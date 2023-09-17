@@ -26,5 +26,5 @@ urlpatterns = [
 
     # app urls
     path('api/', include('baseApp.urls')),
-    path('api/news', include('newsApp.urls')),
+    path('api/news/', include('newsApp.urls')),
 ]
