@@ -4,7 +4,6 @@ from baseApp import views
 
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
-    TokenRefreshView,
 )
 
 urlpatterns = [
@@ -13,4 +12,5 @@ urlpatterns = [
 
     # other urls
     path('users/', views.UserList.as_view(), name='users'),
+    path('users/profile', views.UserProfileGet.as_view(), name='users-profile'),
 ]
