@@ -1,0 +1,12 @@
+
+backend/newsApp/migrations/__pycache__/__init__.cpython-311.pyc
+backend/newsApp/__pycache__/models.cpython-311.pyc
+backend/newsApp/__pycache__/apps.cpython-311.pyc
+backend/newsApp/__pycache__/admin.cpython-311.pyc
+backend/newsApp/__pycache__/__init__.cpython-311.pyc
+backend/backend/__pycache__/wsgi.cpython-311.pyc
+backend/backend/__pycache__/urls.cpython-311.pyc
+backend/backend/__pycache__/settings.cpython-311.pyc
+backend/backend/__pycache__/__init__.cpython-311.pyc
+backend/.idea/misc.xml
+backend/.idea/backend.iml
