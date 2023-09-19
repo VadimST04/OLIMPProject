@@ -52,6 +52,31 @@ INSTALLED_APPS = [
   python manage.py runserver
   ```
 
+<div id="django-orm-info">
+  <h3>Django ORM</h3>
+  <p></p>
+</div>
+
+<p>In order to use django ORM you need to create <code>superuser</code> by using the following commands: </p>
+
+ ```sh
+  python manage.py createsuperuser
+  ```
+
+<p>Then you will need to write username, email (optional) and password</p>
+<p>!When you type a password in the console it is not displayed. It is OK, do not worry!</p>
+
+<br />
+<p>In order to register your model in ORM, go to <code>yourApp/admin.py</code> and write there appropriate lines of code</p>
+
+```python
+from django.contrib import admin
+
+from baseApp.models import UserProfile
+
+admin.site.register(UserProfile)
+```
+
 <hr />
 
 <div id="venv-info">
