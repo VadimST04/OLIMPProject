@@ -17,7 +17,7 @@
 </div>
 
   ```sh
-  pip install -r requiremnts.txt
+  pip install -r requirments.txt
   ```
 
 <p>Django documentation: <a href="https://docs.djangoproject.com/en/4.2/">https://docs.djangoproject.com/en/4.2/</a></p>
