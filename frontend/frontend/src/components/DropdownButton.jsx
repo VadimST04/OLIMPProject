@@ -26,7 +26,7 @@ const DropdownButton = ({ title, options }) => {
       }}
       className="relative">
       <div className="bg-red-400 py-1 px-3 rounded-md flex items-center justify-center gap-2 text-gray-800 cursor-pointer hover:brightness-110 transition-all duration-150 select-none">
-        <p>{title}</p>
+        <p className="hidden sm:block">{title}</p>
         <BsChevronDown />
       </div>
       {active && (
