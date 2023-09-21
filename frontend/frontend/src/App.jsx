@@ -5,7 +5,7 @@ import {
   Route,
   Outlet,
 } from "react-router-dom";
-import Header from './components/Header'
+import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
 import ContactsPage from "./pages/ContactsPage";
 import NewsPage from "./pages/NewsPage";
@@ -13,7 +13,7 @@ import NewsPage from "./pages/NewsPage";
 const Root = () => {
   return (
     <div>
-      <Header />
+      <Navbar />
       {/* The ContactsPage should be to the right of the Outlet */}
       <ContactsPage />
       {/* Outlet is our Application */}
