@@ -7,24 +7,34 @@ from postsApp.serializers import PostSerializer, CommentSerializer
 
 
 class PostList(generics.ListCreateAPIView):
-    queryset = Post
+    queryset = Post.objects.all()
     serializer_class = PostSerializer
     permission_classes = (IsAuthenticated,)
 
 
 class PostUpdateDelete(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Post
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+    permission_classes = (IsAuthenticated, IsAuthorOrIsAuthenticated)
+
+
+class MyPostList(generics.ListCreateAPIView):
+    def get_queryset(self):
+        user = self.request.user
+        return Post.objects.filter(user=user)
+
+    queryset = get_queryset()
     serializer_class = PostSerializer
     permission_classes = (IsAuthenticated, IsAuthorOrIsAuthenticated)
 
 
 class PostCommentCreate(generics.CreateAPIView):
-    queryset = Comment
+    queryset = Comment.objects.all()
     serializer_class = CommentSerializer
     permission_classes = (IsAuthenticated,)
 
 
 class PostCommentUpdateDelete(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Comment
+    queryset = Comment.objects.all()
     serializer_class = CommentSerializer
     permission_classes = (IsAuthenticated, IsAuthorOrIsAuthenticated)
