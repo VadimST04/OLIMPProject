@@ -8,7 +8,6 @@ import {
 import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
 import ContactsPage from "./pages/ContactsPage";
-import NewsPage from "./pages/NewsPage";
 
 const Root = () => {
   return (
@@ -26,7 +25,6 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />}>
       <Route index element={<HomePage />} />
-      <Route path="/news" element={<NewsPage />} />
     </Route>
   )
 );

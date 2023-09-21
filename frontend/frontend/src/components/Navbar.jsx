@@ -1,8 +1,9 @@
 import React from "react";
-import DropdownButton from "./DropdownButton";
 import SearchBar from "./SearchBar";
 import { GrLanguage } from "react-icons/gr";
-import { FiSettings, FiUser } from "react-icons/fi";
+import { FiSettings } from "react-icons/fi";
+import { FaRegCircleUser } from "react-icons/fa6";
+import DropDownButton from "./DropDownButton/DropDownButton.tsx";
 
 function Navbar() {
   const buttonTitle = "Menu";
@@ -13,18 +14,21 @@ function Navbar() {
     { title: "Option 4", href: "/" },
     { title: "Option 5", href: "/" },
   ];
-  const rightSideButtons = [<GrLanguage />, <FiSettings />, <FiUser />];
+  const rightSideButtons = [<GrLanguage />, <FiSettings />, <FaRegCircleUser />];
   return (
     <div className="flex items-center justify-between py-3 px-5 bg-[#97B1F5]">
       <div className="flex items-center gap-5">
-        <DropdownButton title={buttonTitle} options={buttonOptions} />
+        {/* <DropdownButton title={buttonTitle} options={buttonOptions} /> */}
+        <DropDownButton />
+
         <SearchBar />
       </div>
       <div className="flex items-center">
         {rightSideButtons.map((item, index) => (
           <div
             key={index}
-            className="p-2 hover:bg-[#BACBF5] rounded-md text-[20px] cursor-pointer group">
+            className="p-2 hover:bg-[#BACBF5] rounded-md text-[26px] cursor-pointer group mx-1"
+          >
             <div className="group-hover:scale-110 transition-all duration-150">
               {item}
             </div>
