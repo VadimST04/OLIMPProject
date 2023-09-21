@@ -47,6 +47,7 @@ INSTALLED_APPS = [
 
     'baseApp',
     'newsApp',
+    'postsApp',
 ]
 
 MIDDLEWARE = [
