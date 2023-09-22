@@ -3,7 +3,12 @@
 
 <h2>Development Tolls:</h2>
 <ul>
-  <li><a href="#django-drf-info">Django REST Framework</a></li>
+  <li>
+    <a href="#django-drf-info">Django REST Framework</a>
+    <ul>
+      <li><a href="django-orm-info">Django ORM</a></li>
+    </ul>
+  </li>
   <li><a href="#venv-info">Virtual environment</a></li>
   <li><a href="#react-info">React</a></li>
   <li><a href="#react-router-info">React Router</a></li>
@@ -17,7 +22,7 @@
 </div>
 
   ```sh
-  pip install -r requirments.txt
+  pip install -r requirements.txt
   ```
 
 <p>Django documentation: <a href="https://docs.djangoproject.com/en/4.2/">https://docs.djangoproject.com/en/4.2/</a></p>
@@ -104,7 +109,7 @@ admin.site.register(UserProfile)
   <p>React documentation: <a href="https://react.dev/">https://react.dev/</a></p>
 </div>
 
-<p>In order create app use <code> create-react-app project_name</code> command<br>Then enter the rigth directory</p>
+<p>In order create app use <code>create-react-app project_name</code> command<br>Then enter the rigth directory</p>
 
 
   ```sh
@@ -126,6 +131,13 @@ admin.site.register(UserProfile)
   ```
 
   <p>React icons documentation: <a href="https://react-icons.github.io/react-icons">https://react-icons.github.io/react-icons</a></p>
+
+  <h4>Note!</h4>
+  <h5>When you pull a project from GitHub, the project does not have <code>node_modules</code><br />In order to install it write the following line:</h5>
+
+   ```sh
+  npm install
+  ```
 
 <div id="react-router-info">
   <h2>React Router</h2>
