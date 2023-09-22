@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -8,13 +9,17 @@ import {
 import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
 import ContactsPage from "./pages/ContactsPage";
+import SignInSignUp from "./components/SignInSignUp.jsx";
 
 const Root = () => {
+  const [modalState, setModalState] = useState(false);
+
   return (
     <div>
-      <Navbar />
+      <Navbar call={() => setModalState(true)} />
       {/* The ContactsPage should be to the right of the Outlet */}
       <ContactsPage />
+      <SignInSignUp call={modalState} destroy={() => setModalState(false)} />
       {/* Outlet is our Application */}
       <Outlet />
     </div>
