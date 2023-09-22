@@ -9,7 +9,7 @@ import {
 import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
 import ContactsPage from "./pages/ContactsPage";
-import SignInSignUp from "./components/SignInSignUp.jsx";
+import SignInSignUp from "./components/SignInSignUpForm/SignInSignUp.jsx";
 
 const Root = () => {
   const [modalState, setModalState] = useState(false);

@@ -11,7 +11,7 @@
 
 .form_container {
   margin: 2% auto;
-  width: fit-content;
+  width: 28rem;
   height: fit-content;
   display: flex;
   flex-direction: column;
@@ -79,7 +79,7 @@
   position: absolute;
   z-index: 99;
   left: 12px;
-  bottom: 9px;
+  bottom: 12px;
 }
 
 .input_label {
@@ -141,7 +141,7 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
-  background: #212121;
+  background: #4f66a5;
   border-radius: 7px;
   outline: none;
   color: #ffffff;
