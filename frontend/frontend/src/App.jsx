@@ -1,22 +1,13 @@
-import {
-  createBrowserRouter,
-  createRoutesFromElements,
-  RouterProvider,
-  Route,
-  Outlet,
-} from "react-router-dom";
+import { createBrowserRouter, createRoutesFromElements, RouterProvider, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
-import ContactsPage from "./pages/ContactsPage";
+import MainContent from "./components/MainContent";
 
 const Root = () => {
   return (
-    <div>
+    <div className="h-screen flex flex-col">
       <Navbar />
-      {/* The ContactsPage should be to the right of the Outlet */}
-      <ContactsPage />
-      {/* Outlet is our Application */}
-      <Outlet />
+      <MainContent />
     </div>
   );
 };

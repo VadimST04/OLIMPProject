@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react";
 
 function HomePage() {
   return (
-    <div>
-        <h1>HomePage</h1>
+    <div className="flex-grow overflow-y-auto">
+      <h1 className="text-5xl text-white"></h1>
     </div>
-  )
+  );
 }
 
-export default HomePage
+export default HomePage;
