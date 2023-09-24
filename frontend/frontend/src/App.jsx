@@ -1,17 +1,19 @@
-import { useState } from "react";
 import {
   createBrowserRouter,
   createRoutesFromElements,
   RouterProvider,
   Route,
-  Outlet,
 } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import HomePage from "./pages/HomePage";
-import SignInSignUpForm from "./components/SignInSignUpForm";
 import { GrLanguage } from "react-icons/gr";
 import { FiSettings } from "react-icons/fi";
 import { FaRegCircleUser } from "react-icons/fa6";
+
+import Navbar from "./components/Navbar";
+import HomePage from "./pages/HomePage";
+import MainContent from "./components/MainContent";
+import { useState } from "react";
+import SignInSignUpForm from "./components/SignInSignUpForm";
+
 const Root = () => {
   const [isSignInFormOpen, setSignInFormOpen] = useState(false);
   const rightSideButtons = [
@@ -24,10 +26,10 @@ const Root = () => {
       },
     },
   ];
-
   return (
-    <div className="relative">
+    <div className="flex h-screen flex-col">
       <Navbar rightSideButtons={rightSideButtons} />
+      <MainContent />
       {isSignInFormOpen && (
         <SignInSignUpForm
           closeFormCallback={() => {
@@ -35,7 +37,6 @@ const Root = () => {
           }}
         />
       )}
-      <Outlet />
     </div>
   );
 };
