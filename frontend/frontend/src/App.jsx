@@ -8,19 +8,29 @@ import {
 } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
-import ContactsPage from "./pages/ContactsPage";
-import SignInSignUp from "./components/SignInSignUpForm/SignInSignUp.jsx";
-
+import SignInSignUpForm from "./components/SignInSignUpForm";
+import { GrLanguage } from "react-icons/gr";
+import { FiSettings } from "react-icons/fi";
+import { FaRegCircleUser } from "react-icons/fa6";
 const Root = () => {
-  const [modalState, setModalState] = useState(false);
+  const [isSignInFormOpen, setSignInFormOpen] = useState(false);
+  const rightSideButtons = [
+    { icon: <GrLanguage />, callback: () => {} },
+    { icon: <FiSettings />, callback: () => {} },
+    { icon: <FaRegCircleUser />, callback: () => { setSignInFormOpen(true); },
+    },
+  ];
 
   return (
-    <div>
-      <Navbar call={() => setModalState(true)} />
-      {/* The ContactsPage should be to the right of the Outlet */}
-      <ContactsPage />
-      <SignInSignUp call={modalState} destroy={() => setModalState(false)} />
-      {/* Outlet is our Application */}
+    <div className="relative">
+      <Navbar rightSideButtons={rightSideButtons} />
+      {isSignInFormOpen && (
+        <SignInSignUpForm
+          closeFormCallback={() => {
+            setSignInFormOpen(false);
+          }}
+        />
+      )}
       <Outlet />
     </div>
   );
@@ -30,8 +40,8 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />}>
       <Route index element={<HomePage />} />
-    </Route>
-  )
+    </Route>,
+  ),
 );
 
 function App() {

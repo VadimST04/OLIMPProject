@@ -33,7 +33,7 @@
   height: 80px;
   background: linear-gradient(
     180deg,
-    rgba(248, 248, 248, 0) 50%,
+    #f8f8f800 50%,
     #f8f8f888 100%
   );
   border: 1px solid #f7f7f8;

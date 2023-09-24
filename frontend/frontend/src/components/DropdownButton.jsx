@@ -24,7 +24,9 @@ const DropdownButton = ({ buttons }) => {
   const menuTranslate = isOpen ? " translate-y-0" : " -translate-y-5";
   const menuVisibility = isOpen ? "visible" : "invisible";
   const buttonCursor = isOpen ? "" : "cursor-default";
-  const activeButtonBg = !isOpen ? " bg-[#211D26] hover:bg-[#2D2834]" : " bg-[#712AE0]";
+  const activeButtonBg = !isOpen
+    ? " bg-[#211D26] hover:bg-[#2D2834]"
+    : " bg-[#712AE0]";
 
   const buttonClickHandler = (index) => {
     if (!isOpen) return;
@@ -35,20 +37,27 @@ const DropdownButton = ({ buttons }) => {
   useOnClickOutside(wrapperRef, () => setIsOpen(false));
 
   return (
-    <div ref={wrapperRef} className="text-[#F9F9F9] text-[18px] select-none font-euclid relative z-[1]">
+    <div
+      ref={wrapperRef}
+      className="relative z-[1] select-none font-euclid text-[18px] text-[#F9F9F9]"
+    >
       <div
         onClick={() => setIsOpen(!isOpen)}
-        className={`flex items-center gap-2 px-6 py-2 cursor-pointer rounded-3xl ${activeButtonBg}`}>
+        className={`flex cursor-pointer items-center gap-2 rounded-3xl px-6 py-2 ${activeButtonBg}`}
+      >
         {buttons.at(activeButtonIndex).icon}
         <p className="hidden sm:block">{buttons.at(activeButtonIndex).title}</p>
         {isOpen ? <AiOutlineClose /> : <MdOutlineExpandMore />}
       </div>
       <div
-        className={`absolute flex flex-col min-w-full bg-[#211D26] top-0 pt-12 rounded-3xl overflow-hidden z-[-1] transition-all duration-[0.4s] ${menuOpacity} ${menuTranslate} ${menuVisibility}`}>
+        className={`absolute top-0 z-[-1] flex min-w-full flex-col overflow-hidden rounded-3xl bg-[#211D26] pt-12 transition-all duration-[0.4s] ${menuOpacity} ${menuTranslate} ${menuVisibility}`}
+      >
         {buttons.map((button, index) => (
           <button
+            key={index}
             onClick={() => buttonClickHandler(index)}
-            className={`bg-[#211D26] flex items-center sm:justify-normal justify-center gap-2 px-6 py-3 hover:bg-[#2D2834] w-full ${buttonCursor}`}>
+            className={`flex w-full items-center justify-center gap-2 bg-[#211D26] px-6 py-3 hover:bg-[#2D2834] sm:justify-normal ${buttonCursor}`}
+          >
             {button.icon}
             <p className="hidden sm:block">{button.title}</p>
           </button>
