@@ -28,6 +28,8 @@ class UserProfileSerializer(serializers.ModelSerializer):
     """
 
     user = UserSerializer(read_only=True)
+    app_lang = serializers.StringRelatedField()
+    learning_langs = serializers.StringRelatedField(many=True)
 
     class Meta:
         """

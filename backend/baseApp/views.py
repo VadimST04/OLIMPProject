@@ -8,6 +8,7 @@ from rest_framework.views import APIView
 
 from baseApp.models import UserProfile
 from baseApp.serializers import UserSerializer, UserProfileSerializer
+from postsApp.permissions import IsAuthorOrIsAuthenticated
 
 
 class UserRegistration(APIView):
@@ -76,4 +77,4 @@ class UserProfileGet(generics.ListAPIView):
         return UserProfile.objects.filter(user=user)
 
     serializer_class = UserProfileSerializer
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated, IsAuthorOrIsAuthenticated)

@@ -1,5 +1,6 @@
 from django.contrib import admin
 
+from baseApp.models import Language
 from postsApp.models import Post, Comment
 
 
@@ -13,3 +14,4 @@ class PostAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Comment)
+admin.site.register(Language)
