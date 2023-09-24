@@ -18,7 +18,7 @@ function Navbar({ rightSideButtons }) {
   ];
 
   return (
-    <div className="flex items-center justify-between bg-[#97B1F5] px-5 py-3">
+    <div className="bg-main-green flex items-center justify-between px-5 py-3">
       <div className="flex items-center gap-5">
         <DropdownButton buttons={buttonOptions} />
         <SearchBar />
@@ -28,28 +28,13 @@ function Navbar({ rightSideButtons }) {
           <div
             onClick={() => btn.callback()}
             key={index}
-            className="group mx-1 cursor-pointer rounded-md p-2 text-[26px] hover:bg-[#BACBF5]"
+            className="hover:bg-main-dark-green group mx-1 cursor-pointer rounded-md p-2 text-[26px]"
           >
-            <div className="transition-all duration-150 group-hover:scale-110">
+            <div className="text-soft-white transition-all duration-150 group-hover:scale-110">
               {btn.icon}
             </div>
           </div>
         ))}
-        {/* <div className="p-2 hover:bg-[#BACBF5] rounded-md text-[26px] cursor-pointer group mx-1">
-          <div className="group-hover:scale-110 transition-all duration-150">
-            <GrLanguage />
-          </div>
-        </div>
-        <div className="p-2 hover:bg-[#BACBF5] rounded-md text-[26px] cursor-pointer group mx-1">
-          <div className="group-hover:scale-110 transition-all duration-150">
-            <FiSettings />
-          </div>
-        </div>
-        <div className="p-2 hover:bg-[#BACBF5] rounded-md text-[26px] cursor-pointer group mx-1">
-          <div className="group-hover:scale-110 transition-all duration-150">
-            <FaRegCircleUser />
-          </div>
-        </div> */}
       </div>
     </div>
   );

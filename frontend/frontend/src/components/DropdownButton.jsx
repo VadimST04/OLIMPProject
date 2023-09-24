@@ -25,8 +25,8 @@ const DropdownButton = ({ buttons }) => {
   const menuVisibility = isOpen ? "visible" : "invisible";
   const buttonCursor = isOpen ? "" : "cursor-default";
   const activeButtonBg = !isOpen
-    ? " bg-[#211D26] hover:bg-[#2D2834]"
-    : " bg-[#712AE0]";
+    ? " bg-beig hover:bg-beig-dark"
+    : " bg-[#5F8DA3]";
 
   const buttonClickHandler = (index) => {
     if (!isOpen) return;
@@ -39,7 +39,7 @@ const DropdownButton = ({ buttons }) => {
   return (
     <div
       ref={wrapperRef}
-      className="relative z-[1] select-none font-euclid text-[18px] text-[#F9F9F9]"
+      className="text-soft-black relative z-[1] select-none font-euclid text-[18px]"
     >
       <div
         onClick={() => setIsOpen(!isOpen)}
@@ -50,13 +50,13 @@ const DropdownButton = ({ buttons }) => {
         {isOpen ? <AiOutlineClose /> : <MdOutlineExpandMore />}
       </div>
       <div
-        className={`absolute top-0 z-[-1] flex min-w-full flex-col overflow-hidden rounded-3xl bg-[#211D26] pt-12 transition-all duration-[0.4s] ${menuOpacity} ${menuTranslate} ${menuVisibility}`}
+        className={`bg-beig absolute top-0 z-[-1] flex min-w-full flex-col overflow-hidden rounded-3xl pt-12 transition-all duration-[0.4s] ${menuOpacity} ${menuTranslate} ${menuVisibility}`}
       >
         {buttons.map((button, index) => (
           <button
             key={index}
             onClick={() => buttonClickHandler(index)}
-            className={`flex w-full items-center justify-center gap-2 bg-[#211D26] px-6 py-3 hover:bg-[#2D2834] sm:justify-normal ${buttonCursor}`}
+            className={`bg-beig hover:bg-beig-dark flex w-full items-center justify-center gap-2 px-6 py-3 sm:justify-normal ${buttonCursor}`}
           >
             {button.icon}
             <p className="hidden sm:block">{button.title}</p>
