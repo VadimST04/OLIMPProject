@@ -17,7 +17,11 @@ const Root = () => {
   const rightSideButtons = [
     { icon: <GrLanguage />, callback: () => {} },
     { icon: <FiSettings />, callback: () => {} },
-    { icon: <FaRegCircleUser />, callback: () => { setSignInFormOpen(true); },
+    {
+      icon: <FaRegCircleUser />,
+      callback: () => {
+        setSignInFormOpen(true);
+      },
     },
   ];
 

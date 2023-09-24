@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "../store/actions/userActions";
 import { FiUser } from "react-icons/fi";
@@ -25,13 +25,9 @@ const SignInSignUpForm = ({ closeFormCallback }) => {
   ];
 
   const dispatch = useDispatch();
-
+  const outsideForm = useRef(null);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
-  const closeWindow = () => {
-    closeFormCallback();
-  };
 
   const onClickHandler = () => {
     console.log("dispatch");
@@ -39,13 +35,18 @@ const SignInSignUpForm = ({ closeFormCallback }) => {
     closeFormCallback();
   };
 
+  const closeForm = (e) => {
+    if (e.target === outsideForm.current) closeFormCallback();
+  };
+
   return (
     <div
-      onClick={closeWindow()}
+      ref={outsideForm}
+      onClick={(e) => closeForm(e)}
       className="absolute left-0 top-0 z-10 flex h-screen min-h-0 w-screen items-center justify-center bg-black bg-opacity-50"
     >
       <div className="flex w-52 flex-col items-center gap-3 rounded-md border bg-white p-5 shadow-[0_0_30px_#00000090] md:w-64 lg:w-96">
-        <div className="pointer-events-none aspect-square w-16 select-none overflow-hidden rounded-md bg-gradient-to-b from-[#f3f3f3] to-[#e8e8e8] md:w-20 lg:w-24 xl:w-28">
+        <div className="pointer-events-none aspect-square w-16 select-none overflow-hidden rounded-md md:w-20 lg:w-24 xl:w-28">
           <img src={logo} alt="" className="h-full w-full object-contain" />
         </div>
         <p className="font-semibold md:text-[18px] lg:text-[22px] xl:text-[24px]">
