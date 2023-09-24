@@ -52,16 +52,18 @@ const DropdownButton = ({ buttons }) => {
       <div
         className={`bg-beig absolute top-0 z-[-1] flex min-w-full flex-col overflow-hidden rounded-3xl pt-12 transition-all duration-[0.4s] ${menuOpacity} ${menuTranslate} ${menuVisibility}`}
       >
-        {buttons.map((button, index) => (
-          <button
-            key={index}
-            onClick={() => buttonClickHandler(index)}
-            className={`bg-beig hover:bg-beig-dark flex w-full items-center justify-center gap-2 px-6 py-3 sm:justify-normal ${buttonCursor}`}
-          >
-            {button.icon}
-            <p className="hidden sm:block">{button.title}</p>
-          </button>
-        ))}
+        {buttons
+          .filter((_, index) => index !== activeButtonIndex)
+          .map((button, index) => (
+            <button
+              key={index}
+              onClick={() => buttonClickHandler(buttons.indexOf(button))}
+              className={`bg-beig hover:bg-beig-dark flex w-full items-center justify-center gap-2 px-6 py-3 sm:justify-normal ${buttonCursor}`}
+            >
+              {button.icon}
+              <p className="hidden sm:block">{button.title}</p>
+            </button>
+          ))}
       </div>
     </div>
   );
