@@ -6,16 +6,16 @@ const SearchBar = () => {
   const [searchValue, setSearchValue] = useState("");
 
   return (
-    <div className="flex items-center w-full h-full relative">
+    <div className="relative flex h-full w-full items-center">
       <input
         type="text"
         value={searchValue}
         onChange={(e) => {
           setSearchValue(e.target.value);
         }}
-        className="rounded-full py-1 px-3 pr-7 outline-none"
+        className="rounded-full px-3 py-1 pr-7 outline-none hidden md:block"
       />
-      <div className="text-[20px] absolute right-2">
+      <div className="md:absolute md:right-2 text-[20px]">
         {searchValue === "" && <BiSearch />}
         {searchValue !== "" && (
           <RxCross1
