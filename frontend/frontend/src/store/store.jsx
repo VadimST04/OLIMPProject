@@ -6,9 +6,11 @@ import {
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { userLoginReducer } from "../store/reducers/userReducers";
+import { postsListReducer } from '../store/reducers/postsReducers'
 
 const reducer = combineReducers({
-  userInfo: userLoginReducer,
+  userToken: userLoginReducer,
+  postsList: postsListReducer,
 });
 
 const initialStore = {};

@@ -10,7 +10,7 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
+    user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name='user')
     text = models.TextField(max_length=500)
     likes = models.IntegerField(default=0)
