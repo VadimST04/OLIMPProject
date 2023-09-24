@@ -1,11 +1,7 @@
 import React from "react";
 
 function HomePage() {
-  return (
-    <div>
-      <h1>HomePage</h1>
-    </div>
-  );
+  return <div className="flex-grow overflow-y-auto"></div>;
 }
 
 export default HomePage;

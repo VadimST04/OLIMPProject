@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Outlet } from "react-router";
 import Chats from "./Chats";
-import SignInSignUpForm from "./SignInSignUpForm";
 
 const MainContent = () => {
   const [isLeftSideChats, setLeftSideChats] = useState(false);
