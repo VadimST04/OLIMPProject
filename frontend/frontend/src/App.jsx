@@ -13,6 +13,7 @@ import HomePage from "./pages/HomePage";
 import MainContent from "./components/MainContent";
 import { useState } from "react";
 import SignInSignUpForm from "./components/SignInSignUpForm";
+import PostsPage from "./pages/PostsPage";
 
 const Root = () => {
   const [isSignInFormOpen, setSignInFormOpen] = useState(false);
@@ -45,6 +46,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />}>
       <Route index element={<HomePage />} />
+      <Route path="/posts" element={<PostsPage />} />
     </Route>,
   ),
 );

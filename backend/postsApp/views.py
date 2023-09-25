@@ -13,7 +13,7 @@ class PostList(generics.ListCreateAPIView):
     Users must be authenticated to access this view.
     """
 
-    queryset = Post.objects.all()
+    queryset = Post.objects.select_related('user').all()
     serializer_class = PostSerializer
     permission_classes = (IsAuthenticated,)
 
@@ -25,7 +25,7 @@ class PostUpdateDelete(generics.RetrieveUpdateDestroyAPIView):
     Users must be authenticated and be an owner of this post to access this view.
     """
 
-    queryset = Post.objects.all()
+    queryset = Post.objects.select_related('user').all()
     serializer_class = PostSerializer
     permission_classes = (IsAuthenticated, IsAuthorOrIsAuthenticated)
 
@@ -43,7 +43,7 @@ class MyPostList(generics.ListCreateAPIView):
         :return: Queryset of posts of the specific user
         """
         user = self.request.user
-        return Post.objects.filter(user=user)
+        return Post.objects.filter(user=user).select_related('user')
 
     serializer_class = PostSerializer
     permission_classes = (IsAuthenticated, IsAuthorOrIsAuthenticated)
@@ -56,7 +56,7 @@ class PostCommentCreate(generics.CreateAPIView):
     Users must be authenticated to access this view.
     """
 
-    queryset = Comment.objects.all()
+    queryset = Comment.objects.select_related('post', 'user').all()
     serializer_class = CommentSerializer
     permission_classes = (IsAuthenticated,)
 
@@ -68,6 +68,6 @@ class PostCommentUpdateDelete(generics.RetrieveUpdateDestroyAPIView):
     Users must be authenticated and either the author of the comment or have appropriate permissions to access this view.
     """
 
-    queryset = Comment.objects.all()
+    queryset = Comment.objects.select_related('post', 'user').all()
     serializer_class = CommentSerializer
     permission_classes = (IsAuthenticated, IsAuthorOrIsAuthenticated)
