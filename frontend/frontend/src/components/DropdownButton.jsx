@@ -25,8 +25,8 @@ const DropdownButton = ({ buttons }) => {
   const menuVisibility = isOpen ? "visible" : "invisible";
   const buttonCursor = isOpen ? "" : "cursor-default";
   const activeButtonBg = !isOpen
-    ? " bg-[#211D26] hover:bg-[#2D2834]"
-    : " bg-[#712AE0]";
+    ? " bg-beig hover:bg-beig-dark"
+    : " bg-[#5F8DA3]";
 
   const buttonClickHandler = (index) => {
     if (!isOpen) return;
@@ -39,29 +39,31 @@ const DropdownButton = ({ buttons }) => {
   return (
     <div
       ref={wrapperRef}
-      className="relative z-[1] select-none font-euclid text-[18px] text-[#F9F9F9]"
+      className="relative z-[1] select-none font-euclid text-[18px] text-soft-black"
     >
       <div
         onClick={() => setIsOpen(!isOpen)}
-        className={`flex cursor-pointer items-center gap-2 rounded-3xl px-6 py-2 ${activeButtonBg}`}
+        className={`flex cursor-pointer items-center gap-2 rounded-md px-5 py-1.5 ${activeButtonBg}`}
       >
         {buttons.at(activeButtonIndex).icon}
         <p className="hidden sm:block">{buttons.at(activeButtonIndex).title}</p>
         {isOpen ? <AiOutlineClose /> : <MdOutlineExpandMore />}
       </div>
       <div
-        className={`absolute top-0 z-[-1] flex min-w-full flex-col overflow-hidden rounded-3xl bg-[#211D26] pt-12 transition-all duration-[0.4s] ${menuOpacity} ${menuTranslate} ${menuVisibility}`}
+        className={`absolute top-0 z-[-1] flex min-w-full flex-col overflow-hidden rounded-md bg-beig pt-12 transition-all duration-[0.4s] ${menuOpacity} ${menuTranslate} ${menuVisibility}`}
       >
-        {buttons.map((button, index) => (
-          <button
-            key={index}
-            onClick={() => buttonClickHandler(index)}
-            className={`flex w-full items-center justify-center gap-2 bg-[#211D26] px-6 py-3 hover:bg-[#2D2834] sm:justify-normal ${buttonCursor}`}
-          >
-            {button.icon}
-            <p className="hidden sm:block">{button.title}</p>
-          </button>
-        ))}
+        {buttons
+          .filter((_, index) => index !== activeButtonIndex)
+          .map((button, index) => (
+            <button
+              key={index}
+              onClick={() => buttonClickHandler(buttons.indexOf(button))}
+              className={`flex w-full items-center justify-center gap-2 bg-beig px-6 py-3 hover:bg-beig-dark sm:justify-normal ${buttonCursor}`}
+            >
+              {button.icon}
+              <p className="hidden sm:block">{button.title}</p>
+            </button>
+          ))}
       </div>
     </div>
   );
