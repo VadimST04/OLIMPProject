@@ -9,20 +9,6 @@ import logo from "../assets/OLIMPlogo.png";
 
 const SignInSignUpForm = ({ closeFormCallback }) => {
   const textSize = "text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px]";
-  const fields = [
-    {
-      title: "Username",
-      type: "text",
-      placeholder: "Enter your username",
-      icon: <FiUser />,
-    },
-    {
-      title: "Password",
-      type: "password",
-      placeholder: "Enter your password",
-      icon: <RiLockPasswordLine />,
-    },
-  ];
 
   const dispatch = useDispatch();
   const outsideForm = useRef(null);
@@ -53,21 +39,39 @@ const SignInSignUpForm = ({ closeFormCallback }) => {
           Login to your Account
         </p>
         <div className="w-full space-y-2">
-          {fields.map((item, index) => (
-            <div key={index} className="w-full space-y-2">
-              <p className={`font-semibold text-gray-400 ${textSize}`}>
-                {item.title}
-              </p>
-              <div className="relative flex items-center">
-                <input
-                  type={item.type}
-                  placeholder={item.placeholder}
-                  className={`w-full rounded-md border py-1 pl-5 shadow-[0_0_2px_#00000064] outline-none md:py-2 md:pl-6 xl:pl-8 ${textSize}`}
-                />
-                <div className={`absolute left-1 ${textSize}`}>{item.icon}</div>
+          <div className="w-full space-y-2">
+            <p className={`font-semibold text-gray-400 ${textSize}`}>
+              Username
+            </p>
+            <div className="relative flex items-center">
+              <input
+                type="text"
+                placeholder="Enter your username"
+                className={`w-full rounded-md border py-1 pl-5 shadow-[0_0_2px_#00000064] outline-none md:py-2 md:pl-6 xl:pl-8 ${textSize}`}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+              <div className={`absolute left-1 ${textSize}`}>
+                <FiUser />
               </div>
             </div>
-          ))}
+          </div>
+
+          <div className="w-full space-y-2">
+            <p className={`font-semibold text-gray-400 ${textSize}`}>
+              Password
+            </p>
+            <div className="relative flex items-center">
+              <input
+                type="password"
+                placeholder="Enter your password"
+                className={`w-full rounded-md border py-1 pl-5 shadow-[0_0_2px_#00000064] outline-none md:py-2 md:pl-6 xl:pl-8 ${textSize}`}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <div className={`absolute left-1 ${textSize}`}>
+                <RiLockPasswordLine />
+              </div>
+            </div>
+          </div>
         </div>
         <button
           onClick={onClickHandler}

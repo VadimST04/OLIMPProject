@@ -11,7 +11,7 @@ export const userLoginReducer = (state = {}, action) => {
       return { loading: true };
 
     case USER_LOGIN_SUCCESS:
-      return { loading: false, userInfo: action.payload };
+      return { loading: false, userToken: action.payload };
 
     case USER_LOGIN_FAIL:
       return { loading: false, error: action.payload };
@@ -21,8 +21,8 @@ export const userLoginReducer = (state = {}, action) => {
 
     default:
       return {
-        userInfo: localStorage.getItem("userInfo")
-          ? JSON.parse(localStorage.getItem("userInfo"))
+        userToken: localStorage.getItem("userToken")
+          ? JSON.parse(localStorage.getItem("userToken"))
           : null,
       };
   }

@@ -3,7 +3,6 @@ from django.db import models
 
 
 class Post(models.Model):
-    objects = models.Manager()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     image = models.ImageField()
     content = models.TextField()
@@ -11,8 +10,7 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
-    objects = models.Manager()
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
+    user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name='user')
     text = models.TextField(max_length=500)
     likes = models.IntegerField(default=0)
