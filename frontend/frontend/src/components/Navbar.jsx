@@ -35,21 +35,6 @@ function Navbar({ rightSideButtons }) {
             </div>
           </div>
         ))}
-        {/* <div className="p-2 hover:bg-[#BACBF5] rounded-md text-[26px] cursor-pointer group mx-1">
-          <div className="group-hover:scale-110 transition-all duration-150">
-            <GrLanguage />
-          </div>
-        </div>
-        <div className="p-2 hover:bg-[#BACBF5] rounded-md text-[26px] cursor-pointer group mx-1">
-          <div className="group-hover:scale-110 transition-all duration-150">
-            <FiSettings />
-          </div>
-        </div>
-        <div className="p-2 hover:bg-[#BACBF5] rounded-md text-[26px] cursor-pointer group mx-1">
-          <div className="group-hover:scale-110 transition-all duration-150">
-            <FaRegCircleUser />
-          </div>
-        </div> */}
       </div>
     </div>
   );

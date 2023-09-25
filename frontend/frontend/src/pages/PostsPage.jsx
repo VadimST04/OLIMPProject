@@ -18,7 +18,7 @@ function PostsPage() {
       {posts &&
         posts.map((item) => (
           <div className="post" key={item.id}>
-            {<img src={item.image} width="200px" />}
+            {<img src={item.image} width="200px" alt={`${item.user.username} - photo`}/>}
             <h6>{item.user.username}: </h6>
             <p>{item.content}</p>
             <p>likes: {item.likes}</p>
