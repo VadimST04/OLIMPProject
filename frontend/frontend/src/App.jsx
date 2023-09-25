@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -11,9 +12,10 @@ import { FaRegCircleUser } from "react-icons/fa6";
 import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
 import MainContent from "./components/MainContent";
-import { useState } from "react";
 import SignInSignUpForm from "./components/SignInSignUpForm";
+
 import PostsPage from "./pages/PostsPage";
+import UserProfilePage from "./pages/UserProfilePage";
 
 const Root = () => {
   const [isSignInFormOpen, setSignInFormOpen] = useState(false);
@@ -47,6 +49,7 @@ const router = createBrowserRouter(
     <Route path="/" element={<Root />}>
       <Route index element={<HomePage />} />
       <Route path="/posts" element={<PostsPage />} />
+      <Route path="/profile" element={<UserProfilePage />} />
     </Route>,
   ),
 );
