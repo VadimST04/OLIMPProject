@@ -1,41 +1,50 @@
+import { useState } from "react";
 import {
   createBrowserRouter,
   createRoutesFromElements,
   RouterProvider,
   Route,
 } from "react-router-dom";
-import { GrLanguage } from "react-icons/gr";
-import { FiSettings } from "react-icons/fi";
-import { FaRegCircleUser } from "react-icons/fa6";
+
+import { MdLanguage } from "react-icons/md";
+import { MdSettings } from "react-icons/md";
+import { HiOutlineUserCircle } from "react-icons/hi";
 
 import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
 import MainContent from "./components/MainContent";
-import { useState } from "react";
 import SignInSignUpForm from "./components/SignInSignUpForm";
+import RegistrationForm from "./components/RegistrationForm";
 import PostsPage from "./pages/PostsPage";
 
 const Root = () => {
   const [isSignInFormOpen, setSignInFormOpen] = useState(false);
+  const [isRegistrationFormOpen, setRegistrationFormOpen] = useState(false);
+
   const rightSideButtons = [
-    { icon: <GrLanguage />, callback: () => {} },
-    { icon: <FiSettings />, callback: () => {} },
+    { icon: <MdLanguage />, callback: () => {} },
+    { icon: <MdSettings />, callback: () => {} },
     {
-      icon: <FaRegCircleUser />,
+      icon: <HiOutlineUserCircle />,
       callback: () => {
         setSignInFormOpen(true);
       },
     },
   ];
+
   return (
     <div className="flex h-screen flex-col">
       <Navbar rightSideButtons={rightSideButtons} />
       <MainContent />
       {isSignInFormOpen && (
         <SignInSignUpForm
-          closeFormCallback={() => {
-            setSignInFormOpen(false);
-          }}
+          closeFormCallback={() => setSignInFormOpen(false)}
+          registrationFormOpen={() => setRegistrationFormOpen(true)}
+        />
+      )}
+      {isRegistrationFormOpen && (
+        <RegistrationForm
+          closeFormCallback={() => setRegistrationFormOpen(false)}
         />
       )}
     </div>

@@ -1,14 +1,20 @@
 import React from "react";
 
-const ChatItem = ({ id, img, name, lastMessage }) => {
+const ChatItem = ({ img, name, lastMessage, isActive, clickCallback }) => {
+  const activeBg = isActive ? "bg-main-green" : "";
+  const activeText = isActive ? "text-soft-white" : "text-soft-dark";
+
   return (
-    <div className="flex w-full cursor-pointer items-center gap-2 bg-[#EFEFEF] p-2 hover:bg-[#DCDCDC]">
+    <div
+      onClick={() => clickCallback()}
+      className={`flex w-full cursor-pointer select-none items-center gap-2 rounded-md border border-transparent p-2 transition-all duration-100 hover:border-main-green ${activeBg} ${activeText}`}
+    >
       <div className="h-12 w-12 overflow-hidden rounded-full">
         <img src={img} alt="" className="object-cover" />
       </div>
       <div className="flex flex-col">
         <p>{name}</p>
-        <p className="text-[14px] text-gray-500">{lastMessage}</p>
+        <p className="text-[14px]">{lastMessage}</p>
       </div>
     </div>
   );

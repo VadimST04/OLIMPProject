@@ -7,7 +7,9 @@ const MainContent = () => {
   const leftSideChats = isLeftSideChats ? "flex-row-reverse" : "";
 
   return (
-    <div className={`flex h-full min-h-0 gap-5 p-5 ${leftSideChats}`}>
+    <div
+      className={`flex h-full min-h-0 gap-5 bg-[#F3F3F3] p-5 ${leftSideChats}`}
+    >
       <Outlet />
       <Chats />
     </div>
