@@ -74,7 +74,7 @@ class UserProfileGet(generics.ListAPIView):
         :return: Returns a profile of a specific user
         """
         user = self.request.user
-        return UserProfile.objects.filter(user=user)
+        return UserProfile.objects.filter(user=user).select_related('user')
 
     serializer_class = UserProfileSerializer
     permission_classes = (IsAuthenticated, IsAuthorOrIsAuthenticated)
