@@ -19,7 +19,7 @@ const Chats = () => {
   ];
 
   return (
-    <div className="w-72 flex-shrink-0 overflow-y-auto py-[0.6rem]">
+    <div className="w-72 flex-shrink-0 overflow-y-auto px-1 py-[0.6rem]">
       {chats.map((item, index) => (
         <ChatItem
           key={index}

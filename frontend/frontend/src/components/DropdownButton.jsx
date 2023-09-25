@@ -39,18 +39,18 @@ const DropdownButton = ({ buttons }) => {
   return (
     <div
       ref={wrapperRef}
-      className="text-soft-black relative z-[1] select-none font-euclid text-[18px]"
+      className="relative z-[1] select-none font-euclid text-[18px] text-soft-black"
     >
       <div
         onClick={() => setIsOpen(!isOpen)}
-        className={`flex cursor-pointer items-center gap-2 rounded-3xl px-6 py-2 ${activeButtonBg}`}
+        className={`flex cursor-pointer items-center gap-2 rounded-md px-5 py-1.5 ${activeButtonBg}`}
       >
         {buttons.at(activeButtonIndex).icon}
         <p className="hidden sm:block">{buttons.at(activeButtonIndex).title}</p>
         {isOpen ? <AiOutlineClose /> : <MdOutlineExpandMore />}
       </div>
       <div
-        className={`bg-beig absolute top-0 z-[-1] flex min-w-full flex-col overflow-hidden rounded-3xl pt-12 transition-all duration-[0.4s] ${menuOpacity} ${menuTranslate} ${menuVisibility}`}
+        className={`absolute top-0 z-[-1] flex min-w-full flex-col overflow-hidden rounded-md bg-beig pt-12 transition-all duration-[0.4s] ${menuOpacity} ${menuTranslate} ${menuVisibility}`}
       >
         {buttons
           .filter((_, index) => index !== activeButtonIndex)
@@ -58,7 +58,7 @@ const DropdownButton = ({ buttons }) => {
             <button
               key={index}
               onClick={() => buttonClickHandler(buttons.indexOf(button))}
-              className={`bg-beig hover:bg-beig-dark flex w-full items-center justify-center gap-2 px-6 py-3 sm:justify-normal ${buttonCursor}`}
+              className={`flex w-full items-center justify-center gap-2 bg-beig px-6 py-3 hover:bg-beig-dark sm:justify-normal ${buttonCursor}`}
             >
               {button.icon}
               <p className="hidden sm:block">{button.title}</p>

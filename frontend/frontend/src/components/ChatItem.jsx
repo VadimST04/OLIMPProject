@@ -7,7 +7,7 @@ const ChatItem = ({ img, name, lastMessage, isActive, clickCallback }) => {
   return (
     <div
       onClick={() => clickCallback()}
-      className={`hover:border-main-green flex w-full cursor-pointer select-none items-center gap-2 rounded-md border border-transparent p-2 transition-all duration-100 ${activeBg} ${activeText}`}
+      className={`flex w-full cursor-pointer select-none items-center gap-2 rounded-md border border-transparent p-2 transition-all duration-100 hover:border-main-green ${activeBg} ${activeText}`}
     >
       <div className="h-12 w-12 overflow-hidden rounded-full">
         <img src={img} alt="" className="object-cover" />
