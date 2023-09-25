@@ -11,6 +11,8 @@ class CommentSerializer(serializers.ModelSerializer):
     and vice versa, allowing for easy representation of comments in your API.
     """
 
+    user = serializers.CharField(source='user.username')
+
     class Meta:
         """
         model: The Comment model associated with this serializer.
@@ -18,7 +20,7 @@ class CommentSerializer(serializers.ModelSerializer):
         """
 
         model = Comment
-        fields = '__all__'
+        fields = ['user', 'text', 'likes']
 
 
 class PostSerializer(serializers.ModelSerializer):
