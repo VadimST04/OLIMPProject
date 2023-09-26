@@ -13,12 +13,18 @@ function PostsPage() {
   }, [dispatch]);
 
   return (
-    <div className="flex-grow overflow-y-auto">
+    <div className="">
       <h1>Posts</h1>
       {posts &&
         posts.map((item) => (
           <div className="post" key={item.id}>
-            {<img src={item.image} width="200px" alt={`${item.user.username} - photo`}/>}
+            {
+              <img
+                src={item.image}
+                width="200px"
+                alt={`${item.user.username} - photo`}
+              />
+            }
             <h6>{item.user.username}: </h6>
             <p>{item.content}</p>
             <p>likes: {item.likes}</p>
