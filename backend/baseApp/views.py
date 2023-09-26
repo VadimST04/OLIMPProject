@@ -6,7 +6,7 @@ from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from baseApp.models import UserProfile
+from baseApp.models import UserProfile, Language
 from baseApp.serializers import UserSerializer, UserProfileSerializer
 from postsApp.permissions import IsAuthorOrIsAuthenticated
 
@@ -31,14 +31,16 @@ class UserRegistration(APIView):
                 email=data['email'],
             )
 
+            app_lang = Language.objects.filter(name=data['app_lang'])
+            learning_langs = Language.objects.filter(name__in=data.get('learning_langs', []))
+
             new_user_profile = UserProfile.objects.create(
                 user=new_user,
                 image=data.get('image'),
                 description=data.get('description'),
-                app_lang=data['app_lang'],
-                learning_langs=data['learning_langs'],
             )
-
+            new_user_profile.app_lang = app_lang[0]
+            new_user_profile.learning_langs.set(learning_langs)
             new_user_profile.save()
 
             serializer = UserProfileSerializer(new_user_profile)
