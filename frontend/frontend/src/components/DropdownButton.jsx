@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { MdOutlineExpandMore } from "react-icons/md";
 import { AiOutlineClose } from "react-icons/ai";
+import { useNavigate } from "react-router";
 
 function useOnClickOutside(ref, handler) {
   useEffect(() => {
@@ -19,19 +20,20 @@ const DropdownButton = ({ buttons }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeButtonIndex, setActiveButtonIndex] = useState(0);
   const wrapperRef = useRef(null);
-
+  const navigate = useNavigate();
   const menuOpacity = isOpen ? " opacity-100" : " opacity-0";
   const menuTranslate = isOpen ? " translate-y-0" : " -translate-y-5";
   const menuVisibility = isOpen ? "visible" : "invisible";
   const buttonCursor = isOpen ? "" : "cursor-default";
   const activeButtonBg = !isOpen
     ? " bg-beig hover:bg-beig-dark"
-    : " bg-[#5F8DA3]";
+    : " bg-beig-dark";
 
   const buttonClickHandler = (index) => {
     if (!isOpen) return;
     setActiveButtonIndex(index);
     setIsOpen(false);
+    navigate(`${buttons.at(index).link}`);
   };
 
   useOnClickOutside(wrapperRef, () => setIsOpen(false));
@@ -43,7 +45,7 @@ const DropdownButton = ({ buttons }) => {
     >
       <div
         onClick={() => setIsOpen(!isOpen)}
-        className={`flex cursor-pointer items-center gap-2 rounded-md px-5 py-1.5 ${activeButtonBg}`}
+        className={`flex cursor-pointer items-center gap-2 rounded-md px-5 py-[7px] ${activeButtonBg}`}
       >
         {buttons.at(activeButtonIndex).icon}
         <p className="hidden sm:block">{buttons.at(activeButtonIndex).title}</p>

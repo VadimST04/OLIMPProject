@@ -8,9 +8,11 @@ const MainContent = () => {
 
   return (
     <div
-      className={`flex h-full min-h-0 gap-5 bg-[#F3F3F3] p-5 ${leftSideChats}`}
+      className={`flex h-full min-h-0 gap-5 bg-soft-white p-5 text-soft-black ${leftSideChats}`}
     >
-      <Outlet />
+      <div className="flex-grow overflow-y-auto">
+        <Outlet />
+      </div>
       <Chats />
     </div>
   );

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserProfile } from "../store/actions/profileActions";
 
-function UserProfilePage() {
+const ProfilePage = () => {
   const dispatch = useDispatch();
 
   const { userProfile } = useSelector((state) => state.userProfile);
@@ -30,6 +30,6 @@ function UserProfilePage() {
         ))}
     </div>
   );
-}
+};
 
-export default UserProfilePage;
+export default ProfilePage;

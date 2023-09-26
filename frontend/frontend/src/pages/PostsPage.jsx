@@ -13,8 +13,8 @@ function PostsPage() {
   }, [dispatch]);
 
   return (
-    <div className="flex-grow overflow-y-auto">
-      <h1>Posts</h1>
+    <div className="">
+      <h1>PostsPage</h1>
       {posts &&
         posts.map((item) => (
           <div className="post" key={item.id}>
