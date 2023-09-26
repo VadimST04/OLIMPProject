@@ -16,10 +16,20 @@ const Chats = () => {
     { img: testImg, name: "Lorem", lastMessage: "lorem XD" },
     { img: testImg, name: "Lorem", lastMessage: "lorem XD" },
     { img: testImg, name: "Lorem", lastMessage: "lorem XD" },
+    { img: testImg, name: "Lorem", lastMessage: "lorem XD" },
+    { img: testImg, name: "Lorem", lastMessage: "lorem XD" },
+    { img: testImg, name: "Lorem", lastMessage: "lorem XD" },
+    { img: testImg, name: "Lorem", lastMessage: "lorem XD" },
+    { img: testImg, name: "Lorem", lastMessage: "lorem XD" },
+    { img: testImg, name: "Lorem", lastMessage: "lorem XD" },
+    { img: testImg, name: "Lorem", lastMessage: "lorem XD" },
+    { img: testImg, name: "Lorem", lastMessage: "lorem XD" },
+    { img: testImg, name: "Lorem", lastMessage: "lorem XD" },
+    { img: testImg, name: "Lorem", lastMessage: "lorem XD" },
   ];
 
   return (
-    <div className="w-72 flex-shrink-0 overflow-y-auto px-1 py-[0.6rem]">
+    <div className="w-[22rem] flex-shrink-0 overflow-y-auto px-1 py-[0.6rem] ">
       {chats.map((item, index) => (
         <ChatItem
           key={index}

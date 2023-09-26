@@ -45,7 +45,7 @@ const DropdownButton = ({ buttons }) => {
     >
       <div
         onClick={() => setIsOpen(!isOpen)}
-        className={`flex cursor-pointer items-center gap-2 rounded-md px-5 py-[7px] ${activeButtonBg}`}
+        className={`flex w-[9rem] cursor-pointer items-center justify-center gap-2 rounded-md px-5 py-[7px] ${activeButtonBg}`}
       >
         {buttons.at(activeButtonIndex).icon}
         <p className="hidden sm:block">{buttons.at(activeButtonIndex).title}</p>

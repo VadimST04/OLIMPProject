@@ -4,22 +4,23 @@ import { useSelector } from "react-redux";
 import SearchBar from "./SearchBar";
 import DropdownButton from "./DropdownButton";
 
-import { BsNewspaper, BsFillFileEarmarkPostFill } from "react-icons/bs";
+import { BsNewspaper, BsFileEarmarkText } from "react-icons/bs";
 import { PiBooksDuotone } from "react-icons/pi";
-import { LuUsers2 } from "react-icons/lu";
+import { FiUsers } from "react-icons/fi";
 import { IoMusicalNotes } from "react-icons/io5";
 import { MdLanguage } from "react-icons/md";
 import { MdSettings } from "react-icons/md";
 import { HiOutlineUserCircle } from "react-icons/hi";
 
 function Navbar({ isLoggedIn, profileClick, signInClick }) {
+  const navPadding = isLoggedIn ? "py-1" : "py-2.5";
   const testImg =
     "https://images.unsplash.com/photo-1695504236952-37306fc71896";
   const buttonOptions = [
     { title: "News", icon: <BsNewspaper />, link: "/" },
     { title: "Books", icon: <PiBooksDuotone />, link: "/books" },
-    { title: "Posts", icon: <BsFillFileEarmarkPostFill />, link: "/posts" },
-    { title: "Users", icon: <LuUsers2 />, link: "/users" },
+    { title: "Posts", icon: <BsFileEarmarkText />, link: "/posts" },
+    { title: "Users", icon: <FiUsers />, link: "/users" },
     { title: "Music", icon: <IoMusicalNotes />, link: "/music" },
   ];
 
@@ -27,10 +28,13 @@ function Navbar({ isLoggedIn, profileClick, signInClick }) {
     { length: 999 },
     (_, i) => `Lorem${i + 1}`,
   );
+
   const testSumbitCallback = (value) => console.log(value);
 
   return (
-    <div className="flex items-center justify-between bg-main-green px-5 py-1.5">
+    <div
+      className={`flex items-center justify-between bg-main-green px-5 ${navPadding}`}
+    >
       <div className="flex items-center gap-5">
         <DropdownButton buttons={buttonOptions} />
         <SearchBar
@@ -58,9 +62,9 @@ function Navbar({ isLoggedIn, profileClick, signInClick }) {
         {isLoggedIn && (
           <div
             onClick={() => profileClick()}
-            className="group cursor-pointer rounded-full p-2 transition-all duration-150 hover:bg-main-dark-green"
+            className="group cursor-pointer rounded-full p-2.5 transition-all duration-150 hover:bg-main-dark-green"
           >
-            <div className="flex aspect-square w-10 items-center justify-center text-soft-white  group-hover:scale-110">
+            <div className="flex aspect-square w-9 items-center justify-center text-soft-white transition-all duration-150 group-hover:scale-125">
               <img
                 src={testImg}
                 alt=""
