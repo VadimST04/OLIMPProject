@@ -15,10 +15,11 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = models.ImageField(blank=True, null=True)
     description = models.TextField(max_length=500, blank=True, null=True)
-    app_lang = models.OneToOneField(Language,
+    app_lang = models.ForeignKey(Language,
+                                    null=True,
                                     on_delete=models.DO_NOTHING,
                                     related_name='app_language')
-    learning_langs = models.ManyToManyField(Language)
+    learning_langs = models.ManyToManyField(Language, null=True)
 
     def __str__(self):
         return f'{self.user.username} Profile'
