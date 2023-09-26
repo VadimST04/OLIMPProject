@@ -1,23 +1,23 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { postsList } from "../store/actions/postsActions";
+import { getUserProfile } from "../store/actions/profileActions";
 
-function PostsPage() {
+const ProfilePage = () => {
   const dispatch = useDispatch();
 
-  const { posts } = useSelector((state) => state.postsList);
-  console.log(posts);
+  const { userProfile } = useSelector((state) => state.userProfile);
+  console.log(userProfile);
 
   useEffect(() => {
-    dispatch(postsList());
+    dispatch(getUserProfile());
   }, [dispatch]);
 
   return (
-    <div className="">
-      <h1>PostsPage</h1>
-      {posts &&
-        posts.map((item) => (
-          <div className="post" key={item.id}>
+    <div className="flex-grow overflow-y-auto">
+      <h1>User Profile Page</h1>
+      {userProfile &&
+        userProfile.map((item, index) => (
+          <div className="user_profile" key={index}>
             {
               <img
                 src={item.image}
@@ -26,12 +26,10 @@ function PostsPage() {
               />
             }
             <h6>{item.user.username}: </h6>
-            <p>{item.content}</p>
-            <p>likes: {item.likes}</p>
           </div>
         ))}
     </div>
   );
-}
+};
 
-export default PostsPage;
+export default ProfilePage;
