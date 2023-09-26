@@ -80,6 +80,8 @@ const RegistrationForm = ({ closeFormCallback }) => {
 
   const dispatch = useDispatch();
   const onSubmitClickHandler = () => {
+    if (passwordConfirmation !== password) {
+    }
     console.log(
       `dispatch[username: ${username}, password: ${password}, passwordConfirmation: ${passwordConfirmation}]`,
     );
@@ -116,7 +118,7 @@ const RegistrationForm = ({ closeFormCallback }) => {
       onClick={(e) => closeForm(e)}
       className="absolute left-0 top-0 z-10 flex h-screen w-screen items-center justify-center bg-black bg-opacity-50"
     >
-      <form className="flex max-h-[75%] w-52 flex-col items-center gap-5 overflow-y-auto rounded-md border bg-soft-white p-5 text-soft-black shadow-[0_0_30px_#00000090] md:w-64 lg:w-96">
+      <form className="flex  w-52 flex-col items-center gap-5 overflow-y-auto rounded-md border bg-soft-white p-5 text-soft-black shadow-[0_0_30px_#00000090] md:w-64 lg:w-96">
         <p className="font-semibold md:text-[18px] lg:text-[22px] xl:text-[24px]">
           Register new Account
         </p>

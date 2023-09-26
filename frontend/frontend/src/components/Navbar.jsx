@@ -7,14 +7,15 @@ import { LuUsers2 } from "react-icons/lu";
 import { IoMusicalNotes } from "react-icons/io5";
 
 import DropdownButton from "./DropdownButton";
+import { Link } from "react-router-dom";
 
 function Navbar({ rightSideButtons }) {
   const buttonOptions = [
-    { title: "News", icon: <BsNewspaper /> },
-    { title: "Books", icon: <PiBooksDuotone /> },
-    { title: "Posts", icon: <BsFillFileEarmarkPostFill /> },
-    { title: "Users", icon: <LuUsers2 /> },
-    { title: "Music", icon: <IoMusicalNotes /> },
+    { title: "News", icon: <BsNewspaper />, link: "/" },
+    { title: "Books", icon: <PiBooksDuotone />, link: "/books" },
+    { title: "Posts", icon: <BsFillFileEarmarkPostFill />, link: "/posts" },
+    { title: "Users", icon: <LuUsers2 />, link: "/users" },
+    { title: "Music", icon: <IoMusicalNotes />, link: "/music" },
   ];
 
   const testSearchItems = Array.from(

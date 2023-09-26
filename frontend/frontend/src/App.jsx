@@ -16,6 +16,9 @@ import MainContent from "./components/MainContent";
 import SignInSignUpForm from "./components/SignInSignUpForm";
 import RegistrationForm from "./components/RegistrationForm";
 import PostsPage from "./pages/PostsPage";
+import MusicPage from "./pages/MusicPage";
+import UsersPage from "./pages/UsersPage";
+import BooksPage from "./pages/BooksPage";
 
 const Root = () => {
   const [isSignInFormOpen, setSignInFormOpen] = useState(false);
@@ -56,6 +59,9 @@ const router = createBrowserRouter(
     <Route path="/" element={<Root />}>
       <Route index element={<HomePage />} />
       <Route path="/posts" element={<PostsPage />} />
+      <Route path="/books" element={<BooksPage />} />
+      <Route path="/users" element={<UsersPage />} />
+      <Route path="/music" element={<MusicPage />} />
     </Route>,
   ),
 );
