@@ -1,7 +1,7 @@
 import React from "react";
 
 const MusicPage = () => {
-  return <div className="">MusicPage</div>;
+  return <div>MusicPage</div>;
 };
 
 export default MusicPage;

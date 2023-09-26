@@ -5,13 +5,9 @@ import {
   RouterProvider,
   Route,
 } from "react-router-dom";
-
-import { MdLanguage } from "react-icons/md";
-import { MdSettings } from "react-icons/md";
-import { HiOutlineUserCircle } from "react-icons/hi";
+import { useSelector } from "react-redux";
 
 import Navbar from "./components/Navbar";
-import HomePage from "./pages/HomePage";
 import MainContent from "./components/MainContent";
 import SignInSignUpForm from "./components/SignInSignUpForm";
 import RegistrationForm from "./components/RegistrationForm";
@@ -19,25 +15,21 @@ import PostsPage from "./pages/PostsPage";
 import MusicPage from "./pages/MusicPage";
 import UsersPage from "./pages/UsersPage";
 import BooksPage from "./pages/BooksPage";
+import ProfilePage from "./pages/ProfilePage";
+import NewsPage from "./pages/NewsPage";
 
 const Root = () => {
   const [isSignInFormOpen, setSignInFormOpen] = useState(false);
   const [isRegistrationFormOpen, setRegistrationFormOpen] = useState(false);
-
-  const rightSideButtons = [
-    { icon: <MdLanguage />, callback: () => {} },
-    { icon: <MdSettings />, callback: () => {} },
-    {
-      icon: <HiOutlineUserCircle />,
-      callback: () => {
-        setSignInFormOpen(true);
-      },
-    },
-  ];
+  const { userToken } = useSelector((state) => state.userToken);
 
   return (
     <div className="flex h-screen flex-col">
-      <Navbar rightSideButtons={rightSideButtons} />
+      <Navbar
+        isLoggedIn={userToken}
+        signInClick={() => setSignInFormOpen(true)}
+        profileClick={() => setSignInFormOpen(true)}
+      />
       <MainContent />
       {isSignInFormOpen && (
         <SignInSignUpForm
@@ -57,11 +49,12 @@ const Root = () => {
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />}>
-      <Route index element={<HomePage />} />
+      <Route index element={<NewsPage />} />
       <Route path="/posts" element={<PostsPage />} />
       <Route path="/books" element={<BooksPage />} />
       <Route path="/users" element={<UsersPage />} />
       <Route path="/music" element={<MusicPage />} />
+      <Route path="/profile" element={<ProfilePage />} />
     </Route>,
   ),
 );

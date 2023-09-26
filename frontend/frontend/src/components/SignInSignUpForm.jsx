@@ -34,7 +34,6 @@ const SignInSignUpForm = ({ closeFormCallback, registrationFormOpen }) => {
   const [password, setPassword] = useState("");
 
   const onSubmitClickHandler = () => {
-    console.log(`dispatch[username: ${username}, password: ${password}]`);
     dispatch(login(username, password));
     closeFormCallback();
   };
