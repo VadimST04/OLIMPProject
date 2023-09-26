@@ -30,8 +30,7 @@ class UserRegistration(APIView):
                 password=make_password(data['password']),
                 email=data['email'],
             )
-
-            app_lang = Language.objects.filter(name=data['app_lang'])
+            app_lang = Language.objects.filter(name=data['app_lang'])[0]
             learning_langs = Language.objects.filter(name__in=data.get('learning_langs', []))
 
             new_user_profile = UserProfile.objects.create(
@@ -39,16 +38,16 @@ class UserRegistration(APIView):
                 image=data.get('image'),
                 description=data.get('description'),
             )
-            new_user_profile.app_lang = app_lang[0]
+            new_user_profile.app_lang = app_lang
             new_user_profile.learning_langs.set(learning_langs)
             new_user_profile.save()
 
             serializer = UserProfileSerializer(new_user_profile)
 
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        except IntegrityError:
-            message = {'detail': 'user with this email already exist'}
-            return Response(message, status=status.HTTP_400_BAD_REQUEST)
+        # except IntegrityError:
+        #     message = {'detail': 'user with this email already exist'}
+        #     return Response(message, status=status.HTTP_400_BAD_REQUEST)
         except KeyError:
             message = {'detail': 'provided data is incorrect'}
             return Response(message, status=status.HTTP_400_BAD_REQUEST)

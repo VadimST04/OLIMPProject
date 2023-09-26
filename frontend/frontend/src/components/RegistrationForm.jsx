@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { login } from "../store/actions/userActions";
+import { register } from "../store/actions/userActions";
 import { FiUser } from "react-icons/fi";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { BsTranslate } from "react-icons/bs";
@@ -42,6 +42,7 @@ const RegistrationForm = ({ closeFormCallback }) => {
     "Vietnamese",
     "Italian",
     "Ukrainian",
+    "Hebrew",
   ];
 
   const [isFirstStep, setFirstStep] = useState(true);
@@ -81,6 +82,24 @@ const RegistrationForm = ({ closeFormCallback }) => {
   const dispatch = useDispatch();
   const onSubmitClickHandler = () => {
     if (passwordConfirmation !== password) {
+    } else {
+      console.log("register dispatch");
+      console.log(
+        username,
+        "tom@gmail.com",
+        password,
+        appLanguage,
+        learningLanguages,
+      );
+      dispatch(
+        register(
+          username,
+          "test@gmail.com",
+          password,
+          appLanguage,
+          learningLanguages,
+        ),
+      );
     }
     console.log(
       `dispatch[username: ${username}, password: ${password}, passwordConfirmation: ${passwordConfirmation}]`,

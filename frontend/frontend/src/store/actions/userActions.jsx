@@ -57,8 +57,7 @@ export const logout = () => (dispatch) => {
 };
 
 export const register =
-  (username, email, password, image, app_lang, learning_langs) =>
-  async (dispatch) => {
+  (username, email, password, app_lang, learning_langs) => async (dispatch) => {
     try {
       dispatch({
         type: USER_REGISTER_REQUEST,
@@ -71,12 +70,11 @@ export const register =
       };
 
       const { data } = await axios.post(
-        "http://127.0.0.1:8000/api/users/registration",
+        "http://127.0.0.1:8000/api/users/registration/",
         {
           username,
           email,
           password,
-          image,
           app_lang,
           learning_langs,
         },
@@ -92,6 +90,8 @@ export const register =
         type: USER_LOGIN_SUCCESS,
         payload: data,
       });
+
+      localStorage.setItem("userToken", JSON.stringify(data));
     } catch (error) {
       dispatch({
         type: USER_REGISTER_FAIL,
