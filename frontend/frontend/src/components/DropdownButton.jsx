@@ -45,10 +45,10 @@ const DropdownButton = ({ buttons }) => {
     >
       <div
         onClick={() => setIsOpen(!isOpen)}
-        className={`flex w-[9rem] cursor-pointer items-center justify-center gap-2 rounded-md px-5 py-[7px] ${activeButtonBg}`}
+        className={`flex w-[5rem] cursor-pointer items-center justify-center gap-2 rounded-md px-5 py-[7px] md:w-[9rem] ${activeButtonBg}`}
       >
         {buttons.at(activeButtonIndex).icon}
-        <p className="hidden sm:block">{buttons.at(activeButtonIndex).title}</p>
+        <p className="hidden md:block">{buttons.at(activeButtonIndex).title}</p>
         {isOpen ? <AiOutlineClose /> : <MdOutlineExpandMore />}
       </div>
       <div

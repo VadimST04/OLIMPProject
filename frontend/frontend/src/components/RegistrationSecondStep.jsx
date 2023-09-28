@@ -55,7 +55,7 @@ const RegistrationSecondStep = ({
   };
 
   return (
-    <div className="flex w-full flex-col justify-center gap-3">
+    <div className="flex w-full flex-col justify-center gap-4 p-5 pt-0">
       <div className="relative flex items-center">
         <input
           accept="image/*"

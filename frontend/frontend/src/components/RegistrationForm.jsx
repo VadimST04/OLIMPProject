@@ -11,6 +11,7 @@ const RegistrationForm = ({ closeFormCallback }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const [email, setEmail] = useState("");
   const [appLanguage, setAppLanguage] = useState("");
   const [learningLanguages, setLearningLanguages] = useState([]);
 
@@ -59,7 +60,7 @@ const RegistrationForm = ({ closeFormCallback }) => {
       onClick={(e) => closeForm(e)}
       className="absolute left-0 top-0 z-10 flex h-screen w-screen items-center justify-center bg-black bg-opacity-50"
     >
-      <form className="flex w-52 flex-col items-center gap-5 overflow-y-auto rounded-md border bg-soft-white p-5 text-soft-black shadow-[0_0_30px_#00000090] md:w-64 lg:w-96">
+      <form className="flex w-52 flex-col items-center gap-5 overflow-y-auto rounded-md border bg-soft-white text-soft-black shadow-[0_0_30px_#00000090] md:w-64 lg:w-96">
         <div className="pointer-events-none aspect-square w-16 select-none overflow-hidden rounded-md md:w-20 lg:w-24 xl:w-28">
           <img src={logo} alt="" className="h-full w-full object-contain" />
         </div>
@@ -74,6 +75,7 @@ const RegistrationForm = ({ closeFormCallback }) => {
               setPasswordConfirmation={(value) =>
                 setPasswordConfirmation(value)
               }
+              setEmail={(value) => setEmail(value)}
               setFirstStep={(value) => setFirstStep(value)}
             />
           </div>
