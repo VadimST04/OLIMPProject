@@ -14,7 +14,7 @@ class Book(models.Model):
     title = models.CharField(max_length=100)
     text = models.TextField()
     author = models.ForeignKey(Author, null=True, on_delete=models.SET_NULL)
-    cover_image = models.ImageField()
+    cover_image = models.ImageField(null=True)
     pages_count = models.IntegerField()
     languages = models.ForeignKey(Language, on_delete=models.DO_NOTHING)
 
