@@ -60,7 +60,7 @@ const RegistrationSecondStep = ({
         <input
           accept="image/*"
           type="file"
-          className={`w-full rounded-md bg-white-green pl-5 shadow-[0_0_2px_#00000064] outline-none hover:bg-[#D5D9D4] md:py-1.5 md:pl-6 xl:pl-8 ${textSize}`}
+          className={`w-full rounded-md border bg-soft-white pl-5 shadow-[0_0_2px_#00000064] outline-none hover:border-main-green md:py-1.5 md:pl-6 xl:pl-8 ${textSize}`}
         />
         <div className={`absolute left-1 ${textSize}`}>
           <AiOutlineFileImage />
@@ -104,13 +104,13 @@ const RegistrationSecondStep = ({
             e.preventDefault();
             setFirstStep(true);
           }}
-          className={`w-full rounded-md bg-blue-600 py-1 text-soft-white hover:bg-blue-800 md:py-2 ${textSize}`}
+          className={`w-full rounded-md bg-main-green py-1 text-soft-white hover:bg-main-dark-green md:py-2 ${textSize}`}
         >
           Back
         </button>
         <button
           onClick={(e) => onSubmitClickHandler(e)}
-          className={`w-full rounded-md bg-blue-600 py-1 text-soft-white hover:bg-blue-800 md:py-2 ${textSize}`}
+          className={`w-full rounded-md bg-main-green py-1 text-soft-white hover:bg-main-dark-green md:py-2 ${textSize}`}
         >
           Register
         </button>
