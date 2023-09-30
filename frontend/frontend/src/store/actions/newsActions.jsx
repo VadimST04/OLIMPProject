@@ -1,14 +1,14 @@
 import {
-  USER_PROFILE_REQUEST,
-  USER_PROFILE_SUCCESS,
-  USER_PROFILE_FAIL,
-} from "../constants/profileConstants";
+  NEWS_REQUEST,
+  NEWS_SUCCESS,
+  NEWS_FAIL,
+} from "../constants/newsConstants";
 import axios from "axios";
 
-export const getUserProfile = () => async (dispatch, getState) => {
+export const newsList = (learning_langs) => async (dispatch, getState) => {
   try {
     dispatch({
-      type: USER_PROFILE_REQUEST,
+      type: NEWS_REQUEST,
     });
 
     const { userToken } = getState().userToken;
@@ -20,20 +20,21 @@ export const getUserProfile = () => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(
-      "http://127.0.0.1:8000/api/users/profile",
+    const { data } = await axios.post(
+      `http://127.0.0.1:8000/api/news/`,
+      {
+        learning_langs: learning_langs,
+      },
       config,
     );
 
     dispatch({
-      type: USER_PROFILE_SUCCESS,
+      type: NEWS_SUCCESS,
       payload: data,
     });
-
-    localStorage.setItem("userProfile", JSON.stringify(data));
   } catch (error) {
     dispatch({
-      type: USER_PROFILE_FAIL,
+      type: NEWS_FAIL,
       payload:
         error.response && error.response.data.detail
           ? error.response.data.detail
