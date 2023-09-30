@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'baseApp',
     'newsApp',
     'postsApp',
+    'booksApp',
 ]
 
 SIMPLE_JWT = {
