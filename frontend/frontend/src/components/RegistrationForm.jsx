@@ -86,7 +86,7 @@ const RegistrationForm = ({ closeFormCallback }) => {
       console.log("register dispatch");
       console.log(
         username,
-        "tom@gmail.com",
+        "email@gmail.com",
         password,
         appLanguage,
         learningLanguages,
@@ -94,7 +94,7 @@ const RegistrationForm = ({ closeFormCallback }) => {
       dispatch(
         register(
           username,
-          "test@gmail.com",
+          "email@gmail.com",
           password,
           appLanguage,
           learningLanguages,

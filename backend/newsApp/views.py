@@ -10,14 +10,14 @@ class NewsList(APIView):
     View for getting news depending on languages
     """
 
-    def get(self, request):
+    def post(self, request):
         """
-        Handle POST requests for the view.
+        Handle POST requests for the view.d
         :param request: An HTTP request object.
         :return: Returns list of article objects
         """
 
-        news = News.get_news(langs=request.data['learning_languages'])
+        news = News.get_news(langs=request.data['learning_langs'])
         if not news:
             return Response({'detail': 'Something went wrong with news'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         return Response(news, status=status.HTTP_200_OK)
