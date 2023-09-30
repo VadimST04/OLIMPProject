@@ -10,6 +10,8 @@ class UserSerializer(serializers.ModelSerializer):
     This serializer is used to transform User info from database into JSON representations.
     """
 
+    # user_profile = UserProfileSerializer(read_only=True)
+
     class Meta:
         """
         model: The User model to serialize.
