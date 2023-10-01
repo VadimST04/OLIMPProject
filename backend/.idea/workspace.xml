@@ -5,6 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d74729b7-324e-4082-b908-961cbb6b63e6" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/postsApp/migrations/0002_image_alter_post_image.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/postsApp/migrations/0003_remove_post_image_image_post.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/postsApp/migrations/0004_imagepost_delete_image.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/postsApp/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/postsApp/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/postsApp/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/postsApp/models.py" afterDir="false" />
