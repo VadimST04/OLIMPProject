@@ -6,5 +6,9 @@ import booksApp.views.author as author_views
 
 urlpatterns = [
     path('create/', book_views.BookCreateView.as_view()),
-    path('authors/create/', author_views.AuthorCreateView.as_view())
+    path('authors/create/', author_views.AuthorCreateView.as_view()),
+    path('authors/update/<int:pk>/', author_views.AuthorUpdateView.as_view()),
+    path('authors/', author_views.AuthorListView.as_view()),
+    path('authors/delete/<int:pk>/', author_views.AuthorDeleteView.as_view()),
+    path('authors/view/<int:pk>/', author_views.AuthorDetailView.as_view())
 ]
