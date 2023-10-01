@@ -5,16 +5,16 @@ import { postsList } from "../store/actions/postsActions";
 import PostItem from "../components/PostItem";
 
 function PostsPage() {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // const { posts } = useSelector((state) => state.postsList);
-  // console.log(posts);
+  const { posts } = useSelector((state) => state.postsList);
+  console.log(posts);
 
-  // useEffect(() => {
-  //   dispatch(postsList());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(postsList());
+  }, [dispatch]);
 
-  const posts = [
+  const testPosts = [
     {
       id: 1,
       liked: false,
@@ -37,7 +37,7 @@ function PostsPage() {
       ],
       username: "user1",
       content:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis, minus.",
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate alias veritatis nam doloribus perspiciatis, modi, atque quasi minus deleniti ipsa optio sit autem maxime ut ex voluptates excepturi repudiandae beatae dolorum mollitia dignissimos a iusto! Inventore aut cupiditate perspiciatis aliquam placeat omnis non obcaecati debitis, id quaerat commodi sequi. Ratione sapiente enim praesentium, corporis maxime voluptatum ab quam, nihil natus officia totam alias sequi laudantium. Odit voluptatum corrupti esse autem aut impedit, vel sunt quidem qui maiores debitis libero eaque, quis culpa harum quisquam possimus. Eaque perferendis reiciendis magni corrupti earum aliquam adipisci. Fugit sequi fugiat eveniet non, cumque laudantium?",
       likes: 984,
       comments: 132,
     },
@@ -47,17 +47,26 @@ function PostsPage() {
       images: ["https://images.unsplash.com/photo-1695754189866-f2f8eae7328d"],
       username: "user1",
       content:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate alias veritatis nam doloribus perspiciatis, modi, atque quasi minus deleniti ipsa optio sit autem maxime ut ex voluptates excepturi repudiandae beatae dolorum mollitia dignissimos a iusto! Inventore aut cupiditate perspiciatis aliquam placeat omnis non obcaecati debitis, id quaerat commodi sequi. Ratione sapiente enim praesentium, corporis maxime voluptatum ab quam, nihil natus officia totam alias sequi laudantium. Odit voluptatum corrupti esse autem aut impedit, vel sunt quidem qui maiores debitis libero eaque, quis culpa harum quisquam possimus. Eaque perferendis reiciendis magni corrupti earum aliquam adipisci. Fugit sequi fugiat eveniet non, cumque laudantium?",
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis, minus.",
       likes: 984,
       comments: 132,
     },
   ];
 
   return (
-    <div className="flex h-full flex-col items-center gap-5 p-5">
-      {posts.map((item) => (
-        <PostItem {...item} />
-      ))}
+    <div className="flex h-full flex-col items-center gap-5 overflow-y-auto p-5">
+      {posts &&
+        posts.map((item) => (
+          <PostItem
+            liked={false}
+            images={[item.image]}
+            key={item.id}
+            username={item.user.username}
+            content={item.content}
+            likes={item.likes}
+            comments={item.comments}
+          />
+        ))}
     </div>
   );
 }
