@@ -1,4 +1,7 @@
+import re
+
 import requests
+from bs4 import BeautifulSoup
 from rest_framework import serializers
 
 from baseApp.models import Language
@@ -25,7 +28,12 @@ class BookCreateSerializer(serializers.ModelSerializer):
         raise Exception('Incorrect link')
 
     def create(self, validated_data):
-        validated_data['text'] = self.response.text
+        soup = BeautifulSoup(self.response.text, 'html.parser')
+
+        start_point = r'\*\*\*([\s\S]+?)\*\*\*'
+        text = re.split(start_point, soup.get_text())[2].strip('\n')
+
+        validated_data['text'] = text
 
         book_obj = Book.objects.create(**validated_data)
 
