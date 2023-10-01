@@ -23,7 +23,9 @@ class UserRegistration(APIView):
         :param request: An HTTP request object.
         :return: Returns information about user's profile and data about user
         """
+
         data = request.data
+        print(request.FILES)
         try:
             new_user = User.objects.create(
                 username=data['username'],
@@ -45,9 +47,9 @@ class UserRegistration(APIView):
             serializer = UserProfileSerializer(new_user_profile)
 
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        # except IntegrityError:
-        #     message = {'detail': 'user with this email already exist'}
-        #     return Response(message, status=status.HTTP_400_BAD_REQUEST)
+        except IntegrityError:
+            message = {'detail': 'user with this email already exist'}
+            return Response(message, status=status.HTTP_400_BAD_REQUEST)
         except KeyError:
             message = {'detail': 'provided data is incorrect'}
             return Response(message, status=status.HTTP_400_BAD_REQUEST)

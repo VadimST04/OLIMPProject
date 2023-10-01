@@ -14,11 +14,14 @@ const RegistrationForm = ({ closeFormCallback }) => {
   const [email, setEmail] = useState("");
   const [appLanguage, setAppLanguage] = useState("");
   const [learningLanguages, setLearningLanguages] = useState([]);
+  const [image, setImage] = useState(null);
 
   const [isFirstStep, setFirstStep] = useState(true);
 
   const firstStepVisibility = isFirstStep ? "flex" : "hidden";
   const secondStepVisibility = isFirstStep ? "hidden" : "flex";
+
+  console.log(image);
 
   const dispatch = useDispatch();
   const onSubmitClickHandler = () => {
@@ -27,16 +30,18 @@ const RegistrationForm = ({ closeFormCallback }) => {
       console.log("register dispatch");
       console.log(
         username,
-        "email@gmail.com",
+        email,
         password,
+        image,
         appLanguage,
         learningLanguages,
       );
       dispatch(
         register(
           username,
-          "email@gmail.com",
+          email,
           password,
+          image,
           appLanguage,
           learningLanguages,
         ),
@@ -85,6 +90,7 @@ const RegistrationForm = ({ closeFormCallback }) => {
               setAppLanguage={(value) => setAppLanguage(value)}
               setFirstStep={(value) => setFirstStep(value)}
               onSubmitClickHandler={() => onSubmitClickHandler()}
+              image={(image) => setImage(image)}
             />
           </div>
         </div>
