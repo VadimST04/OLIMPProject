@@ -5,6 +5,7 @@
 .idea/
 backend/.idea/
 backend/.idea/workspace.xml
+static/images
 
 # C extensions
 *.so
