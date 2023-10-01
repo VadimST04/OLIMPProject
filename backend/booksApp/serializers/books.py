@@ -7,6 +7,9 @@ from booksApp.models import Book, Author
 
 
 class BookCreateSerializer(serializers.ModelSerializer):
+    """
+    Serializer to create a Book instance
+    """
     author = serializers.SlugRelatedField(
         required=False,
         queryset=Author.objects.all(),
@@ -17,6 +20,9 @@ class BookCreateSerializer(serializers.ModelSerializer):
     )
 
     def is_valid(self, *, raise_exception=False):
+        """
+        Method to check if the link is valid
+        """
         self.response = requests.get(self.initial_data.get('text'))
 
         if self.response.status_code == 200:
@@ -24,6 +30,9 @@ class BookCreateSerializer(serializers.ModelSerializer):
         raise requests.exceptions.ConnectionError('Incorrect link')
 
     def create(self, validated_data):
+        """
+        Method to replace a text field to a valid value
+        """
         validated_data['text'] = utils.get_text_from_html(self.response.text)
 
         book_obj = Book.objects.create(**validated_data)
