@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from baseApp.serializers import UserSerializer
-from postsApp.models import Post, Comment
+from postsApp.models import Post, Comment, ImagePost
 
 
 class CommentSerializer(serializers.ModelSerializer):
@@ -23,6 +23,12 @@ class CommentSerializer(serializers.ModelSerializer):
         fields = ['user', 'text', 'likes']
 
 
+class ImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ImagePost
+        exclude = ['id', 'post', ]
+
+
 class PostSerializer(serializers.ModelSerializer):
     """
     Serializer class for serializing Post model instances.
@@ -31,8 +37,9 @@ class PostSerializer(serializers.ModelSerializer):
     It includes user details for the post author and a list of comments associated with the post.
     """
 
-    user = UserSerializer(read_only=True)
+    user = serializers.CharField(source='user.username')
     comments = CommentSerializer(many=True, read_only=True)
+    image_post = ImageSerializer(read_only=True, many=True)
 
     class Meta:
         """
