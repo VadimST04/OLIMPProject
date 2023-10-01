@@ -4,6 +4,7 @@
 *$py.class
 .idea/
 backend/.idea/
+backend/.idea/workspace.xml
 
 # C extensions
 *.so
