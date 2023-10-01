@@ -17,7 +17,6 @@ const RegistrationForm = ({ closeFormCallback }) => {
 
   const [isFirstStep, setFirstStep] = useState(true);
 
-  const textSize = "text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px]";
   const firstStepVisibility = isFirstStep ? "flex" : "hidden";
   const secondStepVisibility = isFirstStep ? "hidden" : "flex";
 
