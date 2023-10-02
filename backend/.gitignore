@@ -6,6 +6,7 @@
 backend/.idea/
 backend/.idea/workspace.xml
 static/images
+*/migrations/
 
 # C extensions
 *.so
