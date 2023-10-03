@@ -1,5 +1,10 @@
+from rest_framework.response import Response
+from django.contrib.auth.models import AnonymousUser
 from rest_framework.generics import CreateAPIView, UpdateAPIView, RetrieveAPIView, ListAPIView, DestroyAPIView
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.views import APIView
 
+from baseApp.models import UserProfile
 from booksApp.models import Book
 from booksApp.serializers.books import BookCreateSerializer, BookUpdateSerializer, BookDetailViewSerializer, \
     BookViewSerializer, BookDeleteSerializer
@@ -11,6 +16,7 @@ class BookCreateView(CreateAPIView):
     """
     queryset = Book.objects.all()
     serializer_class = BookCreateSerializer
+    authentication_classes = (IsAuthenticated, IsAdminUser)
 
 
 class BookUpdateView(UpdateAPIView):
@@ -19,6 +25,7 @@ class BookUpdateView(UpdateAPIView):
     """
     queryset = Book.objects.all()
     serializer_class = BookUpdateSerializer
+    authentication_classes = (IsAuthenticated, IsAdminUser)
 
 
 class BookDetailView(RetrieveAPIView):
@@ -27,14 +34,18 @@ class BookDetailView(RetrieveAPIView):
     """
     queryset = Book.objects.all()
     serializer_class = BookDetailViewSerializer
+    authentication_classes = IsAuthenticated,
 
 
-class BookListView(ListAPIView):
+class BookListView(APIView):
     """
     View to get all book's instances
     """
-    queryset = Book.objects.all()
-    serializer_class = BookViewSerializer
+    def post(self, request):
+        data = request.data
+        books = Book.objects.filter(languages__name__in=data['learning_langs'])
+        serializer = BookViewSerializer(books, many=True)
+        return Response(serializer.data)
 
 
 class BookDeleteView(DestroyAPIView):
@@ -43,3 +54,4 @@ class BookDeleteView(DestroyAPIView):
     """
     queryset = Book.objects.all()
     serializer_class = BookDeleteSerializer
+    authentication_classes = (IsAuthenticated, IsAdminUser)

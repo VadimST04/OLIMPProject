@@ -46,6 +46,10 @@ class BookCreateSerializer(serializers.ModelSerializer):
 
 
 class BookViewSerializer(serializers.ModelSerializer):
+    languages = serializers.StringRelatedField()
+    author = serializers.SlugRelatedField(queryset=Author.objects.all(),
+                                          slug_field='name')
+
     class Meta:
         model = Book
         exclude = ['id', 'text']
