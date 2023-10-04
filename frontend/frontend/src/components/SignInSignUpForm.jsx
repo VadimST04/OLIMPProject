@@ -8,41 +8,54 @@ import { SiFacebook } from "react-icons/si";
 import logo from "../assets/OLIMPlogo.png";
 
 const SignInSignUpForm = ({ closeFormCallback, registrationFormOpen }) => {
-  const textSize = "text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px]";
-  const fields = [
-    {
-      title: "Username",
-      type: "text",
-      placeholder: "Enter your username",
-      icon: <FiUser />,
-      autoComplete: "username",
-      onChangeHandler: (e) => setUsername(e.target.value),
-    },
-    {
-      title: "Password",
-      type: "password",
-      placeholder: "Enter your password",
-      icon: <RiLockPasswordLine />,
-      autoComplete: "password",
-      onChangeHandler: (e) => setPassword(e.target.value),
-    },
-  ];
-
   const dispatch = useDispatch();
   const formBg = useRef(null);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({});
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+  });
+  const error = useSelector((state) => state.usertoken);
+  const textSize = "text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px]";
 
-  const onSubmitClickHandler = () => {
-    dispatch(login(username, password));
-    closeFormCallback();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const validationErrors = {};
+    const usernameExists = false; // fetch from db
+    const isPasswordValid = false; // fetch from db
+
+    if (!formData.username.trim()) {
+      validationErrors.username = "username is required";
+    } else if (!usernameExists) {
+      validationErrors.username = "this username doesn't exist";
+    }
+
+    if (!formData.password.trim()) {
+      validationErrors.password = "password is required";
+    } else if (!isPasswordValid) {
+      validationErrors.password = "wrong password";
+    }
+
+    setErrors(validationErrors);
+
+    console.log(error);
+
+    if (Object.keys(validationErrors).length === 0) {
+      dispatch(login(formData.username, formData.password));
+      closeFormCallback();
+    }
   };
-  const onRegistrationClick = () => {
-    registrationFormOpen();
-    closeFormCallback();
-  };
+
   const closeForm = (e) => {
     if (e.target === formBg.current) closeFormCallback();
+  };
+
+  const fieldChangeHandle = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   };
 
   return (
@@ -58,28 +71,53 @@ const SignInSignUpForm = ({ closeFormCallback, registrationFormOpen }) => {
         <p className="font-semibold md:text-[18px] lg:text-[22px] xl:text-[24px]">
           Login to your Account
         </p>
-        <div className="w-full space-y-2">
-          {fields.map((item, index) => (
-            <div key={index} className="w-full space-y-2">
-              <p className={`font-semibold text-gray-400 ${textSize}`}>
-                {item.title}
-              </p>
-              <div className="relative flex items-center">
-                <input
-                  onChange={(e) => item.onChangeHandler(e)}
-                  autoComplete={item.autoComplete}
-                  type={item.type}
-                  placeholder={item.placeholder}
-                  className={`w-full rounded-md border bg-soft-white py-1 pl-5 shadow-[0_0_2px_#00000064] outline-none
+
+        <div className="flex w-full flex-col justify-center gap-4">
+          {/* Username */}
+          <div className="w-full">
+            <div className="relative flex w-full items-center">
+              <input
+                name="username"
+                onChange={fieldChangeHandle}
+                autoComplete="username"
+                type="text"
+                placeholder="Enter your username"
+                className={`w-full rounded-md border bg-soft-white py-1 pl-5 shadow-[0_0_2px_#00000064] outline-none
                   hover:border-main-green md:py-2 md:pl-6 xl:pl-8 ${textSize}`}
-                />
-                <div className={`absolute left-1 ${textSize}`}>{item.icon}</div>
+              />
+              <div className={`absolute left-1 ${textSize}`}>
+                <FiUser />
               </div>
             </div>
-          ))}
+            {errors.username && (
+              <div className="text-red-500">{errors.username}</div>
+            )}
+          </div>
+
+          {/* Password */}
+          <div className="w-full">
+            <div className="relative flex w-full items-center">
+              <input
+                name="password"
+                onChange={fieldChangeHandle}
+                autoComplete="password"
+                type="password"
+                placeholder="Enter your password"
+                className={`w-full rounded-md border bg-soft-white py-1 pl-5 shadow-[0_0_2px_#00000064] outline-none
+                  hover:border-main-green md:py-2 md:pl-6 xl:pl-8 ${textSize}`}
+              />
+              <div className={`absolute left-1 ${textSize}`}>
+                <RiLockPasswordLine />
+              </div>
+            </div>
+            {errors.password && (
+              <div className="text-red-500">{errors.password}</div>
+            )}
+          </div>
         </div>
+
         <button
-          onClick={onSubmitClickHandler}
+          onClick={handleSubmit}
           className={`w-full rounded-md bg-main-green py-1 text-soft-white hover:bg-main-dark-green md:py-2 ${textSize}`}
         >
           Sign In
@@ -106,7 +144,10 @@ const SignInSignUpForm = ({ closeFormCallback, registrationFormOpen }) => {
           Sign In with Facebook
         </div>
         <p
-          onClick={() => onRegistrationClick()}
+          onClick={() => {
+            registrationFormOpen();
+            closeFormCallback();
+          }}
           className="cursor-pointer text-[10px] text-gray-500 hover:underline md:text-[12px] lg:text-[14px] xl:text-[16px]"
         >
           Don't have an account? Register now

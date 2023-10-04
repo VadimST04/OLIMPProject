@@ -3,9 +3,8 @@ import SearchBar from "./SearchBar";
 import { AiOutlineFileImage } from "react-icons/ai";
 
 const RegistrationSecondStep = ({
-  learningLanguages,
-  setLearningLanguages,
-  setAppLanguage,
+  formData,
+  setFormData,
   setFirstStep,
   onSubmitClickHandler,
 }) => {
@@ -37,18 +36,24 @@ const RegistrationSecondStep = ({
   const [availableLanguages, setAvailableLanguages] = useState(languages);
 
   const langSelected = (value) => {
-    const newLearningLanguages = learningLanguages.concat([value]);
-    setLearningLanguages(newLearningLanguages);
+    const newLearningLanguages = formData.learningLanguages.concat([value]);
+    setFormData({
+      ...formData,
+      learningLanguages: newLearningLanguages,
+    });
     setAvailableLanguages(
       languages.filter((item) => !newLearningLanguages.includes(item)),
     );
   };
 
   const langRemoved = (langToRemove) => {
-    const newLearningLanguages = learningLanguages.filter(
+    const newLearningLanguages = formData.learningLanguages.filter(
       (item) => item !== langToRemove,
     );
-    setLearningLanguages(newLearningLanguages);
+    setFormData({
+      ...formData,
+      learningLanguages: newLearningLanguages,
+    });
     setAvailableLanguages(
       languages.filter((item) => !newLearningLanguages.includes(item)),
     );
@@ -71,7 +76,12 @@ const RegistrationSecondStep = ({
         searchItems={languages}
         maxHeight="max-h-28"
         placeholder="Choose app language"
-        submitCallback={(value) => setAppLanguage(value)}
+        submitCallback={(value) =>
+          setFormData({
+            ...formData,
+            appLanguage: value,
+          })
+        }
       />
       <SearchBar
         searchItems={availableLanguages}
@@ -82,13 +92,13 @@ const RegistrationSecondStep = ({
       />
       <div
         className={`max-h-48 flex-wrap items-center gap-1 overflow-y-auto rounded-md bg-white-green p-2 ${
-          learningLanguages.length === 0 ? "hidden" : "flex"
+          formData.learningLanguages.length === 0 ? "hidden" : "flex"
         }`}
       >
         <div className={`w-full select-none text-center ${textSize}`}>
           Click on language to remove:
         </div>
-        {learningLanguages.map((item) => (
+        {formData.learningLanguages.map((item) => (
           <div
             onClick={() => langRemoved(item)}
             key={item}

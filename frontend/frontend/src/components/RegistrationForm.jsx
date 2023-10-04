@@ -8,42 +8,31 @@ import RegistrationSecondStep from "./RegistrationSecondStep";
 
 const RegistrationForm = ({ closeFormCallback }) => {
   const formBg = useRef(null);
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordConfirmation, setPasswordConfirmation] = useState("");
-  const [email, setEmail] = useState("");
-  const [appLanguage, setAppLanguage] = useState("");
-  const [learningLanguages, setLearningLanguages] = useState([]);
-
   const [isFirstStep, setFirstStep] = useState(true);
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+    passwordConfirmation: "",
+    email: "",
+    appLanguage: "",
+    learningLanguages: [],
+  });
 
   const firstStepVisibility = isFirstStep ? "flex" : "hidden";
   const secondStepVisibility = isFirstStep ? "hidden" : "flex";
 
   const dispatch = useDispatch();
   const onSubmitClickHandler = () => {
-    if (passwordConfirmation !== password) {
-    } else {
-      console.log("register dispatch");
-      console.log(
-        username,
-        "email@gmail.com",
-        password,
-        appLanguage,
-        learningLanguages,
-      );
-      dispatch(
-        register(
-          username,
-          "email@gmail.com",
-          password,
-          appLanguage,
-          learningLanguages,
-        ),
-      );
-    }
-    console.log(
-      `dispatch[username: ${username}, password: ${password}, passwordConfirmation: ${passwordConfirmation}]`,
+    console.log("register dispatch");
+    console.log(formData);
+    dispatch(
+      register(
+        formData.username,
+        formData.email,
+        formData.password,
+        formData.appLanguage,
+        formData.learningLanguages,
+      ),
     );
 
     closeFormCallback();
@@ -67,22 +56,17 @@ const RegistrationForm = ({ closeFormCallback }) => {
           Register new Account
         </p>
         <div className={"flex w-full flex-col gap-5"}>
-          <div className={`${firstStepVisibility}`}>
+          <div className={firstStepVisibility}>
             <RegistrationFirstStep
-              setUsername={(value) => setUsername(value)}
-              setPassword={(value) => setPassword(value)}
-              setPasswordConfirmation={(value) =>
-                setPasswordConfirmation(value)
-              }
-              setEmail={(value) => setEmail(value)}
               setFirstStep={(value) => setFirstStep(value)}
+              formData={formData}
+              setFormData={setFormData}
             />
           </div>
-          <div className={`${secondStepVisibility}`}>
+          <div className={secondStepVisibility}>
             <RegistrationSecondStep
-              learningLanguages={learningLanguages}
-              setLearningLanguages={(value) => setLearningLanguages(value)}
-              setAppLanguage={(value) => setAppLanguage(value)}
+              formData={formData}
+              setFormData={setFormData}
               setFirstStep={(value) => setFirstStep(value)}
               onSubmitClickHandler={() => onSubmitClickHandler()}
             />
