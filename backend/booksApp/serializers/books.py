@@ -42,10 +42,13 @@ class BookCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Book
-        fields = ['title', 'text', 'author', 'languages', 'pages_count']
+        fields = ['title', 'text', 'author', 'languages']
 
 
 class BookViewSerializer(serializers.ModelSerializer):
+    """
+    Serializer to retrieve all Book's instances according to User's learning languages
+    """
     languages = serializers.StringRelatedField()
     author = serializers.SlugRelatedField(queryset=Author.objects.all(),
                                           slug_field='name')
@@ -56,18 +59,27 @@ class BookViewSerializer(serializers.ModelSerializer):
 
 
 class BookDetailViewSerializer(serializers.ModelSerializer):
+    """
+    Serializer to retrieve all fields of specific Book instance
+    """
     class Meta:
         model = Book
         exclude = ['id']
 
 
 class BookDeleteSerializer(serializers.ModelSerializer):
+    """
+    Serializer to delete a Book instance
+    """
     class Meta:
         model = Book
         fields = ['id']
 
 
 class BookUpdateSerializer(serializers.ModelSerializer):
+    """
+    Serializer to update Book instance. All parameters are not required.
+    """
     title = serializers.CharField(required=False)
     text = serializers.CharField(required=False)
     cover_image = serializers.ImageField(required=False)
@@ -80,6 +92,9 @@ class BookUpdateSerializer(serializers.ModelSerializer):
                                           slug_field='name')
 
     def is_valid(self, *, raise_exception=False):
+        """
+        If the field text is updated, check if the link is correct
+        """
         if self.initial_data.get('text'):
             self.response = requests.get(self.initial_data.get('text'))
 
@@ -89,6 +104,10 @@ class BookUpdateSerializer(serializers.ModelSerializer):
         return super().is_valid(raise_exception=raise_exception)
 
     def save(self, **kwargs):
+        """
+        Method to make text field readable using a function get_text_from_html
+        :return: Book instance
+        """
         book = super().save()
         book.text = utils.get_text_from_html(self.response.text)
 
