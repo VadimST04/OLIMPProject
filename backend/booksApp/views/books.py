@@ -42,6 +42,10 @@ class BookListView(APIView):
     View to get all book's instances
     """
     def post(self, request):
+        """
+        This method customize request for Book model
+        :return: Returns books with the user's learning languages
+        """
         data = request.data
         books = Book.objects.filter(languages__name__in=data['learning_langs'])
         serializer = BookViewSerializer(books, many=True)
