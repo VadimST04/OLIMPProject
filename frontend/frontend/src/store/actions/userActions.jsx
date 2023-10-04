@@ -53,6 +53,7 @@ export const login = (username, password) => async (dispatch) => {
 
 export const logout = () => (dispatch) => {
   localStorage.removeItem("userToken");
+  localStorage.removeItem("userProfile");
 
   dispatch({
     type: USER_LOGOUT,
