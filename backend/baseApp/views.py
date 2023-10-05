@@ -106,15 +106,15 @@ class UserProfileUpdate(APIView):
 
         user.save()
 
-        userprofile.user = user
         userprofile.image = data.get('image', userprofile.image)
         userprofile.description = data.get('description', userprofile.description)
 
-        if data.get('app_lang') or data.get('learning_langs'):
+        if data.get('app_lang'):
             app_lang = Language.objects.filter(name=data.get('app_lang', userprofile.app_lang))[0]
-            learning_langs = Language.objects.filter(name__in=data.get('learning_langs', []))
-
             userprofile.app_lang = app_lang
+
+        if data.get('learning_langs'):
+            learning_langs = Language.objects.filter(name__in=data.get('learning_langs', []))
             userprofile.learning_langs.set(learning_langs)
 
         userprofile.save()
