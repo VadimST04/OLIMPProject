@@ -5,6 +5,7 @@ from rest_framework import generics, status
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework import mixins
 
 from baseApp.models import UserProfile, Language
 from baseApp.serializers import UserSerializer, UserProfileSerializer
@@ -45,9 +46,9 @@ class UserRegistration(APIView):
             serializer = UserProfileSerializer(new_user_profile)
 
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        # except IntegrityError:
-        #     message = {'detail': 'user with this email already exist'}
-        #     return Response(message, status=status.HTTP_400_BAD_REQUEST)
+        except IntegrityError:
+            message = {'detail': 'user with this email already exist'}
+            return Response(message, status=status.HTTP_400_BAD_REQUEST)
         except KeyError:
             message = {'detail': 'provided data is incorrect'}
             return Response(message, status=status.HTTP_400_BAD_REQUEST)
@@ -79,3 +80,45 @@ class UserProfileGet(generics.ListAPIView):
 
     serializer_class = UserProfileSerializer
     permission_classes = (IsAuthenticated, IsAuthorOrIsAuthenticated)
+
+
+class UserProfileUpdate(APIView):
+    """
+    A view for updating user and user profile information
+    """
+
+    def patch(self, request):
+        """
+        Handle PATCH requests for the view.
+        Update user and user profile data
+        :param request: An HTTP request object.
+        :return: Returns information about user's profile and data about user
+        """
+        data = request.data
+        user = request.user
+        userprofile = UserProfile.objects.get(user=user)
+
+        user.username = data.get('username', user.username)
+        user.email = data.get('email', user.email)
+        password = data.get('password')
+        if password:
+            user.set_password(password)
+
+        user.save()
+
+        userprofile.image = data.get('image', userprofile.image)
+        userprofile.description = data.get('description', userprofile.description)
+
+        if data.get('app_lang'):
+            app_lang = Language.objects.filter(name=data.get('app_lang', userprofile.app_lang))[0]
+            userprofile.app_lang = app_lang
+
+        if data.get('learning_langs'):
+            learning_langs = Language.objects.filter(name__in=data.get('learning_langs', []))
+            userprofile.learning_langs.set(learning_langs)
+
+        userprofile.save()
+
+        serializer = UserProfileSerializer(userprofile)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
