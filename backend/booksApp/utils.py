@@ -1,14 +1,16 @@
 from typing import Dict
 import re
 
+import requests
 from bs4 import BeautifulSoup
 
 
-def get_text_from_html(text: str) -> Dict[str, str]:
+def get_data_from_html(link: str) -> Dict[str, str]:
     """
     Make text readable from html and get title, author, lang from link
     """
-    soup = BeautifulSoup(text, 'html.parser')
+    page = requests.get(link)
+    soup = BeautifulSoup(page.text, 'html.parser')
     start_point = r'\*\*\*([\s\S]+?)\*\*\*'
 
     author = re.split(r'Author: ([\s\S]+?)\n', soup.get_text())[1].strip('\n')
