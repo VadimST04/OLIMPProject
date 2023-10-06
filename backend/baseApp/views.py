@@ -24,7 +24,9 @@ class UserRegistration(APIView):
         :param request: An HTTP request object.
         :return: Returns information about user's profile and data about user
         """
+
         data = request.data
+        print(request.FILES)
         try:
             new_user = User.objects.create(
                 username=data['username'],
