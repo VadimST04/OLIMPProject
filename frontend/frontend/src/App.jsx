@@ -21,7 +21,7 @@ import NewsPage from "./pages/NewsPage";
 const Root = () => {
   const [isSignInFormOpen, setSignInFormOpen] = useState(false);
   const [isRegistrationFormOpen, setRegistrationFormOpen] = useState(false);
-  const { userToken } = useSelector((state) => state.userToken);
+  const { userToken } = useSelector((state) => state.userLogin);
 
   return (
     <div className="flex h-screen flex-col">

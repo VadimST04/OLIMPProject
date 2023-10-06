@@ -11,7 +11,10 @@ import {
   USER_LIST_FAIL,
 } from "../constants/userConstants";
 
-export const userLoginReducer = (state = {}, action) => {
+export const userLoginReducer = (
+  state = { userToken: {}, loading: false, error: {} },
+  action,
+) => {
   switch (action.type) {
     case USER_LOGIN_REQUEST:
       return { loading: true };

@@ -33,9 +33,17 @@ const SignInSignUpForm = ({ closeFormCallback, registrationFormOpen }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const onSubmitClickHandler = () => {
+  const userLogin = useSelector((state) => state.userLogin);
+  const { loading, error, userToken } = userLogin;
+
+  console.log(error);
+
+  const onSubmitClickHandler = (e) => {
     dispatch(login(username, password));
-    closeFormCallback();
+    e.preventDefault();
+    if (userToken) {
+      closeFormCallback();
+    }
   };
   const onRegistrationClick = () => {
     registrationFormOpen();

@@ -11,7 +11,7 @@ import { userProfileReducer } from "../store/reducers/profileReducers";
 import { newsListReducer } from "../store/reducers/newsReducers";
 
 const reducer = combineReducers({
-  userToken: userLoginReducer,
+  userLogin: userLoginReducer,
   postsList: postsListReducer,
   userProfile: userProfileReducer,
   newsList: newsListReducer,

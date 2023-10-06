@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { register } from "../store/actions/userActions";
 
 import logo from "../assets/OLIMPlogo.png";
@@ -20,33 +21,28 @@ const RegistrationForm = ({ closeFormCallback }) => {
   const firstStepVisibility = isFirstStep ? "flex" : "hidden";
   const secondStepVisibility = isFirstStep ? "hidden" : "flex";
 
+  const userLogin = useSelector((state) => state.userLogin);
+  const { loading, error, userToken } = userLogin;
+
+  console.log(error);
+
   const dispatch = useDispatch();
   const onSubmitClickHandler = () => {
     if (passwordConfirmation !== password) {
     } else {
       console.log("register dispatch");
-      console.log(
-        username,
-        "email@gmail.com",
-        password,
-        appLanguage,
-        learningLanguages,
-      );
+      console.log(username, email, password, appLanguage, learningLanguages);
       dispatch(
-        register(
-          username,
-          "email@gmail.com",
-          password,
-          appLanguage,
-          learningLanguages,
-        ),
+        register(username, email, password, appLanguage, learningLanguages),
       );
     }
     console.log(
       `dispatch[username: ${username}, password: ${password}, passwordConfirmation: ${passwordConfirmation}]`,
     );
 
-    closeFormCallback();
+    if (userToken) {
+      closeFormCallback();
+    }
   };
 
   const closeForm = (e) => {
