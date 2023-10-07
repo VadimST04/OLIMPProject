@@ -16,7 +16,7 @@ class BookCreateView(CreateAPIView):
     """
     queryset = Book.objects.all()
     serializer_class = BookCreateSerializer
-    authentication_classes = (IsAuthenticated, IsAdminUser)
+    # authentication_classes = (IsAuthenticated, IsAdminUser)
 
 
 class BookUpdateView(UpdateAPIView):
@@ -25,7 +25,7 @@ class BookUpdateView(UpdateAPIView):
     """
     queryset = Book.objects.all()
     serializer_class = BookUpdateSerializer
-    authentication_classes = (IsAuthenticated, IsAdminUser)
+    # permission_classes = IsAuthenticated
 
 
 class BookDetailView(RetrieveAPIView):
@@ -34,7 +34,7 @@ class BookDetailView(RetrieveAPIView):
     """
     queryset = Book.objects.all()
     serializer_class = BookDetailViewSerializer
-    authentication_classes = IsAuthenticated,
+    # authentication_classes = IsAuthenticated,
 
 
 class BookListView(APIView):
@@ -58,4 +58,4 @@ class BookDeleteView(DestroyAPIView):
     """
     queryset = Book.objects.all()
     serializer_class = BookDeleteSerializer
-    authentication_classes = (IsAuthenticated, IsAdminUser)
+    # permission_classes = IsAuthenticated

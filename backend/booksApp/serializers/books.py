@@ -23,9 +23,8 @@ class BookCreateSerializer(serializers.ModelSerializer):
         """
         Method to check if the link is valid
         """
-        self.response = requests.get(self.initial_data.get('text'))
 
-        if self.response.status_code == 200:
+        if requests.get(self.initial_data.get('text')).status_code == 200:
             return super().is_valid(raise_exception=raise_exception)
         raise requests.exceptions.ConnectionError('Incorrect link')
 
@@ -33,8 +32,6 @@ class BookCreateSerializer(serializers.ModelSerializer):
         """
         Method to replace a text field to a valid value
         """
-        validated_data['text'] = utils.get_text_from_html(self.response.text)
-
         book_obj = Book.objects.create(**validated_data)
 
         book_obj.save()
