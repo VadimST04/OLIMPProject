@@ -1,7 +1,6 @@
 import requests
 from rest_framework import serializers
 
-import booksApp.utils as utils
 from baseApp.models import Language
 from booksApp.models import Book, Author
 
@@ -59,6 +58,9 @@ class BookDetailViewSerializer(serializers.ModelSerializer):
     """
     Serializer to retrieve all fields of specific Book instance
     """
+    languages = serializers.SlugRelatedField(queryset=Language.objects.all(), required=False, slug_field='name')
+    author = serializers.SlugRelatedField(queryset=Author.objects.all(), required=False, slug_field='name')
+
     class Meta:
         model = Book
         exclude = ['id']
@@ -93,9 +95,7 @@ class BookUpdateSerializer(serializers.ModelSerializer):
         If the field text is updated, check if the link is correct
         """
         if self.initial_data.get('text'):
-            self.response = requests.get(self.initial_data.get('text'))
-
-            if self.response.status_code == 200:
+            if requests.get(self.initial_data.get('text')).status_code == 200:
                 return super().is_valid(raise_exception=raise_exception)
             raise requests.exceptions.ConnectionError('Incorrect link')
         return super().is_valid(raise_exception=raise_exception)
@@ -106,8 +106,6 @@ class BookUpdateSerializer(serializers.ModelSerializer):
         :return: Book instance
         """
         book = super().save()
-        book.text = utils.get_text_from_html(self.response.text)
-
         book.save()
         return book
 
