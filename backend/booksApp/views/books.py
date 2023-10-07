@@ -17,7 +17,7 @@ class BookCreateView(CreateAPIView):
     """
     queryset = Book.objects.all()
     serializer_class = BookCreateSerializer
-    # authentication_classes = (IsAuthenticated, IsAdminUser)
+    permission_classes = [IsAuthenticated, IsAdminUser]
 
 
 class BookUpdateView(UpdateAPIView):
@@ -26,7 +26,7 @@ class BookUpdateView(UpdateAPIView):
     """
     queryset = Book.objects.all()
     serializer_class = BookUpdateSerializer
-    # permission_classes = IsAuthenticated
+    permission_classes = [IsAuthenticated, IsAdminUser]
 
 
 class BookDetailView(RetrieveAPIView):
@@ -35,7 +35,7 @@ class BookDetailView(RetrieveAPIView):
     """
     queryset = Book.objects.all()
     serializer_class = BookDetailViewSerializer
-    # authentication_classes = IsAuthenticated,
+    permission_classes = [IsAuthenticated]
 
     def get(self, request, *args, **kwargs):
         # book = Book.objects.filter(**kwargs)
@@ -56,10 +56,15 @@ class BookListView(APIView):
         This method customize request for Book model
         :return: Returns books with the user's learning languages
         """
-        data = request.data
-        books = Book.objects.filter(languages__name__in=data['learning_langs'])
-        serializer = BookViewSerializer(books, many=True)
-        return Response(serializer.data)
+        if not isinstance(request.user, AnonymousUser):
+            data = request.data
+            books = Book.objects.filter(languages__name__in=data['learning_langs'])
+            serializer = BookViewSerializer(books, many=True)
+            return Response(serializer.data)
+        else:
+            books = Book.objects.all()
+            serializer = BookViewSerializer(books, many=True)
+            return Response(serializer.data)
 
 
 class BookDeleteView(DestroyAPIView):
@@ -68,4 +73,4 @@ class BookDeleteView(DestroyAPIView):
     """
     queryset = Book.objects.all()
     serializer_class = BookDeleteSerializer
-    # permission_classes = IsAuthenticated
+    permission_classes = [IsAuthenticated, IsAdminUser]
