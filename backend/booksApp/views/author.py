@@ -1,4 +1,6 @@
 from rest_framework.generics import CreateAPIView, UpdateAPIView, ListAPIView, DestroyAPIView, RetrieveAPIView
+from rest_framework.pagination import LimitOffsetPagination
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
 from booksApp.models import Author
 from booksApp.serializers.authors import AuthorSerializer, AuthorDeleteSerializer
@@ -10,6 +12,7 @@ class AuthorCreateView(CreateAPIView):
     """
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
+    permission_classes = [IsAuthenticated, IsAdminUser]
 
 
 class AuthorUpdateView(UpdateAPIView):
@@ -18,6 +21,7 @@ class AuthorUpdateView(UpdateAPIView):
     """
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
+    permission_classes = [IsAuthenticated, IsAdminUser]
 
 
 class AuthorListView(ListAPIView):
@@ -26,6 +30,7 @@ class AuthorListView(ListAPIView):
     """
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
+    # pagination_class = LimitOffsetPagination
 
 
 class AuthorDeleteView(DestroyAPIView):
@@ -34,6 +39,7 @@ class AuthorDeleteView(DestroyAPIView):
     """
     queryset = Author.objects.all()
     serializer_class = AuthorDeleteSerializer
+    permission_classes = [IsAuthenticated, IsAdminUser]
 
 
 class AuthorDetailView(RetrieveAPIView):
@@ -42,3 +48,4 @@ class AuthorDetailView(RetrieveAPIView):
     """
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
+    permission_classes = [IsAuthenticated]
