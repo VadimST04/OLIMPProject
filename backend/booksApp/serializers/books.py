@@ -3,6 +3,7 @@ from rest_framework import serializers
 
 from baseApp.models import Language
 from booksApp.models import Book, Author
+from booksApp import utils
 
 
 class BookCreateSerializer(serializers.ModelSerializer):
@@ -22,9 +23,21 @@ class BookCreateSerializer(serializers.ModelSerializer):
         """
         Method to check if the link is valid
         """
+        data = requests.get(self.initial_data.get('text'))
 
-        if requests.get(self.initial_data.get('text')).status_code == 200:
+        if data.status_code == 200:
+            try:
+                if self.initial_data.get('author') is not None:
+                    author = Author.objects.get(name=self.initial_data.get('author', None))
+                else:
+                    author_name = utils.get_data_from_html(self.initial_data.get('text')).get('author')
+                    author = Author.objects.get(name=author_name)
+            except Author.DoesNotExist:
+                author = Author.objects.create(name=self.initial_data.get('author', author_name))
+
+            self.initial_data['author'] = author.name
             return super().is_valid(raise_exception=raise_exception)
+
         raise requests.exceptions.ConnectionError('Incorrect link')
 
     def create(self, validated_data):
@@ -32,7 +45,6 @@ class BookCreateSerializer(serializers.ModelSerializer):
         Method to replace a text field to a valid value
         """
         book_obj = Book.objects.create(**validated_data)
-
         book_obj.save()
         return book_obj
 
