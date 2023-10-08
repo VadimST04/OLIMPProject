@@ -10,6 +10,7 @@ def get_data_from_html(link: str) -> Dict[str, str]:
     Make text readable from html and get title, author, lang from link
     """
     page = requests.get(link)
+    page.encoding = 'utf-8'
     soup = BeautifulSoup(page.text, 'html.parser')
     start_point = r'\*\*\*([\s\S]+?)\*\*\*'
 
