@@ -26,6 +26,10 @@ class BookCreateSerializer(serializers.ModelSerializer):
         data = requests.get(self.initial_data.get('text'))
 
         if data.status_code == 200:
+            """
+            Author auto adding, it checks if the field wasn't empty, if it is takes author name from website
+            and put the data into the database 
+            """
             try:
                 if self.initial_data.get('author') is not None:
                     author = Author.objects.get(name=self.initial_data.get('author', None))

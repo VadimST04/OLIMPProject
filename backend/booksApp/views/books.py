@@ -46,7 +46,6 @@ class BookDetailView(RetrieveAPIView):
                          'languages': book.languages.name})
 
 
-
 class BookListView(APIView):
     """
     View to get all book's instances
@@ -54,7 +53,7 @@ class BookListView(APIView):
     def post(self, request):
         """
         This method customize request for Book model
-        :return: Returns books with the user's learning languages
+        :return: Returns books with the user's learning languages or all books if the user is Anonym
         """
         if not isinstance(request.user, AnonymousUser):
             data = request.data
