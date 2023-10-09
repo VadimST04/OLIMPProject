@@ -1,6 +1,6 @@
 from rest_framework.response import Response
 from django.contrib.auth.models import AnonymousUser
-from rest_framework.generics import CreateAPIView, UpdateAPIView, RetrieveAPIView, ListAPIView, DestroyAPIView, \
+from rest_framework.generics import CreateAPIView, UpdateAPIView, RetrieveAPIView, DestroyAPIView, \
     get_object_or_404
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.views import APIView

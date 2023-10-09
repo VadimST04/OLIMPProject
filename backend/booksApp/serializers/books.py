@@ -34,7 +34,7 @@ class BookCreateSerializer(serializers.ModelSerializer):
                 if self.initial_data.get('author') is not None:
                     author = Author.objects.get(name=self.initial_data.get('author', None))
                 else:
-                    author_name = utils.get_data_from_html(self.initial_data.get('text')).get('author')
+                    author_name = utils.get_data_from_html(data).get('author')
                     author = Author.objects.get(name=author_name)
             except Author.DoesNotExist:
                 author = Author.objects.create(name=self.initial_data.get('author', author_name))

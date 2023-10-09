@@ -5,13 +5,15 @@ import requests
 from bs4 import BeautifulSoup
 
 
-def get_data_from_html(link: str) -> Dict[str, str]:
+def get_data_from_html(book_data: str | requests.Response) -> Dict[str, str]:
     """
+    book_data: if book_data is a link, function will make a request to the website
     Make text readable from html and get title, author, lang from link
     """
-    page = requests.get(link)
-    page.encoding = 'utf-8'
-    soup = BeautifulSoup(page.text, 'html.parser')
+    if isinstance(book_data, str):
+        book_data = requests.get(book_data)
+    book_data.encoding = 'utf-8'
+    soup = BeautifulSoup(book_data.text, 'html.parser')
     start_point = r'\*\*\*([\s\S]+?)\*\*\*'
 
     author = re.split(r'Author: ([\s\S]+?)\n', soup.get_text())[1].strip('\n')
