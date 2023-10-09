@@ -8,12 +8,14 @@ class News:
     Class for news representation
     """
 
+    API_URL = 'https://newsdata.io/api/1/news?apikey=pub_302653a0c64258bbef513eca1345b75be0e9f&timeframe=24&full_content=1&image=1'
+
     LANGUAGES_NEWS = {
         'English': requests.get(
-            'https://newsdata.io/api/1/news?apikey=pub_302653a0c64258bbef513eca1345b75be0e9f&timeframe=24&full_content=1&language=en').json()[
+            f'{API_URL}&language=en').json()[
             'results'],
         'German': requests.get(
-            'https://newsdata.io/api/1/news?apikey=pub_302653a0c64258bbef513eca1345b75be0e9f&timeframe=24&full_content=1&language=de').json()[
+            f'{API_URL}&language=de').json()[
             'results'],
     }
 
@@ -32,30 +34,30 @@ class News:
             'language': item['language'],
         }
 
-    @staticmethod
-    def get_news(langs):
+    @classmethod
+    def get_news(cls, langs):
         """
         Main function that on base of user's languages return news
         :param langs: list of languages that user learns
         :return: article objects (dictionaries)
         """
-        news = [News.LANGUAGES_NEWS[lang] for lang in langs]
+        news = [cls.LANGUAGES_NEWS[lang] for lang in langs]
         news = list(chain.from_iterable(news))
-        news = list(map(News.create_news_object, news))
+        news = list(map(cls.create_news_object, news))
         shuffle(news)
         return news
 
-    @staticmethod
-    def print_get_news(langs):
+    @classmethod
+    def print_get_news(cls, langs):
         """
         Function to print news in console (for developers)
         :param langs:
         :return: None
         """
-        news = News.get_news(langs)
+        news = cls.get_news(langs)
         print(news)
 
 
 if __name__ == '__main__':
-    news = News.get_news(['English'])
-    print(news)
+    all_news = News.get_news(['English'])
+    print(all_news)
