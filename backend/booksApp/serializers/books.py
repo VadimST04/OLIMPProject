@@ -7,6 +7,9 @@ from booksApp import utils
 
 
 class BookRUDSerializer(serializers.ModelSerializer):
+    author = serializers.SlugRelatedField(
+        queryset=Author.objects.all(),
+        slug_field='name')
     languages = serializers.SlugRelatedField(
         queryset=Language.objects.all(),
         slug_field='name',
@@ -23,7 +26,6 @@ class BookCreateSerializer(serializers.ModelSerializer):
     Serializer to create a Book instance
     """
     author = serializers.SlugRelatedField(
-        required=False,
         queryset=Author.objects.all(),
         slug_field='name')
     languages = serializers.SlugRelatedField(

@@ -34,12 +34,6 @@ class BookRUDView(generics.RetrieveUpdateDestroyAPIView):
                          'author': book.author.name,
                          'languages': book.languages.name})
 
-
-class BookListView(APIView):
-    """
-    View to get all book's instances
-    """
-
     def post(self, request):
         """
         This method customize request for Book model
