@@ -45,7 +45,7 @@ const NewsPage = () => {
   };
 
   return (
-    <div className="h-full w-full space-y-5 overflow-y-auto">
+    <div className="h-full w-full space-y-5 overflow-y-auto pr-2">
       {generateCards().map((item, index) => (
         <div key={index} className="flex h-full w-full gap-5">
           {item}
