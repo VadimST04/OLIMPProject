@@ -16,124 +16,20 @@ const NewsPage = () => {
     : ["English"];
 
   const { news } = useSelector((state) => state.newsList);
-  // console.log(news);
+  console.log(news);
 
   useEffect(() => {
     dispatch(getUserProfile());
     dispatch(newsList(learning_langs));
   }, [dispatch]);
 
-
-  const test_news = [
-    {
-      language: "English",
-      img: "https://images.unsplash.com/photo-1691036561573-4b76998b60de",
-      title:
-        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus distinctio incidunt, facere quasi consequatur unde pariatur. Labore sit non, est, dolores sint odio ea a assumenda cupiditate ex molestiae incidunt!",
-      content:
-        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat, debitis repellendus? Laudantium architecto atque consequuntur in laboriosam asperiores facilis quo temporibus, suscipit doloremque totam fuga distinctio sit accusamus, pariatur iusto. Veniam perferendis et maxime laborum a ipsa. Dolores officiis sapiente dolor? Unde provident labore similique aliquam repudiandae accusamus quibusdam quam!",
-    },
-    {
-      language: "English",
-      img: "https://images.unsplash.com/photo-1674133015234-8de60fbdbd16",
-      title:
-        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus distinctio incidunt, facere quasi consequatur unde pariatur. Labore sit non, est, dolores sint odio ea a assumenda cupiditate ex molestiae incidunt!",
-      content:
-        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat, debitis repellendus? Laudantium architecto atque consequuntur in laboriosam asperiores facilis quo temporibus, suscipit doloremque totam fuga distinctio sit accusamus, pariatur iusto. Veniam perferendis et maxime laborum a ipsa. Dolores officiis sapiente dolor? Unde provident labore similique aliquam repudiandae accusamus quibusdam quam!",
-    },
-    {
-      language: "English",
-      img: "https://images.unsplash.com/photo-1673563932782-28daf64ff066",
-      title:
-        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus distinctio incidunt, facere quasi consequatur unde pariatur. Labore sit non, est, dolores sint odio ea a assumenda cupiditate ex molestiae incidunt!",
-      content:
-        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat, debitis repellendus? Laudantium architecto atque consequuntur in laboriosam asperiores facilis quo temporibus, suscipit doloremque totam fuga distinctio sit accusamus, pariatur iusto. Veniam perferendis et maxime laborum a ipsa. Dolores officiis sapiente dolor? Unde provident labore similique aliquam repudiandae accusamus quibusdam quam!",
-    },
-    {
-      language: "English",
-      img: "https://images.unsplash.com/photo-1692125440608-4364afbf849b",
-      title:
-        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus distinctio incidunt, facere quasi consequatur unde pariatur. Labore sit non, est, dolores sint odio ea a assumenda cupiditate ex molestiae incidunt!",
-      content:
-        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat, debitis repellendus? Laudantium architecto atque consequuntur in laboriosam asperiores facilis quo temporibus, suscipit doloremque totam fuga distinctio sit accusamus, pariatur iusto. Veniam perferendis et maxime laborum a ipsa. Dolores officiis sapiente dolor? Unde provident labore similique aliquam repudiandae accusamus quibusdam quam!",
-    },
-    {
-      language: "English",
-      img: "https://images.unsplash.com/photo-1691036561573-4b76998b60de",
-      title:
-        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus distinctio incidunt, facere quasi consequatur unde pariatur. Labore sit non, est, dolores sint odio ea a assumenda cupiditate ex molestiae incidunt!",
-      content:
-        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat, debitis repellendus? Laudantium architecto atque consequuntur in laboriosam asperiores facilis quo temporibus, suscipit doloremque totam fuga distinctio sit accusamus, pariatur iusto. Veniam perferendis et maxime laborum a ipsa. Dolores officiis sapiente dolor? Unde provident labore similique aliquam repudiandae accusamus quibusdam quam!",
-    },
-    {
-      language: "English",
-      img: "https://images.unsplash.com/photo-1674133015234-8de60fbdbd16",
-      title:
-        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus distinctio incidunt, facere quasi consequatur unde pariatur. Labore sit non, est, dolores sint odio ea a assumenda cupiditate ex molestiae incidunt!",
-      content:
-        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat, debitis repellendus? Laudantium architecto atque consequuntur in laboriosam asperiores facilis quo temporibus, suscipit doloremque totam fuga distinctio sit accusamus, pariatur iusto. Veniam perferendis et maxime laborum a ipsa. Dolores officiis sapiente dolor? Unde provident labore similique aliquam repudiandae accusamus quibusdam quam!",
-    },
-    {
-      language: "English",
-      img: "https://images.unsplash.com/photo-1673563932782-28daf64ff066",
-      title:
-        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus distinctio incidunt, facere quasi consequatur unde pariatur. Labore sit non, est, dolores sint odio ea a assumenda cupiditate ex molestiae incidunt!",
-      content:
-        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat, debitis repellendus? Laudantium architecto atque consequuntur in laboriosam asperiores facilis quo temporibus, suscipit doloremque totam fuga distinctio sit accusamus, pariatur iusto. Veniam perferendis et maxime laborum a ipsa. Dolores officiis sapiente dolor? Unde provident labore similique aliquam repudiandae accusamus quibusdam quam!",
-    },
-    {
-      language: "English",
-      img: "https://images.unsplash.com/photo-1692125440608-4364afbf849b",
-      title:
-        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus distinctio incidunt, facere quasi consequatur unde pariatur. Labore sit non, est, dolores sint odio ea a assumenda cupiditate ex molestiae incidunt!",
-      content:
-        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat, debitis repellendus? Laudantium architecto atque consequuntur in laboriosam asperiores facilis quo temporibus, suscipit doloremque totam fuga distinctio sit accusamus, pariatur iusto. Veniam perferendis et maxime laborum a ipsa. Dolores officiis sapiente dolor? Unde provident labore similique aliquam repudiandae accusamus quibusdam quam!",
-    },
-    {
-      language: "English",
-      img: "https://images.unsplash.com/photo-1691036561573-4b76998b60de",
-      title:
-        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus distinctio incidunt, facere quasi consequatur unde pariatur. Labore sit non, est, dolores sint odio ea a assumenda cupiditate ex molestiae incidunt!",
-      content:
-        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat, debitis repellendus? Laudantium architecto atque consequuntur in laboriosam asperiores facilis quo temporibus, suscipit doloremque totam fuga distinctio sit accusamus, pariatur iusto. Veniam perferendis et maxime laborum a ipsa. Dolores officiis sapiente dolor? Unde provident labore similique aliquam repudiandae accusamus quibusdam quam!",
-    },
-    {
-      language: "English",
-      img: "https://images.unsplash.com/photo-1674133015234-8de60fbdbd16",
-      title:
-        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus distinctio incidunt, facere quasi consequatur unde pariatur. Labore sit non, est, dolores sint odio ea a assumenda cupiditate ex molestiae incidunt!",
-      content:
-        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat, debitis repellendus? Laudantium architecto atque consequuntur in laboriosam asperiores facilis quo temporibus, suscipit doloremque totam fuga distinctio sit accusamus, pariatur iusto. Veniam perferendis et maxime laborum a ipsa. Dolores officiis sapiente dolor? Unde provident labore similique aliquam repudiandae accusamus quibusdam quam!",
-    },
-    {
-      language: "English",
-      img: "https://images.unsplash.com/photo-1673563932782-28daf64ff066",
-      title:
-        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus distinctio incidunt, facere quasi consequatur unde pariatur. Labore sit non, est, dolores sint odio ea a assumenda cupiditate ex molestiae incidunt!",
-      content:
-        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat, debitis repellendus? Laudantium architecto atque consequuntur in laboriosam asperiores facilis quo temporibus, suscipit doloremque totam fuga distinctio sit accusamus, pariatur iusto. Veniam perferendis et maxime laborum a ipsa. Dolores officiis sapiente dolor? Unde provident labore similique aliquam repudiandae accusamus quibusdam quam!",
-    },
-    {
-      language: "English",
-      img: "https://images.unsplash.com/photo-1692125440608-4364afbf849b",
-      title:
-        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Possimus distinctio incidunt, facere quasi consequatur unde pariatur. Labore sit non, est, dolores sint odio ea a assumenda cupiditate ex molestiae incidunt!",
-      content:
-        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat, debitis repellendus? Laudantium architecto atque consequuntur in laboriosam asperiores facilis quo temporibus, suscipit doloremque totam fuga distinctio sit accusamus, pariatur iusto. Veniam perferendis et maxime laborum a ipsa. Dolores officiis sapiente dolor? Unde provident labore similique aliquam repudiandae accusamus quibusdam quam!",
-    },
-  ];
-
   const generateCards = () => {
     const cards = [];
-    for (let i = 0; i < test_news.length; i += 4) {
-      const news1 = test_news[i];
-      const news2 = test_news[i + 1];
-      const news3 = test_news[i + 2];
-      const news4 = test_news[i + 3];
-      console.log(news1);
-      console.log(news2);
-      console.log(news3);
-      console.log(news4);
+    for (let i = 0; i < news?.length; i += 4) {
+      const news1 = news[i];
+      const news2 = news[i + 1];
+      const news3 = news[i + 2];
+      const news4 = news[i + 3];
 
       cards.push(
         <NewsSection
