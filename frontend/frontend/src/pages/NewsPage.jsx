@@ -21,10 +21,12 @@ const NewsPage = () => {
 
   const { news } = useSelector((state) => state.newsList);
   console.log(news);
+  
   useEffect(() => {
     dispatch(getUserProfile());
     dispatch(newsList(learning_langs));
   }, [dispatch]);
+
 
   const generateSections = () => {
     const sections = [];
@@ -33,6 +35,7 @@ const NewsPage = () => {
       const news2 = news[i + 1];
       const news3 = news[i + 2];
       const news4 = news[i + 3];
+
 
       sections.push(
         <NewsSection
