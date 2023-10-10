@@ -1,10 +1,14 @@
 import React from "react";
-
-const NewsItem = ({ img, title, content, language }) => {
+import defaultImg from "../assets/defaultNewsImage.avif";
+const NewsItem = ({ image_url, title, content, language }) => {
   return (
     <div className="relative h-full w-full">
-      <img src={img} alt="" className="h-full w-full object-cover" />
-      <div className="group absolute bottom-0 left-0 flex h-full w-full cursor-pointer flex-col justify-end bg-gradient-to-t from-black px-5 pb-5">
+      <img
+        src={image_url ? image_url : defaultImg}
+        alt=""
+        className="h-full w-full object-cover"
+      />
+      <div className="group absolute bottom-0 left-0 flex h-full w-full cursor-pointer flex-col justify-end bg-gradient-to-t from-black  to-[50%] px-5 pb-5">
         <p className="line-clamp-1 w-full text-[18px] text-soft-white">
           {title}
         </p>
@@ -12,7 +16,7 @@ const NewsItem = ({ img, title, content, language }) => {
           <p className="line-clamp-3 h-full w-full">{content}</p>
         </div>
       </div>
-      <div className="absolute right-2 top-2 rounded-md bg-main-green bg-opacity-75 px-2 py-1 text-soft-white">
+      <div className="absolute right-2 top-2 rounded-md bg-main-green bg-opacity-75 px-2 py-1 capitalize text-soft-white">
         {language}
       </div>
     </div>
