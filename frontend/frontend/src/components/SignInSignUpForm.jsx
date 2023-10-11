@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../store/actions/userActions";
 import { FiUser } from "react-icons/fi";
 import { RiLockPasswordLine } from "react-icons/ri";
@@ -70,7 +70,8 @@ const SignInSignUpForm = ({ closeFormCallback, registrationFormOpen }) => {
                   autoComplete={item.autoComplete}
                   type={item.type}
                   placeholder={item.placeholder}
-                  className={`w-full rounded-md bg-white-green py-1 pl-5 shadow-[0_0_2px_#00000064] outline-none hover:bg-[#D5D9D4] md:py-2 md:pl-6 xl:pl-8 ${textSize}`}
+                  className={`w-full rounded-md border bg-soft-white py-1 pl-5 shadow-[0_0_2px_#00000064] outline-none
+                  hover:border-main-green md:py-2 md:pl-6 xl:pl-8 ${textSize}`}
                 />
                 <div className={`absolute left-1 ${textSize}`}>{item.icon}</div>
               </div>
@@ -79,7 +80,7 @@ const SignInSignUpForm = ({ closeFormCallback, registrationFormOpen }) => {
         </div>
         <button
           onClick={onSubmitClickHandler}
-          className={`w-full rounded-md bg-blue-600 py-1 text-soft-white hover:bg-blue-800 md:py-2 ${textSize}`}
+          className={`w-full rounded-md bg-main-green py-1 text-soft-white hover:bg-main-dark-green md:py-2 ${textSize}`}
         >
           Sign In
         </button>

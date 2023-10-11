@@ -26,7 +26,7 @@ const SearchBar = ({
           setVisibleItems(true);
         }}
         type="text"
-        className="h-full w-full rounded-md bg-white-green py-2 pl-3 pr-5 outline-none hover:bg-[#D5D9D4]"
+        className="h-full w-full rounded-md border bg-soft-white py-2 pl-3 pr-5 shadow-[0_0_2px_#00000064] outline-none hover:border-main-green"
         onSubmit={(e) => submitCallback(searchValue)}
       />
       <div className={`absolute right-1 text-[18px]`}>

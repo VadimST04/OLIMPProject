@@ -31,7 +31,8 @@ urlpatterns = [
     path('api/', include('baseApp.urls')),
     path('api/news/', include('newsApp.urls')),
     path('api/posts/', include('postsApp.urls')),
-    path('api/books/', include('booksApp.urls'))
+    path('api/news/', include('newsApp.urls')),
+    path('api/books/', include('booksApp.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

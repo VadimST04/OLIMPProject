@@ -2,6 +2,11 @@
 */__pycache__/
 *.py[cod]
 *$py.class
+.idea/
+backend/.idea/
+backend/.idea/workspace.xml
+static/images
+*/migrations/
 
 # C extensions
 *.so
@@ -50,6 +55,11 @@ coverage.xml
 .hypothesis/
 .pytest_cache/
 cover/
+*.xml
+*.pyc
+*.jpg
+*.png
+
 
 # Translations
 *.mo
