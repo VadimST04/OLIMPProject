@@ -47,7 +47,7 @@ const DetailedNews = ({
           {!author && (
             <p className="text-[#737373]">{timeSinceArticlePosted} ago</p>
           )}
-          <p className="text-soft-black">{content}</p>
+          <p className="text-soft-black dark:text-soft-white">{content}</p>
           <a href={link} className="cursor-pointer text-[14px] font-semibold">
             <p className="pt-5">Source: {link}</p>
           </a>
