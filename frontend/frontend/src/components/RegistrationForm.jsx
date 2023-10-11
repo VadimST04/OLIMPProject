@@ -15,6 +15,7 @@ const RegistrationForm = ({ closeFormCallback }) => {
   const [email, setEmail] = useState("");
   const [appLanguage, setAppLanguage] = useState("");
   const [learningLanguages, setLearningLanguages] = useState([]);
+  const [image, setImage] = useState(null);
 
   const [isFirstStep, setFirstStep] = useState(true);
 
@@ -25,15 +26,35 @@ const RegistrationForm = ({ closeFormCallback }) => {
   const { loading, error, userToken } = userLogin;
 
   console.log(error);
+  console.log(image);
+
 
   const dispatch = useDispatch();
   const onSubmitClickHandler = () => {
     if (passwordConfirmation !== password) {
     } else {
       console.log("register dispatch");
+
       console.log(username, email, password, appLanguage, learningLanguages);
       dispatch(
         register(username, email, password, appLanguage, learningLanguages),
+      console.log(
+        username,
+        email,
+        password,
+        image,
+        appLanguage,
+        learningLanguages,
+      );
+      dispatch(
+        register(
+          username,
+          email,
+          password,
+          image,
+          appLanguage,
+          learningLanguages,
+        ),
       );
     }
     console.log(
@@ -81,6 +102,7 @@ const RegistrationForm = ({ closeFormCallback }) => {
               setAppLanguage={(value) => setAppLanguage(value)}
               setFirstStep={(value) => setFirstStep(value)}
               onSubmitClickHandler={() => onSubmitClickHandler()}
+              image={(image) => setImage(image)}
             />
           </div>
         </div>
