@@ -13,7 +13,7 @@ import { MdSettings } from "react-icons/md";
 import { HiOutlineUserCircle } from "react-icons/hi";
 
 function Navbar({ isLoggedIn, profileClick, signInClick }) {
-  const navPadding = isLoggedIn ? "py-1" : "py-2.5";
+  const navPadding = isLoggedIn ? "py-[3px]" : "py-2.5";
   const testImg =
     "https://images.unsplash.com/photo-1695504236952-37306fc71896";
   const buttonOptions = [
