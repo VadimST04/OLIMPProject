@@ -8,12 +8,14 @@ const SearchBar = ({
   placeholder = "Search",
   maxHeight = "max-h-72",
   clearOnSubmit = false,
+  defaultValue = "",
 }) => {
   searchItems = [...new Set(searchItems)]; // leaving unique items only
-  const [searchValue, setSearchValue] = useState("");
+  const [searchValue, setSearchValue] = useState(defaultValue);
   const [visibleItems, setVisibleItems] = useState(false);
   const itemsVisibility = visibleItems ? "" : "hidden";
   const textSize = "text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px]";
+
   return (
     <div
       className={`relative flex w-full items-center text-soft-black ${textSize}`}
