@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -6,6 +6,7 @@ import {
   Route,
 } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
 import MainContent from "./components/MainContent";
@@ -22,13 +23,34 @@ const Root = () => {
   const [isSignInFormOpen, setSignInFormOpen] = useState(false);
   const [isRegistrationFormOpen, setRegistrationFormOpen] = useState(false);
   const { userToken } = useSelector((state) => state.userToken);
+  const [theme, setTheme] = useState(localStorage.getItem("theme"));
+  const navigate = useNavigate();
+
+  const profileClickHandler = () => {
+    if (userToken) {
+      navigate("/user/profile");
+    } else {
+      setSignInFormOpen(true);
+    }
+  };
+
+  useEffect(() => {
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }, [theme]);
 
   return (
     <div className="flex h-screen flex-col">
       <Navbar
         isLoggedIn={userToken}
         signInClick={() => setSignInFormOpen(true)}
-        profileClick={() => setSignInFormOpen(true)}
+        profileClick={() => profileClickHandler()}
+        setTheme={setTheme}
       />
       <MainContent />
       {isSignInFormOpen && (
@@ -54,7 +76,7 @@ const router = createBrowserRouter(
       <Route path="/books" element={<BooksPage />} />
       <Route path="/users" element={<UsersPage />} />
       <Route path="/music" element={<MusicPage />} />
-      <Route path="/profile" element={<ProfilePage />} />
+      <Route path="/user/profile" element={<ProfilePage />} />
     </Route>,
   ),
 );

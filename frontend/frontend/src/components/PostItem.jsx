@@ -30,7 +30,7 @@ const PostItem = ({ liked, images, username, content, likes, comments }) => {
 
         <div className="flex h-full w-[24rem] flex-col gap-2">
           <img
-            src={images[activeImgIndex]}
+            src={images[activeImgIndex].image}
             alt=""
             className={
               "h-[31rem] w-full cursor-pointer select-none object-cover"
@@ -72,11 +72,12 @@ const PostItem = ({ liked, images, username, content, likes, comments }) => {
         )}
       </div>
       {detailedView && (
-        <DetailedPost closePostCallback={() => setDetailedView(false)}
-        images={images}
-        likes={likes}
-        comments={comments}
-        content={content}
+        <DetailedPost
+          closePostCallback={() => setDetailedView(false)}
+          images={images}
+          likes={likes}
+          comments={comments}
+          content={content}
         />
       )}
     </div>

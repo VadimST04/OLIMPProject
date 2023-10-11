@@ -21,6 +21,8 @@ const RegistrationForm = ({ closeFormCallback }) => {
   const firstStepVisibility = isFirstStep ? "flex" : "hidden";
   const secondStepVisibility = isFirstStep ? "hidden" : "flex";
 
+  console.log(image);
+
   const dispatch = useDispatch();
   const onSubmitClickHandler = () => {
     console.log("register dispatch");
@@ -33,6 +35,30 @@ const RegistrationForm = ({ closeFormCallback }) => {
         formData.appLanguage,
         formData.learningLanguages,
       ),
+    if (passwordConfirmation !== password) {
+    } else {
+      console.log("register dispatch");
+      console.log(
+        username,
+        email,
+        password,
+        image,
+        appLanguage,
+        learningLanguages,
+      );
+      dispatch(
+        register(
+          username,
+          email,
+          password,
+          image,
+          appLanguage,
+          learningLanguages,
+        ),
+      );
+    }
+    console.log(
+      `dispatch[username: ${username}, password: ${password}, passwordConfirmation: ${passwordConfirmation}]`,
     );
 
     closeFormCallback();
@@ -69,6 +95,7 @@ const RegistrationForm = ({ closeFormCallback }) => {
               setFormData={setFormData}
               setFirstStep={(value) => setFirstStep(value)}
               onSubmitClickHandler={() => onSubmitClickHandler()}
+              image={(image) => setImage(image)}
             />
           </div>
         </div>

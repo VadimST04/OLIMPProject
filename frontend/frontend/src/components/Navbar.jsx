@@ -4,7 +4,12 @@ import { useSelector } from "react-redux";
 import SearchBar from "./SearchBar";
 import DropdownButton from "./DropdownButton";
 
-import { BsNewspaper, BsFileEarmarkText } from "react-icons/bs";
+import {
+  BsNewspaper,
+  BsFileEarmarkText,
+  BsMoonFill,
+  BsFillSunFill,
+} from "react-icons/bs";
 import { PiBooksDuotone } from "react-icons/pi";
 import { FiUsers } from "react-icons/fi";
 import { IoMusicalNotes } from "react-icons/io5";
@@ -12,7 +17,7 @@ import { MdLanguage } from "react-icons/md";
 import { MdSettings } from "react-icons/md";
 import { HiOutlineUserCircle } from "react-icons/hi";
 
-function Navbar({ isLoggedIn, profileClick, signInClick }) {
+function Navbar({ isLoggedIn, profileClick, signInClick, setTheme }) {
   const navPadding = isLoggedIn ? "py-1" : "py-2.5";
   const testImg =
     "https://images.unsplash.com/photo-1695504236952-37306fc71896";
@@ -43,6 +48,24 @@ function Navbar({ isLoggedIn, profileClick, signInClick }) {
         />
       </div>
       <div className="flex items-center gap-1">
+        <div
+          onClick={() => setTheme("dark")}
+          className="group cursor-pointer rounded-md p-2 text-[20px] hover:bg-main-dark-green dark:hidden"
+        >
+          <div className="flex items-center justify-center text-soft-white transition-all duration-150 group-hover:scale-110">
+            <BsMoonFill />
+          </div>
+        </div>
+        {/*  */}
+        <div
+          onClick={() => setTheme("light")}
+          className="group hidden cursor-pointer rounded-md p-2 text-[26px] hover:bg-main-dark-green dark:block"
+        >
+          <div className="flex items-center justify-center text-soft-white transition-all duration-150 group-hover:scale-110">
+            <BsFillSunFill />
+          </div>
+        </div>
+        {/*  */}
         <div
           onClick={() => {}}
           className="group cursor-pointer rounded-md p-2 text-[26px] hover:bg-main-dark-green"

@@ -5,18 +5,15 @@ import {
 } from "../constants/newsConstants";
 import axios from "axios";
 
-export const newsList = (learning_langs) => async (dispatch, getState) => {
+export const newsList = (learning_langs) => async (dispatch) => {
   try {
     dispatch({
       type: NEWS_REQUEST,
     });
 
-    const { userToken } = getState().userToken;
-
     const config = {
       headers: {
         "Content-type": "application/json",
-        Authorization: `Bearer ${userToken.access}`,
       },
     };
 

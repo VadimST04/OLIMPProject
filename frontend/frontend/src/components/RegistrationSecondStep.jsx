@@ -7,6 +7,7 @@ const RegistrationSecondStep = ({
   setFormData,
   setFirstStep,
   onSubmitClickHandler,
+  image,
 }) => {
   const textSize = "text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px]";
   const languages = [
@@ -66,6 +67,7 @@ const RegistrationSecondStep = ({
           accept="image/*"
           type="file"
           className={`w-full rounded-md border bg-soft-white pl-5 shadow-[0_0_2px_#00000064] outline-none hover:border-main-green md:py-1.5 md:pl-6 xl:pl-8 ${textSize}`}
+          onChange={(e) => image(e.target.files[0])}
         />
         <div className={`absolute left-1 ${textSize}`}>
           <AiOutlineFileImage />

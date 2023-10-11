@@ -26,7 +26,7 @@ const DetailedPost = ({
       <div className="flex">
         <div className="flex w-[24rem] flex-col gap-2 bg-soft-white">
           <img
-            src={images[activeImgIndex]}
+            src={images[activeImgIndex].image}
             alt=""
             className={
               "h-[32rem] w-full cursor-pointer select-none object-cover"

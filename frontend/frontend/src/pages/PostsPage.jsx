@@ -58,7 +58,7 @@ function PostsPage() {
         posts.map((item) => (
           <PostItem
             liked={false}
-            images={[item.image]}
+            images={[...item.image_post]}
             key={item.id}
             username={item.user.username}
             content={item.content}
