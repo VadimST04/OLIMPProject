@@ -3,11 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getUserProfile } from "../store/actions/profileActions";
 import { logout } from "../store/actions/userActions";
-import { Button } from "primereact/button"; //npm install primereact
-import { Dialog } from "primereact/dialog";
-import { useState } from "react";
-import Avatar from "react-avatar-edit"; //npm i react-avatar-edit
 import SearchBar from "../components/SearchBar";
+import { useState } from "react";
+import { useRef } from "react";
 const ProfilePage = () => {
   const languages = [
     "English",
@@ -49,31 +47,8 @@ const ProfilePage = () => {
     dispatch(getUserProfile());
   }, [dispatch]);
 
-  const profilePic =
-    "https://images.unsplash.com/photo-1692871480784-4fd78f25459f";
-
   // Day input component
   const [date, setDate] = useState();
-  // Avatar edit components //
-
-  const [imgcrop, setImgcrop] = useState();
-  const [profile, setProfile] = useState([]);
-  const [preview, setPreview] = useState(false);
-
-  const profE = profile.map((item) => item.preview);
-  const onClose = () => {
-    setPreview(null);
-  };
-
-  const onCrop = (view) => {
-    setPreview(view);
-  };
-
-  const saveCropImage = () => {
-    setProfile([...profile, { preview }]);
-    setImgcrop(false);
-  };
-  //------------------------------- //
 
   // not working add items
   const addListItem = () => {
@@ -81,6 +56,22 @@ const ProfilePage = () => {
   };
   const [list, setList] = useState();
   //----------------------------------
+
+  // avatar component
+
+  const ref = useRef();
+  const handleClick = (e) => {
+    ref.current.click();
+  };
+
+  const [image, setImage] = useState(null);
+
+  const onImageChange = (event) => {
+    if (event.target.files && event.target.files[0]) {
+      setImage(URL.createObjectURL(event.target.files[0]));
+    }
+  };
+  // -----------------
   return (
     <div className="flex flex-col gap-5">
       {/* title */}
@@ -89,53 +80,27 @@ const ProfilePage = () => {
       <div className="flex items-center justify-center">
         <div className="relative aspect-square h-52 rounded-full ">
           <img
-            src={profE.length ? profE : profilePic}
+            src={image}
             alt=""
             className="h-full w-full  rounded-full object-cover"
           />
+
           <div>
             {" "}
             <button
               className="absolute bottom-5 right-5 z-10 h-5 w-5 rounded-full bg-[#EDC5AB]"
-              onClick={() => setImgcrop(true)}
+              onClick={handleClick}
             ></button>
-            {/* Dialog component */}
-            <Dialog
-              visible={imgcrop}
-              header={() => (
-                <p
-                  htmlFor=""
-                  className="text-2x1 textColor bg-red-700 font-semibold"
-                >
-                  Update Avatar
-                </p>
-              )}
-              onHide={() => setImgcrop(false)}
-            >
-              {/* Avatar in block */}
-              <Avatar
-                width={500}
-                height={400}
-                onCrop={onCrop}
-                onClose={onClose}
-                src={profilePic}
-                shadingColor={"#474649"}
-                backgroundColor={"#474649"}
-              />
-              <div className=" flex-column align-items-center mt-5 flex w-12">
-                <div className="justify-content-around mt-4 flex w-12">
-                  <Button
-                    onClick={saveCropImage}
-                    label="Save"
-                    icon="pi pi-check"
-                  />
-                </div>
-              </div>
-            </Dialog>
+            <input
+              onChange={onImageChange}
+              className="hidden"
+              ref={ref}
+              type="file"
+            ></input>
           </div>
         </div>
       </div>
-      <div className="flex items-center justify-evenly">
+      <div className="flex items-center justify-evenly py-10">
         {/* left */}
         <div className="flex flex-col gap-8">
           <div className="space-y-3">
@@ -227,38 +192,21 @@ const ProfilePage = () => {
             >
               Add
             </button>
-            <Dialog
-              className="flex h-80 w-80 flex-col border-2 bg-slate-500 hover:border-main-green"
-              visible={list}
-              header={() => (
-                <p htmlFor="" className="text-2x1 textColor font-semibold">
-                  Add language
-                </p>
-              )}
-              onHide={() => setList(false)}
-            >
-              <div className=" align-items-center  flex-col">
-                <SearchBar
-                  submitCallback={() => {}}
-                  searchItems={languages}
-                  maxHeight="max-h-28"
-                  placeholder="Choose language"
-                />
-                <Button
-                  className="items-center rounded-md bg-[#217074] px-5  py-5 text-white "
-                  onClick={addListItem}
-                  label="Add"
-                />
-              </div>
-            </Dialog>
           </div>
         </div>
       </div>
       <div
         className="
         flex
-        flex-col  items-center "
+        flex-row
+        items-center 
+        gap-9 
+        px-[750px]
+        py-11 "
       >
+        <button className=" w-52 items-center rounded-md  border bg-[#ff2f2f] px-5 py-3 font-semibold text-white">
+          Log out
+        </button>
         <button className=" w-52 items-center rounded-md  border bg-[#217074] px-5 py-3 font-semibold text-white">
           Update
         </button>
