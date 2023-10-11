@@ -29,7 +29,7 @@ const Chats = () => {
   ];
 
   return (
-    <div className="w-[22rem] flex-shrink-0 space-y-1 overflow-y-auto px-1">
+    <div className="w-[22rem] flex-shrink-0 space-y-1 overflow-y-auto px-1 text-soft-black">
       {chats.length === 0 && (
         <div className="flex h-full w-full items-center justify-center">
           <div
