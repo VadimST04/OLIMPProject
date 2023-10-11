@@ -24,8 +24,8 @@ const RegistrationFirstStep = ({ setFirstStep, formData, setFormData }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const validationErrors = {};
-    const usernameExists = true; // fetch from db
-    const emailExists = true; // fetch from db
+    const usernameExists = false; // fetch from db
+    const emailExists = false; // fetch from db
 
     if (!formData.username.trim()) {
       validationErrors.username = "username is required";

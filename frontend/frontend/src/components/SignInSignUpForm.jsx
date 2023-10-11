@@ -21,8 +21,8 @@ const SignInSignUpForm = ({ closeFormCallback, registrationFormOpen }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const validationErrors = {};
-    const usernameExists = false; // fetch from db
-    const isPasswordValid = false; // fetch from db
+    const usernameExists = true; // fetch from db
+    const isPasswordValid = true; // fetch from db
 
     if (!formData.username.trim()) {
       validationErrors.username = "username is required";
