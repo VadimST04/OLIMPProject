@@ -19,8 +19,7 @@ import { HiOutlineUserCircle } from "react-icons/hi";
 
 function Navbar({ isLoggedIn, profileClick, signInClick, setTheme }) {
   const navPadding = isLoggedIn ? "py-1" : "py-2.5";
-  const testImg =
-    "https://images.unsplash.com/photo-1695504236952-37306fc71896";
+  const { userProfile } = useSelector((state) => state.userProfile);
   const buttonOptions = [
     { title: "News", icon: <BsNewspaper />, link: "/" },
     { title: "Books", icon: <PiBooksDuotone />, link: "/books" },
@@ -89,7 +88,7 @@ function Navbar({ isLoggedIn, profileClick, signInClick, setTheme }) {
           >
             <div className="flex aspect-square w-9 items-center justify-center text-soft-white transition-all duration-150 group-hover:scale-125">
               <img
-                src={testImg}
+                src={userProfile?.at(0).image}
                 alt=""
                 className="h-full w-full rounded-full object-cover"
               />
