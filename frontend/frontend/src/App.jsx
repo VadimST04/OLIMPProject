@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -23,7 +23,7 @@ const Root = () => {
   const [isSignInFormOpen, setSignInFormOpen] = useState(false);
   const [isRegistrationFormOpen, setRegistrationFormOpen] = useState(false);
   const { userToken } = useSelector((state) => state.userToken);
-
+  const [theme, setTheme] = useState(localStorage.getItem("theme"));
   const navigate = useNavigate();
 
   const profileClickHandler = () => {
@@ -34,12 +34,23 @@ const Root = () => {
     }
   };
 
+  useEffect(() => {
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }, [theme]);
+
   return (
     <div className="flex h-screen flex-col">
       <Navbar
         isLoggedIn={userToken}
         signInClick={() => setSignInFormOpen(true)}
         profileClick={() => profileClickHandler()}
+        setTheme={setTheme}
       />
       <MainContent />
       {isSignInFormOpen && (

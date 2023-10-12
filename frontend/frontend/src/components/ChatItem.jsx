@@ -1,7 +1,7 @@
 import React from "react";
 
 const ChatItem = ({ img, name, lastMessage, isActive, clickCallback }) => {
-  const activeBg = isActive ? "bg-main-green" : "";
+  const activeBg = isActive ? "bg-main-green" : "dark:bg-[#D9D9D9]";
   const activeText = isActive ? "text-soft-white" : "text-soft-dark";
 
   return (
