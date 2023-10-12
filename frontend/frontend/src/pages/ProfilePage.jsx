@@ -13,6 +13,8 @@ const ProfilePage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const imageInput = useRef();
+  const { userProfile } = useSelector((state) => state.userProfile);
+  console.log(userProfile);
   const [formData, setFormData] = useState({
     username: "",
     description: "",
@@ -20,10 +22,8 @@ const ProfilePage = () => {
     password: "",
     appLanguage: "",
     learningLanguages: [],
-    image: null,
+    image: userProfile?.at(0).image,
   });
-  const { userProfile } = useSelector((state) => state.userProfile);
-  console.log(userProfile);
 
   useEffect(() => {
     dispatch(getUserProfile());
@@ -34,7 +34,7 @@ const ProfilePage = () => {
     navigate("/");
   };
 
-  const saveButtonHandler = () => {};
+  const updateButtonHandler = () => {};
 
   const languages = [
     "English",
@@ -110,7 +110,7 @@ const ProfilePage = () => {
             <img
               src={formData.image}
               alt=""
-              className="h-full w-full cursor-pointer rounded-full border object-cover"
+              className="h-full w-full cursor-pointer rounded-full object-cover"
             />
             <div className="absolute bottom-2 right-2 z-10 flex h-6 w-6 cursor-pointer items-center justify-center rounded-full bg-[#EDC5AB] text-[20px]">
               <BiSolidPencil />
@@ -149,7 +149,7 @@ const ProfilePage = () => {
           </div>
 
           {/* Middle */}
-          <div className="flex h-56 w-[25%] flex-col justify-between justify-between gap-2">
+          <div className="flex h-56 w-[25%] flex-col justify-between gap-2">
             <div className="w-full">
               <p>Email</p>
               <input
@@ -184,7 +184,7 @@ const ProfilePage = () => {
             </div>
           </div>
           {/* Right */}
-          <div className="flex h-56 w-[25%] flex-col justify-between justify-between gap-2">
+          <div className="flex h-56 w-[25%] flex-col justify-between gap-2">
             <div className="w-full">
               <p>Add new language</p>
               <SearchBar
@@ -224,10 +224,10 @@ const ProfilePage = () => {
             Log Out
           </button>
           <button
-            onClick={saveButtonHandler}
+            onClick={updateButtonHandler}
             className="w-32 rounded-md bg-main-green py-2 pl-3 pr-5 text-soft-white outline-none hover:border-main-green hover:bg-main-dark-green"
           >
-            Save
+            Update
           </button>
         </div>
       </div>
