@@ -149,7 +149,7 @@ const ProfilePage = () => {
           </div>
 
           {/* Middle */}
-          <div className="flex h-56 w-[25%] flex-col justify-between justify-between gap-2">
+          <div className="flex h-56 w-[25%] flex-col justify-between gap-2">
             <div className="w-full">
               <p>Email</p>
               <input
@@ -184,7 +184,7 @@ const ProfilePage = () => {
             </div>
           </div>
           {/* Right */}
-          <div className="flex h-56 w-[25%] flex-col justify-between justify-between gap-2">
+          <div className="flex h-56 w-[25%] flex-col justify-between gap-2">
             <div className="w-full">
               <p>Add new language</p>
               <SearchBar
