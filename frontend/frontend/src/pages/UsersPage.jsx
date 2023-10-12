@@ -6,14 +6,14 @@ import Useritem from "../components/Useritem";
 const UsersPage = () => {
   // const dispatch = useDispatch();
 
-  // const { users } = useSelector((state) => state.users);
-  // console.log(users);
+  const { users } = useSelector((state) => state.usersList); // need to use SPRED operator (...)
+  console.log(users);
 
   // useEffect(() => {
   //   dispatch(getUsers());
   // }, [dispatch]);
 
-  const users = [
+  const testUsers = [
     {
       img: "https://images.unsplash.com/photo-1696945157988-5dbff7a97d02",
       username:
@@ -85,7 +85,7 @@ const UsersPage = () => {
 
   return (
     <div className="flex h-full w-full flex-wrap gap-x-12 gap-y-5 overflow-y-auto">
-      {users.map((item, index) => (
+      {testUsers.map((item, index) => (
         <div key={index}>
           <Useritem {...item} />
         </div>
