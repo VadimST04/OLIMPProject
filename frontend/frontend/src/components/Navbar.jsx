@@ -18,7 +18,7 @@ import { MdSettings } from "react-icons/md";
 import { HiOutlineUserCircle } from "react-icons/hi";
 
 function Navbar({ isLoggedIn, profileClick, signInClick, setTheme }) {
-  const navPadding = isLoggedIn ? "py-1" : "py-2.5";
+  const navPadding = isLoggedIn ? "py-[3px]" : "py-2.5";
   const { userProfile } = useSelector((state) => state.userProfile);
   const buttonOptions = [
     { title: "News", icon: <BsNewspaper />, link: "/" },
