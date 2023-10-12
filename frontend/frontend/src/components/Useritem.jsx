@@ -1,11 +1,11 @@
 import React from "react";
 
-const Useritem = ({ img, username, description }) => {
+const Useritem = ({ image, username, description }) => {
   return (
     <>
       <div className="flex aspect-square w-28 flex-col items-center gap-2">
         <img
-          src={img}
+          src={image}
           alt=""
           className="h-full w-full rounded-full object-cover"
         />

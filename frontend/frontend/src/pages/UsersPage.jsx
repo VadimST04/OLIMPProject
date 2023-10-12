@@ -4,90 +4,22 @@ import { getUsers } from "../store/actions/userActions";
 import Useritem from "../components/Useritem";
 
 const UsersPage = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const { users } = useSelector((state) => state.usersList); // need to use SPREAD operator (...)
 
-  const { users } = useSelector((state) => state.usersList); // need to use SPRED operator (...)
-  console.log(users);
-
-  // useEffect(() => {
-  //   dispatch(getUsers());
-  // }, [dispatch]);
-
-  const testUsers = [
-    {
-      img: "https://images.unsplash.com/photo-1696945157988-5dbff7a97d02",
-      username:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem eius, dolorum excepturi hic reiciendis ipsam nobis. Tenetur nulla ratione commodi ex odio nobis debitis corporis. Quae cum maiores reiciendis earum.",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem eius, dolorum excepturi hic reiciendis ipsam nobis. Tenetur nulla ratione commodi ex odio nobis debitis corporis. Quae cum maiores reiciendis earum.",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1696945157988-5dbff7a97d02",
-      username: "username",
-      description: "description",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1696945157988-5dbff7a97d02",
-      username: "username",
-      description: "description",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1696945157988-5dbff7a97d02",
-      username: "username",
-      description: "description",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1696945157988-5dbff7a97d02",
-      username: "username",
-      description: "description",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1696945157988-5dbff7a97d02",
-      username: "username",
-      description: "description",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1696945157988-5dbff7a97d02",
-      username: "username",
-      description: "description",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1696945157988-5dbff7a97d02",
-      username: "username",
-      description: "description",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1696945157988-5dbff7a97d02",
-      username: "username",
-      description: "description",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1696945157988-5dbff7a97d02",
-      username: "username",
-      description: "description",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1696945157988-5dbff7a97d02",
-      username: "username",
-      description: "description",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1696945157988-5dbff7a97d02",
-      username: "username",
-      description: "description",
-    },
-    {
-      img: "https://images.unsplash.com/photo-1696945157988-5dbff7a97d02",
-      username: "username",
-      description: "description",
-    },
-  ];
+  useEffect(() => {
+    dispatch(getUsers());
+  }, [dispatch]);
 
   return (
     <div className="flex h-full w-full flex-wrap gap-x-12 gap-y-5 overflow-y-auto">
-      {testUsers.map((item, index) => (
+      {users?.map((item, index) => (
         <div key={index}>
-          <Useritem {...item} />
+          <Useritem
+            image={item.image}
+            description={item.description}
+            username={item.user.username}
+          />
         </div>
       ))}
     </div>
