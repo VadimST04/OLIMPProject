@@ -5,7 +5,7 @@ import { getUsers } from "../store/actions/userActions";
 const UsersPage = () => {
   const dispatch = useDispatch();
 
-  const { users } = useSelector((state) => state.users);
+  const { users } = useSelector((state) => state.usersList); // need to use SPRED operator (...)
   console.log(users);
 
   useEffect(() => {

@@ -61,8 +61,8 @@ class UserList(generics.ListAPIView):
     A view for retrieving a list of User objects.
     """
 
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+    queryset = UserProfile.objects.all()
+    serializer_class = UserProfileSerializer
     permission_classes = (IsAuthenticated,)
 
 
