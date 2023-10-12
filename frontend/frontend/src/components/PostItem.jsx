@@ -24,7 +24,7 @@ const PostItem = ({ liked, images, username, content, likes, comments }) => {
                 (activeImgIndex - 1 + images.length) % images.length,
               )
             }
-            className="cursor-pointer select-none text-[32px] text-main-green hover:text-main-dark-green"
+            className="cursor-pointer select-none text-[32px] text-main-green hover:text-main-dark-green dark:text-soft-white dark:hover:text-[#B3B3B3]"
           />
         )}
 
@@ -37,21 +37,21 @@ const PostItem = ({ liked, images, username, content, likes, comments }) => {
             }
             onClick={() => setDetailedView(true)}
           />
-          <div className="space-y-1 text-main-green">
+          <div className="space-y-1 text-main-green dark:text-soft-white">
             <div className="flex items-center justify-between ">
               <div className="flex items-center gap-2">
-                <div className="flex cursor-pointer select-none items-center text-center font-bold hover:text-main-dark-green">
+                <div className="flex cursor-pointer select-none items-center text-center font-bold hover:text-main-dark-green dark:hover:text-[#B3B3B3]">
                   <AiOutlineHeart className="text-[28px]" />
                   <p>{likes}</p>
                 </div>
-                <div className="flex cursor-pointer select-none items-center text-center font-bold hover:text-main-dark-green">
+                <div className="flex cursor-pointer select-none items-center text-center font-bold hover:text-main-dark-green dark:hover:text-[#B3B3B3]">
                   <BiComment className="text-[26px] " />
                   <p>{comments.length}</p>
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <FiSend className="cursor-pointer text-[25px] hover:text-main-dark-green" />
-                <LuArrowDownSquare className="cursor-pointer text-[27px] hover:text-main-dark-green" />
+                <FiSend className="cursor-pointer text-[25px] hover:text-main-dark-green dark:hover:text-[#B3B3B3]" />
+                <LuArrowDownSquare className="cursor-pointer text-[27px] hover:text-main-dark-green dark:hover:text-[#B3B3B3]" />
               </div>
             </div>
             <p
@@ -67,7 +67,7 @@ const PostItem = ({ liked, images, username, content, likes, comments }) => {
             onClick={() =>
               setActiveImgIndex((activeImgIndex + 1) % images.length)
             }
-            className="cursor-pointer select-none text-[32px] text-main-green hover:text-main-dark-green"
+            className="cursor-pointer select-none text-[32px] text-main-green hover:text-main-dark-green dark:text-soft-white dark:hover:text-[#B3B3B3]"
           />
         )}
       </div>
