@@ -60,10 +60,10 @@ const DetailedPost = ({
       onClick={(e) => closePost(e)}
       className="absolute left-0 top-0 z-10 flex h-screen min-h-0 w-screen items-center justify-center overflow-y-auto bg-black bg-opacity-80"
     >
-      <div className="absolute right-[20%] top-10 z-10 cursor-pointer text-[20px] text-soft-white">
-        <RxCross1 className="" onClick={() => closePostCallback()} />
-      </div>
-      <div className="flex gap-4">
+      <div className="relative flex gap-4 rounded-md bg-soft-white p-5 text-soft-black dark:bg-soft-black dark:text-soft-white">
+        <div className="absolute -right-6 -top-6 z-10 cursor-pointer text-[20px] text-soft-white">
+          <RxCross1 className="" onClick={() => closePostCallback()} />
+        </div>
         {/* Post */}
         <div className="flex w-[29rem] flex-col">
           <div
@@ -78,7 +78,7 @@ const DetailedPost = ({
                     (activeImgIndex - 1 + images.length) % images.length,
                   )
                 }
-                className="cursor-pointer select-none text-[32px] text-soft-white hover:text-[#B3B3B3]"
+                className="cursor-pointer select-none text-[32px] hover:text-[#666666]"
               />
             )}
 
@@ -90,21 +90,21 @@ const DetailedPost = ({
                   "h-[31rem] w-full cursor-pointer select-none object-cover"
                 }
               />
-              <div className="space-y-1 text-soft-white">
+              <div className="space-y-1 ">
                 <div className="flex items-center justify-between ">
                   <div className="flex items-center gap-2">
-                    <div className="flex cursor-pointer select-none items-center text-center font-bold hover:text-[#B3B3B3]">
+                    <div className="flex cursor-pointer select-none items-center text-center font-bold hover:text-[#666666]">
                       <AiOutlineHeart className="text-[28px]" />
                       <p>{likes}</p>
                     </div>
-                    <div className="flex cursor-pointer select-none items-center text-center font-bold hover:text-[#B3B3B3]">
+                    <div className="flex cursor-pointer select-none items-center text-center font-bold hover:text-[#666666]">
                       <BiComment className="text-[26px] " />
                       <p>{comments.length}</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
-                    <FiSend className="cursor-pointer text-[25px] hover:text-[#B3B3B3]" />
-                    <LuArrowDownSquare className="cursor-pointer text-[27px] hover:text-[#B3B3B3]" />
+                    <FiSend className="cursor-pointer text-[25px] hover:text-[#666666]" />
+                    <LuArrowDownSquare className="cursor-pointer text-[27px] hover:text-[#666666]" />
                   </div>
                 </div>
               </div>
@@ -114,13 +114,13 @@ const DetailedPost = ({
                 onClick={() =>
                   setActiveImgIndex((activeImgIndex + 1) % images.length)
                 }
-                className="cursor-pointer select-none text-[32px] text-soft-white hover:text-[#B3B3B3]"
+                className="cursor-pointer select-none text-[32px]  hover:text-[#666666]"
               />
             )}
           </div>
         </div>
         {/* Comments */}
-        <div className="w-[24rem] text-soft-white ">
+        <div className="w-[24rem]  ">
           {testComments.map((item, index) => (
             <CommentItem {...item} />
           ))}

@@ -21,7 +21,7 @@ const CommentItem = ({ profileImg, username, commentDate, commentContent }) => {
         {commentContent.length > maxSymbols && (
           <div
             onClick={() => setExpandComment(!expandComment)}
-            className="w-full cursor-pointer hover:text-[#d3d3d3]"
+            className="w-full cursor-pointer hover:text-[#666666]"
           >
             {expandComment ? "Hide" : "Expand"}
           </div>
