@@ -4,7 +4,7 @@ from musicApp.models import Song
 
 
 class SongSerializer(serializers.ModelSerializer):
-    language = serializers.StringRelatedField()
+    language = serializers.StringRelatedField(many=True)
 
     class Meta:
         model = Song

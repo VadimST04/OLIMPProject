@@ -4,6 +4,7 @@ from baseApp.models import Language
 
 
 class Song(models.Model):
+    objects = models.Manager()
     title = models.CharField(max_length=100)
     artist = models.CharField(max_length=100)
     image = models.ImageField()
