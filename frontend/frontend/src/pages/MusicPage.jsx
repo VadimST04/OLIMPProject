@@ -15,6 +15,7 @@ const MusicPage = () => {
 
   const testMusic = [
     {
+      id: 1,
       language: "English",
       isLiked: false,
       image: "https://images.unsplash.com/photo-1697325320142-28beaededbf3",
@@ -23,6 +24,7 @@ const MusicPage = () => {
       length: "4:37",
     },
     {
+      id: 2,
       language: "English",
       isLiked: false,
       image: "https://images.unsplash.com/photo-1696595861023-35fde5406cb2",
@@ -31,6 +33,7 @@ const MusicPage = () => {
       length: "4:37",
     },
     {
+      id: 3,
       language: "English",
       isLiked: false,
       image: "https://images.unsplash.com/photo-1692035072849-93a511f35b2c",
@@ -39,6 +42,7 @@ const MusicPage = () => {
       length: "4:37",
     },
     {
+      id: 4,
       language: "English",
       isLiked: false,
       image: "https://images.unsplash.com/photo-1695917642455-8ee7e1ce83db",
@@ -47,6 +51,7 @@ const MusicPage = () => {
       length: "4:37",
     },
     {
+      id: 5,
       language: "English",
       isLiked: false,
       image: "https://images.unsplash.com/photo-1697325320142-28beaededbf3",
@@ -55,6 +60,7 @@ const MusicPage = () => {
       length: "4:37",
     },
     {
+      id: 6,
       language: "English",
       isLiked: false,
       image: "https://images.unsplash.com/photo-1696595861023-35fde5406cb2",
@@ -63,6 +69,7 @@ const MusicPage = () => {
       length: "4:37",
     },
     {
+      id: 7,
       language: "English",
       isLiked: false,
       image: "https://images.unsplash.com/photo-1692035072849-93a511f35b2c",
@@ -71,6 +78,7 @@ const MusicPage = () => {
       length: "4:37",
     },
     {
+      id: 8,
       language: "English",
       isLiked: false,
       image: "https://images.unsplash.com/photo-1695917642455-8ee7e1ce83db",
@@ -79,6 +87,7 @@ const MusicPage = () => {
       length: "4:37",
     },
     {
+      id: 9,
       language: "English",
       isLiked: false,
       image: "https://images.unsplash.com/photo-1697325320142-28beaededbf3",
@@ -87,6 +96,7 @@ const MusicPage = () => {
       length: "4:37",
     },
     {
+      id: 10,
       language: "English",
       isLiked: false,
       image: "https://images.unsplash.com/photo-1696595861023-35fde5406cb2",
@@ -95,6 +105,7 @@ const MusicPage = () => {
       length: "4:37",
     },
     {
+      id: 11,
       language: "English",
       isLiked: false,
       image: "https://images.unsplash.com/photo-1692035072849-93a511f35b2c",
@@ -103,6 +114,7 @@ const MusicPage = () => {
       length: "4:37",
     },
     {
+      id: 12,
       language: "English",
       isLiked: false,
       image: "https://images.unsplash.com/photo-1695917642455-8ee7e1ce83db",
@@ -111,6 +123,7 @@ const MusicPage = () => {
       length: "4:37",
     },
     {
+      id: 13,
       language: "English",
       isLiked: false,
       image: "https://images.unsplash.com/photo-1697325320142-28beaededbf3",
@@ -119,6 +132,7 @@ const MusicPage = () => {
       length: "4:37",
     },
     {
+      id: 14,
       language: "English",
       isLiked: false,
       image: "https://images.unsplash.com/photo-1696595861023-35fde5406cb2",
@@ -127,6 +141,7 @@ const MusicPage = () => {
       length: "4:37",
     },
     {
+      id: 15,
       language: "English",
       isLiked: false,
       image: "https://images.unsplash.com/photo-1692035072849-93a511f35b2c",
@@ -135,6 +150,7 @@ const MusicPage = () => {
       length: "4:37",
     },
     {
+      id: 16,
       language: "English",
       isLiked: false,
       image: "https://images.unsplash.com/photo-1695917642455-8ee7e1ce83db",
@@ -143,6 +159,7 @@ const MusicPage = () => {
       length: "4:37",
     },
     {
+      id: 17,
       language: "English",
       isLiked: false,
       image: "https://images.unsplash.com/photo-1697325320142-28beaededbf3",
@@ -151,6 +168,7 @@ const MusicPage = () => {
       length: "4:37",
     },
     {
+      id: 18,
       language: "English",
       isLiked: false,
       image: "https://images.unsplash.com/photo-1696595861023-35fde5406cb2",
@@ -159,6 +177,7 @@ const MusicPage = () => {
       length: "4:37",
     },
     {
+      id: 19,
       language: "English",
       isLiked: false,
       image: "https://images.unsplash.com/photo-1692035072849-93a511f35b2c",
@@ -167,6 +186,7 @@ const MusicPage = () => {
       length: "4:37",
     },
     {
+      id: 20,
       language: "English",
       isLiked: false,
       image: "https://images.unsplash.com/photo-1695917642455-8ee7e1ce83db",
@@ -175,6 +195,7 @@ const MusicPage = () => {
       length: "4:37",
     },
     {
+      id: 21,
       language: "English",
       isLiked: false,
       image: "https://images.unsplash.com/photo-1697325320142-28beaededbf3",
@@ -183,6 +204,7 @@ const MusicPage = () => {
       length: "4:37",
     },
     {
+      id: 22,
       language: "English",
       isLiked: false,
       image: "https://images.unsplash.com/photo-1696595861023-35fde5406cb2",
@@ -191,6 +213,7 @@ const MusicPage = () => {
       length: "4:37",
     },
     {
+      id: 23,
       language: "English",
       isLiked: false,
       image: "https://images.unsplash.com/photo-1692035072849-93a511f35b2c",
@@ -199,6 +222,7 @@ const MusicPage = () => {
       length: "4:37",
     },
     {
+      id: 24,
       language: "English",
       isLiked: false,
       image: "https://images.unsplash.com/photo-1695917642455-8ee7e1ce83db",
@@ -207,6 +231,7 @@ const MusicPage = () => {
       length: "4:37",
     },
     {
+      id: 25,
       language: "English",
       isLiked: false,
       image: "https://images.unsplash.com/photo-1697325320142-28beaededbf3",
@@ -215,6 +240,7 @@ const MusicPage = () => {
       length: "4:37",
     },
     {
+      id: 26,
       language: "English",
       isLiked: false,
       image: "https://images.unsplash.com/photo-1696595861023-35fde5406cb2",
@@ -223,6 +249,7 @@ const MusicPage = () => {
       length: "4:37",
     },
     {
+      id: 27,
       language: "English",
       isLiked: false,
       image: "https://images.unsplash.com/photo-1692035072849-93a511f35b2c",
@@ -231,6 +258,7 @@ const MusicPage = () => {
       length: "4:37",
     },
     {
+      id: 28,
       language: "English",
       isLiked: false,
       image: "https://images.unsplash.com/photo-1695917642455-8ee7e1ce83db",
@@ -239,6 +267,7 @@ const MusicPage = () => {
       length: "4:37",
     },
     {
+      id: 29,
       language: "English",
       isLiked: false,
       image: "https://images.unsplash.com/photo-1697325320142-28beaededbf3",
@@ -247,6 +276,7 @@ const MusicPage = () => {
       length: "4:37",
     },
     {
+      id: 30,
       language: "English",
       isLiked: false,
       image: "https://images.unsplash.com/photo-1696595861023-35fde5406cb2",
@@ -255,6 +285,7 @@ const MusicPage = () => {
       length: "4:37",
     },
     {
+      id: 31,
       language: "English",
       isLiked: false,
       image: "https://images.unsplash.com/photo-1692035072849-93a511f35b2c",
@@ -263,6 +294,7 @@ const MusicPage = () => {
       length: "4:37",
     },
     {
+      id: 32,
       language: "English",
       isLiked: false,
       image: "https://images.unsplash.com/photo-1695917642455-8ee7e1ce83db",
@@ -275,7 +307,7 @@ const MusicPage = () => {
   return (
     <div className="flex h-full w-full flex-wrap gap-4 overflow-y-auto">
       {testMusic.map((item) => (
-        <MusicItem {...item} />
+        <MusicItem {...item} key={item.id} />
       ))}
     </div>
   );
