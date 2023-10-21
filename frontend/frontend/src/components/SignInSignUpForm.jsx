@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { login } from "../store/actions/userActions";
 import { FiUser } from "react-icons/fi";
 import { RiLockPasswordLine } from "react-icons/ri";
@@ -9,6 +10,7 @@ import logo from "../assets/OLIMPlogo.png";
 
 const SignInSignUpForm = ({ closeFormCallback, registrationFormOpen }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const formBg = useRef(null);
   const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState({

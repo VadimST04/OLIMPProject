@@ -1,5 +1,5 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import SearchBar from "./SearchBar";
 import DropdownButton from "./DropdownButton";
@@ -18,8 +18,10 @@ import { MdSettings } from "react-icons/md";
 import { HiOutlineUserCircle } from "react-icons/hi";
 
 function Navbar({ isLoggedIn, profileClick, signInClick, setTheme }) {
+  const dispatch = useDispatch();
+
   const navPadding = isLoggedIn ? "py-[3px]" : "py-2.5";
-  const { userProfile } = useSelector((state) => state.userProfile);
+  const { userToken } = useSelector((state) => state.userToken);
   const buttonOptions = [
     { title: "News", icon: <BsNewspaper />, link: "/" },
     { title: "Books", icon: <PiBooksDuotone />, link: "/books" },
@@ -88,7 +90,7 @@ function Navbar({ isLoggedIn, profileClick, signInClick, setTheme }) {
           >
             <div className="flex aspect-square w-9 items-center justify-center text-soft-white transition-all duration-150 group-hover:scale-125">
               <img
-                src={userProfile?.at(0).image}
+                src={userToken.image}
                 alt=""
                 className="h-full w-full rounded-full object-cover"
               />
