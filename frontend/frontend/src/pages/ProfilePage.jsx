@@ -14,7 +14,8 @@ const ProfilePage = () => {
   const navigate = useNavigate();
   const imageInput = useRef();
   const { userProfile } = useSelector((state) => state.userProfile);
-  console.log(userProfile);
+  console.log("userProfile ", userProfile);
+  console.log("userProfileImage ", userProfile?.at(0).image);
   const [formData, setFormData] = useState({
     username: "",
     description: "",
@@ -22,12 +23,25 @@ const ProfilePage = () => {
     password: "",
     appLanguage: "",
     learningLanguages: [],
-    image: userProfile?.at(0).image,
+    image: "",
   });
+  console.log("formData ", formData);
 
   useEffect(() => {
-    dispatch(getUserProfile());
-  }, [dispatch]);
+    if (!userProfile) {
+      dispatch(getUserProfile());
+    } else {
+      setFormData({
+        username: userProfile[0].user.username,
+        description: userProfile[0].description,
+        email: userProfile[0].user.email,
+        password: "",
+        appLanguage: userProfile[0].app_lang,
+        learningLanguages: [...userProfile[0].learning_langs],
+        image: userProfile[0].image,
+      });
+    }
+  }, [dispatch, userProfile]);
 
   const logoutButtonHandler = () => {
     dispatch(logout());
@@ -135,6 +149,7 @@ const ProfilePage = () => {
                 type="text"
                 onChange={onFieldsChange}
                 className="w-full rounded-md border-2 border-main-green bg-soft-white py-2 pl-3 pr-5 outline-none hover:border-main-green"
+                value={formData.username}
               />
             </div>
             <div className="flex min-h-0 w-full flex-grow flex-col">
@@ -144,6 +159,7 @@ const ProfilePage = () => {
                 type="text"
                 onChange={onFieldsChange}
                 className="h-full w-full resize-none rounded-md border-2 border-main-green bg-soft-white py-2 pl-3 pr-5 outline-none hover:border-main-green"
+                value={formData.description}
               />
             </div>
           </div>
@@ -157,6 +173,7 @@ const ProfilePage = () => {
                 type="text"
                 onChange={onFieldsChange}
                 className="w-full rounded-md border-2 border-main-green bg-soft-white py-2 pl-3 pr-5 outline-none hover:border-main-green"
+                value={formData.email}
               />
             </div>
             <div className="w-full">
