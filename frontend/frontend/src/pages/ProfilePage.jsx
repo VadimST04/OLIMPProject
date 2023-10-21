@@ -25,7 +25,6 @@ const ProfilePage = () => {
     learningLanguages: [],
     image: "",
   });
-  console.log("formData ", formData);
 
   useEffect(() => {
     if (!userProfile) {
@@ -40,6 +39,7 @@ const ProfilePage = () => {
         learningLanguages: [...userProfile[0].learning_langs],
         image: userProfile[0].image,
       });
+      console.log("formData ", formData);
     }
   }, [dispatch, userProfile]);
 
@@ -110,9 +110,11 @@ const ProfilePage = () => {
     });
   };
 
+  console.log(formData);
+
   return (
     <div className="h-full w-full overflow-y-auto">
-      <div className="flex h-full w-full flex-col gap-10">
+      <form className="flex h-full w-full flex-col gap-10">
         {/* title */}
         <p className="text-center text-[32px] font-semibold">My Profile</p>
         {/* img */}
@@ -127,7 +129,7 @@ const ProfilePage = () => {
               className="h-full w-full cursor-pointer rounded-full object-cover"
             />
             <div className="absolute bottom-2 right-2 z-10 flex h-6 w-6 cursor-pointer items-center justify-center rounded-full bg-[#EDC5AB] text-[20px]">
-              <BiSolidPencil />
+              <BiSolidPencil className="text-soft-black" />
             </div>
             <input
               onChange={onImageChange}
@@ -148,7 +150,7 @@ const ProfilePage = () => {
                 name="username"
                 type="text"
                 onChange={onFieldsChange}
-                className="w-full rounded-md border-2 border-main-green bg-soft-white py-2 pl-3 pr-5 outline-none hover:border-main-green"
+                className="w-full rounded-md border-2 border-main-green bg-transparent py-2 pl-3 pr-5 outline-none hover:border-main-green"
                 value={formData.username}
               />
             </div>
@@ -158,7 +160,7 @@ const ProfilePage = () => {
                 name="description"
                 type="text"
                 onChange={onFieldsChange}
-                className="h-full w-full resize-none rounded-md border-2 border-main-green bg-soft-white py-2 pl-3 pr-5 outline-none hover:border-main-green"
+                className="h-full w-full resize-none rounded-md border-2 border-main-green bg-transparent py-2 pl-3 pr-5 outline-none hover:border-main-green"
                 value={formData.description}
               />
             </div>
@@ -172,7 +174,7 @@ const ProfilePage = () => {
                 name="email"
                 type="text"
                 onChange={onFieldsChange}
-                className="w-full rounded-md border-2 border-main-green bg-soft-white py-2 pl-3 pr-5 outline-none hover:border-main-green"
+                className="w-full rounded-md border-2 border-main-green bg-transparent py-2 pl-3 pr-5 outline-none hover:border-main-green"
                 value={formData.email}
               />
             </div>
@@ -181,8 +183,9 @@ const ProfilePage = () => {
               <input
                 name="password"
                 type="password"
+                autoComplete="password"
                 onChange={onFieldsChange}
-                className="w-full rounded-md border-2 border-main-green bg-soft-white py-2 pl-3 pr-5 outline-none hover:border-main-green"
+                className="w-full rounded-md border-2 border-main-green bg-transparent py-2 pl-3 pr-5 outline-none hover:border-main-green"
               />
             </div>
             <div className="w-full">
@@ -197,6 +200,8 @@ const ProfilePage = () => {
                     appLanguage: value,
                   });
                 }}
+                defaultValue={formData.appLanguage}
+                inputStyling="w-full rounded-md border-2 border-main-green bg-transparent py-2 pl-3 pr-5 outline-none hover:border-main-green"
               />
             </div>
           </div>
@@ -211,15 +216,16 @@ const ProfilePage = () => {
                 placeholder="Add new language"
                 submitCallback={(value) => langSelected(value)}
                 clearOnSubmit={true}
+                inputStyling="w-full rounded-md border-2 border-main-green bg-transparent py-2 pl-3 pr-5 outline-none hover:border-main-green"
               />
             </div>
             <div className="flex min-h-0 w-full flex-grow flex-col">
               <p>Languages studied</p>
-              <div className="h-full w-full overflow-y-auto rounded-md border-2 border-main-green bg-soft-white">
+              <div className="h-full w-full overflow-y-auto rounded-md border-2 border-main-green bg-transparent">
                 {formData.learningLanguages.map((item) => (
                   <div
                     key={item}
-                    className="flex select-none items-center justify-between bg-[#D9D9D9] px-3 py-1 hover:bg-[#cecece]"
+                    className="hover:bg-soft-white-hover dark:hover:bg-soft-black-hover flex select-none items-center justify-between px-3 py-1"
                   >
                     <p>{item}</p>
                     <RxCross1
@@ -247,7 +253,7 @@ const ProfilePage = () => {
             Update
           </button>
         </div>
-      </div>
+      </form>
     </div>
   );
 };

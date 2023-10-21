@@ -46,6 +46,7 @@ function Navbar({ isLoggedIn, profileClick, signInClick, setTheme }) {
         <SearchBar
           searchItems={testSearchItems}
           submitCallback={testSumbitCallback}
+          inputStyling="h-full w-full rounded-md bg-soft-white py-2 pl-3 pr-5 outline-none text-soft-black"
         />
       </div>
       <div className="flex items-center gap-1">
