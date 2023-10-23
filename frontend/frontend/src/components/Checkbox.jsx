@@ -11,7 +11,7 @@ const Checkbox = ({ label, checkCallback = () => {} }) => {
       <input
         type="checkbox"
         className="h-4 w-4 accent-main-green"
-        checked={checked} // Добавили checked атрибут
+        checked={checked}
       />
       <p className="capitalize">{label}</p>
     </div>
