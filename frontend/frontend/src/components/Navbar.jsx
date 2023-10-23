@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import SearchBar from "./SearchBar";
@@ -13,13 +13,12 @@ import {
 import { PiBooksDuotone } from "react-icons/pi";
 import { FiUsers } from "react-icons/fi";
 import { IoMusicalNotes } from "react-icons/io5";
-import { MdLanguage } from "react-icons/md";
 import { MdSettings } from "react-icons/md";
 import { HiOutlineUserCircle } from "react-icons/hi";
+import LanguageDropDown from "./LanguageDropDown";
 
 function Navbar({ isLoggedIn, profileClick, signInClick, setTheme }) {
   const dispatch = useDispatch();
-
   const navPadding = isLoggedIn ? "py-[3px]" : "py-2.5";
   const { userToken } = useSelector((state) => state.userToken);
   const buttonOptions = [
@@ -67,14 +66,7 @@ function Navbar({ isLoggedIn, profileClick, signInClick, setTheme }) {
           </div>
         </div>
         {/*  */}
-        <div
-          onClick={() => {}}
-          className="group cursor-pointer rounded-md p-2 text-[26px] hover:bg-main-dark-green"
-        >
-          <div className="flex items-center justify-center text-soft-white transition-all duration-150 group-hover:scale-110">
-            <MdLanguage />
-          </div>
-        </div>
+        <LanguageDropDown />
         <div
           onClick={() => {}}
           className="group cursor-pointer rounded-md p-2 text-[26px] hover:bg-main-dark-green"
