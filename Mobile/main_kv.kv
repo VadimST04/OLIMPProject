@@ -1,0 +1,46 @@
+MDScreen:
+    md_bg_color: '#F3F3F3'
+    BoxLayoutMain:
+        TopBar:
+        ScrollViewMain:
+        BottomNavigation:
+
+
+<BoxLayoutMain>
+    orientation: 'vertical'
+
+
+<TopBar>
+    md_bg_color: '#F3F3F3'
+    specific_text_color: '#333333'
+    left_action_items: [["menu", lambda x: app.navigation_draw()]]
+    right_action_items:
+        [
+        ["white-balance-sunny", lambda x: app.change_theme_dark()],
+        ["account-circle-outline", lambda x: app.sign_in()]
+        ]
+
+
+<ScrollViewMain>
+    MDBoxLayout:
+        orientation: 'vertical'
+        size_hint_y: None
+        height: self.minimum_height
+        md_bg_color: '#F3F3F3'
+
+
+<BottomNavigation>
+    size_hint: (1, 0.07)
+    panel_color: '#217074'
+    use_text: False
+    text_color_normal: '#F3F3F3'
+    text_color_active: '#2B2D30'
+
+    MDBottomNavigationItem:
+        icon: 'account-circle-outline'
+
+    MDBottomNavigationItem:
+        icon: 'home-outline'
+
+    MDBottomNavigationItem:
+        icon: 'chat-outline'
