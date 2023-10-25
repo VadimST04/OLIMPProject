@@ -14,8 +14,6 @@ const ProfilePage = () => {
   const navigate = useNavigate();
   const imageInput = useRef();
   const { userProfile } = useSelector((state) => state.userProfile);
-  console.log("userProfile ", userProfile);
-  console.log("userProfileImage ", userProfile?.at(0).image);
   const [formData, setFormData] = useState({
     username: "",
     description: "",
@@ -25,7 +23,6 @@ const ProfilePage = () => {
     learningLanguages: [],
     image: "",
   });
-  console.log("formData ", formData);
 
   useEffect(() => {
     if (!userProfile) {

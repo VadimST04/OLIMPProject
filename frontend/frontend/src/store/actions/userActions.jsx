@@ -130,9 +130,6 @@ export const getUsers = () => async (dispatch, getState) => {
       config,
     );
 
-    console.log("I am here");
-    console.log(data);
-
     dispatch({
       type: USER_LIST_SUCCESS,
       payload: data,

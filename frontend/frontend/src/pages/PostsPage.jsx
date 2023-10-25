@@ -8,7 +8,6 @@ function PostsPage() {
   const dispatch = useDispatch();
 
   const { posts } = useSelector((state) => state.postsList);
-  console.log(posts);
   useEffect(() => {
     dispatch(postsList());
   }, [dispatch]);
