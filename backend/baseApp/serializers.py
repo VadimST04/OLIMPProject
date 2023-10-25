@@ -60,11 +60,8 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         """
         data = super().validate(attrs)
 
-        serializer = UserSerializer(self.user).data
         user_profile = UserProfile.objects.get(user=self.user)
 
-        for key, value in serializer.items():
-            data[key] = value
         request = self.context.get('request')
         if request:
             data['image'] = request.build_absolute_uri(user_profile.image.url)
