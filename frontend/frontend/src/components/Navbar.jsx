@@ -38,6 +38,7 @@ function Navbar() {
         <SearchBar
           searchItems={testSearchItems}
           submitCallback={(value) => console.log(value)}
+          inputStyling="h-full w-full rounded-md bg-soft-white py-2 pl-3 pr-5 outline-none text-soft-black"
         />
       </div>
       <div className="flex items-center gap-1">
