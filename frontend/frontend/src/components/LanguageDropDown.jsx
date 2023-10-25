@@ -5,9 +5,11 @@ import Checkbox from "./Checkbox";
 
 const LanguageDropDown = () => {
   const [languageDropDownOpen, setLanguageDropDownOpen] = useState(false);
-  const { userProfile } = useSelector((state) => state.userProfile);
-  const learning_languages = userProfile?.at(0).learning_langs;
   const selfRef = useRef();
+  const { userProfile } = useSelector((state) => state.userProfile);
+
+  const learning_languages = userProfile?.at(0).learning_langs;
+  const dropDownVisibility = languageDropDownOpen ? "" : "hidden";
 
   const onOutsideClick = (e) => {
     if (!selfRef.current.contains(e.target)) setLanguageDropDownOpen(false);
@@ -32,9 +34,7 @@ const LanguageDropDown = () => {
         </div>
       </div>
       <div
-        className={`absolute right-0 top-[100%] flex max-h-64 w-max cursor-pointer overflow-y-auto rounded-md bg-soft-white ${
-          !languageDropDownOpen ? "hidden" : ""
-        }`}
+        className={`absolute right-0 top-[100%] flex max-h-64 w-max cursor-pointer overflow-y-auto rounded-md bg-soft-white ${dropDownVisibility}`}
       >
         <div className="">
           {learning_languages?.map((lang, index) => (
