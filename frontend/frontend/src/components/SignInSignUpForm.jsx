@@ -40,8 +40,6 @@ const SignInSignUpForm = ({ closeFormCallback, registrationFormOpen }) => {
 
     setErrors(validationErrors);
 
-    console.log(error);
-
     if (Object.keys(validationErrors).length === 0) {
       dispatch(login(formData.username, formData.password));
       closeFormCallback();

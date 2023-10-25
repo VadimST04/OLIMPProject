@@ -14,8 +14,6 @@ const ProfilePage = () => {
   const navigate = useNavigate();
   const imageInput = useRef();
   const { userProfile } = useSelector((state) => state.userProfile);
-  console.log("userProfile ", userProfile);
-  console.log("userProfileImage ", userProfile?.at(0).image);
   const [formData, setFormData] = useState({
     username: "",
     description: "",
@@ -27,9 +25,7 @@ const ProfilePage = () => {
   });
 
   useEffect(() => {
-    if (!userProfile) {
-      dispatch(getUserProfile());
-    } else {
+    if (userProfile) {
       setFormData({
         username: userProfile[0].user.username,
         description: userProfile[0].description,
@@ -41,7 +37,7 @@ const ProfilePage = () => {
       });
       console.log("formData ", formData);
     }
-  }, [dispatch, userProfile]);
+  }, [userProfile]);
 
   const logoutButtonHandler = () => {
     dispatch(logout());

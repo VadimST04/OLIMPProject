@@ -19,7 +19,6 @@ const DetailedPost = ({
     if (e.target === postBg.current) closePostCallback();
   };
   const [activeImgIndex, setActiveImgIndex] = useState(0);
-  console.log(comments);
 
   const testComments = [
     {
