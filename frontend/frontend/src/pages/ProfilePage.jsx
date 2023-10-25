@@ -25,9 +25,7 @@ const ProfilePage = () => {
   });
 
   useEffect(() => {
-    if (!userProfile) {
-      dispatch(getUserProfile());
-    } else {
+    if (userProfile) {
       setFormData({
         username: userProfile[0].user.username,
         description: userProfile[0].description,
@@ -38,7 +36,7 @@ const ProfilePage = () => {
         image: userProfile[0].image,
       });
     }
-  }, [dispatch, userProfile]);
+  }, [userProfile]);
 
   const logoutButtonHandler = () => {
     dispatch(logout());

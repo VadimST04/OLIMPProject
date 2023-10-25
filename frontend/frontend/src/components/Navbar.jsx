@@ -1,26 +1,21 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 
-import SearchBar from "./SearchBar";
-import DropdownButton from "./DropdownButton";
-
-import {
-  BsNewspaper,
-  BsFileEarmarkText,
-  BsMoonFill,
-  BsFillSunFill,
-} from "react-icons/bs";
+import { BsNewspaper, BsFileEarmarkText } from "react-icons/bs";
 import { PiBooksDuotone } from "react-icons/pi";
 import { FiUsers } from "react-icons/fi";
 import { IoMusicalNotes } from "react-icons/io5";
-import { MdSettings } from "react-icons/md";
-import { HiOutlineUserCircle } from "react-icons/hi";
-import LanguageDropDown from "./LanguageDropDown";
 
-function Navbar({ isLoggedIn, profileClick, signInClick, setTheme }) {
-  const dispatch = useDispatch();
-  const navPadding = isLoggedIn ? "py-[3px]" : "py-2.5";
+import SearchBar from "./SearchBar";
+import DropdownButton from "./DropdownButton";
+import LanguageDropDown from "./LanguageDropDown";
+import ThemeToggle from "./ThemeToggle";
+import ProfileButton from "./ProfileButton";
+import SettingsButton from "./SettingsButton";
+
+function Navbar() {
   const { userToken } = useSelector((state) => state.userToken);
+  const navPadding = userToken ? "py-[4px]" : "py-2.5";
   const buttonOptions = [
     { title: "News", icon: <BsNewspaper />, link: "/" },
     { title: "Books", icon: <PiBooksDuotone />, link: "/books" },
@@ -34,8 +29,6 @@ function Navbar({ isLoggedIn, profileClick, signInClick, setTheme }) {
     (_, i) => `Lorem${i + 1}`,
   );
 
-  const testSumbitCallback = (value) => console.log(value);
-
   return (
     <div
       className={`flex items-center justify-between bg-main-green px-5 ${navPadding}`}
@@ -44,61 +37,14 @@ function Navbar({ isLoggedIn, profileClick, signInClick, setTheme }) {
         <DropdownButton buttons={buttonOptions} />
         <SearchBar
           searchItems={testSearchItems}
-          submitCallback={testSumbitCallback}
+          submitCallback={(value) => console.log(value)}
         />
       </div>
       <div className="flex items-center gap-1">
-        <div
-          onClick={() => setTheme("dark")}
-          className="group cursor-pointer rounded-md p-2 text-[20px] hover:bg-main-dark-green dark:hidden"
-        >
-          <div className="flex items-center justify-center text-soft-white transition-all duration-150 group-hover:scale-110">
-            <BsMoonFill />
-          </div>
-        </div>
-        {/*  */}
-        <div
-          onClick={() => setTheme("light")}
-          className="group hidden cursor-pointer rounded-md p-2 text-[26px] hover:bg-main-dark-green dark:block"
-        >
-          <div className="flex items-center justify-center text-soft-white transition-all duration-150 group-hover:scale-110">
-            <BsFillSunFill />
-          </div>
-        </div>
-        {/*  */}
+        <ThemeToggle />
         <LanguageDropDown />
-        <div
-          onClick={() => {}}
-          className="group cursor-pointer rounded-md p-2 text-[26px] hover:bg-main-dark-green"
-        >
-          <div className="flex items-center justify-center text-soft-white transition-all duration-150 group-hover:scale-110">
-            <MdSettings />
-          </div>
-        </div>
-        {isLoggedIn && (
-          <div
-            onClick={() => profileClick()}
-            className="group cursor-pointer rounded-full p-2.5 transition-all duration-150 hover:bg-main-dark-green"
-          >
-            <div className="flex aspect-square w-9 items-center justify-center text-soft-white transition-all duration-150 group-hover:scale-125">
-              <img
-                src={userToken.image}
-                alt=""
-                className="h-full w-full rounded-full object-cover"
-              />
-            </div>
-          </div>
-        )}
-        {!isLoggedIn && (
-          <div
-            onClick={() => signInClick()}
-            className="group cursor-pointer rounded-md p-2 text-[26px] hover:bg-main-dark-green"
-          >
-            <div className="flex items-center justify-center text-soft-white transition-all duration-150 group-hover:scale-110">
-              <HiOutlineUserCircle />
-            </div>
-          </div>
-        )}
+        <SettingsButton />
+        <ProfileButton />
       </div>
     </div>
   );

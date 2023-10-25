@@ -1,14 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
+
 import { MdLanguage } from "react-icons/md";
 import { useSelector } from "react-redux";
+
 import Checkbox from "./Checkbox";
 
 const LanguageDropDown = () => {
   const [languageDropDownOpen, setLanguageDropDownOpen] = useState(false);
-  const selfRef = useRef();
+  const [learningLanguages, setLearningLanguages] = useState([]);
   const { userProfile } = useSelector((state) => state.userProfile);
-
-  const learning_languages = userProfile?.at(0).learning_langs;
+  const selfRef = useRef();
   const dropDownVisibility = languageDropDownOpen ? "" : "hidden";
 
   const onOutsideClick = (e) => {
@@ -22,13 +23,17 @@ const LanguageDropDown = () => {
     };
   }, []);
 
+  useEffect(() => {
+    setLearningLanguages(userProfile ? userProfile[0].learning_langs : []);
+  }, [userProfile]);
+
+  const onClickHandler = () => {
+    setLanguageDropDownOpen(true);
+  };
+
   return (
-    <div
-      onClick={() => setLanguageDropDownOpen(true)}
-      ref={selfRef}
-      className="relative"
-    >
-      <div className="group cursor-pointer p-2 text-[26px] hover:bg-main-dark-green">
+    <div onClick={() => onClickHandler()} ref={selfRef} className="relative">
+      <div className="group cursor-pointer rounded-md p-2 text-[26px] hover:bg-main-dark-green">
         <div className="flex items-center justify-center text-soft-white transition-all duration-150 group-hover:scale-110">
           <MdLanguage />
         </div>
@@ -37,8 +42,8 @@ const LanguageDropDown = () => {
         className={`absolute right-0 top-[100%] flex max-h-64 w-max cursor-pointer overflow-y-auto rounded-md bg-soft-white ${dropDownVisibility}`}
       >
         <div className="">
-          {learning_languages?.map((lang, index) => (
-            <Checkbox key={index} label={lang} />
+          {learningLanguages?.map((lang, index) => (
+            <Checkbox key={index} label={lang} checkedByDefault={true} />
           ))}
         </div>
       </div>
