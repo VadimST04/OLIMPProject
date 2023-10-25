@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import { useEffect } from "react";
 import { BiSearch } from "react-icons/bi";
 import { RxCross1 } from "react-icons/rx";
 
@@ -8,57 +9,99 @@ const SearchBar = ({
   placeholder = "Search",
   maxHeight = "max-h-72",
   clearOnSubmit = false,
+  exceptItems = [],
+  defaultValue = "",
+  inputStyling = "",
 }) => {
-  searchItems = [...new Set(searchItems)]; // leaving unique items only
-  const [searchValue, setSearchValue] = useState("");
+  searchItems = [...new Set(searchItems)];
+
+  const [searchValue, setSearchValue] = useState(defaultValue);
   const [visibleItems, setVisibleItems] = useState(false);
-  const itemsVisibility = visibleItems ? "" : "hidden";
-  const textSize = "text-[12px] md:text-[14px] lg:text-[16px] xl:text-[18px]";
+  const [filteredItems, setFilteredItems] = useState(searchItems);
+  const selfRef = useRef();
+
+  const onClickOutside = (e) => {
+    if (selfRef.current && !selfRef.current.contains(e.target)) {
+      setVisibleItems(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", onClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", onClickOutside);
+    };
+  }, []);
+
+  useEffect(() => {
+    setSearchValue(defaultValue);
+  }, [defaultValue]);
+
+  useEffect(() => {
+    setFilteredItems(
+      searchValue.length === 0
+        ? searchItems
+        : searchItems.filter((str) =>
+            str.toLowerCase().includes(searchValue.toLowerCase()),
+          ),
+    );
+  }, [searchValue]);
+
+  const onItemClick = (item) => {
+    submitCallback(item);
+    setSearchValue(clearOnSubmit ? "" : item);
+    setVisibleItems(false);
+  };
+
   return (
-    <div
-      className={`relative flex w-full items-center text-soft-black ${textSize}`}
-    >
+    <div className={`relative flex w-full items-center`} ref={selfRef}>
       <input
         placeholder={placeholder}
         value={searchValue}
-        onChange={(e) => {
-          setSearchValue(e.target.value);
+        onFocusCapture={() => {
           setVisibleItems(true);
         }}
+        onChange={(e) => {
+          setSearchValue(e.target.value);
+        }}
         type="text"
-        className="h-full w-full rounded-md border bg-soft-white py-2 pl-3 pr-5 shadow-[0_0_2px_#00000064] outline-none hover:border-main-green"
+        className={inputStyling}
         onSubmit={(e) => submitCallback(searchValue)}
       />
       <div className={`absolute right-1 text-[18px]`}>
         {searchValue === "" && <BiSearch />}
         {searchValue !== "" && (
           <RxCross1
-            onClick={() => setSearchValue("")}
+            onClick={() => {
+              setSearchValue("");
+              setVisibleItems(false);
+            }}
             className="cursor-pointer"
           />
         )}
       </div>
-      {searchValue !== "" && (
+      {setVisibleItems !== "" && (
         <div
-          className={`absolute left-0 top-9 z-10 min-w-full overflow-y-auto rounded-md bg-white-green ${maxHeight} ${itemsVisibility}`}
+          className={`absolute left-0 top-[calc(100%+5px)] z-10 min-w-full overflow-y-auto rounded-md border-2 border-main-green bg-soft-white dark:bg-soft-black ${maxHeight} ${
+            visibleItems ? "" : "hidden"
+          }`}
         >
-          {searchItems
-            .filter((str) =>
-              str.toLowerCase().includes(searchValue.toLowerCase()),
-            )
+          {filteredItems
+            .filter((item) => !exceptItems.includes(item))
             .map((item) => (
               <div
                 key={item}
-                onClick={() => {
-                  submitCallback(item);
-                  setSearchValue(clearOnSubmit ? "" : item);
-                  setVisibleItems(false);
-                }}
-                className="cursor-pointer p-1 hover:bg-[#D5D9D4]"
+                onClick={() => onItemClick(item)}
+                className="hover:bg-soft-white-hover dark:hover:bg-soft-black-hover cursor-pointer p-1 text-soft-black dark:text-soft-white"
               >
                 {item}
               </div>
             ))}
+          {!filteredItems.length && (
+            <div className="hover:bg-soft-white-hover dark:hover:bg-soft-black-hover invisible cursor-pointer p-1">
+              empty
+            </div>
+          )}
         </div>
       )}
     </div>

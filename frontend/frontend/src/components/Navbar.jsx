@@ -1,10 +1,15 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import SearchBar from "./SearchBar";
 import DropdownButton from "./DropdownButton";
 
-import { BsNewspaper, BsFileEarmarkText } from "react-icons/bs";
+import {
+  BsNewspaper,
+  BsFileEarmarkText,
+  BsMoonFill,
+  BsFillSunFill,
+} from "react-icons/bs";
 import { PiBooksDuotone } from "react-icons/pi";
 import { FiUsers } from "react-icons/fi";
 import { IoMusicalNotes } from "react-icons/io5";
@@ -12,10 +17,11 @@ import { MdLanguage } from "react-icons/md";
 import { MdSettings } from "react-icons/md";
 import { HiOutlineUserCircle } from "react-icons/hi";
 
-function Navbar({ isLoggedIn, profileClick, signInClick }) {
-  const navPadding = isLoggedIn ? "py-1" : "py-2.5";
-  const testImg =
-    "https://images.unsplash.com/photo-1695504236952-37306fc71896";
+function Navbar({ isLoggedIn, profileClick, signInClick, setTheme }) {
+  const dispatch = useDispatch();
+
+  const navPadding = isLoggedIn ? "py-[3px]" : "py-2.5";
+  const { userToken } = useSelector((state) => state.userToken);
   const buttonOptions = [
     { title: "News", icon: <BsNewspaper />, link: "/" },
     { title: "Books", icon: <PiBooksDuotone />, link: "/books" },
@@ -40,9 +46,28 @@ function Navbar({ isLoggedIn, profileClick, signInClick }) {
         <SearchBar
           searchItems={testSearchItems}
           submitCallback={testSumbitCallback}
+          inputStyling="h-full w-full rounded-md bg-soft-white py-2 pl-3 pr-5 outline-none text-soft-black"
         />
       </div>
       <div className="flex items-center gap-1">
+        <div
+          onClick={() => setTheme("dark")}
+          className="group cursor-pointer rounded-md p-2 text-[20px] hover:bg-main-dark-green dark:hidden"
+        >
+          <div className="flex items-center justify-center text-soft-white transition-all duration-150 group-hover:scale-110">
+            <BsMoonFill />
+          </div>
+        </div>
+        {/*  */}
+        <div
+          onClick={() => setTheme("light")}
+          className="group hidden cursor-pointer rounded-md p-2 text-[26px] hover:bg-main-dark-green dark:block"
+        >
+          <div className="flex items-center justify-center text-soft-white transition-all duration-150 group-hover:scale-110">
+            <BsFillSunFill />
+          </div>
+        </div>
+        {/*  */}
         <div
           onClick={() => {}}
           className="group cursor-pointer rounded-md p-2 text-[26px] hover:bg-main-dark-green"
@@ -66,7 +91,7 @@ function Navbar({ isLoggedIn, profileClick, signInClick }) {
           >
             <div className="flex aspect-square w-9 items-center justify-center text-soft-white transition-all duration-150 group-hover:scale-125">
               <img
-                src={testImg}
+                src={userToken.image}
                 alt=""
                 className="h-full w-full rounded-full object-cover"
               />

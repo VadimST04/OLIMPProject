@@ -5,9 +5,11 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
 )
 
+from baseApp.views import MyTokenObtainPairView
+
 urlpatterns = [
     # authentication urls
-    path('login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('login/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('users/registration/', views.UserRegistration.as_view(), name='user-registration'),
 
     # other urls

@@ -33,6 +33,8 @@ urlpatterns = [
     path('api/posts/', include('postsApp.urls')),
     path('api/news/', include('newsApp.urls')),
     path('api/books/', include('booksApp.urls')),
+    path('api/music/', include('musicApp.urls')),
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -53,7 +53,7 @@ export const userRegisterReducer = (state = {}, action) => {
   }
 };
 
-export const userListReducer = (state = { userProfile: {} }, action) => {
+export const userListReducer = (state = {}, action) => {
   switch (action.type) {
     case USER_LIST_REQUEST:
       return { loading: true };

@@ -1,5 +1,7 @@
 from rest_framework import serializers
 
+from backend import settings
+from baseApp.models import UserProfile
 from baseApp.serializers import UserSerializer
 from postsApp.models import Post, Comment, ImagePost
 
@@ -12,6 +14,7 @@ class CommentSerializer(serializers.ModelSerializer):
     """
 
     user = serializers.CharField(source='user.username')
+    user_image = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         """
@@ -20,7 +23,18 @@ class CommentSerializer(serializers.ModelSerializer):
         """
 
         model = Comment
-        fields = ['user', 'text', 'likes']
+        fields = ['user', 'user_image', 'text', 'likes']
+
+    def get_user_image(self, obj):
+        userprofile = UserProfile.objects.get(user=obj.user)
+
+        try:
+            if userprofile.image:
+                request = self.context.get('request')
+                if request:
+                    return request.build_absolute_uri(userprofile.image.url)
+        except ValueError:
+            return None
 
 
 class ImageSerializer(serializers.ModelSerializer):

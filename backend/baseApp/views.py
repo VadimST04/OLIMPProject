@@ -6,10 +6,21 @@ from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import mixins
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 from baseApp.models import UserProfile, Language
-from baseApp.serializers import UserSerializer, UserProfileSerializer
+from baseApp.serializers import UserSerializer, UserProfileSerializer, MyTokenObtainPairSerializer
 from postsApp.permissions import IsAuthorOrIsAuthenticated
+
+
+class MyTokenObtainPairView(TokenObtainPairView):
+    """
+    This view extends the TokenObtainPairView from the SimpleJWT library to use a custom view
+    for obtaining authentication tokens.
+    serializer_class: MyTokenObtainPairSerializer is a custom serializers.
+    """
+
+    serializer_class = MyTokenObtainPairSerializer
 
 
 class UserRegistration(APIView):
@@ -61,8 +72,8 @@ class UserList(generics.ListAPIView):
     A view for retrieving a list of User objects.
     """
 
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+    queryset = UserProfile.objects.all()
+    serializer_class = UserProfileSerializer
     permission_classes = (IsAuthenticated,)
 
 
