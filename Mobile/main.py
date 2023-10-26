@@ -40,7 +40,6 @@ class BottomNavigation(MDBottomNavigation):
 
 class MainApp(MDApp):
     def build(self):
-        Builder.load_file('widget.kv')
         return Builder.load_file('main_kv.kv')
 
     @staticmethod
@@ -56,8 +55,6 @@ class MainApp(MDApp):
         if len(text) > max_length:
             return text[:max_length] + '...'
         return text
-
-
 
 
 if __name__ == '__main__':

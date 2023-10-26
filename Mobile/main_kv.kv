@@ -50,16 +50,16 @@ MDScreen:
                 MDBoxLayout:
                     orientation: 'vertical'
                     size_hint: (1, 0.2)
-                    spacing: 20
-                    padding: 20, 0, 10, 40
+                    spacing: self.width / 20
+                    padding: self.width / 20, 0, self.width / 30, self.width / 10
                     MDLabel:
                         text: 'Cats'
-                        font_style: 'H5'
-                        padding: 10, 0, 0, 40
+                        font_size: self.width / 13
+                        padding: self.width / 15, 0, 0, self.width / 8
                     MDLabel:
                         text: app.shorten_text('Cats, also known as domestic cats, are small carnivorous mammals that are popular pets around the world. They are known for their playful and independent nature. Cats have been kept as companions for thousands of years, and they come in a variety of breeds, each with its own unique characteristics.', 115)
                         color: '#737373'
-                        font_size: 15
+                        font_size: self.width / 23
 
             MDRelativeLayout:
                 size: self.parent.size
@@ -111,35 +111,30 @@ MDScreen:
                         cols: 1
                         MDLabel:
                             text: 'French Radio Stations'
-                            padding: 0, 20, 0, 0
+                            padding: 0, self.width * 0.1, 0, 0
                             size_hint_y: None
                             size: self.texture_size
-                            font_size: 18
+                            font_size: self.width * 0.1
                         MDLabel:
                             text: app.shorten_text('I would prefer to be able to do this using existing kivy layouts instead of having to write my own layout class to handle I would prefer to be able to do this using existing kivy layouts instead of having to write my own layout class to handle this, but if no other option is possible, this is also ok.', 100)
                             size_hint_y: None
-                            font_size: 12
-                            padding: 0, 0, 0, 20
+                            font_size: self.width * 0.08
+                            padding: 0, self.width * 0.3, 0, self.width * 0.2
                             color: '#737373'
 
 
                 MDRelativeLayout:
                     size_hint: (0.15, 1)
-                    canvas:
-                        Color:
-                            rgb: app.hex_to_rgb('#217074')
-                        RoundedRectangle:
-                            pos: self.pos
-                            size: self.size
-                            radius: [20, 20, 20, 20]
-#                            text: 'EN'
-#                            font_size: 12
-#                        text_color: '#F3F3F3'
-#                        md_bg_color: '#217074'
-#                        size_hint: None, None
-#                        size: self.parent.width / 1.5, self.parent.width / 1.5
-#                        pos_hint: {'x': 0.2, 'y': 0.6}
-#                        radius: [20, 20, 20, 20]
+                    MDRaisedButton:
+                        text: 'EN'
+                        font_size: 12
+                        text_color: '#F3F3F3'
+                        md_bg_color: '#217074'
+                        elevation: 0
+                        size_hint: None, None
+                        size: self.parent.width / 1.5, self.parent.width / 1.5
+                        pos_hint: {'x': 0.2, 'y': 0.6}
+                        radius: [20, 20, 20, 20]
 
 ######################################## 3 WIDGET ########################################
         MDWidget:
@@ -178,15 +173,15 @@ MDScreen:
                         cols: 1
                         MDLabel:
                             text: 'French Radio Stations'
-                            padding: 0, 20, 0, 0
+                            padding: 0, self.width * 0.1, 0, 0
                             size_hint_y: None
                             size: self.texture_size
-                            font_size: 18
+                            font_size: self.width * 0.1
                         MDLabel:
                             text: app.shorten_text('I would prefer to be able to do this using existing kivy layouts instead of having to write my own layout class to handle I would prefer to be able to do this using existing kivy layouts instead of having to write my own layout class to handle this, but if no other option is possible, this is also ok.', 100)
                             size_hint_y: None
-                            font_size: 12
-                            padding: 0, 0, 0, 20
+                            font_size: self.width * 0.08
+                            padding: 0, self.width * 0.3, 0, self.width * 0.2
                             color: '#737373'
 
 
@@ -240,15 +235,15 @@ MDScreen:
                         cols: 1
                         MDLabel:
                             text: 'French Radio Stations'
-                            padding: 0, 20, 0, 0
+                            padding: 0, self.width * 0.1, 0, 0
                             size_hint_y: None
                             size: self.texture_size
-                            font_size: 18
+                            font_size: self.width * 0.1
                         MDLabel:
                             text: app.shorten_text('I would prefer to be able to do this using existing kivy layouts instead of having to write my own layout class to handle I would prefer to be able to do this using existing kivy layouts instead of having to write my own layout class to handle this, but if no other option is possible, this is also ok.', 100)
                             size_hint_y: None
-                            font_size: 12
-                            padding: 0, 0, 0, 20
+                            font_size: self.width * 0.08
+                            padding: 0, self.width * 0.2, 0, self.width * 0.2
                             color: '#737373'
 
 
@@ -302,15 +297,15 @@ MDScreen:
                         cols: 1
                         MDLabel:
                             text: 'French Radio Stations'
-                            padding: 0, 20, 0, 0
+                            padding: 0, self.width * 0.1, 0, 0
                             size_hint_y: None
                             size: self.texture_size
-                            font_size: 18
+                            font_size: self.width * 0.1
                         MDLabel:
                             text: app.shorten_text('I would prefer to be able to do this using existing kivy layouts instead of having to write my own layout class to handle I would prefer to be able to do this using existing kivy layouts instead of having to write my own layout class to handle this, but if no other option is possible, this is also ok.', 100)
                             size_hint_y: None
-                            font_size: 12
-                            padding: 0, 0, 0, 20
+                            font_size: self.width * 0.08
+                            padding: 0, self.width * 0.3, 0, self.width * 0.2
                             color: '#737373'
 
 
