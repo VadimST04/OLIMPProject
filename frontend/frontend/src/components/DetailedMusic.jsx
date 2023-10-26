@@ -26,9 +26,9 @@ const DetailedMusic = ({
           <img
             src={image}
             alt=""
-            className="h-[50%] w-[50%] select-none object-cover"
+            className="h-[70%] w-[60%] select-none object-cover"
           />
-          <div className="w-[50%]">
+          <div className="w-[60%]">
             <div className="flex w-full justify-center gap-2">
               Song language - <p className="font-semibold">{language}</p>
             </div>
