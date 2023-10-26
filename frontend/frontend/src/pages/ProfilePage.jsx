@@ -41,6 +41,7 @@ const ProfilePage = () => {
 
   const logoutButtonHandler = () => {
     dispatch(logout());
+    localStorage.setItem("activeButtonIndex", 0);
     navigate("/");
   };
 
@@ -221,7 +222,7 @@ const ProfilePage = () => {
                 {formData.learningLanguages.map((item) => (
                   <div
                     key={item}
-                    className="hover:bg-soft-white-hover dark:hover:bg-soft-black-hover flex select-none items-center justify-between px-3 py-1"
+                    className="flex select-none items-center justify-between px-3 py-1 hover:bg-soft-white-hover dark:hover:bg-soft-black-hover"
                   >
                     <p>{item}</p>
                     <RxCross1
