@@ -14,7 +14,7 @@ const MusicItem = ({
   return (
     <div
       onClick={() => onClickHandler(lyrics, language, image, title, author)}
-      className="flex w-48 flex-col items-center justify-center rounded-2xl bg-[#DBDBDB] p-2 transition-all duration-200 hover:bg-[#A9A9A9] dark:bg-[#737373] dark:hover:bg-soft-black-hover"
+      className="flex w-48 cursor-pointer flex-col items-center justify-center rounded-2xl bg-[#DBDBDB] p-2 transition-all duration-200 hover:bg-[#A9A9A9] dark:bg-[#737373] dark:hover:bg-soft-black-hover"
     >
       <div className="flex w-full items-center justify-between font-semibold">
         {language}
