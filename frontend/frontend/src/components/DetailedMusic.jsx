@@ -22,7 +22,7 @@ const DetailedMusic = ({
         <BsFillArrowLeftCircleFill />
       </div>
       <div className="flex h-full w-full gap-5">
-        <div className="flex h-full w-full flex-col items-center justify-center">
+        <div className="flex h-full w-full flex-col items-center justify-evenly">
           <img
             src={image}
             alt=""
