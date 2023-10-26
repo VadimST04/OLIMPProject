@@ -15,20 +15,20 @@ const DetailedMusic = ({
 
   return (
     <>
-      <div
-        onClick={() => hideDetailedMusic()}
-        className="flex w-min cursor-pointer items-center text-[32px]"
-      >
-        <BsFillArrowLeftCircleFill />
-      </div>
       <div className="flex h-full w-full gap-5">
+        <div
+          onClick={() => hideDetailedMusic()}
+          className="flex w-min cursor-pointer items-center text-[32px]"
+        >
+          <BsFillArrowLeftCircleFill />
+        </div>
         <div className="flex h-full w-full flex-col items-center justify-evenly">
           <img
             src={image}
             alt=""
-            className="h-[50%] w-[40%] select-none object-cover"
+            className="h-[50%] w-[50%] select-none object-cover"
           />
-          <div className="w-[40%]">
+          <div className="w-[50%]">
             <div className="flex w-full justify-center gap-2">
               Song language - <p className="font-semibold">{language}</p>
             </div>
@@ -60,7 +60,7 @@ const DetailedMusic = ({
             </div>
           </div>
         </div>
-        <div className="h-full min-h-0 max-w-[40%] overflow-y-auto">
+        <div className="h-full max-w-[40%] overflow-y-auto">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat ullam
           beatae fuga delectus esse sequi laudantium labore sit quas, autem
           ipsum excepturi laboriosam vitae praesentium aperiam tenetur error
