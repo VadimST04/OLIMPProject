@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { login } from "../store/actions/userActions";
 import { FiUser } from "react-icons/fi";
 import { RiLockPasswordLine } from "react-icons/ri";
@@ -9,6 +10,7 @@ import logo from "../assets/OLIMPlogo.png";
 
 const SignInSignUpForm = ({ closeFormCallback, registrationFormOpen }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const formBg = useRef(null);
   const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState({
@@ -38,8 +40,6 @@ const SignInSignUpForm = ({ closeFormCallback, registrationFormOpen }) => {
 
     setErrors(validationErrors);
 
-    console.log(error);
-
     if (Object.keys(validationErrors).length === 0) {
       dispatch(login(formData.username, formData.password));
       closeFormCallback();
@@ -62,9 +62,9 @@ const SignInSignUpForm = ({ closeFormCallback, registrationFormOpen }) => {
     <div
       ref={formBg}
       onClick={(e) => closeForm(e)}
-      className="absolute left-0 top-0 z-10 flex h-screen min-h-0 w-screen items-center justify-center bg-black bg-opacity-50"
+      className="absolute left-0 top-0 z-10 flex h-screen min-h-0 w-screen items-center justify-center bg-black/80"
     >
-      <form className="flex w-52 flex-col items-center gap-3 rounded-md border bg-soft-white p-5 text-soft-black shadow-[0_0_30px_#00000090] md:w-64 lg:w-96">
+      <form className="flex w-52 flex-col items-center gap-3 rounded-md bg-soft-white p-5 shadow-[0_0_30px_#00000090] dark:bg-soft-black dark:text-soft-white md:w-64 lg:w-96">
         <div className="pointer-events-none aspect-square w-16 select-none overflow-hidden rounded-md md:w-20 lg:w-24 xl:w-28">
           <img src={logo} alt="" className="h-full w-full object-contain" />
         </div>
@@ -82,8 +82,7 @@ const SignInSignUpForm = ({ closeFormCallback, registrationFormOpen }) => {
                 autoComplete="username"
                 type="text"
                 placeholder="Enter your username"
-                className={`w-full rounded-md border bg-soft-white py-1 pl-5 shadow-[0_0_2px_#00000064] outline-none
-                  hover:border-main-green md:py-2 md:pl-6 xl:pl-8 ${textSize}`}
+                className={`w-full rounded-md border-2 border-transparent bg-soft-white py-0.5 pl-5 outline-none hover:outline-main-green focus:outline focus:outline-main-green dark:bg-soft-black md:py-2 md:pl-6 xl:pl-8 ${textSize}`}
               />
               <div className={`absolute left-1 ${textSize}`}>
                 <FiUser />
@@ -103,8 +102,7 @@ const SignInSignUpForm = ({ closeFormCallback, registrationFormOpen }) => {
                 autoComplete="password"
                 type="password"
                 placeholder="Enter your password"
-                className={`w-full rounded-md border bg-soft-white py-1 pl-5 shadow-[0_0_2px_#00000064] outline-none
-                  hover:border-main-green md:py-2 md:pl-6 xl:pl-8 ${textSize}`}
+                className={`w-full rounded-md border-2 border-transparent bg-soft-white py-0.5 pl-5 outline-none hover:outline-main-green focus:outline focus:outline-main-green dark:bg-soft-black md:py-2 md:pl-6 xl:pl-8 ${textSize}`}
               />
               <div className={`absolute left-1 ${textSize}`}>
                 <RiLockPasswordLine />
@@ -132,13 +130,13 @@ const SignInSignUpForm = ({ closeFormCallback, registrationFormOpen }) => {
           <hr className="w-full border-gray-400" />
         </div>
         <div
-          className={`flex w-full cursor-pointer items-center justify-center gap-1 rounded-md border py-1 hover:bg-gray-300 md:py-2 ${textSize}`}
+          className={`flex w-full cursor-pointer items-center justify-center gap-1 rounded-md bg-soft-white py-1 text-soft-black hover:bg-gray-300 md:py-2 ${textSize}`}
         >
           <FcGoogle />
           Sign In with Google
         </div>
         <div
-          className={`flex w-full cursor-pointer items-center justify-center gap-1 rounded-md border bg-[#4E66A4] py-1 text-soft-white hover:bg-[#3B4D7C] md:py-2 ${textSize}`}
+          className={`flex w-full cursor-pointer items-center justify-center gap-1 rounded-md bg-[#4E66A4] py-1 text-soft-white hover:bg-[#3B4D7C] md:py-2 ${textSize}`}
         >
           <SiFacebook />
           Sign In with Facebook
@@ -148,7 +146,7 @@ const SignInSignUpForm = ({ closeFormCallback, registrationFormOpen }) => {
             registrationFormOpen();
             closeFormCallback();
           }}
-          className="cursor-pointer text-[10px] text-gray-500 hover:underline md:text-[12px] lg:text-[14px] xl:text-[16px]"
+          className="cursor-pointer text-[10px] text-gray-600 hover:underline dark:text-gray-300 md:text-[12px] lg:text-[14px] xl:text-[16px]"
         >
           Don't have an account? Register now
         </p>

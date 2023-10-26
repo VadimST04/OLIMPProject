@@ -14,19 +14,13 @@ const NewsPage = () => {
   const dispatch = useDispatch();
 
   const { userProfile } = useSelector((state) => state.userProfile);
-
-  const learning_langs = userProfile
-    ? userProfile[0].learning_langs
-    : ["English"];
-
   const { news } = useSelector((state) => state.newsList);
-  console.log(news);
-  
-  useEffect(() => {
-    dispatch(getUserProfile());
-    dispatch(newsList(learning_langs));
-  }, [dispatch]);
 
+  useEffect(() => {
+    if (userProfile) {
+      dispatch(newsList(userProfile[0].learning_langs));
+    } else dispatch(newsList(["English"]));
+  }, [userProfile]);
 
   const generateSections = () => {
     const sections = [];
@@ -35,7 +29,6 @@ const NewsPage = () => {
       const news2 = news[i + 1];
       const news3 = news[i + 2];
       const news4 = news[i + 3];
-
 
       sections.push(
         <NewsSection

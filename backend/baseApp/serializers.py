@@ -1,7 +1,31 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 from baseApp.models import UserProfile
+
+
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    """
+    This serializer extends the TokenObtainPairSerializer from the SimpleJWT library.
+    It adds user-specific data to the token response, expanding the default return.
+    """
+
+    def validate(self, attrs):
+        """
+        This method extends the base validation provided by TokenObtainPairSerializer.
+        It includes additional user-specific data in the response data.
+        :param attrs: The dictionary which contains token and user data.
+        :return: Returns token data and additional fields.
+        """
+        data = super().validate(attrs)
+
+        user_profile = UserProfile.objects.get(user=self.user)
+
+        request = self.context.get('request')
+        if request:
+            data['image'] = request.build_absolute_uri(user_profile.image.url)
+        return data
 
 
 class UserSerializer(serializers.ModelSerializer):

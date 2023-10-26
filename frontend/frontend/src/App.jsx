@@ -1,17 +1,12 @@
-import { useEffect, useState } from "react";
 import {
   createBrowserRouter,
   createRoutesFromElements,
   RouterProvider,
   Route,
 } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
 import MainContent from "./components/MainContent";
-import SignInSignUpForm from "./components/SignInSignUpForm";
-import RegistrationForm from "./components/RegistrationForm";
 import PostsPage from "./pages/PostsPage";
 import MusicPage from "./pages/MusicPage";
 import UsersPage from "./pages/UsersPage";
@@ -20,50 +15,10 @@ import ProfilePage from "./pages/ProfilePage";
 import NewsPage from "./pages/NewsPage";
 
 const Root = () => {
-  const [isSignInFormOpen, setSignInFormOpen] = useState(false);
-  const [isRegistrationFormOpen, setRegistrationFormOpen] = useState(false);
-  const { userToken } = useSelector((state) => state.userToken);
-  const [theme, setTheme] = useState(localStorage.getItem("theme"));
-  const navigate = useNavigate();
-
-  const profileClickHandler = () => {
-    if (userToken) {
-      navigate("/user/profile");
-    } else {
-      setSignInFormOpen(true);
-    }
-  };
-
-  useEffect(() => {
-    if (theme === "dark") {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
-  }, [theme]);
-
   return (
     <div className="flex h-screen flex-col">
-      <Navbar
-        isLoggedIn={userToken}
-        signInClick={() => setSignInFormOpen(true)}
-        profileClick={() => profileClickHandler()}
-        setTheme={setTheme}
-      />
+      <Navbar />
       <MainContent />
-      {isSignInFormOpen && (
-        <SignInSignUpForm
-          closeFormCallback={() => setSignInFormOpen(false)}
-          registrationFormOpen={() => setRegistrationFormOpen(true)}
-        />
-      )}
-      {isRegistrationFormOpen && (
-        <RegistrationForm
-          closeFormCallback={() => setRegistrationFormOpen(false)}
-        />
-      )}
     </div>
   );
 };

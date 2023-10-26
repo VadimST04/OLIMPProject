@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'newsApp',
     'postsApp',
     'booksApp',
+    'musicApp',
 ]
 
 SIMPLE_JWT = {
@@ -131,13 +132,24 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'olimp_db',
+#         'USER': 'postgres',
+#         'PASSWORD': os.environ.get('DB_PASSWORD'),
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'olimp_db',
-        'USER': 'postgres',
-        'PASSWORD': os.environ.get('DB_PASSWORD'),
-        'HOST': 'localhost',
+        'USER': 'olimp_admin',
+        'PASSWORD': os.environ.get('DB_PASSWORD_AZURE'),
+        'HOST': 'olimpserver.postgres.database.azure.com',
         'PORT': '5432',
     }
 }
