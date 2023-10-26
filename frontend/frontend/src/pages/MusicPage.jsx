@@ -386,7 +386,9 @@ const MusicPage = () => {
   return (
     <>
       {!showDetailedMusic && (
-        <div className={`flex h-full w-full flex-wrap gap-4 overflow-y-auto`}>
+        <div
+          className={`flex h-full w-full flex-wrap justify-center gap-4 overflow-y-auto`}
+        >
           {testMusic.map((item) => (
             <MusicItem
               {...item}
