@@ -409,7 +409,7 @@ const MusicPage = () => {
         <div className="flex h-full w-full">
           <div className="h-full w-max shrink-0 overflow-y-auto">
             {leftItems.map((item) => (
-              <div className="cursor-pointer rounded-md p-1 px-3 hover:bg-soft-white-hover">
+              <div className="cursor-pointer rounded-md p-1 px-3 hover:bg-soft-white-hover dark:hover:bg-soft-black-hover">
                 <p>{item}</p>
               </div>
             ))}
