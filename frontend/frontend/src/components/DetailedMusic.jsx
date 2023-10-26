@@ -38,7 +38,7 @@ const DetailedMusic = ({
             <p className="w-full truncate text-center">{author}</p>
             <input
               type="range"
-              className="h-1 w-full bg-soft-white-hover accent-soft-black"
+              className="h-1 w-full bg-soft-white-hover accent-soft-black dark:bg-soft-black-hover dark:accent-soft-white"
             />
             <div className="flex items-center justify-center gap-2 pt-4 text-[52px]">
               <div className="flex cursor-pointer items-center justify-center rounded-full hover:bg-soft-white-hover dark:hover:bg-soft-black-hover">
