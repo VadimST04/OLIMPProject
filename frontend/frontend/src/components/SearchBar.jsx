@@ -92,13 +92,13 @@ const SearchBar = ({
               <div
                 key={item}
                 onClick={() => onItemClick(item)}
-                className="hover:bg-soft-white-hover dark:hover:bg-soft-black-hover cursor-pointer p-1 text-soft-black dark:text-soft-white"
+                className="cursor-pointer p-1 text-soft-black hover:bg-soft-white-hover dark:text-soft-white dark:hover:bg-soft-black-hover"
               >
                 {item}
               </div>
             ))}
           {!filteredItems.length && (
-            <div className="hover:bg-soft-white-hover dark:hover:bg-soft-black-hover invisible cursor-pointer p-1">
+            <div className="invisible cursor-pointer p-1 hover:bg-soft-white-hover dark:hover:bg-soft-black-hover">
               empty
             </div>
           )}
