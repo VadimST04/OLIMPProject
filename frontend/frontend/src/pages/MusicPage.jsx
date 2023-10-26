@@ -23,6 +23,26 @@ const MusicPage = () => {
   //   dispatch(musicList());
   // }, [dispatch]);
 
+  const leftItems = [
+    "Historical songs",
+    "Tik tok songs",
+    "New hit 2023",
+    "Pop",
+    "Japanese songs",
+    "Sport",
+    "Popular songs",
+    "Rock",
+    "Playlist",
+    "Study",
+    "Sport",
+    "Meditation",
+    "English",
+    "Ukrainian",
+    "Japanese",
+    "Arabic",
+    "Turkish",
+  ];
+
   const testMusic = [
     {
       id: 1,
@@ -386,16 +406,25 @@ const MusicPage = () => {
   return (
     <>
       {!showDetailedMusic && (
-        <div
-          className={`flex h-full w-full flex-wrap justify-center gap-4 overflow-y-auto`}
-        >
-          {testMusic.map((item) => (
-            <MusicItem
-              {...item}
-              key={item.id}
-              onClickHandler={musicItemClick}
-            />
-          ))}
+        <div className="flex h-full w-full">
+          <div className="h-full w-max shrink-0 overflow-y-auto">
+            {leftItems.map((item) => (
+              <div className="cursor-pointer rounded-md p-1 px-3 hover:bg-soft-white-hover">
+                <p>{item}</p>
+              </div>
+            ))}
+          </div>
+          <div
+            className={`flex grow flex-wrap justify-center gap-4 overflow-y-auto`}
+          >
+            {testMusic.map((item) => (
+              <MusicItem
+                {...item}
+                key={item.id}
+                onClickHandler={musicItemClick}
+              />
+            ))}
+          </div>
         </div>
       )}
       {showDetailedMusic && (
