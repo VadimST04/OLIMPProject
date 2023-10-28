@@ -2,7 +2,7 @@ import React from "react";
 
 const BookItem = ({ image, title, author, language }) => {
   return (
-    <div className="group w-44 cursor-pointer space-y-2 overflow-hidden rounded-2xl border border-[#CACACA] p-2 hover:bg-soft-white-hover dark:border-none dark:bg-[#737373] dark:hover:bg-soft-black-hover">
+    <div className="group w-full cursor-pointer space-y-2 overflow-hidden rounded-2xl border border-[#CACACA] p-2 hover:bg-soft-white-hover dark:border-none dark:bg-[#737373] dark:hover:bg-soft-black-hover">
       <img
         src={image}
         alt=""

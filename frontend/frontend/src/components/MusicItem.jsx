@@ -3,7 +3,7 @@ import { AiOutlineHeart } from "react-icons/ai";
 
 const MusicItem = ({ language, isLiked, image, title, author, length }) => {
   return (
-    <div className="flex w-48 flex-col items-center justify-center rounded-2xl bg-[#DBDBDB] p-2 transition-all duration-200 hover:bg-[#A9A9A9]">
+    <div className="flex w-full flex-col items-center justify-center rounded-2xl bg-[#DBDBDB] p-2 transition-all duration-200 hover:bg-[#A9A9A9]">
       <div className="flex w-full items-center justify-between font-semibold">
         {language}
         <AiOutlineHeart className="cursor-pointer text-[20px]" />
