@@ -185,7 +185,6 @@ const BooksPage = () => {
           </div>
         ))}
       </div>
-      <p></p>
     </div>
   );
 };

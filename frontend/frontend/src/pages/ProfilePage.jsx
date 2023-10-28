@@ -40,6 +40,7 @@ const ProfilePage = () => {
 
   const logoutButtonHandler = () => {
     dispatch(logout());
+    localStorage.setItem("activeButtonIndex", 0);
     navigate("/");
   };
 
