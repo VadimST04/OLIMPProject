@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { musicList } from "../store/actions/musicActions";
 import MusicItem from "../components/MusicItem";
 import DetailedMusic from "../components/DetailedMusic";
+import HorizontalCarousel from "../components/HorizontalCarousel";
 
 const MusicPage = () => {
   const [showDetailedMusic, setShowDetailedMusic] = useState(false);
@@ -404,15 +405,20 @@ const MusicPage = () => {
   };
 
   return (
-    <div className="grid w-full grid-cols-[repeat(auto-fill,minmax(11rem,1fr))] gap-4">
-      {testMusic.map((item) => (
-        <MusicItem {...item} key={item.id} />
-      ))}
-    </div>
-
     <>
+      {/* {!showDetailedMusic && (
+        <div className="space-y-4">
+          <HorizontalCarousel items={leftItems} />
+          <div className="grid w-full grid-cols-[repeat(auto-fill,minmax(11rem,1fr))] gap-4">
+            {testMusic.map((item) => (
+              <MusicItem {...item} key={item.id} />
+            ))}
+          </div>
+        </div>
+      )} */}
+
       {!showDetailedMusic && (
-        <div className="flex h-full w-full">
+        <div className="flex gap-4">
           <div className="h-full w-max shrink-0 overflow-y-auto">
             {leftItems.map((item) => (
               <div className="cursor-pointer rounded-md p-1 px-3 hover:bg-soft-white-hover dark:hover:bg-soft-black-hover">
@@ -420,19 +426,14 @@ const MusicPage = () => {
               </div>
             ))}
           </div>
-          <div
-            className={`flex grow flex-wrap justify-center gap-4 overflow-y-auto`}
-          >
+          <div className="grid w-full grid-cols-[repeat(auto-fill,minmax(11rem,1fr))] gap-4">
             {testMusic.map((item) => (
-              <MusicItem
-                {...item}
-                key={item.id}
-                onClickHandler={musicItemClick}
-              />
+              <MusicItem {...item} key={item.id} />
             ))}
           </div>
         </div>
       )}
+
       {showDetailedMusic && (
         <DetailedMusic
           {...currentDetailedMusic}
