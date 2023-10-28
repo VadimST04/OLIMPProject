@@ -36,10 +36,14 @@ const Chats = () => {
   ];
 
   return (
-    <div className={`relative ${!chatsCollapsed ? "px-6" : ""}`}>
+    <div
+      className={`relative flex items-center transition-all duration-300 ${
+        !chatsCollapsed ? "px-6" : ""
+      }`}
+    >
       <div
         onClick={() => setChatsCollapsed(!chatsCollapsed)}
-        className="absolute -left-4 top-[50%] cursor-pointer text-[32px] dark:text-soft-white"
+        className="absolute -left-4 cursor-pointer text-[32px] dark:text-soft-white"
       >
         <BsCaretRight
           className={`transition-all duration-300 group-hover:scale-110 ${collapseButtonRotation}`}
