@@ -43,10 +43,10 @@ const Chats = () => {
     >
       <div
         onClick={() => setChatsCollapsed(!chatsCollapsed)}
-        className="absolute -left-4 cursor-pointer text-[32px] dark:text-soft-white"
+        className="group absolute -left-4 cursor-pointer text-[32px] dark:text-soft-white"
       >
         <BsCaretRight
-          className={`transition-all duration-300 group-hover:scale-110 ${collapseButtonRotation}`}
+          className={`transition-all duration-300 group-hover:scale-[115%] ${collapseButtonRotation}`}
         />
       </div>
 
