@@ -29,8 +29,9 @@ const Chats = () => {
     { img: testImg, name: "Lorem", lastMessage: "lorem XD" },
     { img: testImg, name: "Lorem", lastMessage: "lorem XD" },
   ];
+  
   return (
-    <div className="w-[22rem] flex-shrink-0 space-y-1 overflow-y-auto px-1 text-soft-black">
+    <div className="w-[22rem] flex-shrink-0 space-y-1 overflow-y-auto pr-2 text-soft-black">
       {chats.length === 0 && userProfile && (
         <div className="flex h-full w-full items-center justify-center">
           <div

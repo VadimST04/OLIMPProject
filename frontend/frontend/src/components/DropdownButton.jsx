@@ -48,7 +48,7 @@ const DropdownButton = ({ buttons }) => {
   return (
     <div
       ref={wrapperRef}
-      className="relative z-[1] select-none font-euclid text-[18px] text-soft-black"
+      className="relative z-[2] select-none font-euclid text-[18px] text-soft-black"
     >
       <div
         onClick={() => setIsOpen(!isOpen)}

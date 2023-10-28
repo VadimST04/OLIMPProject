@@ -35,7 +35,6 @@ const ProfilePage = () => {
         learningLanguages: [...userProfile[0].learning_langs],
         image: userProfile[0].image,
       });
-      console.log("formData ", formData);
     }
   }, [userProfile]);
 
@@ -106,8 +105,6 @@ const ProfilePage = () => {
       [name]: value,
     });
   };
-
-  console.log(formData);
 
   return (
     <div className="h-full w-full overflow-y-auto">
