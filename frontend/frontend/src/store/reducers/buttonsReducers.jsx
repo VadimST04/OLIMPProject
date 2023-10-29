@@ -1,3 +1,5 @@
+import { BsNewspaper } from "react-icons/bs";
+
 import { MAIN_BUTTON_CHANGE_NAME } from "../constants/buttonsConstants";
 
 export const mainButtonReducer = (
