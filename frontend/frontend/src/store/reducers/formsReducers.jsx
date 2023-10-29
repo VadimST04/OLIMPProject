@@ -3,7 +3,7 @@ import {
   SIGN_IN_FORM_CLOSE,
 } from "../constants/fromsConstants";
 
-export const signInFormToggler = (state = { isOpen: false }) => {
+export const signInFormToggler = (state = { isOpen: false }, action) => {
   switch (action.type) {
     case SIGN_IN_FORM_OPEN:
       return { isOpen: true };
