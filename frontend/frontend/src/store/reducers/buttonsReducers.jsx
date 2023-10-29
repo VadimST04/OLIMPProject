@@ -7,7 +7,7 @@ export const mainButtonReducer = (
   action,
 ) => {
   switch (action.type) {
-    case MUSIC_REQUEST:
+    case MAIN_BUTTON_CHANGE_NAME:
       return { buttonName: `${action.payload.icon} ${action.payload.btnName}` };
 
     default:
