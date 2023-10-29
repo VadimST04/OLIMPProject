@@ -14,6 +14,15 @@ const MusicPage = () => {
     author: "",
   });
 
+  const dispatch = useDispatch();
+
+  const { music } = useSelector((state) => state.musicList);
+  console.log(music);
+
+  useEffect(() => {
+    dispatch(musicList());
+  }, [dispatch]);
+
   // const dispatch = useDispatch();
 
   // const { music } = useSelector((state) => state.musicList);

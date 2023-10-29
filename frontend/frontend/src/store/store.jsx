@@ -5,11 +5,15 @@ import {
 } from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
-import { userLoginReducer, userListReducer } from "../store/reducers/userReducers";
+import {
+  userLoginReducer,
+  userListReducer,
+} from "../store/reducers/userReducers";
 import { postsListReducer } from "../store/reducers/postsReducers";
 import { userProfileReducer } from "../store/reducers/profileReducers";
 import { newsListReducer } from "../store/reducers/newsReducers";
 import { musicListReducer } from "../store/reducers/musicReducers";
+import { booksListReducer } from "../store/reducers/booksReducers";
 
 const reducer = combineReducers({
   userToken: userLoginReducer,
@@ -18,6 +22,7 @@ const reducer = combineReducers({
   musicList: musicListReducer,
   userProfile: userProfileReducer,
   newsList: newsListReducer,
+  booksList: booksListReducer,
 });
 
 const initialStore = {};

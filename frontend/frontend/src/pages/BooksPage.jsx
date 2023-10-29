@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import BookItem from "../components/BookItem";
 import SearchBar from "../components/SearchBar";
 import HorizontalCarousel from "../components/HorizontalCarousel";
+import { useSelector, useDispatch } from "react-redux";
+import { booksList } from "../store/actions/booksAction";
 
 const BooksPage = () => {
+  const dispatch = useDispatch();
+
+  const { books } = useSelector((state) => state.booksList);
+  console.log(books);
+
+  useEffect(() => {
+    dispatch(booksList());
+  }, [dispatch]);
+
   const testBooks = [
     {
       image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f",

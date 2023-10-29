@@ -1,14 +1,14 @@
 import {
-  MUSIC_REQUEST,
-  MUSIC_SUCCESS,
-  MUSIC_FAIL,
-} from "../constants/musicConstants";
+  BOOKS_REQUEST,
+  BOOKS_SUCCESS,
+  BOOKS_FAIL,
+} from "../constants/booksConstants";
 import axios from "axios";
 
-export const musicList = () => async (dispatch) => {
+export const booksList = () => async (dispatch) => {
   try {
     dispatch({
-      type: MUSIC_REQUEST,
+      type: BOOKS_REQUEST,
     });
 
     const config = {
@@ -18,17 +18,17 @@ export const musicList = () => async (dispatch) => {
     };
 
     const { data } = await axios.get(
-      "http://127.0.0.1:8000/api/music/",
+      "http://127.0.0.1:8000/api/books/view/",
       config,
     );
 
     dispatch({
-      type: MUSIC_SUCCESS,
+      type: BOOKS_SUCCESS,
       payload: data,
     });
   } catch (error) {
     dispatch({
-      type: MUSIC_FAIL,
+      type: BOOKS_FAIL,
       payload:
         error.response && error.response.data.detail
           ? error.response.data.detail
