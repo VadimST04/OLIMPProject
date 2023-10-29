@@ -14,8 +14,6 @@ const ProfilePage = () => {
   const navigate = useNavigate();
   const imageInput = useRef();
   const { userProfile } = useSelector((state) => state.userProfile);
-  console.log("userProfile ", userProfile);
-  console.log("userProfileImage ", userProfile?.at(0).image);
   const [formData, setFormData] = useState({
     username: "",
     description: "",
@@ -27,9 +25,7 @@ const ProfilePage = () => {
   });
 
   useEffect(() => {
-    if (!userProfile) {
-      dispatch(getUserProfile());
-    } else {
+    if (userProfile) {
       setFormData({
         username: userProfile[0].user.username,
         description: userProfile[0].description,
@@ -39,12 +35,12 @@ const ProfilePage = () => {
         learningLanguages: [...userProfile[0].learning_langs],
         image: userProfile[0].image,
       });
-      console.log("formData ", formData);
     }
-  }, [dispatch, userProfile]);
+  }, [userProfile]);
 
   const logoutButtonHandler = () => {
     dispatch(logout());
+    localStorage.setItem("activeButtonIndex", 0);
     navigate("/");
   };
 
@@ -109,8 +105,6 @@ const ProfilePage = () => {
       [name]: value,
     });
   };
-
-  console.log(formData);
 
   return (
     <div className="h-full w-full overflow-y-auto">
@@ -225,7 +219,7 @@ const ProfilePage = () => {
                 {formData.learningLanguages.map((item) => (
                   <div
                     key={item}
-                    className="hover:bg-soft-white-hover dark:hover:bg-soft-black-hover flex select-none items-center justify-between px-3 py-1"
+                    className="flex select-none items-center justify-between px-3 py-1 hover:bg-soft-white-hover dark:hover:bg-soft-black-hover"
                   >
                     <p>{item}</p>
                     <RxCross1

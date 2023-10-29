@@ -18,7 +18,11 @@ function useOnClickOutside(ref, handler) {
 
 const DropdownButton = ({ buttons }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeButtonIndex, setActiveButtonIndex] = useState(0);
+  const [activeButtonIndex, setActiveButtonIndex] = useState(
+    localStorage.getItem("activeButtonIndex")
+      ? localStorage.getItem("activeButtonIndex")
+      : 0,
+  );
   const wrapperRef = useRef(null);
   const navigate = useNavigate();
   const menuOpacity = isOpen ? " opacity-100" : " opacity-0";
@@ -31,17 +35,20 @@ const DropdownButton = ({ buttons }) => {
 
   const buttonClickHandler = (index) => {
     if (!isOpen) return;
+    localStorage.setItem(
+      "activeButtonIndex",
+      buttons.indexOf(buttons.at(index)),
+    );
     setActiveButtonIndex(index);
     setIsOpen(false);
     navigate(`${buttons.at(index).link}`);
   };
 
   useOnClickOutside(wrapperRef, () => setIsOpen(false));
-
   return (
     <div
       ref={wrapperRef}
-      className="relative z-[1] select-none font-euclid text-[18px] text-soft-black"
+      className="relative z-[2] select-none font-euclid text-[18px] text-soft-black"
     >
       <div
         onClick={() => setIsOpen(!isOpen)}
