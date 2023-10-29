@@ -9,7 +9,7 @@ class SongList(generics.ListAPIView,
                generics.RetrieveAPIView):
     queryset = Song.objects.all()
     serializer_class = SongSerializer
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated,) # если мы хотим получать список неавторизованными есть проблема с доступом
 
 
 class SongSettings(generics.CreateAPIView,

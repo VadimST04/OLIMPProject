@@ -23,7 +23,7 @@ class BookRUDView(generics.RetrieveUpdateDestroyAPIView):
     """
     queryset = Book.objects.all()
     serializer_class = BookRUDSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]  # если мы хотим получать список неавторизованными есть проблема с доступом
 
     def get(self, request, *args, **kwargs):
         # book = Book.objects.filter(**kwargs)
@@ -32,6 +32,11 @@ class BookRUDView(generics.RetrieveUpdateDestroyAPIView):
                          'text': utils.get_data_from_html(book.text).get('text'),
                          'author': book.author.name,
                          'languages': book.languages.name})
+
+
+class BookListView(generics.ListAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookRUDSerializer
 
     def post(self, request):
         """

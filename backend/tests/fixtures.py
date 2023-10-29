@@ -1,18 +1,14 @@
+from collections import namedtuple
+
 import pytest
-from rest_framework.test import APIClient
 
 from baseApp.models import UserProfile
 from baseApp.models import Language
 
 
 @pytest.fixture
-def api_client():
-    return APIClient
-
-
-@pytest.fixture
 @pytest.mark.django_db
-def regular_user_token(client, django_user_model):
+def regular_user(client, django_user_model):
     username = 'test_regular_user'
     password = 'test_passw'
 
@@ -26,4 +22,7 @@ def regular_user_token(client, django_user_model):
     test_profile.learning_langs.set([lang])
 
     response = client.post('/api/login/', {'username': username, 'password': password}, format='json')
-    return response.data.get('access')
+
+    UserData = namedtuple('UserData', ['data', 'token'])
+    user_data = UserData(regular, response.data.get('access'))
+    return user_data

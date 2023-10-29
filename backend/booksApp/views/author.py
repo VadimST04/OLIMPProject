@@ -14,3 +14,5 @@ class AuthorView(generics.ListCreateAPIView,
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
     permission_classes = [IsAuthenticated, IsAdminUser]
+
+
