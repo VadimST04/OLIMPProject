@@ -1,6 +1,8 @@
 from collections import namedtuple
 
 import pytest
+from rest_framework.test import APIClient
+
 
 from baseApp.models import UserProfile
 from baseApp.models import Language
@@ -26,3 +28,8 @@ def regular_user(client, django_user_model):
     UserData = namedtuple('UserData', ['data', 'token'])
     user_data = UserData(regular, response.data.get('access'))
     return user_data
+
+
+@pytest.fixture
+def api_client():
+    return APIClient

@@ -2,6 +2,7 @@ from rest_framework.response import Response
 from django.contrib.auth.models import AnonymousUser
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.views import APIView
 
 from booksApp import utils
 from booksApp.models import Book
@@ -23,7 +24,7 @@ class BookRUDView(generics.RetrieveUpdateDestroyAPIView):
     """
     queryset = Book.objects.all()
     serializer_class = BookRUDSerializer
-    permission_classes = [IsAuthenticated]  # если мы хотим получать список неавторизованными есть проблема с доступом
+    permission_classes = [IsAuthenticated]
 
     def get(self, request, *args, **kwargs):
         # book = Book.objects.filter(**kwargs)
@@ -34,21 +35,14 @@ class BookRUDView(generics.RetrieveUpdateDestroyAPIView):
                          'languages': book.languages.name})
 
 
-class BookListView(generics.ListAPIView):
-    queryset = Book.objects.all()
-    serializer_class = BookRUDSerializer
+class BookListView(APIView):
 
     def post(self, request):
         """
         This method customize request for Book model
         :return: Returns books with the user's learning languages or all books if the user is Anonym
         """
-        if not isinstance(request.user, AnonymousUser):
-            data = request.data
-            books = Book.objects.filter(languages__name__in=data['learning_langs'])
-            serializer = BookRUDSerializer(books, many=True)
-            return Response(serializer.data)
-        else:
-            books = Book.objects.all()
-            serializer = BookRUDSerializer(books, many=True)
-            return Response(serializer.data)
+        data = request.data
+        books = Book.objects.filter(languages__name__in=data.getlist('learning_langs'))
+        serializer = BookRUDSerializer(books, many=True)
+        return Response(serializer.data)
