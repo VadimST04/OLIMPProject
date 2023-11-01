@@ -415,7 +415,7 @@ const MusicPage = () => {
 
   return (
     <>
-      {/* {!showDetailedMusic && (
+      {!showDetailedMusic && (
         <div className="space-y-4">
           <HorizontalCarousel items={leftItems} />
           <div className="grid w-full grid-cols-[repeat(auto-fill,minmax(11rem,1fr))] gap-4">
@@ -424,9 +424,9 @@ const MusicPage = () => {
             ))}
           </div>
         </div>
-      )} */}
+      )}
 
-      {!showDetailedMusic && (
+      {/* {!showDetailedMusic && (
         <div className="flex gap-4">
           <div className="h-full w-max shrink-0 overflow-y-auto">
             {leftItems.map((item) => (
@@ -445,7 +445,7 @@ const MusicPage = () => {
             ))}
           </div>
         </div>
-      )}
+      )} */}
 
       {showDetailedMusic && (
         <DetailedMusic
