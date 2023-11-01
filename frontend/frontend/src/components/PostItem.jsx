@@ -6,7 +6,15 @@ import { FiSend } from "react-icons/fi";
 import { LuArrowDownSquare } from "react-icons/lu";
 import DetailedPost from "./DetailedPost";
 
-const PostItem = ({ liked, images, username, content, likes, comments }) => {
+const PostItem = ({
+  liked,
+  images,
+  username,
+  content,
+  likes,
+  comments,
+  commentDate,
+}) => {
   const [activeImgIndex, setActiveImgIndex] = useState(0);
   const [detailedView, setDetailedView] = useState(false);
 
@@ -54,12 +62,15 @@ const PostItem = ({ liked, images, username, content, likes, comments }) => {
                 <LuArrowDownSquare className="cursor-pointer text-[27px] hover:text-main-dark-green dark:hover:text-[#B3B3B3]" />
               </div>
             </div>
-            <p
-              onClick={() => setDetailedView(true)}
-              className="line-clamp-3 cursor-pointer text-[14px] font-semibold hover:underline"
-            >
-              {content}
-            </p>
+            <div className="flex">
+              <p
+                onClick={() => setDetailedView(true)}
+                className="line-clamp-3 cursor-pointer text-[14px] font-semibold hover:underline"
+              >
+                <b>{`${username}: `}</b>
+                {content}
+              </p>
+            </div>
           </div>
         </div>
         {images.length > 1 && (
@@ -78,6 +89,8 @@ const PostItem = ({ liked, images, username, content, likes, comments }) => {
           likes={likes}
           comments={comments}
           content={content}
+          username={username}
+          commentDate={commentDate}
         />
       )}
     </div>

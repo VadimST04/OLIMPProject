@@ -12,6 +12,8 @@ function PostsPage() {
     dispatch(postsList());
   }, [dispatch]);
 
+  console.log(posts);
+
   return (
     <div className="flex h-full flex-col items-center gap-5 overflow-y-auto p-5">
       {posts &&
@@ -20,10 +22,11 @@ function PostsPage() {
             liked={false}
             images={[...item.image_post]}
             key={item.id}
-            username={item.user.username}
+            username={item.user}
             content={item.content}
             likes={item.likes}
             comments={item.comments}
+            commentDate={item.created_at}
           />
         ))}
     </div>
