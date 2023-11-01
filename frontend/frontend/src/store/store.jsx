@@ -14,15 +14,22 @@ import { userProfileReducer } from "../store/reducers/profileReducers";
 import { newsListReducer } from "../store/reducers/newsReducers";
 import { musicListReducer } from "../store/reducers/musicReducers";
 import { mainButtonReducer } from "../store/reducers/buttonsReducers";
+import { signInFormToggler } from "../store/reducers/formsReducers";
+import { booksListReducer } from "../store/reducers/booksReducers";
+import { languagesListReducer } from "../store/reducers/languagesReducers";
 
 const reducer = combineReducers({
   userToken: userLoginReducer,
   usersList: userListReducer,
+  languagesList: languagesListReducer,
   postsList: postsListReducer,
   musicList: musicListReducer,
   userProfile: userProfileReducer,
   newsList: newsListReducer,
   mainButtonName: mainButtonReducer,
+  booksList: booksListReducer,
+
+  formIsOpen: signInFormToggler,
 });
 
 const initialStore = {};

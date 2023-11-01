@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
-from baseApp.models import UserProfile
+from baseApp.models import UserProfile, Language
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -66,3 +66,19 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
         model = UserProfile
         fields = ['user', 'image', 'description', 'app_lang', 'learning_langs']
+
+
+class LanguageSerializer(serializers.ModelSerializer):
+    """
+    A serializer for the Language model.
+    This serializer is used to convert Language model instances to JSON data and vice versa.
+    """
+
+    class Meta:
+        """
+        model (Model): The model class associated with the serializer (Language in this case).
+        fields (str or tuple): The fields to include in the serialized representation.
+        """
+
+        model = Language
+        fields = '__all__'

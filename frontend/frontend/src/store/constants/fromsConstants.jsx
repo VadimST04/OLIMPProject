@@ -1,0 +1,2 @@
+export const SIGN_IN_FORM_OPEN = "SIGN_IN_FORM_OPEN";
+export const SIGN_IN_FORM_CLOSE = "SIGN_IN_FORM_CLOSE";

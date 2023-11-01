@@ -7,6 +7,12 @@ from booksApp import utils
 
 
 class BookRUDSerializer(serializers.ModelSerializer):
+    """
+    A serializer for the Book model designed for Retrieve, Update, and Destroy operations.
+    This serializer is used to convert Book model instances to JSON data and vice versa, specifically for
+    retrieval, update, and deletion operations.
+    """
+
     author = serializers.SlugRelatedField(
         queryset=Author.objects.all(),
         slug_field='name')
@@ -17,14 +23,22 @@ class BookRUDSerializer(serializers.ModelSerializer):
     )
 
     class Meta:
+        """
+        model (Model): The model class associated with the serializer.
+        fields (str or tuple): The fields to include in the serialized representation.
+        """
+
         model = Book
         fields = '__all__'
 
 
 class BookCreateSerializer(serializers.ModelSerializer):
     """
-    Serializer to create a Book instance
+    A serializer for creating Book instances.
+    This serializer is used for creating new Book instances by converting incoming data to the appropriate format
+    for database insertion.
     """
+
     author = serializers.SlugRelatedField(
         queryset=Author.objects.all(),
         slug_field='name')
@@ -36,7 +50,10 @@ class BookCreateSerializer(serializers.ModelSerializer):
 
     def is_valid(self, *, raise_exception=False):
         """
-        Method to check if the link is valid
+        Validate the incoming data for book creation, including author auto-adding.
+        This method performs validation checks on the incoming data, including making an HTTP request to retrieve
+        additional data and handling author auto-adding. If the data is valid, it calls the parent class's
+        is_valid method.
         """
         data = requests.get(self.initial_data.get('text'))
 
@@ -61,7 +78,10 @@ class BookCreateSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         """
-        Method to replace a text field to a valid value
+        Create a new Book instance using the validated data.
+        This method creates a new Book instance using the validated data, including handling related languages
+        and setting the appropriate values for the Book object.
+        Returns: The newly created Book instance.
         """
         languages_data = validated_data.pop('languages', [])
         book_obj = Book.objects.create(**validated_data)
@@ -71,5 +91,10 @@ class BookCreateSerializer(serializers.ModelSerializer):
         return book_obj
 
     class Meta:
+        """
+        model (Model): The model class associated with the serializer.
+        fields (str or tuple): The fields to include in the serialized representation.
+        """
+
         model = Book
         fields = ['title', 'text', 'author', 'languages']

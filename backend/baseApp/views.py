@@ -9,7 +9,7 @@ from rest_framework import mixins
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 from baseApp.models import UserProfile, Language
-from baseApp.serializers import UserSerializer, UserProfileSerializer, MyTokenObtainPairSerializer
+from baseApp.serializers import UserSerializer, UserProfileSerializer, MyTokenObtainPairSerializer, LanguageSerializer
 from postsApp.permissions import IsAuthorOrIsAuthenticated
 
 
@@ -136,4 +136,12 @@ class UserProfileUpdate(APIView):
 
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    
+
+class LanguageList(generics.ListAPIView):
+    """
+    A view for listing Language instances.
+    This view allows users to retrieve a list of Language objects.
+    """
+
+    queryset = Language.objects.all()
+    serializer_class = LanguageSerializer
