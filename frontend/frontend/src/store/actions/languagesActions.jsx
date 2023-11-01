@@ -1,14 +1,13 @@
 import {
-  MUSIC_REQUEST,
-  MUSIC_SUCCESS,
-  MUSIC_FAIL,
-} from "../constants/musicConstants";
-import axios from "axios";
+  LANGUAGES_REQUEST,
+  LANGUAGES_SUCCESS,
+  LANGUAGES_FAIL,
+} from "../constants/languagesConstants";
 
-export const musicList = () => async (dispatch) => {
+export const languagesList = () => async (dispatch) => {
   try {
     dispatch({
-      type: MUSIC_REQUEST,
+      type: LANGUAGES_REQUEST,
     });
 
     const config = {
@@ -18,17 +17,17 @@ export const musicList = () => async (dispatch) => {
     };
 
     const { data } = await axios.get(
-      "http://127.0.0.1:8000/api/music/",
+      "http://127.0.0.1:8000/api/languages/",
       config,
     );
 
     dispatch({
-      type: MUSIC_SUCCESS,
+      type: LANGUAGES_SUCCESS,
       payload: data,
     });
   } catch (error) {
     dispatch({
-      type: MUSIC_FAIL,
+      type: LANGUAGES_FAIL,
       payload:
         error.response && error.response.data.detail
           ? error.response.data.detail
