@@ -420,7 +420,11 @@ const MusicPage = () => {
           <HorizontalCarousel items={leftItems} />
           <div className="grid w-full grid-cols-[repeat(auto-fill,minmax(11rem,1fr))] gap-4">
             {testMusic.map((item) => (
-              <MusicItem {...item} key={item.id} />
+              <MusicItem
+                {...item}
+                key={item.id}
+                onClickHandler={musicItemClick}
+              />
             ))}
           </div>
         </div>
