@@ -13,6 +13,7 @@ import { postsListReducer } from "../store/reducers/postsReducers";
 import { userProfileReducer } from "../store/reducers/profileReducers";
 import { newsListReducer } from "../store/reducers/newsReducers";
 import { musicListReducer } from "../store/reducers/musicReducers";
+import { signInFormToggler } from "../store/reducers/formsReducers";
 import { booksListReducer } from "../store/reducers/booksReducers";
 import { languagesListReducer } from "../store/reducers/languagesReducers";
 
@@ -25,6 +26,8 @@ const reducer = combineReducers({
   userProfile: userProfileReducer,
   newsList: newsListReducer,
   booksList: booksListReducer,
+
+  formIsOpen: signInFormToggler,
 });
 
 const initialStore = {};
