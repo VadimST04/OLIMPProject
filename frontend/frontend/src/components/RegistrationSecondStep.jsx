@@ -33,7 +33,6 @@ const RegistrationSecondStep = ({
     "Ukrainian",
     "Hebrew",
   ];
-  const [availableLanguages, setAvailableLanguages] = useState(languages);
 
   const langSelected = (value) => {
     const newLearningLanguages = formData.learningLanguages.concat([value]);
@@ -41,9 +40,6 @@ const RegistrationSecondStep = ({
       ...formData,
       learningLanguages: newLearningLanguages,
     });
-    setAvailableLanguages(
-      languages.filter((item) => !newLearningLanguages.includes(item)),
-    );
   };
 
   const langRemoved = (langToRemove) => {
@@ -54,9 +50,6 @@ const RegistrationSecondStep = ({
       ...formData,
       learningLanguages: newLearningLanguages,
     });
-    setAvailableLanguages(
-      languages.filter((item) => !newLearningLanguages.includes(item)),
-    );
   };
 
   return (
@@ -65,7 +58,7 @@ const RegistrationSecondStep = ({
         <input
           accept="image/*"
           type="file"
-          className={`w-full rounded-md border bg-soft-white pl-5 shadow-[0_0_2px_#00000064] outline-none hover:border-main-green md:py-1.5 md:pl-6 xl:pl-8 ${textSize}`}
+          className={`w-full rounded-md border bg-soft-white shadow-[0_0_2px_#00000064] outline-none hover:border-main-green md:py-1.5 md:pl-6 xl:pl-8 ${textSize}`}
           onChange={(e) =>
             setFormData({
               ...formData,
@@ -82,6 +75,7 @@ const RegistrationSecondStep = ({
         searchItems={languages}
         maxHeight="max-h-28"
         placeholder="Choose app language"
+        inputStyling={`w-full rounded-md border bg-soft-white py-1 pl-5 shadow-[0_0_2px_#00000064] outline-none hover:border-main-green md:py-2 ${textSize}`}
         submitCallback={(value) =>
           setFormData({
             ...formData,
@@ -90,28 +84,31 @@ const RegistrationSecondStep = ({
         }
       />
       <SearchBar
-        searchItems={availableLanguages}
+        searchItems={languages}
+        exceptItems={formData.learningLanguages}
         maxHeight="max-h-28"
         placeholder="Choose learning languages"
+        inputStyling={`w-full rounded-md border bg-soft-white py-1 pl-5 shadow-[0_0_2px_#00000064] outline-none hover:border-main-green md:py-2 ${textSize}`}
         submitCallback={(value) => langSelected(value)}
         clearOnSubmit={true}
       />
       <div
-        className={`max-h-48 flex-wrap items-center gap-1 overflow-y-auto rounded-md bg-white-green p-2 ${
-          formData.learningLanguages.length === 0 ? "hidden" : "flex"
-        }`}
+        className={`flex max-h-[9.5rem] flex-wrap items-center gap-1 overflow-y-auto rounded-md bg-white-green p-2`}
       >
         <div className={`w-full select-none text-center ${textSize}`}>
           Click on language to remove:
         </div>
         {formData.learningLanguages.map((item) => (
-          <div
-            onClick={() => langRemoved(item)}
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              langRemoved(item);
+            }}
             key={item}
             className={`cursor-pointer select-none rounded-md bg-soft-black px-3 py-1 text-soft-white ${textSize}`}
           >
             {item}
-          </div>
+          </button>
         ))}
       </div>
       <div className="flex gap-2">
