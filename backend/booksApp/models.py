@@ -4,6 +4,7 @@ from baseApp.models import Language
 
 
 class Author(models.Model):
+    objects = models.Manager()
     name = models.CharField(max_length=100)
 
     def __str__(self):
@@ -11,6 +12,7 @@ class Author(models.Model):
 
 
 class Book(models.Model):
+    objects = models.Manager()
     title = models.CharField(max_length=100)
     text = models.TextField()
     author = models.ForeignKey(Author, blank=True, null=True, on_delete=models.SET_NULL)

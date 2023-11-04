@@ -14,6 +14,8 @@ const ProfilePage = () => {
   const navigate = useNavigate();
   const imageInput = useRef();
   const { userProfile } = useSelector((state) => state.userProfile);
+  // const { languages } = useSelector((state) => state.languagesList);
+  // console.log(languages);
   const [formData, setFormData] = useState({
     username: "",
     description: "",

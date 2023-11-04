@@ -20,14 +20,20 @@ class BookCreateView(generics.CreateAPIView):
 
 class BookRUDView(generics.RetrieveUpdateDestroyAPIView):
     """
-    View to get all data about one instance
+    A view for retrieving, updating, and deleting a single Book instance.
+    This view allows authenticated users to retrieve, update, and delete Book objects.
     """
+
     queryset = Book.objects.all()
     serializer_class = BookRUDSerializer
     permission_classes = [IsAuthenticated]
 
     def get(self, request, *args, **kwargs):
-        # book = Book.objects.filter(**kwargs)
+        """
+        Retrieve a single Book instance by its primary key and return its details.
+        This method retrieves a Book instance using its primary key and returns its title, text, author,
+        and languages in the response.
+        """
         book = generics.get_object_or_404(self.get_queryset(), **kwargs)
         return Response({'title': book.title,
                          'text': utils.get_data_from_html(book.text).get('text'),
@@ -35,7 +41,10 @@ class BookRUDView(generics.RetrieveUpdateDestroyAPIView):
                          'languages': book.languages.name})
 
 
-class BookListView(APIView):
+class BooksListAPIView(APIView):
+    """
+    View to get all books
+    """
 
     def post(self, request):
         """

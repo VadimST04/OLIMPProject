@@ -10,6 +10,6 @@ urlpatterns = [
     path('view/', book_views.BookListView.as_view()),
 
     # urls for authors
-    path('authors/', author_views.AuthorView.as_view()),
-    path('authors/<int:pk>', author_views.AuthorView.as_view()),
+    path('authors/', author_views.AuthorListView.as_view(), name='author-list'),
+    path('authors/<int:pk>', author_views.AuthorRUDView.as_view(), name='author-rud'),
 ]

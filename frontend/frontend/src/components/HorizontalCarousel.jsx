@@ -64,23 +64,23 @@ const HorizontalCarousel = ({ items, onItemClick }) => {
         ))}
       </div>
       {isLeftVisible && (
-        <div className="absolute left-0 z-[1] flex h-full w-20 items-center bg-gradient-to-r from-soft-white from-50% dark:from-soft-black">
+        <button className="absolute left-0 z-[1] flex h-full w-20 items-center bg-gradient-to-r from-soft-white from-50% dark:from-soft-black">
           <div
             onClick={() => onLeftClick()}
             className="cursor-pointer rounded-full p-1 text-[20px] hover:bg-soft-white-hover dark:hover:bg-soft-black-hover"
           >
             <FiChevronLeft />
           </div>
-        </div>
+        </button>
       )}
       {isRightVisible && (
         <div className="absolute right-0 flex h-full w-20 items-center justify-end bg-gradient-to-l from-soft-white from-50% dark:from-soft-black">
-          <div
+          <button
             onClick={() => onRightClick()}
             className="cursor-pointer rounded-full p-1 text-[20px] hover:bg-soft-white-hover dark:hover:bg-soft-black-hover"
           >
             <FiChevronRight />
-          </div>
+          </button>
         </div>
       )}
     </div>

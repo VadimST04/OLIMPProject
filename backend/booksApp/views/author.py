@@ -6,13 +6,22 @@ from booksApp.models import Author
 from booksApp.serializers.authors import AuthorSerializer
 
 
-class AuthorView(generics.ListCreateAPIView,
-                 generics.RetrieveUpdateDestroyAPIView):
+class AuthorRUDView(generics.RetrieveUpdateDestroyAPIView):
     """
-    View to create an author instance
+    A view for retrieving, updating, and deleting a single Author instance.
+    This view allows authenticated users with admin privileges to retrieve, update, and delete Author objects.
     """
+
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
     permission_classes = [IsAuthenticated, IsAdminUser]
 
 
+class AuthorListView(generics.ListCreateAPIView):
+    """
+    A view for listing and creating Author instances.
+    This view allows authenticated users to list existing Author objects and create new Author objects.
+    """
+
+    queryset = Author.objects.all()
+    serializer_class = AuthorSerializer
