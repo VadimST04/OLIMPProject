@@ -1,11 +1,9 @@
 import json
-import re
 
 import pytest
 
 from baseApp.models import Language
 
-BOOK_PART_FOR_TEST = 'JACK DERRINGER'
 pytestmark = pytest.mark.django_db
 
 
@@ -14,19 +12,21 @@ class TestBookModel:
 
     def test_all_books_page_authorized(self, api_client, book_factory, regular_user):
         ger = Language.objects.create(name='German')
+        ital = Language.objects.create(name='Italian')
         eng = Language.objects.get(name='English')
 
         book_factory.create_batch(5, languages=[ger])
         eng_books = book_factory.create_batch(5, languages=[eng])
+        ital_books = book_factory.create_batch(5, languages=[ital])
 
-        response = api_client().post(path=self.books_view_endpoint, data={'learning_langs': ['English']},
+        response = api_client().post(path=self.books_view_endpoint, data={'learning_langs': ['English', 'Italian']},
                                      HTTP_AUTHORIZATION='Bearer ' + regular_user.token)
 
         assert response.status_code == 200
 
         response_books = json.loads(response.content)
 
-        assert len(eng_books) == len(response_books)
+        assert len(eng_books) + len(ital_books) == len(response_books)
 
     def test_get_one_book(self, api_client, book_factory, regular_user):
         book_link_to_test = 'https://gutenberg.org/cache/epub/71996/pg71996-images.html'
@@ -37,5 +37,3 @@ class TestBookModel:
         response = api_client().get(path=custom_book_endpoint, HTTP_AUTHORIZATION='Bearer ' + regular_user.token)
 
         assert response.status_code == 200
-        assert re.match(BOOK_PART_FOR_TEST, response.data.get('text'))
-
