@@ -37,15 +37,15 @@ class UserRegistration(APIView):
         """
 
         data = request.data
-        print(request.FILES)
         try:
             new_user = User.objects.create(
                 username=data['username'],
                 password=make_password(data['password']),
                 email=data['email'],
             )
+            new_user.save()
             app_lang = Language.objects.filter(name=data['app_lang'])[0]
-            learning_langs = Language.objects.filter(name__in=data.get('learning_langs', []))
+            learning_langs = Language.objects.filter(name__in=data.getlist('learning_langs')[0].split(','))
 
             new_user_profile = UserProfile.objects.create(
                 user=new_user,
@@ -54,9 +54,10 @@ class UserRegistration(APIView):
             )
             new_user_profile.app_lang = app_lang
             new_user_profile.learning_langs.set(learning_langs)
-            new_user_profile.save()
 
             serializer = UserProfileSerializer(new_user_profile)
+
+            new_user_profile.save()
 
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         except IntegrityError:

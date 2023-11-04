@@ -16,6 +16,8 @@ import { getUserProfile } from "./profileActions";
 
 export const login = (username, password) => async (dispatch) => {
   try {
+    console.log("LOGIN ENTER");
+
     dispatch({
       type: USER_LOGIN_REQUEST,
     });
@@ -76,7 +78,7 @@ export const register =
       formData.append("email", email);
       formData.append("password", password);
       formData.append("app_lang", app_lang);
-      formData.append("learning_langs", JSON.stringify(learning_langs));
+      formData.append("learning_langs", [...learning_langs]);
 
       const config = {
         headers: {
@@ -95,12 +97,7 @@ export const register =
         payload: data,
       });
 
-      dispatch({
-        type: USER_LOGIN_SUCCESS,
-        payload: data,
-      });
-
-      localStorage.setItem("userToken", JSON.stringify(data));
+      dispatch(login(username, password));
     } catch (error) {
       dispatch({
         type: USER_REGISTER_FAIL,
