@@ -12,6 +12,8 @@ from baseApp.models import UserProfile, Language
 from baseApp.serializers import UserSerializer, UserProfileSerializer, MyTokenObtainPairSerializer, LanguageSerializer
 from postsApp.permissions import IsAuthorOrIsAuthenticated
 
+import json
+
 
 class MyTokenObtainPairView(TokenObtainPairView):
     """
@@ -36,7 +38,11 @@ class UserRegistration(APIView):
         :return: Returns information about user's profile and data about user
         """
 
-        data = request.data
+        data = {key: value for key, value in request.data.items()}
+        if isinstance(data['learning_langs'], str):
+            data['learning_langs'] = json.loads(data['learning_langs'])
+        print(data)
+
         try:
             new_user = User.objects.create(
                 username=data['username'],
@@ -45,7 +51,7 @@ class UserRegistration(APIView):
             )
             new_user.save()
             app_lang = Language.objects.filter(name=data['app_lang'])[0]
-            learning_langs = Language.objects.filter(name__in=data.getlist('learning_langs')[0].split(','))
+            learning_langs = Language.objects.filter(name__in=data.get('learning_langs', []))
 
             new_user_profile = UserProfile.objects.create(
                 user=new_user,
