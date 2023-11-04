@@ -52,7 +52,6 @@ class PostSerializer(serializers.ModelSerializer):
     """
 
     user = serializers.CharField(source='user.username')
-    user_image = serializers.SerializerMethodField(read_only=True)
     comments = CommentSerializer(many=True, read_only=True)
     image_post = ImageSerializer(read_only=True, many=True)
 
@@ -64,14 +63,3 @@ class PostSerializer(serializers.ModelSerializer):
 
         model = Post
         fields = '__all__'
-
-    def get_user_image(self, obj):
-        userprofile = UserProfile.objects.get(user=obj.user)
-
-        try:
-            if userprofile.image:
-                request = self.context.get('request')
-                if request:
-                    return request.build_absolute_uri(userprofile.image.url)
-        except ValueError:
-            return None
