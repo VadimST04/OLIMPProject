@@ -14,14 +14,16 @@ def regular_user(client, django_user_model):
     username = 'test_regular_user'
     password = 'test_passw'
 
-    lang = Language.objects.create(name='English')
+    eng = Language.objects.create(name='English')
+    ger = Language.objects.create(name='German')
 
     regular = django_user_model.objects.create_user(
         username=username, password=password)
 
     test_profile = UserProfile.objects.create(user_id=regular.pk, image='backend/static/images/test.png',
-                                              description=None, app_lang=lang)
-    test_profile.learning_langs.set([lang])
+                                              description=None, app_lang=eng)
+    test_profile.learning_langs.set([eng])
+    test_profile.learning_langs.set([ger])
 
     response = client.post('/api/login/', {'username': username, 'password': password}, format='json')
 
