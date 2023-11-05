@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { register } from "../store/actions/userActions";
+import { login, register } from "../store/actions/userActions";
 
 import logo from "../assets/OLIMPlogo.png";
 import RegistrationFirstStep from "./RegistrationFirstStep";

@@ -15,8 +15,20 @@ class SongList(generics.ListAPIView):
     serializer_class = SongSerializer
 
 
+class SongRetrieve(generics.RetrieveAPIView):
+    """
+    A view for retrieving a single Song instance.
+    This view allows authenticated users retrieve Song objects.
+    """
+
+    queryset = Song.objects.all()
+    serializer_class = SongSerializer
+    permission_classes = (IsAuthenticated,)
+
+
 class SongSettings(generics.CreateAPIView,
-                   generics.RetrieveUpdateDestroyAPIView):
+                   generics.UpdateAPIView,
+                   generics.DestroyAPIView):
     """
     A view for creating, retrieving, updating, and deleting a single Song instance.
     This view allows authenticated users with admin privileges to create, retrieve, update, and delete Song objects.
