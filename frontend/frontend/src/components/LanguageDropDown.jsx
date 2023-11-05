@@ -24,7 +24,7 @@ const LanguageDropDown = () => {
   }, []);
 
   useEffect(() => {
-    setLearningLanguages(userProfile ? userProfile[0].learning_langs : []);
+    setLearningLanguages(userProfile ? userProfile?.at(0).learning_langs : []);
   }, [userProfile]);
 
   const onClickHandler = () => {

@@ -1,7 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getUserProfile } from "../store/actions/profileActions";
+import {
+  getUserProfile,
+  updateUserProfile,
+} from "../store/actions/profileActions";
 import { logout } from "../store/actions/userActions";
 import SearchBar from "../components/SearchBar";
 import { useState } from "react";
@@ -46,7 +49,20 @@ const ProfilePage = () => {
     navigate("/");
   };
 
-  const updateButtonHandler = () => {};
+  const updateButtonHandler = (e) => {
+    e.preventDefault();
+
+    dispatch(
+      updateUserProfile(
+        formData.username,
+        formData.email,
+        formData.password,
+        formData.image,
+        formData.appLanguage,
+        formData.learningLanguages,
+      ),
+    );
+  };
 
   const languages = [
     "English",
@@ -243,7 +259,7 @@ const ProfilePage = () => {
             Log Out
           </button>
           <button
-            onClick={updateButtonHandler}
+            onClick={(e) => updateButtonHandler(e)}
             className="w-32 rounded-md bg-main-green py-2 pl-3 pr-5 text-soft-white outline-none hover:border-main-green hover:bg-main-dark-green"
           >
             Update

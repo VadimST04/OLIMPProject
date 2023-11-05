@@ -41,7 +41,6 @@ class UserRegistration(APIView):
         data = {key: value for key, value in request.data.items()}
         if isinstance(data['learning_langs'], str):
             data['learning_langs'] = json.loads(data['learning_langs'])
-        print(data)
 
         try:
             new_user = User.objects.create(
@@ -114,7 +113,8 @@ class UserProfileUpdate(APIView):
         :param request: An HTTP request object.
         :return: Returns information about user's profile and data about user
         """
-        data = request.data
+        data = {key: value for key, value in request.data.items()}
+        print(data)
         user = request.user
         userprofile = UserProfile.objects.get(user=user)
 
@@ -134,6 +134,9 @@ class UserProfileUpdate(APIView):
             userprofile.app_lang = app_lang
 
         if data.get('learning_langs'):
+            if isinstance(data['learning_langs'], str):
+                data['learning_langs'] = json.loads(data['learning_langs'])
+
             learning_langs = Language.objects.filter(name__in=data.get('learning_langs', []))
             userprofile.learning_langs.set(learning_langs)
 
