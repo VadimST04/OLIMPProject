@@ -5,18 +5,15 @@ import {
 } from "../constants/musicConstants";
 import axios from "axios";
 
-export const musicList = () => async (dispatch, getState) => {
+export const musicList = () => async (dispatch) => {
   try {
     dispatch({
       type: MUSIC_REQUEST,
     });
 
-    const { userToken } = getState().userToken;
-
     const config = {
       headers: {
         "Content-type": "application/json",
-        Authorization: `Bearer ${userToken.access}`,
       },
     };
 

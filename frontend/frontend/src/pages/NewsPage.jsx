@@ -14,22 +14,13 @@ const NewsPage = () => {
   const dispatch = useDispatch();
 
   const { userProfile } = useSelector((state) => state.userProfile);
-
-  console.log(userProfile);
-
-  const learning_langs = userProfile
-    ? userProfile[0].learning_langs
-    : ["English"];
-
-  console.log(learning_langs);
-
   const { news } = useSelector((state) => state.newsList);
-  console.log(news);
 
   useEffect(() => {
-    dispatch(getUserProfile());
-    dispatch(newsList(learning_langs));
-  }, [dispatch]);
+    if (userProfile) {
+      dispatch(newsList(userProfile[0].learning_langs));
+    } else dispatch(newsList(["English"]));
+  }, [userProfile]);
 
   const generateSections = () => {
     const sections = [];

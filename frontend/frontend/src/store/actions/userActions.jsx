@@ -12,6 +12,7 @@ import {
 } from "../constants/userConstants";
 
 import axios from "axios";
+import { getUserProfile } from "./profileActions";
 
 export const login = (username, password) => async (dispatch) => {
   try {
@@ -40,6 +41,7 @@ export const login = (username, password) => async (dispatch) => {
     });
 
     localStorage.setItem("userToken", JSON.stringify(data));
+    dispatch(getUserProfile());
   } catch (error) {
     dispatch({
       type: USER_LOGIN_FAIL,
@@ -93,10 +95,7 @@ export const register =
         payload: data,
       });
 
-      dispatch({
-        type: USER_LOGIN_SUCCESS,
-        payload: data,
-      });
+      dispatch(login(username, password));
 
       localStorage.setItem("userToken", JSON.stringify(data));
     } catch (error) {
@@ -129,9 +128,6 @@ export const getUsers = () => async (dispatch, getState) => {
       "http://127.0.0.1:8000/api/users/",
       config,
     );
-
-    console.log("I am here");
-    console.log(data);
 
     dispatch({
       type: USER_LIST_SUCCESS,

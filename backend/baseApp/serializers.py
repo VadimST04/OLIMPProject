@@ -2,7 +2,30 @@ from django.contrib.auth.models import User
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
-from baseApp.models import UserProfile
+from baseApp.models import UserProfile, Language
+
+
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    """
+    This serializer extends the TokenObtainPairSerializer from the SimpleJWT library.
+    It adds user-specific data to the token response, expanding the default return.
+    """
+
+    def validate(self, attrs):
+        """
+        This method extends the base validation provided by TokenObtainPairSerializer.
+        It includes additional user-specific data in the response data.
+        :param attrs: The dictionary which contains token and user data.
+        :return: Returns token data and additional fields.
+        """
+        data = super().validate(attrs)
+
+        user_profile = UserProfile.objects.get(user=self.user)
+
+        request = self.context.get('request')
+        if request:
+            data['image'] = request.build_absolute_uri(user_profile.image.url)
+        return data
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -45,27 +68,17 @@ class UserProfileSerializer(serializers.ModelSerializer):
         fields = ['user', 'image', 'description', 'app_lang', 'learning_langs']
 
 
-class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+class LanguageSerializer(serializers.ModelSerializer):
     """
-    This serializer extends the TokenObtainPairSerializer from the SimpleJWT library.
-    It adds user-specific data to the token response, expanding the default return.
+    A serializer for the Language model.
+    This serializer is used to convert Language model instances to JSON data and vice versa.
     """
 
-    def validate(self, attrs):
+    class Meta:
         """
-        This method extends the base validation provided by TokenObtainPairSerializer.
-        It includes additional user-specific data in the response data.
-        :param attrs: The dictionary which contains token and user data.
-        :return: Returns token data and additional fields.
+        model (Model): The model class associated with the serializer (Language in this case).
+        fields (str or tuple): The fields to include in the serialized representation.
         """
-        data = super().validate(attrs)
 
-        serializer = UserSerializer(self.user).data
-        user_profile = UserProfile.objects.get(user=self.user)
-
-        for key, value in serializer.items():
-            data[key] = value
-        request = self.context.get('request')
-        if request:
-            data['image'] = request.build_absolute_uri(user_profile.image.url)
-        return data
+        model = Language
+        fields = '__all__'
