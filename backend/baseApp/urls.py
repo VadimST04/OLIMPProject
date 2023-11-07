@@ -16,4 +16,5 @@ urlpatterns = [
     path('users/', views.UserList.as_view(), name='users'),
     path('users/profile/', views.UserProfileGet.as_view(), name='users-profile'),
     path('users/profile/update/', views.UserProfileUpdate.as_view(), name='users-profile'),
+    path('languages/', views.LanguageList.as_view(), name='languages-list'),
 ]

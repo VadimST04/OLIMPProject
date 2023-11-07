@@ -95,10 +95,7 @@ export const register =
         payload: data,
       });
 
-      dispatch({
-        type: USER_LOGIN_SUCCESS,
-        payload: data,
-      });
+      dispatch(login(username, password));
 
       localStorage.setItem("userToken", JSON.stringify(data));
     } catch (error) {

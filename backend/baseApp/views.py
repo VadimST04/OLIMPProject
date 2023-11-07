@@ -9,8 +9,10 @@ from rest_framework import mixins
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 from baseApp.models import UserProfile, Language
-from baseApp.serializers import UserSerializer, UserProfileSerializer, MyTokenObtainPairSerializer
+from baseApp.serializers import UserSerializer, UserProfileSerializer, MyTokenObtainPairSerializer, LanguageSerializer
 from postsApp.permissions import IsAuthorOrIsAuthenticated
+
+import json
 
 
 class MyTokenObtainPairView(TokenObtainPairView):
@@ -36,14 +38,18 @@ class UserRegistration(APIView):
         :return: Returns information about user's profile and data about user
         """
 
-        data = request.data
-        print(request.FILES)
+        data = {key: value for key, value in request.data.items()}
+        if isinstance(data['learning_langs'], str):
+            data['learning_langs'] = json.loads(data['learning_langs'])
+        print(data)
+
         try:
             new_user = User.objects.create(
                 username=data['username'],
                 password=make_password(data['password']),
                 email=data['email'],
             )
+            new_user.save()
             app_lang = Language.objects.filter(name=data['app_lang'])[0]
             learning_langs = Language.objects.filter(name__in=data.get('learning_langs', []))
 
@@ -54,9 +60,10 @@ class UserRegistration(APIView):
             )
             new_user_profile.app_lang = app_lang
             new_user_profile.learning_langs.set(learning_langs)
-            new_user_profile.save()
 
             serializer = UserProfileSerializer(new_user_profile)
+
+            new_user_profile.save()
 
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         except IntegrityError:
@@ -136,4 +143,12 @@ class UserProfileUpdate(APIView):
 
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    
+
+class LanguageList(generics.ListAPIView):
+    """
+    A view for listing Language instances.
+    This view allows users to retrieve a list of Language objects.
+    """
+
+    queryset = Language.objects.all()
+    serializer_class = LanguageSerializer
