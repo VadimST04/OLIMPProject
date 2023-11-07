@@ -17,7 +17,7 @@ const DetailedMusic = ({
     <div className="relative grid h-full grid-cols-2 gap-5">
       <button
         onClick={() => hideDetailedMusic()}
-        className="absolute left-0 top-0 text-3xl hover:text-soft-black-hover dark:hover:text-soft-white-hover"
+        className="absolute left-0 top-0 z-[1] text-3xl hover:text-soft-black-hover dark:hover:text-soft-white-hover"
       >
         <BsFillArrowLeftCircleFill />
       </button>
