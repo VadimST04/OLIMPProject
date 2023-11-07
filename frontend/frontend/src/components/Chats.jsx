@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ChatItem from "./ChatItem";
 import { useSelector } from "react-redux";
-import { BsCaretRight } from "react-icons/bs";
+import { AiOutlineRight } from "react-icons/ai";
 
 const Chats = () => {
   const { userProfile } = useSelector((state) => state.userProfile);
@@ -12,7 +12,8 @@ const Chats = () => {
 
   const testImg =
     "https://upload.wikimedia.org/wikipedia/commons/a/ae/Aristotle_Altemps_Inv8575.jpg";
-  const chats = [
+
+  const testChats = [
     { img: testImg, name: "Lorem", lastMessage: "lorem XD" },
     { img: testImg, name: "Lorem", lastMessage: "lorem XD" },
     { img: testImg, name: "Lorem", lastMessage: "lorem XD" },
@@ -37,40 +38,38 @@ const Chats = () => {
 
   return (
     <div
-      className={`relative flex items-center transition-all duration-300 ${
-        !chatsCollapsed ? "px-6" : ""
+      className={`relative flex items-center transition-all duration-500 ${
+        !chatsCollapsed ? "px-6" : "px-2"
       }`}
     >
       <div
         onClick={() => setChatsCollapsed(!chatsCollapsed)}
-        className="group absolute -left-4 cursor-pointer text-[32px] dark:text-soft-white"
+        className="absolute -left-3 cursor-pointer rounded-full bg-main-green p-1 text-[24px] text-soft-white hover:bg-main-dark-green dark:text-soft-white"
       >
-        <BsCaretRight
-          className={`transition-all duration-300 group-hover:scale-[115%] ${collapseButtonRotation}`}
+        <AiOutlineRight
+          className={`transition-transform duration-500 ${collapseButtonRotation}`}
         />
       </div>
 
       <div
-        className={`h-full flex-shrink-0 space-y-1 overflow-y-auto text-soft-black transition-all duration-300 ${chatsWidth} ${
+        className={`h-full flex-shrink-0 space-y-1 overflow-y-auto overflow-x-hidden text-soft-black transition-all duration-500 ${chatsWidth} ${
           !chatsCollapsed ? "pr-2" : ""
         }`}
       >
-        {chats.length === 0 && userProfile && (
+        {testChats.length === 0 && userProfile && (
           <div className="flex h-full w-full items-center justify-center">
-            <div
-              className={`flex w-full cursor-pointer select-none items-center justify-center gap-2 rounded-md border border-transparent bg-main-green p-5 text-soft-white`}
-            >
+            <div className="flex w-full cursor-pointer select-none items-center justify-center gap-2 rounded-md border border-transparent bg-main-green p-5 text-soft-white">
               You don't have any chats yet
             </div>
           </div>
         )}
-        {!true && (
+        {!userProfile && (
           <div className="flex h-full w-full items-center justify-center dark:text-soft-white">
             <p className="text-[20px] font-semibold">Log in to use chats</p>
           </div>
         )}
-        {true &&
-          chats.map((item, index) => (
+        {userProfile &&
+          testChats.map((item, index) => (
             <ChatItem
               key={index}
               isActive={index === activeChatIndex}
