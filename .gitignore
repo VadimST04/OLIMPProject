@@ -11,3 +11,6 @@ backend/backend/__pycache__/__init__.cpython-311.pyc
 backend/.idea/misc.xml
 backend/.idea/backend.iml
 mobile/.idea
+mobile/BookPage/.idea
+Mobile/BookPage/__pycache__/BookPage.cpython-310.pyc
+Mobile/BookPage/__pycache__/BookPage.cpython-311.pyc
