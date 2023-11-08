@@ -1,12 +1,22 @@
 from kivymd.uix.fitimage import FitImage
 from kivymd.uix.scrollview import MDScrollView
 from kivymd.uix.widget import MDWidget
-
-TEXT = 'I would prefer to be able to do this using existing kivy layouts instead of having to write my own layout class to handle I would prefer to be able to do this using existing kivy layouts instead of having to write my own layout class to handle this, but if no other option is possible, this is also ok.'
+from backend_data import get_news
 
 
 class ScrollViewMain(MDScrollView):
-    pass
+
+    @staticmethod
+    def get_head_text(self):
+        return get_news()[0]["title"]
+
+    @staticmethod
+    def get_description_text(self):
+        return get_news()[0]["description"]
+
+    @staticmethod
+    def get_image(self):
+        return get_news()[0]["image_url"]
 
 
 class LoopWidget(MDWidget):
@@ -27,16 +37,10 @@ class LoopWidget(MDWidget):
     @staticmethod
     def add_widget_news(main_app):
         box_layout = main_app.root.ids.scroll.ids.box
-        photos = ['size200_1.jpg', 'size200_2.jpg', 'size200_3.jpeg',
-                  'flowers.jpg', 'nature.jpg']
-        text_list = ['Crisis of Refugees: Escalation at the European Border',
-                     'COVID-19 Study: New Insights into Virus Spread',
-                     'Economic Growth: IMF Forecasts for the Coming Years',
-                     'Political Shifts: Election of Parliament Leader in Country X',
-                     'Technological Breakthrough: Launch of First Space Mission to Mars']
-        for i, photo in enumerate(photos):
+        photos = get_news()
+        for index, photo in enumerate(photos, start=1):
             loop_widget = LoopWidget()
-            loop_widget.add_image(photo)
-            loop_widget.add_head_text(main_app.shorten_text(text_list[i], 18))
-            loop_widget.add_description_text(main_app.shorten_text(TEXT, 100))
+            loop_widget.add_image(photo['image_url'])
+            loop_widget.add_head_text(main_app.shorten_text(photo['title'], 18))
+            loop_widget.add_description_text(main_app.shorten_text(photo['description'], 85))
             box_layout.add_widget(loop_widget)

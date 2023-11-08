@@ -33,7 +33,6 @@
         MDBoxLayout:
             adaptive_height: True
             padding: 0, 0, 0, self.width / 25
-######################################## 1 WIDGET ########################################
 
             MDWidget:
                 size_hint_y: None
@@ -41,7 +40,13 @@
                 radius: [self.width / 15]
 
                 FitImage:
-                    source: 'size200_3.jpeg'
+                    source: root.get_image(root)
+                    size: self.parent.size
+                    pos: self.parent.pos
+                    radius: [self.width / 15]
+
+                FitImage:
+                    source: 'trans.png'
                     size: self.parent.size
                     pos: self.parent.pos
                     radius: [self.width / 15]
@@ -49,7 +54,6 @@
                 MDFlatButton:
                     pos: self.parent.pos
                     size: self.parent.size
-                    md_bg_color: 0, 0, 0, 0.3
                     radius: [self.width / 15]
 
                 MDStackLayout:
@@ -63,12 +67,15 @@
                         spacing: self.width / 20
                         padding: self.width / 20, 0, self.width / 30, self.width / 10
                         MDLabel:
-                            text: 'Cats'
+                            id: head_label
+                            text: app.shorten_text(root.get_head_text(root), 15)
                             font_size: self.width / 13
                             padding: self.width / 15, 0, 0, self.width / 8
+                            color: '#F3F3F3'
                         MDLabel:
-                            text: app.shorten_text('Cats, also known as domestic cats, are small carnivorous mammals that are popular pets around the world. They are known for their playful and independent nature. Cats have been kept as companions for thousands of years, and they come in a variety of breeds, each with its own unique characteristics.', 115)
-                            color: '#737373'
+                            id: description_label
+                            text: app.shorten_text(root.get_description_text(root), 115)
+                            color: '#F3F3F3'
                             font_size: self.width / 23
 
                 MDRelativeLayout:
