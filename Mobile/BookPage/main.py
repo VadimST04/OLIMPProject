@@ -1,8 +1,7 @@
+import os
 from kivy.lang import Builder
 from kivy.core.window import Window
-from kivymd.app import MDApp
-from kivy.uix.screenmanager import Screen
-from kivymd.uix.screen import MDScreen
+from kivymd.tools.hotreload.app import MDApp
 
 from BookPage import Screen
 
@@ -15,7 +14,6 @@ class NewsPageWindow(Screen):
 
 class Example(MDApp):
     def build(self):
-
         return Builder.load_file('css.kv')
 
 

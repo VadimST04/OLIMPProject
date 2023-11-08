@@ -23,65 +23,62 @@
 
 MDScreen:
 
-    MDNavigationLayout:
+    MDTopAppBar:
+        id: top_app_bar
+#        adaptive_height: True
 
+        elevation: 0
+        pos_hint: {"top": 1}
+        md_bg_color: "#F3F3F3"
+        specific_text_color: "#333333"
+        left_action_items: [["menu", lambda x: nav_drawer.set_state("open")]]
+
+        right_action_items:
+            [
+            ["white-balance-sunny", lambda x: app.change_theme_dark()],
+            ["account-circle-outline", lambda x: app.sign_in()]
+            ]
+    MDBoxLayout:
+        size_hint: (1, 0.99)
         MDScreenManager:
+            id: screen_manager
+            size_hint_y: 0.88
+            BookPageWindow:
+                name: 'book1'
+            NewsPageWindow:
+                name: 'news1'
 
-            MDScreen:
-                md_bg_color:'#7c6100'
+    MDBottomNavigation:
+        size_hint: (1, 0.01)
+        panel_color: '#217074'
+        use_text: False
+        text_color_normal: '#F3F3F3'
+        text_color_active: '#2B2D30'
+        MDBottomNavigationItem:
+            icon: 'account-circle-outline'
 
-                MDTopAppBar:
-                    id: top_app_bar
-                    adaptive_height: True
+        MDBottomNavigationItem:
+            icon: 'home-outline'
+            on_tab_press:
+                screen_manager.current = 'news1'
+        MDBottomNavigationItem:
+            icon: 'chat-outline'
+    MDNavigationDrawer:
+        id: nav_drawer
+        radius: (0, 16, 16, 0)
 
-                    elevation: 0
-                    pos_hint: {"top": 1}
-                    md_bg_color: "#F3F3F3"
-                    specific_text_color: "#333333"
-                    left_action_items: [["menu", lambda x: nav_drawer.set_state("open")]]
-                    right_action_items:
-                        [
-                        ["white-balance-sunny", lambda x: app.change_theme_dark()],
-                        ["account-circle-outline", lambda x: app.sign_in()]
-                        ]
+        MDNavigationDrawerMenu:
 
-                MDScreenManager:
-                    id: screen_manager
-                    size_hint_y: 0.88
-                    BookPageWindow:
-                    NewsPageWindow:
+            DrawerClickableItem:
+                icon: "book"
+                text_right_color: "#4a4939"
+                text: "BooksPage"
+                on_release:
+                    screen_manager.current = 'book1'
 
-                MDBottomNavigation:
-                    size_hint: (1, 0.01)
-                    panel_color: '#217074'
-                    use_text: False
-                    text_color_normal: '#F3F3F3'
-                    text_color_active: '#2B2D30'
-                    MDBottomNavigationItem:
-                        icon: 'account-circle-outline'
-
-                    MDBottomNavigationItem:
-                        icon: 'home-outline'
-                        on_tab_press:
-                            screen_manager.current = 'news1'
-                    MDBottomNavigationItem:
-                        icon: 'chat-outline'
-        MDNavigationDrawer:
-            id: nav_drawer
-            radius: (0, 16, 16, 0)
-
-            MDNavigationDrawerMenu:
-
-                DrawerClickableItem:
-                    icon: "book"
-                    text_right_color: "#4a4939"
-                    text: "BooksPage"
-                    on_release:
-                        screen_manager.current = 'book1'
-
-                DrawerClickableItem:
-                    icon: "newspaper"
-                    text: "NewsPage"
+            DrawerClickableItem:
+                icon: "newspaper"
+                text: "NewsPage"
 
 
 
