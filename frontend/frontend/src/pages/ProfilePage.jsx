@@ -17,6 +17,7 @@ const ProfilePage = () => {
   const navigate = useNavigate();
   const imageInput = useRef();
   const { userProfile } = useSelector((state) => state.userProfile);
+  console.log(userProfile);
   // const { languages } = useSelector((state) => state.languagesList);
   // console.log(languages);
   const [formData, setFormData] = useState({
@@ -32,16 +33,18 @@ const ProfilePage = () => {
   useEffect(() => {
     if (userProfile) {
       setFormData({
-        username: userProfile[0].user.username,
-        description: userProfile[0].description,
-        email: userProfile[0].user.email,
+        username: userProfile.user.username,
+        description: userProfile.description,
+        email: userProfile.user.email,
         password: "",
-        appLanguage: userProfile[0].app_lang,
-        learningLanguages: [...userProfile[0].learning_langs],
-        image: userProfile[0].image,
+        appLanguage: userProfile.app_lang,
+        learningLanguages: [...userProfile.learning_langs],
+        image: userProfile.image,
       });
+    } else {
+      dispatch(getUserProfile());
     }
-  }, [userProfile]);
+  }, [dispatch, userProfile]);
 
   const logoutButtonHandler = () => {
     dispatch(logout());
@@ -57,6 +60,7 @@ const ProfilePage = () => {
         formData.username,
         formData.email,
         formData.password,
+        formData.description,
         formData.image,
         formData.appLanguage,
         formData.learningLanguages,

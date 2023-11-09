@@ -13,6 +13,7 @@ from baseApp.serializers import UserSerializer, UserProfileSerializer, MyTokenOb
 from postsApp.permissions import IsAuthorOrIsAuthenticated
 
 import json
+import os
 
 
 class MyTokenObtainPairView(TokenObtainPairView):
@@ -83,19 +84,19 @@ class UserList(generics.ListAPIView):
     permission_classes = (IsAuthenticated,)
 
 
-class UserProfileGet(generics.ListAPIView):
+class UserProfileGet(generics.RetrieveAPIView):
     """
     A view for retrieving the profile of a specific user
     with information about this user
     """
 
-    def get_queryset(self):
+    def get_object(self):
         """
-        This method is used to customize the queryset for the UserProfile model based on the requesting user.
-        :return: Returns a profile of a specific user
+        This method is used to get the UserProfile object for the requesting user.
+        :return: Returns a profile of the specific user
         """
         user = self.request.user
-        return UserProfile.objects.filter(user=user).select_related('user')
+        return UserProfile.objects.get(user=user)
 
     serializer_class = UserProfileSerializer
     permission_classes = (IsAuthenticated, IsAuthorOrIsAuthenticated)
@@ -126,7 +127,7 @@ class UserProfileUpdate(APIView):
 
         user.save()
 
-        userprofile.image = data.get('image', userprofile.image)
+        userprofile.image = os.path.basename(data.get('image', userprofile.image))
         userprofile.description = data.get('description', userprofile.description)
 
         if data.get('app_lang'):

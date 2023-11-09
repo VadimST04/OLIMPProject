@@ -43,7 +43,7 @@ export const getUserProfile = () => async (dispatch, getState) => {
 };
 
 export const updateUserProfile =
-  (username, email, password, image, app_lang, learning_langs) =>
+  (username, email, password, description, image, app_lang, learning_langs) =>
   async (dispatch, getState) => {
     try {
       dispatch({
@@ -57,6 +57,7 @@ export const updateUserProfile =
       formData.append("username", username);
       formData.append("email", email);
       if (password) formData.append("password", password);
+      formData.append("description", description);
       formData.append("app_lang", app_lang);
       formData.append("learning_langs", JSON.stringify(learning_langs));
 
@@ -72,6 +73,8 @@ export const updateUserProfile =
         formData,
         config,
       );
+
+      console.log(data);
 
       dispatch({
         type: USER_PROFILE_SUCCESS,
