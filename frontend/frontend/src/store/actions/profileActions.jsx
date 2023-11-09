@@ -56,7 +56,7 @@ export const updateUserProfile =
       formData.append("image", image);
       formData.append("username", username);
       formData.append("email", email);
-      formData.append("password", password);
+      if (password) formData.append("password", password);
       formData.append("app_lang", app_lang);
       formData.append("learning_langs", JSON.stringify(learning_langs));
 
