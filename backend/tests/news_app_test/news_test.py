@@ -1,4 +1,3 @@
-
 class TestNewsPage:
     endpoint = '/api/news/'
 
