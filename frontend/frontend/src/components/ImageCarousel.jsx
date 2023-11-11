@@ -30,9 +30,13 @@ const ImageCarousel = ({ images }) => {
   }, [activeImageIndex, translateAmount, images]);
 
   useEffect(() => {
-    setTranslateAmount(imageContainer.current.clientWidth);
+    setTranslateAmount(
+      document.getElementById("rootDiv").getBoundingClientRect().width,
+    );
     const handleResize = () => {
-      setTranslateAmount(imageContainer.current.clientWidth);
+      setTranslateAmount(
+        document.getElementById("rootDiv").getBoundingClientRect().width,
+      );
     };
 
     window.addEventListener("resize", handleResize);
@@ -42,7 +46,10 @@ const ImageCarousel = ({ images }) => {
   }, []);
 
   return (
-    <div className="relative flex h-full w-full items-center justify-center overflow-hidden">
+    <div
+      id="rootDiv"
+      className="relative flex h-full w-full items-center justify-center overflow-hidden"
+    >
       <div
         style={{ transform: `translateX(-${translate}px)` }}
         ref={imageContainer}
@@ -59,12 +66,14 @@ const ImageCarousel = ({ images }) => {
         ))}
       </div>
       {isLeftVisible && (
-        <button
-          onClick={onLeftClick}
-          className="absolute left-0 text-4xl text-white/40 outline-none hover:text-white/90"
-        >
-          <BiSolidChevronLeftCircle />
-        </button>
+        <>
+          <button
+            onClick={onLeftClick}
+            className="absolute left-0 text-4xl text-white/40 outline-none hover:text-white/90"
+          >
+            <BiSolidChevronLeftCircle />
+          </button>
+        </>
       )}
 
       {isRightVisible && (
