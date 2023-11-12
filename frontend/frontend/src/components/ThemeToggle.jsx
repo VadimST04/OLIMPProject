@@ -18,7 +18,7 @@ const ThemeToggle = () => {
     <>
       <button
         onClick={() => setTheme("dark")}
-        className="group rounded-md p-2 text-[20px] hover:bg-main-dark-green dark:hidden"
+        className="group cursor-pointer rounded-md p-[11px] text-[20px] hover:bg-main-dark-green dark:hidden"
       >
         <div className="flex items-center justify-center text-soft-white transition-all duration-150 group-hover:scale-110">
           <BsMoonFill />

@@ -49,11 +49,12 @@ const HorizontalCarousel = ({ items, onItemClick }) => {
       className="relative flex items-center overflow-x-hidden"
     >
       <div
-        className="flex w-[max-content] gap-3 whitespace-nowrap transition-transform"
+        className="flex w-[max-content] whitespace-nowrap transition-transform"
         style={{ transform: `translateX(-${translate}px)` }}
       >
-        {items.map((item) => (
+        {items.map((item, index) => (
           <div
+            key={index}
             onClick={() => {
               // onItemClick();
             }}
@@ -74,14 +75,14 @@ const HorizontalCarousel = ({ items, onItemClick }) => {
         </button>
       )}
       {isRightVisible && (
-        <div className="absolute right-0 flex h-full w-20 items-center justify-end bg-gradient-to-l from-soft-white from-50% dark:from-soft-black">
-          <button
+        <button className="absolute right-0 flex h-full w-20 items-center justify-end bg-gradient-to-l from-soft-white from-50% dark:from-soft-black">
+          <div
             onClick={() => onRightClick()}
             className="cursor-pointer rounded-full p-1 text-[20px] hover:bg-soft-white-hover dark:hover:bg-soft-black-hover"
           >
             <FiChevronRight />
-          </button>
-        </div>
+          </div>
+        </button>
       )}
     </div>
   );
