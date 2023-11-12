@@ -52,8 +52,9 @@ const HorizontalCarousel = ({ items, onItemClick }) => {
         className="flex w-[max-content] gap-3 whitespace-nowrap transition-transform"
         style={{ transform: `translateX(-${translate}px)` }}
       >
-        {items.map((item) => (
+        {items.map((item, index) => (
           <div
+            key={index}
             onClick={() => {
               // onItemClick();
             }}

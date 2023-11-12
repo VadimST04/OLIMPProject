@@ -32,7 +32,7 @@ const LanguageDropDown = () => {
   };
 
   return (
-    <div onClick={() => onClickHandler()} ref={selfRef} className="relative">
+    <button onClick={() => onClickHandler()} ref={selfRef} className="relative">
       <div className="group cursor-pointer rounded-md p-2 text-[26px] hover:bg-main-dark-green">
         <div className="flex items-center justify-center text-soft-white transition-all duration-150 group-hover:scale-110">
           <MdLanguage />
@@ -47,7 +47,7 @@ const LanguageDropDown = () => {
           ))}
         </div>
       </div>
-    </div>
+    </button>
   );
 };
 

@@ -52,7 +52,7 @@ const DropdownButton = ({ buttons }) => {
     >
       <div
         onClick={() => setIsOpen(!isOpen)}
-        className={`flex w-[5rem] cursor-pointer items-center justify-center gap-2 rounded-md px-5 py-[7px] md:w-[9rem] ${activeButtonBg}`}
+        className={`flex cursor-pointer items-center justify-center gap-2 rounded-md px-5 py-[7px] ${activeButtonBg}`}
       >
         {buttons.at(activeButtonIndex).icon}
         <p className="hidden md:block">{buttons.at(activeButtonIndex).title}</p>
@@ -67,10 +67,10 @@ const DropdownButton = ({ buttons }) => {
             <button
               key={index}
               onClick={() => buttonClickHandler(buttons.indexOf(button))}
-              className={`flex w-full items-center justify-center gap-2 bg-beig px-6 py-3 hover:bg-beig-dark sm:justify-normal ${buttonCursor}`}
+              className={`flex w-full items-center justify-center gap-2 bg-beig px-6 py-3 hover:bg-beig-dark md:justify-normal ${buttonCursor}`}
             >
               {button.icon}
-              <p className="hidden sm:block">{button.title}</p>
+              <p className="hidden md:block">{button.title}</p>
             </button>
           ))}
       </div>

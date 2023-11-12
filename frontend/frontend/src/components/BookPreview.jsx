@@ -1,4 +1,5 @@
 import React from "react";
+import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 
 const BookPreview = ({
   image,
@@ -7,6 +8,8 @@ const BookPreview = ({
   language,
   genre,
   firstPageContent,
+  closePreviewHandler,
+  readMoreHandler,
 }) => {
   image = "https://images.unsplash.com/photo-1589998059171-988d887df646";
   title = "Twisted love";
@@ -14,21 +17,33 @@ const BookPreview = ({
   author = "Ana Huang";
   language = "English";
   return (
-    <div className="grid h-full w-full grid-cols-[0.4fr,1fr] gap-5">
-      <div className="relative grid grid-rows-[1fr,0.5fr]">
-        <div className="flex flex-col items-center gap-5 px-5">
+    <div className="grid h-full w-full grid-cols-1 gap-5 md:grid-cols-[0.3fr,1fr]">
+      <div className="relative grid md:grid-rows-[1fr,0.5fr]">
+        <button
+          onClick={() => closePreviewHandler()}
+          className="absolute z-[1] h-min w-min text-[32px]"
+        >
+          <BsFillArrowLeftCircleFill />
+        </button>
+        <div className="flex select-none flex-col items-center gap-5 px-5 pt-12 md:min-w-[22rem]">
           <img
             src={image}
             alt=""
             className="h-full w-full object-cover shadow-[0_5px_5px_#000] transition-all duration-300 will-change-transform hover:-translate-y-2 hover:shadow-[0_10px_10px_#000]"
           />
-          <button className="w-48 rounded-md bg-main-green p-2 text-soft-white outline-none hover:bg-main-dark-green">
+          <button
+            onClick={() => {
+              closePreviewHandler();
+              readMoreHandler();
+            }}
+            className="w-48 rounded-md bg-main-green p-2 text-soft-white outline-none hover:bg-main-dark-green"
+          >
             Read more
           </button>
         </div>
       </div>
-      <div className="space-y-2 overflow-y-auto pr-5 pt-5 text-lg">
-        <div className="flex items-center justify-between">
+      <div className="space-y-2 pr-5 pt-5 text-lg md:overflow-y-auto">
+        <div className="flex flex-wrap items-center justify-between">
           <p className="text-3xl font-bold">{title}</p>
           <p className="font-semibold text-[#737373]">{genre}</p>
         </div>
@@ -40,7 +55,7 @@ const BookPreview = ({
           <span>Book language - </span>
           <span>{language}</span>
         </p>
-        <div className="space-y-4">
+        <div className="space-y-4 pt-5">
           <p>
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vero dolor
             sit reiciendis, libero sint soluta expedita. Dicta facilis

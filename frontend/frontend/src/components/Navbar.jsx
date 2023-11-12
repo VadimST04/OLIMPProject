@@ -27,10 +27,13 @@ function Navbar() {
     <div
       className={`flex items-center justify-between bg-main-green px-5 ${navPadding}`}
     >
-      <div className="flex items-center gap-5">
+      <div className="flex w-[168px] items-center gap-5">
         <DropdownButton buttons={buttonOptions} />
       </div>
-      <div className="flex items-center gap-1">
+      <div className="pointer-events-none hidden select-none font-bruno-ace text-4xl uppercase text-soft-white sm:block">
+        olimp
+      </div>
+      <div className="flex items-center">
         <ThemeToggle />
         <LanguageDropDown />
         <SettingsButton />

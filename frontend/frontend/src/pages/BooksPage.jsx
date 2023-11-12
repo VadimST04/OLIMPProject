@@ -5,11 +5,18 @@ import HorizontalCarousel from "../components/HorizontalCarousel";
 import { useSelector, useDispatch } from "react-redux";
 import { booksList } from "../store/actions/booksAction";
 import BookPreview from "../components/BookPreview";
+import DetailedBook from "../components/DetailedBook";
 
 const BooksPage = () => {
   const dispatch = useDispatch();
-  const [bookPreview, setBookPreview] = useState(true);
+  const [bookPreview, setBookPreview] = useState(false);
   const [bookDetails, setBookDetails] = useState(false);
+  const [currentBook, setCurrentBook] = useState({
+    image: "",
+    title: "",
+    author: "",
+    language: "",
+  });
   const { books } = useSelector((state) => state.booksList);
 
   useEffect(() => {
@@ -188,19 +195,39 @@ const BooksPage = () => {
     <>
       {!bookPreview && !bookDetails && (
         <div className="h-full w-full space-y-5">
-          <div className="h-10 w-full">
-            <SearchBar inputStyling="h-full w-full rounded-2xl bg-[#D9D9D9] outline-none p-2 px-6 dark:text-soft-black" />
+          <div className="h-10 w-full dark:text-soft-black">
+            <SearchBar inputStyling="h-full w-full rounded-2xl bg-[#D9D9D9] outline-none p-2 px-6" />
           </div>
           <HorizontalCarousel items={testTags} />
           <div className="grid grid-cols-[repeat(auto-fill,minmax(11rem,1fr))] gap-4">
             {testBooks.map((item, index) => (
-              <BookItem key={index} {...item} />
+              <BookItem
+                key={index}
+                image={item.image}
+                title={item.title}
+                author={item.author}
+                language={item.language}
+                previewHandler={() => setBookPreview(true)}
+                setBook={setCurrentBook}
+              />
             ))}
           </div>
         </div>
       )}
 
-      {bookPreview && <BookPreview />}
+      {bookPreview && (
+        <BookPreview
+          closePreviewHandler={() => setBookPreview(false)}
+          readMoreHandler={() => setBookDetails(true)}
+        />
+      )}
+
+      {bookDetails && (
+        <DetailedBook
+          closeBookHandler={() => setBookDetails(false)}
+          {...currentBook}
+        />
+      )}
     </>
   );
 };
