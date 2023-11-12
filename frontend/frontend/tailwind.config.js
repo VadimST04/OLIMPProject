@@ -6,6 +6,7 @@ module.exports = {
     extend: {
       fontFamily: {
         euclid: ["Euclid Circular A", "Poppins"],
+        "bruno-ace": ["Bruno Ace"],
       },
       colors: {
         "main-green": "#217074",

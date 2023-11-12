@@ -16,22 +16,22 @@ const ThemeToggle = () => {
 
   return (
     <>
-      <div
+      <button
         onClick={() => setTheme("dark")}
-        className="group cursor-pointer rounded-md p-2 text-[20px] hover:bg-main-dark-green dark:hidden"
+        className="group cursor-pointer rounded-md p-[11px] text-[20px] hover:bg-main-dark-green dark:hidden"
       >
         <div className="flex items-center justify-center text-soft-white transition-all duration-150 group-hover:scale-110">
           <BsMoonFill />
         </div>
-      </div>
-      <div
+      </button>
+      <button
         onClick={() => setTheme("light")}
-        className="group hidden cursor-pointer rounded-md p-2 text-[26px] hover:bg-main-dark-green dark:block"
+        className="group hidden rounded-md p-2 text-[26px] hover:bg-main-dark-green dark:block"
       >
         <div className="flex items-center justify-center text-soft-white transition-all duration-150 group-hover:scale-110">
           <BsFillSunFill />
         </div>
-      </div>
+      </button>
     </>
   );
 };
