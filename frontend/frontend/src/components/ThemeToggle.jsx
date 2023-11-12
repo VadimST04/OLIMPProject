@@ -26,7 +26,7 @@ const ThemeToggle = () => {
       </button>
       <button
         onClick={() => setTheme("light")}
-        className="group hidden cursor-pointer rounded-md p-2 text-[26px] hover:bg-main-dark-green dark:block"
+        className="group hidden rounded-md p-2 text-[26px] hover:bg-main-dark-green dark:block"
       >
         <div className="flex items-center justify-center text-soft-white transition-all duration-150 group-hover:scale-110">
           <BsFillSunFill />
