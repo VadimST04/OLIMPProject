@@ -8,6 +8,7 @@ from rest_framework.views import APIView
 from rest_framework import mixins
 from rest_framework_simplejwt.views import TokenObtainPairView
 
+from backend import settings
 from baseApp.models import UserProfile, Language
 from baseApp.serializers import UserSerializer, UserProfileSerializer, MyTokenObtainPairSerializer, LanguageSerializer
 from postsApp.permissions import IsAuthorOrIsAuthenticated
@@ -115,7 +116,6 @@ class UserProfileUpdate(APIView):
         :return: Returns information about user's profile and data about user
         """
         data = {key: value for key, value in request.data.items()}
-        print(data)
         user = request.user
         userprofile = UserProfile.objects.get(user=user)
 
@@ -127,7 +127,8 @@ class UserProfileUpdate(APIView):
 
         user.save()
 
-        userprofile.image = os.path.basename(data.get('image', userprofile.image))
+        print(data.get('image', userprofile.image))
+        userprofile.image = data.get('image', userprofile.image)
         userprofile.description = data.get('description', userprofile.description)
 
         if data.get('app_lang'):

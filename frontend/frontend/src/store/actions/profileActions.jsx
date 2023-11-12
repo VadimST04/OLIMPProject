@@ -53,7 +53,7 @@ export const updateUserProfile =
       const { userToken } = getState().userToken;
 
       const formData = new FormData();
-      formData.append("image", image);
+      if (image) formData.append("image", image);
       formData.append("username", username);
       formData.append("email", email);
       if (password) formData.append("password", password);

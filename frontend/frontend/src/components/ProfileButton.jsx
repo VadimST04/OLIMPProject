@@ -1,20 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { HiOutlineUserCircle } from "react-icons/hi";
 import SignInSignUpForm from "./SignInSignUpForm";
 import RegistrationForm from "./RegistrationForm";
+import { getUserProfile } from "../store/actions/profileActions";
 
 const ProfileButton = () => {
   const [profileImage, setProfileImage] = useState();
   const [isSignInFormOpen, setSignInFormOpen] = useState(false);
   const [isRegistrationFormOpen, setRegistrationFormOpen] = useState(false);
   const { userToken } = useSelector((state) => state.userToken);
+  const { userProfile } = useSelector((state) => state.userProfile);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    if (userToken) setProfileImage(userToken.image);
-  }, [userToken]);
+    if (!userProfile) dispatch(getUserProfile());
+    else setProfileImage(userProfile.image);
+  }, [dispatch, userProfile]);
 
   return (
     <>

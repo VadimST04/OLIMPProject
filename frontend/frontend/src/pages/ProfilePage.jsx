@@ -20,6 +20,8 @@ const ProfilePage = () => {
   console.log(userProfile);
   // const { languages } = useSelector((state) => state.languagesList);
   // console.log(languages);
+  const [imageFileOld, setImageFileOld] = useState("");
+  const [imageFile, setImageFile] = useState("");
   const [formData, setFormData] = useState({
     username: "",
     description: "",
@@ -28,6 +30,7 @@ const ProfilePage = () => {
     appLanguage: "",
     learningLanguages: [],
     image: "",
+    imageName: imageFile,
   });
 
   useEffect(() => {
@@ -40,6 +43,7 @@ const ProfilePage = () => {
         appLanguage: userProfile.app_lang,
         learningLanguages: [...userProfile.learning_langs],
         image: userProfile.image,
+        imageName: imageFile,
       });
     } else {
       dispatch(getUserProfile());
@@ -61,11 +65,14 @@ const ProfilePage = () => {
         formData.email,
         formData.password,
         formData.description,
-        formData.image,
+        formData.imageName === imageFileOld ? null : formData.imageName,
         formData.appLanguage,
         formData.learningLanguages,
       ),
     );
+
+    setImageFileOld(imageFile);
+    dispatch(getUserProfile());
   };
 
   const languages = [
@@ -116,7 +123,9 @@ const ProfilePage = () => {
       setFormData({
         ...formData,
         image: URL.createObjectURL(event.target.files[0]),
+        imageName: event.target.files[0],
       });
+      setImageFile(event.target.files[0]);
     }
   };
 
