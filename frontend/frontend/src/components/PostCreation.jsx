@@ -1,10 +1,13 @@
 import React, { useRef, useState } from "react";
 import { BiImageAdd } from "react-icons/bi";
 import ImageCarousel from "./ImageCarousel";
+import PostsNavbar from "./PostsNavbar";
+import { useNavigate } from "react-router";
 
-//TODOO: add image carousel for new added images
-const PostCreation = ({ closeForm }) => {
+const PostCreation = () => {
   const imageInput = useRef();
+  const navigate = useNavigate();
+
   const formBg = useRef();
   const [drag, setDrag] = useState(false);
   const dragBorderStyle = drag ? "border-soft-black" : "border-transparent";
@@ -50,27 +53,20 @@ const PostCreation = ({ closeForm }) => {
     setDrag(false);
   };
 
-  const closeFormHandler = (e) => {
-    if (e.target === formBg.current) closeForm();
-  };
-
   return (
-    <div
-      onClick={(e) => closeFormHandler(e)}
-      ref={formBg}
-      className="absolute left-0 top-0 z-10 flex h-full w-full items-center justify-center bg-black/50 p-2"
-    >
+    <div className="flex h-full w-full flex-col items-center">
+      <PostsNavbar />
       <div
         onDragStart={onDragHandler}
         onDragOver={onDragHandler}
         onDragLeave={onDragLeaveHandler}
         onDrop={onDropHandler}
-        className="flex h-[70%] w-[70%] max-w-[52rem] grid-cols-2 flex-col overflow-hidden rounded-xl bg-soft-white dark:bg-soft-black"
+        className="flex w-full max-w-[72rem] grow grid-cols-2 flex-col overflow-hidden rounded-xl bg-soft-white dark:bg-soft-black"
       >
         <p className="p-2 text-center text-2xl font-semibold text-soft-black dark:text-soft-white">
           Create a post
         </p>
-        <hr className="w-[80%] self-center border-soft-black dark:border-[#ABABAB] rounded-full" />
+        <hr className="w-[80%] self-center rounded-full border-soft-black dark:border-[#ABABAB]" />
         <div className="grid h-full flex-grow grid-cols-1 gap-5 overflow-y-auto px-5 py-12 text-soft-black dark:text-soft-white md:grid-cols-2 md:overflow-y-hidden">
           <div className="grid grid-rows-[3.5rem,1fr] gap-5">
             <div
@@ -105,9 +101,17 @@ const PostCreation = ({ closeForm }) => {
               <p className="select-none text-[#C0C0C0]">Description</p>
               <textarea className="flex-grow resize-none rounded-xl border-2 border-[#E1E1E1] bg-soft-white p-2 text-soft-black outline-none dark:border-[#ABABAB] dark:bg-soft-black dark:text-soft-white"></textarea>
             </div>
-            <button className="mx-[25%] rounded-xl bg-soft-black font-semibold text-soft-white hover:bg-soft-black-hover dark:bg-[#D9D9D9] dark:text-soft-black dark:hover:bg-soft-white-hover">
-              Share
-            </button>
+            <div className="flex gap-10 ">
+              <button
+                onClick={() => navigate("/posts")}
+                className="grow rounded-xl bg-[#D96060] font-semibold text-soft-white hover:bg-[#B04E4E]"
+              >
+                Cancel
+              </button>
+              <button className="grow rounded-xl bg-soft-black font-semibold text-soft-white hover:bg-soft-black-hover dark:bg-[#D9D9D9] dark:text-soft-black dark:hover:bg-soft-white-hover">
+                Share
+              </button>
+            </div>
           </div>
         </div>
       </div>

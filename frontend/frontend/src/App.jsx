@@ -13,6 +13,7 @@ import UsersPage from "./pages/UsersPage";
 import BooksPage from "./pages/BooksPage";
 import ProfilePage from "./pages/ProfilePage";
 import NewsPage from "./pages/NewsPage";
+import PostCreation from "./components/PostCreation";
 
 const Root = () => {
   return (
@@ -28,6 +29,7 @@ const router = createBrowserRouter(
     <Route path="/" element={<Root />}>
       <Route index element={<NewsPage />} />
       <Route path="/posts" element={<PostsPage />} />
+      <Route path="/posts/post-creation" element={<PostCreation />} />
       <Route path="/books" element={<BooksPage />} />
       <Route path="/users" element={<UsersPage />} />
       <Route path="/music" element={<MusicPage />} />
