@@ -13,17 +13,17 @@ from baseApp.models import Language
 def regular_user(client, django_user_model):
     username = 'test_regular_user'
     password = 'test_passw'
+    email = 'test_email@gmail.com'
 
     eng = Language.objects.create(name='English')
     ger = Language.objects.create(name='German')
 
     regular = django_user_model.objects.create_user(
-        username=username, password=password)
+        username=username, password=password, email=email)
 
     test_profile = UserProfile.objects.create(user_id=regular.pk, image='backend/static/images/test.png',
                                               description=None, app_lang=eng)
-    test_profile.learning_langs.set([eng])
-    test_profile.learning_langs.set([ger])
+    test_profile.learning_langs.set([eng, ger])
 
     response = client.post('/api/login/', {'username': username, 'password': password}, format='json')
 

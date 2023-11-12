@@ -1,6 +1,6 @@
 from pytest_factoryboy import register
 
-from tests.factories import BookFactory, AuthorFactory, SongFactory, LanguageFactory
+from tests.factories import BookFactory, AuthorFactory, SongFactory, LanguageFactory, UserFactory, UserProfileFactory
 
 pytest_plugins = 'tests.fixtures'
 
@@ -8,3 +8,5 @@ register(BookFactory)
 register(AuthorFactory)
 register(SongFactory)
 register(LanguageFactory)
+register(UserFactory)
+register(UserProfileFactory)

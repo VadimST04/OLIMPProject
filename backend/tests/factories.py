@@ -1,8 +1,12 @@
-import factory
+import datetime
 
-from baseApp.models import Language
+import factory
+from django.contrib.auth.models import User
+
+from baseApp.models import Language, UserProfile
 from booksApp.models import Book, Author
 from musicApp.models import Song
+from postsApp.models import Post
 
 
 class AuthorFactory(factory.django.DjangoModelFactory):
@@ -16,7 +20,7 @@ class LanguageFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Language
 
-    name = factory.Sequence(lambda n: f'test_name{n}')
+    name = 'English'
 
 
 class BookFactory(factory.django.DjangoModelFactory):
@@ -62,3 +66,47 @@ class SongFactory(factory.django.DjangoModelFactory):
             for lang in extracted:
                 self.language.add(lang)
 
+
+class UserFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = User
+
+    first_name = factory.Sequence(lambda n: f'test_first_name_{n}')
+    last_name = factory.Sequence(lambda n: f'test_last_name_{n}')
+    email = factory.Sequence(lambda n: f'test_email_{n}@gmail.com')
+    password = factory.Sequence(lambda n: f'test_password_{n}')
+
+
+class UserProfileFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = UserProfile
+
+    user = factory.SubFactory(UserFactory)
+    image = 'backend/static/images/test.png'
+    description = factory.Sequence(lambda n: f'test_description_{n}')
+    app_lang = factory.SubFactory(LanguageFactory)
+
+    @factory.post_generation  # разобрать как работает
+    def learning_langs(self, create, extracted, **kwargs):
+        if not create:
+            # Simple build, do nothing.
+            return
+
+        if extracted:
+            # A list of items were passed in, use them
+            for lang in extracted:
+                self.learning_langs.add(lang)
+
+
+# class PostFactory(factory.django.DjangoModelFactory):
+#     class Meta:
+#         model = Post
+#
+#     user = factory.SubFactory(UserFactory)
+#     content = factory.Sequence(lambda n: f'test_content_{n}')
+#     likes = factory.Sequence(lambda n: n + 10)
+#     created_at = datetime.datetime.now()
+#
+#
+# class CommentFactory(factory.django.DjangoModelFactory):
+#
