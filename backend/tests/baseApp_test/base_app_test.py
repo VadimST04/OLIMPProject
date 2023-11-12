@@ -3,20 +3,31 @@ import json
 import pytest
 from django.contrib.auth.models import User
 
+from baseApp.models import Language, UserProfile
+
 pytestmark = pytest.mark.django_db
 
 
-# class TestUserAuth:
-#     login_endpoint = '/api/login/'
-#
-#     def test_login(self, user_profile_factory, api_client):
-#         user = user_profile_factory.create()
-#
-#         response = api_client().post(self.login_endpoint,
-#                                      {'username': user.user.username, 'password': user.user.password,
-#                                       'email': user.user.email}, format='json')
-#
-#         assert response.status_code == 200
+class TestUserAuth:
+    login_endpoint = '/api/login/'
+
+    def test_login(self, api_client, django_user_model):
+        username = 'test_admin_user'
+        password = 'test_passw'
+
+        eng = Language.objects.create(name='English')
+
+        admin = django_user_model.objects.create_superuser(
+            username=username, password=password, is_superuser=True)
+
+        test_profile = UserProfile.objects.create(user_id=admin.pk, image='backend/static/images/test.png',
+                                                  description=None, app_lang=eng)
+        test_profile.learning_langs.set([eng])
+
+        response = api_client().post(self.login_endpoint,
+                                     {'username': username, 'password': password}, format='json')
+
+        assert response.status_code == 200
 
 
 class TestUser:
@@ -34,7 +45,7 @@ class TestUser:
 
         assert content.get('app_lang') == regular_user.data.user_profile.app_lang.name
         assert content.get('description') == regular_user.data.user_profile.description
-        # assert content.get('image') == regular_user.data.user_profile.image.url
+        assert content.get('image') == response.wsgi_request.build_absolute_uri(regular_user.data.user_profile.image.url)
         assert content.get('learning_langs') == langs
         assert user_content.get('username') == regular_user.data.username
         assert user_content.get('email') == regular_user.data.email
@@ -47,3 +58,14 @@ class TestUser:
         assert response.status_code == 200
         assert len(json.loads(response.content)) == len(User.objects.all())
 
+    def test_user_profile_update(self, api_client, regular_user, user_profile_factory):
+        new_user = user_profile_factory.create()
+        new_user_data = {'username': new_user.user.username, 'email': new_user.user.email,
+                         'password': new_user.user.password, 'image': new_user.image,
+                         'description': new_user.description, 'app_lang': new_user.app_lang,
+                         'learning_langs': new_user.learning_langs}
+
+        endpoint = self.user_profile_endpoint + 'update/'
+        response = api_client().patch(endpoint, data=new_user_data,
+                                      HTTP_AUTHORIZATION=f'Bearer {regular_user.token}')
+        assert response.status_code == 200

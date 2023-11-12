@@ -51,8 +51,7 @@ def admin_user(client, django_user_model):
 
     test_profile = UserProfile.objects.create(user_id=admin.pk, image='backend/static/images/test.png',
                                               description=None, app_lang=eng)
-    test_profile.learning_langs.set([eng])
-    test_profile.learning_langs.set([ger])
+    test_profile.learning_langs.set([eng, ger])
 
     response = client.post('/api/login/', {'username': username, 'password': password}, format='json')
 
