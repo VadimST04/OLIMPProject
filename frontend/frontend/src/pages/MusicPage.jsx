@@ -430,27 +430,6 @@ const MusicPage = () => {
         </div>
       )}
 
-      {/* {!showDetailedMusic && (
-        <div className="flex gap-4">
-          <div className="h-full w-max shrink-0 overflow-y-auto">
-            {leftItems.map((item) => (
-              <div className="cursor-pointer rounded-md p-1 px-3 hover:bg-soft-white-hover dark:hover:bg-soft-black-hover">
-                <p>{item}</p>
-              </div>
-            ))}
-          </div>
-          <div className="grid w-full grid-cols-[repeat(auto-fill,minmax(11rem,1fr))] gap-4">
-            {testMusic.map((item) => (
-              <MusicItem
-                {...item}
-                key={item.id}
-                onClickHandler={musicItemClick}
-              />
-            ))}
-          </div>
-        </div>
-      )} */}
-
       {showDetailedMusic && (
         <DetailedMusic
           {...currentDetailedMusic}
