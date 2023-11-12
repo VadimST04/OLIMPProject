@@ -217,6 +217,7 @@ const BooksPage = () => {
 
       {bookPreview && (
         <BookPreview
+          {...currentBook}
           closePreviewHandler={() => setBookPreview(false)}
           readMoreHandler={() => setBookDetails(true)}
         />

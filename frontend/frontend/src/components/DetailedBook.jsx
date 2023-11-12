@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
+import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 const DetailedBook = ({ title, author, pages, closeBookHandler }) => {
   pages = 238;
   const [page, setPage] = useState(1);
@@ -13,7 +14,13 @@ const DetailedBook = ({ title, author, pages, closeBookHandler }) => {
 
   return (
     <div className="grid h-full w-full grid-rows-[minmax(5rem,auto),1fr,minmax(5rem,auto)] gap-5 overflow-y-auto">
-      <div className="grid grid-cols-[minmax(0,1fr),auto] gap-5">
+      <div className="relative grid h-full grid-cols-[minmax(0,1fr),auto] gap-5 pt-10">
+        <button
+          onClick={() => closeBookHandler()}
+          className="absolute z-[1] h-min w-min text-[32px]"
+        >
+          <BsFillArrowLeftCircleFill />
+        </button>
         <div className="w-full self-center justify-self-start">
           <p className="w-full break-words text-3xl">{title}</p>
           <p className="w-full break-words text-2xl">{author}</p>

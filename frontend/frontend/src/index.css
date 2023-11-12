@@ -6,7 +6,7 @@
 /* width */
 ::-webkit-scrollbar {
   width: 0.25rem;
-  /* display: none; */
+  display: none;
 }
 
 /* Track */

@@ -11,11 +11,11 @@ const BookPreview = ({
   closePreviewHandler,
   readMoreHandler,
 }) => {
-  image = "https://images.unsplash.com/photo-1589998059171-988d887df646";
-  title = "Twisted love";
+  // image = "https://images.unsplash.com/photo-1589998059171-988d887df646";
+  // title = "Twisted love";
   genre = "Romance novels";
-  author = "Ana Huang";
-  language = "English";
+  // author = "Ana Huang";
+  // language = "English";
   return (
     <div className="grid h-full w-full grid-cols-1 gap-5 md:grid-cols-[0.3fr,1fr]">
       <div className="relative grid md:grid-rows-[1fr,0.5fr]">
@@ -25,12 +25,14 @@ const BookPreview = ({
         >
           <BsFillArrowLeftCircleFill />
         </button>
-        <div className="flex select-none flex-col items-center gap-5 px-5 pt-12 md:min-w-[22rem]">
-          <img
-            src={image}
-            alt=""
-            className="h-full w-full object-cover shadow-[0_5px_5px_#000] transition-all duration-300 will-change-transform hover:-translate-y-2 hover:shadow-[0_10px_10px_#000]"
-          />
+        <div className="flex h-full select-none flex-col items-center gap-5 px-5 pt-12 md:min-w-[22rem]">
+          <div className="relative h-full min-h-[20rem] w-full">
+            <img
+              src={image}
+              alt=""
+              className="absolute h-full w-full object-cover shadow-[0_5px_5px_#000] transition-all duration-300 will-change-transform hover:-translate-y-2 hover:shadow-[0_10px_10px_#000]"
+            />
+          </div>
           <button
             onClick={() => {
               closePreviewHandler();
@@ -44,7 +46,7 @@ const BookPreview = ({
       </div>
       <div className="space-y-2 pr-5 pt-5 text-lg md:overflow-y-auto">
         <div className="flex flex-wrap items-center justify-between">
-          <p className="text-3xl font-bold">{title}</p>
+          <p className="truncate text-3xl font-bold">{title}</p>
           <p className="font-semibold text-[#737373]">{genre}</p>
         </div>
         <p>
