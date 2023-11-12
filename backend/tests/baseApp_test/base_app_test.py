@@ -1,6 +1,7 @@
 import json
 
 import pytest
+from django.contrib.auth.models import User
 
 pytestmark = pytest.mark.django_db
 
@@ -37,3 +38,12 @@ class TestUser:
         assert content.get('learning_langs') == langs
         assert user_content.get('username') == regular_user.data.username
         assert user_content.get('email') == regular_user.data.email
+
+    def test_user_list(self, api_client, regular_user, user_profile_factory):
+        user_profile_factory.create_batch(10)
+
+        response = api_client().get(self.users_endpoint, HTTP_AUTHORIZATION=f'Bearer {regular_user.token}')
+
+        assert response.status_code == 200
+        assert len(json.loads(response.content)) == len(User.objects.all())
+
