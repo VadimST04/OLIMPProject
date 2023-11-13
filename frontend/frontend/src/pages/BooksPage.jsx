@@ -17,10 +17,14 @@ const BooksPage = () => {
     author: "",
     language: "",
   });
+
+  const { userProfile } = useSelector((state) => state.userProfile);
+
   const { books } = useSelector((state) => state.booksList);
+  console.log(books);
 
   useEffect(() => {
-    dispatch(booksList());
+    dispatch(booksList(userProfile.learning_langs));
   }, [dispatch]);
 
   const testBooks = [
