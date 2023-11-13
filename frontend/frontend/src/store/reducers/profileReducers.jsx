@@ -20,6 +20,10 @@ export const userProfileReducer = (state = { user: {} }, action) => {
       return {};
 
     default:
-      return state;
+      return {
+        userProfile: localStorage.getItem("userProfile")
+          ? JSON.parse(localStorage.getItem("userProfile"))
+          : null,
+      };
   }
 };
