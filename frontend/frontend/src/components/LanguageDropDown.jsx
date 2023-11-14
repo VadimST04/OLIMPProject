@@ -24,7 +24,7 @@ const LanguageDropDown = () => {
   }, []);
 
   useEffect(() => {
-    setLearningLanguages(userProfile ? userProfile[0].learning_langs : []);
+    setLearningLanguages(userProfile ? userProfile.learning_langs : []);
   }, [userProfile]);
 
   const onClickHandler = () => {
@@ -39,7 +39,7 @@ const LanguageDropDown = () => {
         </div>
       </div>
       <div
-        className={`absolute right-0 top-[100%] flex max-h-64 w-max cursor-pointer overflow-y-auto rounded-md bg-soft-white ${dropDownVisibility}`}
+        className={`absolute right-0 top-[100%] z-[1] flex max-h-64 w-max cursor-pointer overflow-y-auto rounded-md bg-soft-white ${dropDownVisibility}`}
       >
         <div className="">
           {learningLanguages?.map((lang, index) => (

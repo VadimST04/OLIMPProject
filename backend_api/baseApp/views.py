@@ -8,11 +8,13 @@ from rest_framework.views import APIView
 from rest_framework import mixins
 from rest_framework_simplejwt.views import TokenObtainPairView
 
+from backend import settings
 from baseApp.models import UserProfile, Language
 from baseApp.serializers import UserSerializer, UserProfileSerializer, MyTokenObtainPairSerializer, LanguageSerializer
 from postsApp.permissions import IsAuthorOrIsAuthenticated
 
 import json
+import os
 
 
 class MyTokenObtainPairView(TokenObtainPairView):
@@ -41,7 +43,6 @@ class UserRegistration(APIView):
         data = {key: value for key, value in request.data.items()}
         if isinstance(data['learning_langs'], str):
             data['learning_langs'] = json.loads(data['learning_langs'])
-        print(data)
 
         try:
             new_user = User.objects.create(
@@ -84,19 +85,19 @@ class UserList(generics.ListAPIView):
     permission_classes = (IsAuthenticated,)
 
 
-class UserProfileGet(generics.ListAPIView):
+class UserProfileGet(generics.RetrieveAPIView):
     """
     A view for retrieving the profile of a specific user
     with information about this user
     """
 
-    def get_queryset(self):
+    def get_object(self):
         """
-        This method is used to customize the queryset for the UserProfile model based on the requesting user.
-        :return: Returns a profile of a specific user
+        This method is used to get the UserProfile object for the requesting user.
+        :return: Returns a profile of the specific user
         """
         user = self.request.user
-        return UserProfile.objects.filter(user=user).select_related('user')
+        return UserProfile.objects.get(user=user)
 
     serializer_class = UserProfileSerializer
     permission_classes = (IsAuthenticated, IsAuthorOrIsAuthenticated)
@@ -114,7 +115,7 @@ class UserProfileUpdate(APIView):
         :param request: An HTTP request object.
         :return: Returns information about user's profile and data about user
         """
-        data = request.data
+        data = {key: value for key, value in request.data.items()}
         user = request.user
         userprofile = UserProfile.objects.get(user=user)
 
@@ -126,6 +127,7 @@ class UserProfileUpdate(APIView):
 
         user.save()
 
+        print(data.get('image', userprofile.image))
         userprofile.image = data.get('image', userprofile.image)
         userprofile.description = data.get('description', userprofile.description)
 
@@ -134,6 +136,9 @@ class UserProfileUpdate(APIView):
             userprofile.app_lang = app_lang
 
         if data.get('learning_langs'):
+            if isinstance(data['learning_langs'], str):
+                data['learning_langs'] = json.loads(data['learning_langs'])
+
             learning_langs = Language.objects.filter(name__in=data.get('learning_langs', []))
             userprofile.learning_langs.set(learning_langs)
 

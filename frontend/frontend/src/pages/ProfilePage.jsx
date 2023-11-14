@@ -1,7 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getUserProfile } from "../store/actions/profileActions";
+import {
+  getUserProfile,
+  updateUserProfile,
+} from "../store/actions/profileActions";
 import { logout } from "../store/actions/userActions";
 import SearchBar from "../components/SearchBar";
 import { useState } from "react";
@@ -14,8 +17,11 @@ const ProfilePage = () => {
   const navigate = useNavigate();
   const imageInput = useRef();
   const { userProfile } = useSelector((state) => state.userProfile);
+  console.log(userProfile);
   // const { languages } = useSelector((state) => state.languagesList);
   // console.log(languages);
+  const [imageFileOld, setImageFileOld] = useState("");
+  const [imageFile, setImageFile] = useState("");
   const [formData, setFormData] = useState({
     username: "",
     description: "",
@@ -24,21 +30,25 @@ const ProfilePage = () => {
     appLanguage: "",
     learningLanguages: [],
     image: "",
+    imageName: imageFile,
   });
 
   useEffect(() => {
     if (userProfile) {
       setFormData({
-        username: userProfile[0].user.username,
-        description: userProfile[0].description,
-        email: userProfile[0].user.email,
+        username: userProfile.user.username,
+        description: userProfile.description,
+        email: userProfile.user.email,
         password: "",
-        appLanguage: userProfile[0].app_lang,
-        learningLanguages: [...userProfile[0].learning_langs],
-        image: userProfile[0].image,
+        appLanguage: userProfile.app_lang,
+        learningLanguages: [...userProfile.learning_langs],
+        image: userProfile.image,
+        imageName: imageFile,
       });
+    } else {
+      dispatch(getUserProfile());
     }
-  }, [userProfile]);
+  }, [dispatch, userProfile]);
 
   const logoutButtonHandler = () => {
     dispatch(logout());
@@ -46,7 +56,24 @@ const ProfilePage = () => {
     navigate("/");
   };
 
-  const updateButtonHandler = () => {};
+  const updateButtonHandler = (e) => {
+    e.preventDefault();
+
+    dispatch(
+      updateUserProfile(
+        formData.username,
+        formData.email,
+        formData.password,
+        formData.description,
+        formData.imageName === imageFileOld ? null : formData.imageName,
+        formData.appLanguage,
+        formData.learningLanguages,
+      ),
+    );
+
+    setImageFileOld(imageFile);
+    dispatch(getUserProfile());
+  };
 
   const languages = [
     "English",
@@ -96,7 +123,9 @@ const ProfilePage = () => {
       setFormData({
         ...formData,
         image: URL.createObjectURL(event.target.files[0]),
+        imageName: event.target.files[0],
       });
+      setImageFile(event.target.files[0]);
     }
   };
 
@@ -243,7 +272,7 @@ const ProfilePage = () => {
             Log Out
           </button>
           <button
-            onClick={updateButtonHandler}
+            onClick={(e) => updateButtonHandler(e)}
             className="w-32 rounded-md bg-main-green py-2 pl-3 pr-5 text-soft-white outline-none hover:border-main-green hover:bg-main-dark-green"
           >
             Update

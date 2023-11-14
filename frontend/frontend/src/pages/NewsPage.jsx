@@ -18,7 +18,7 @@ const NewsPage = () => {
 
   useEffect(() => {
     if (userProfile) {
-      dispatch(newsList(userProfile[0].learning_langs));
+      dispatch(newsList(userProfile.learning_langs));
     } else dispatch(newsList(["English"]));
   }, [userProfile]);
 

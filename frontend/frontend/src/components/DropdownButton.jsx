@@ -19,8 +19,8 @@ function useOnClickOutside(ref, handler) {
 const DropdownButton = ({ buttons }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeButtonIndex, setActiveButtonIndex] = useState(
-    localStorage.getItem("activeButtonIndex")
-      ? localStorage.getItem("activeButtonIndex")
+    sessionStorage.getItem("activeButtonIndex")
+      ? sessionStorage.getItem("activeButtonIndex")
       : 0,
   );
   const wrapperRef = useRef(null);
@@ -35,7 +35,7 @@ const DropdownButton = ({ buttons }) => {
 
   const buttonClickHandler = (index) => {
     if (!isOpen) return;
-    localStorage.setItem(
+    sessionStorage.setItem(
       "activeButtonIndex",
       buttons.indexOf(buttons.at(index)),
     );

@@ -1,6 +1,8 @@
 from django.contrib.auth.models import User
 from django.db import models
 
+from backend import settings
+
 
 class Language(models.Model):
     objects = models.Manager()
