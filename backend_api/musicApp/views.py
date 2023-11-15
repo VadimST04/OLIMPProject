@@ -1,4 +1,5 @@
-from rest_framework import generics
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import generics, filters
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -51,3 +52,15 @@ class SongSettings(generics.CreateAPIView,
     queryset = Song.objects.all()
     serializer_class = SongSerializer
     permission_classes = (IsAuthenticated, IsAdminUser)
+
+
+class SongSearch(generics.ListAPIView):
+    """
+    This endpoint allows users to retrieve a list of songs based on search criteria,
+    such as title or author's name.
+    """
+
+    queryset = Song.objects.all()
+    serializer_class = SongSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['title', 'artist__name']
