@@ -49,7 +49,7 @@ const HorizontalCarousel = ({ items, onItemClick }) => {
       className="relative flex items-center overflow-x-hidden"
     >
       <div
-        className="flex w-[max-content] whitespace-nowrap transition-transform"
+        className="flex w-[max-content] gap-2 overflow-x-auto whitespace-nowrap transition-transform sm:overflow-x-visible"
         style={{ transform: `translateX(-${translate}px)` }}
       >
         {items.map((item, index) => (
@@ -58,7 +58,7 @@ const HorizontalCarousel = ({ items, onItemClick }) => {
             onClick={() => {
               // onItemClick();
             }}
-            className="shrink-0 cursor-pointer select-none rounded-md px-3 py-2 font-semibold hover:bg-soft-white-hover dark:hover:bg-soft-black-hover"
+            className="shrink-0 cursor-pointer select-none rounded-md border border-soft-white-hover px-2 py-1 font-semibold hover:bg-soft-white-hover dark:hover:bg-soft-black-hover sm:border-none"
           >
             {item}
           </div>
@@ -68,7 +68,7 @@ const HorizontalCarousel = ({ items, onItemClick }) => {
         <button className="absolute left-0 z-[1] flex h-full w-20 items-center bg-gradient-to-r from-soft-white from-50% dark:from-soft-black">
           <div
             onClick={() => onLeftClick()}
-            className="cursor-pointer rounded-full p-1 text-[20px] hover:bg-soft-white-hover dark:hover:bg-soft-black-hover"
+            className="hidden cursor-pointer rounded-full p-1 text-[20px] hover:bg-soft-white-hover dark:hover:bg-soft-black-hover sm:block"
           >
             <FiChevronLeft />
           </div>
@@ -78,7 +78,7 @@ const HorizontalCarousel = ({ items, onItemClick }) => {
         <button className="absolute right-0 flex h-full w-20 items-center justify-end bg-gradient-to-l from-soft-white from-50% dark:from-soft-black">
           <div
             onClick={() => onRightClick()}
-            className="cursor-pointer rounded-full p-1 text-[20px] hover:bg-soft-white-hover dark:hover:bg-soft-black-hover"
+            className="hidden cursor-pointer rounded-full p-1 text-[20px] hover:bg-soft-white-hover dark:hover:bg-soft-black-hover sm:block"
           >
             <FiChevronRight />
           </div>
