@@ -12,7 +12,7 @@ const PostsNavbar = ({}) => {
   );
   const activeButtonStyle =
     "bg-soft-black hover:bg-soft-black-hover text-soft-white";
-  const buttonStyle = "bg-[#D9D9D9] hover:bg-[#BEBEBE]";
+  const buttonStyle = "";
   const navigate = useNavigate();
   const buttons = [
     {
@@ -42,9 +42,7 @@ const PostsNavbar = ({}) => {
             sessionStorage.setItem("postNavbarActiveButton", index);
             navigate(item.link);
           }}
-          className={`flex w-[5rem] items-center justify-center gap-1 rounded-xl px-4 py-2 md:w-[12rem] ${
-            index == activeButtonIndex ? activeButtonStyle : buttonStyle
-          }`}
+          className="flex w-[5rem] items-center justify-center gap-1 rounded-xl bg-[#D9D9D9] px-4 py-2 hover:bg-[#BEBEBE] md:w-[12rem]"
         >
           {item.icon}
           <span className="hidden md:inline">{item.title}</span>
