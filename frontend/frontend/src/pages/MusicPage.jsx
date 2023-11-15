@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { musicList } from "../store/actions/musicActions";
+import { getUserProfile } from "../store/actions/profileActions";
 import MusicItem from "../components/MusicItem";
 import DetailedMusic from "../components/DetailedMusic";
 import HorizontalCarousel from "../components/HorizontalCarousel";
@@ -17,9 +18,12 @@ const MusicPage = () => {
     author: "",
   });
 
+  const { userProfile } = useSelector((state) => state.userProfile);
+
   useEffect(() => {
-    dispatch(musicList());
-  }, [dispatch]);
+    if (!userProfile) dispatch(getUserProfile());
+    dispatch(musicList(userProfile ? userProfile.learning_langs : ["English"]));
+  }, [dispatch, userProfile]);
 
   const tags = [
     "Historical songs",
