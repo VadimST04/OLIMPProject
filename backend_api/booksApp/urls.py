@@ -11,6 +11,7 @@ urlpatterns = [
     path('create/', book_views.BookCreateView.as_view(), name='book-create'),
     path('view/<int:pk>/', book_views.BookRUDView.as_view(), name='book-rud'),
     path('view/', book_views.BooksListAPIView.as_view(), name='book-list'),
+    path('search', book_views.BookSearch.as_view(), name='book-search'),
 
     # urls for authors
     path('authors/', author_views.AuthorListView.as_view(), name='author-list'),

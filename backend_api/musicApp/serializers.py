@@ -13,7 +13,6 @@ class SongSerializer(serializers.ModelSerializer):
     language = serializers.SlugRelatedField(
         queryset=Language.objects.all(),
         slug_field='name',
-        many=True,
     )
     artist = serializers.CharField(source='artist.name')
 

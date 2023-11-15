@@ -19,7 +19,6 @@ class BookRUDSerializer(serializers.ModelSerializer):
     languages = serializers.SlugRelatedField(
         queryset=Language.objects.all(),
         slug_field='name',
-        many=True,
     )
 
     class Meta:
