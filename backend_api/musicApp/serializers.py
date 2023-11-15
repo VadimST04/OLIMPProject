@@ -1,5 +1,6 @@
 from rest_framework import serializers
 
+from baseApp.models import Language
 from musicApp.models import Song
 
 
@@ -9,7 +10,12 @@ class SongSerializer(serializers.ModelSerializer):
     This serializer is used to convert Song model instances to JSON data and vice versa.
     """
 
-    language = serializers.StringRelatedField(many=True)
+    language = serializers.SlugRelatedField(
+        queryset=Language.objects.all(),
+        slug_field='name',
+        many=True,
+    )
+    artist = serializers.CharField(source='artist.name')
 
     class Meta:
         """

@@ -1,18 +1,32 @@
 from rest_framework import generics, filters
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from musicApp.models import Song
 from musicApp.serializers import SongSerializer
 
 
-class SongList(generics.ListAPIView):
+class SongList(APIView):
     """
     A view for listing Song instances.
     This view allows users to retrieve a list of Song objects.
     """
 
-    queryset = Song.objects.all()
-    serializer_class = SongSerializer
+    def post(self, request):
+        """
+        This method customize request for Music model
+        :return: Returns books with the user's learning languages or all books if the user is unauthorized
+        """
+        if request.user.is_authenticated:
+            data = request.data
+            songs = Song.objects.filter(language__name__in=data['learning_langs'])
+            serializer = SongSerializer(songs, many=True)
+            return Response(serializer.data)
+        else:
+            songs = Song.objects.all()
+            serializer = SongSerializer(songs, many=True)
+            return Response(serializer.data)
 
 
 class SongRetrieve(generics.RetrieveAPIView):
