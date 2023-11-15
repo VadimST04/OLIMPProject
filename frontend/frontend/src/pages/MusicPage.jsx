@@ -5,6 +5,7 @@ import { getUserProfile } from "../store/actions/profileActions";
 import MusicItem from "../components/MusicItem";
 import DetailedMusic from "../components/DetailedMusic";
 import HorizontalCarousel from "../components/HorizontalCarousel";
+import SearchBar from "../components/SearchBar";
 
 const MusicPage = () => {
   const [showDetailedMusic, setShowDetailedMusic] = useState(false);
@@ -54,6 +55,9 @@ const MusicPage = () => {
     <>
       {!showDetailedMusic && (
         <div className="space-y-4">
+          <div className="h-10 w-full dark:text-soft-black">
+            <SearchBar inputStyling="h-full w-full rounded-2xl bg-[#D9D9D9] outline-none p-2 px-6" />
+          </div>
           <HorizontalCarousel items={tags} />
           <div className="grid w-full grid-cols-[repeat(auto-fill,minmax(11rem,1fr))] gap-4">
             {music?.map((item) => (

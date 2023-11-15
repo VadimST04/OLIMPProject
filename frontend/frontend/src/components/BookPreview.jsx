@@ -1,5 +1,7 @@
 import React from "react";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
+import { useDispatch, useSelector } from "react-redux";
+import { SIGN_IN_FORM_OPEN } from "../store/constants/fromsConstants";
 
 const BookPreview = ({
   image,
@@ -16,6 +18,9 @@ const BookPreview = ({
   genre = "Romance novels";
   // author = "Ana Huang";
   // language = "English";
+  const { userToken } = useSelector((state) => state.userToken);
+  const dispatch = useDispatch();
+
   return (
     <div className="grid h-full w-full grid-cols-1 gap-5 md:grid-cols-[0.3fr,1fr]">
       <div className="relative grid md:grid-rows-[1fr,0.5fr]">
@@ -35,6 +40,10 @@ const BookPreview = ({
           </div>
           <button
             onClick={() => {
+              if (!userToken) {
+                dispatch({ type: SIGN_IN_FORM_OPEN });
+                return;
+              }
               closePreviewHandler();
               readMoreHandler();
             }}

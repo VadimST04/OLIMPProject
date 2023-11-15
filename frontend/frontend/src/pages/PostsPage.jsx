@@ -15,6 +15,7 @@ function PostsPage() {
   const dispatch = useDispatch();
   const [postCreation, setPostCreation] = useState(false);
   const { posts } = useSelector((state) => state.postsList);
+
   useEffect(() => {
     dispatch(postsList());
   }, [dispatch]);

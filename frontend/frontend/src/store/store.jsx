@@ -26,10 +26,10 @@ const reducer = combineReducers({
   musicList: musicListReducer,
   userProfile: userProfileReducer,
   newsList: newsListReducer,
-  mainButtonName: mainButtonReducer,
   booksList: booksListReducer,
 
   formIsOpen: signInFormToggler,
+  mainButtonName: mainButtonReducer,
 });
 
 const initialStore = {};
