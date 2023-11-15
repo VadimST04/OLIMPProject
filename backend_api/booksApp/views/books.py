@@ -49,9 +49,9 @@ class BooksListAPIView(APIView):
     def post(self, request):
         """
         This method customize request for Book model
-        :return: Returns books with the user's learning languages or all books if the user is Anonym
+        :return: Returns books with the user's learning languages or all books if the user is unauthorized
         """
-        if not isinstance(request.user, AnonymousUser):
+        if request.user.is_authenticated:
             data = request.data
             books = Book.objects.filter(languages__name__in=data['learning_langs'])
             serializer = BookRUDSerializer(books, many=True)

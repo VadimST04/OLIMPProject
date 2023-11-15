@@ -20,14 +20,6 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         """
         data = super().validate(attrs)
 
-        user_profile = UserProfile.objects.get(user=self.user)
-
-        request = self.context.get('request')
-        if request:
-            try:
-                data['image'] = request.build_absolute_uri(user_profile.image.url)
-            except (KeyError, ValueError):
-                return data
         return data
 
 
