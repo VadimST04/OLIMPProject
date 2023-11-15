@@ -6,11 +6,8 @@ import {
 
 const ImageCarousel = ({ images }) => {
   const [activeImageIndex, setActiveImage] = useState(0);
-  const [translate, setTranslate] = useState(0);
-  const [translateAmount, setTranslateAmount] = useState(0);
   const [isRightVisible, setIsRightVisible] = useState(false);
   const [isLeftVisible, setIsLeftVisible] = useState(false);
-  const imageContainer = useRef();
 
   const onRightClick = () => {
     if (activeImageIndex === images.length - 1) return;
@@ -26,34 +23,13 @@ const ImageCarousel = ({ images }) => {
     if (activeImageIndex > images.length - 1) setActiveImage(0);
     setIsLeftVisible(activeImageIndex > 0);
     setIsRightVisible(activeImageIndex < images.length - 1);
-    setTranslate(activeImageIndex * translateAmount);
-  }, [activeImageIndex, translateAmount, images]);
-
-  useEffect(() => {
-    setTranslateAmount(
-      document.getElementById("rootDiv").getBoundingClientRect().width,
-    );
-    const handleResize = () => {
-      setTranslateAmount(
-        document.getElementById("rootDiv").getBoundingClientRect().width,
-      );
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  }, [activeImageIndex, images]);
 
   return (
-    <div
-      id="rootDiv"
-      className="relative flex h-full w-full items-center justify-center overflow-hidden"
-    >
+    <div className="relative flex h-full w-full items-center justify-center overflow-hidden">
       <div
-        style={{ transform: `translateX(-${translate}px)` }}
-        ref={imageContainer}
-        className="flex h-full w-full transition-all duration-300 will-change-transform"
+        style={{ transform: `translateX(-${100 * activeImageIndex}%)` }}
+        className="flex h-full w-full transition-transform duration-300 will-change-transform"
       >
         {images.map((image, index) => (
           <div className="relative h-full w-full flex-shrink-0" key={index}>

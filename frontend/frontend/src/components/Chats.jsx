@@ -51,7 +51,7 @@ const Chats = () => {
           localStorage.setItem("chatsCollapse", !chatsCollapsed);
           setChatsCollapsed(!chatsCollapsed);
         }}
-        className="absolute -left-4 cursor-pointer rounded-full bg-main-green p-1 text-[24px] text-soft-white hover:bg-main-dark-green dark:text-soft-white"
+        className="absolute -left-4 hidden cursor-pointer rounded-full bg-main-green p-1 text-[24px] text-soft-white hover:bg-main-dark-green dark:text-soft-white md:block"
       >
         <AiOutlineRight
           className={`transition-transform duration-500 ${collapseButtonRotation}`}

@@ -50,19 +50,19 @@ const NewsPage = () => {
               />
             )
           }
-          news3={
-            news3 && (
+          news4={
+            news4 && (
               <NewsItem
-                {...news3}
+                {...news4}
                 setNewsDetails={setNewsDetails}
                 setOpenDetails={setOpenDetails}
               />
             )
           }
-          news4={
-            news4 && (
+          news3={
+            news3 && (
               <NewsItem
-                {...news4}
+                {...news3}
                 setNewsDetails={setNewsDetails}
                 setOpenDetails={setOpenDetails}
               />
@@ -74,17 +74,38 @@ const NewsPage = () => {
     }
     return sections;
   };
-
   return (
+    // <>
+    //   <div
+    //     className={`h-full w-full space-y-5 overflow-y-auto pr-2 ${newsVisibility}`}
+    //   >
+    //     {generateSections().map((item, index) => (
+    //       <div key={index} className="flex h-full w-full gap-5">
+    //         {item}
+    //       </div>
+    //     ))}
+    //   </div>
+    //
+    // </>
     <>
-      <div
-        className={`h-full w-full space-y-5 overflow-y-auto pr-2 ${newsVisibility}`}
-      >
-        {generateSections().map((item, index) => (
-          <div key={index} className="flex h-full w-full gap-5">
-            {item}
-          </div>
-        ))}
+      <div className={`h-full w-full overflow-y-auto ${newsVisibility}`}>
+        <div className="h-full w-full space-y-5 md:hidden">
+          {news?.map((item, index) => (
+            <NewsItem
+              {...item}
+              key={index}
+              setNewsDetails={setNewsDetails}
+              setOpenDetails={setOpenDetails}
+            />
+          ))}
+        </div>
+        <div className="hidden h-full w-full space-y-5 md:block">
+          {generateSections().map((item, index) => (
+            <div key={index} className="h-full w-full">
+              {item}
+            </div>
+          ))}
+        </div>
       </div>
       {openDetails && <DetailedNews {...newsDetails} />}
     </>

@@ -7,8 +7,6 @@ import { useNavigate } from "react-router";
 const PostCreation = () => {
   const imageInput = useRef();
   const navigate = useNavigate();
-
-  const formBg = useRef();
   const [drag, setDrag] = useState(false);
   const dragBorderStyle = drag ? "border-soft-black" : "border-transparent";
   const profileImage =
@@ -17,6 +15,7 @@ const PostCreation = () => {
   const [images, setImages] = useState([]);
 
   const rowSpan = images.length > 0 ? "" : "row-span-2";
+  const imagesGap = images.length > 0 ? "gap-5" : "";
 
   const onImageSelect = (e) => {
     if (!e.target.files || !e.target.files[0]) return;
@@ -66,15 +65,19 @@ const PostCreation = () => {
         <p className="p-2 text-center text-2xl font-semibold text-soft-black dark:text-soft-white">
           Create a post
         </p>
-        <hr className="w-[80%] self-center rounded-full border-soft-black dark:border-[#ABABAB]" />
-        <div className="grid h-full flex-grow grid-cols-1 gap-5 overflow-y-auto px-5 py-12 text-soft-black dark:text-soft-white md:grid-cols-2 md:overflow-y-hidden">
-          <div className="grid grid-rows-[3.5rem,1fr] gap-5">
+        <hr className="w-full self-center rounded-full border-soft-black dark:border-[#ABABAB]" />
+        <div className="grid h-full flex-grow grid-cols-1 grid-rows-2 gap-5 overflow-y-auto py-5 text-soft-black dark:text-soft-white md:grid-cols-2 md:grid-rows-1 md:overflow-y-hidden">
+          <div
+            className={`grid grid-rows-[auto,1fr] md:grid-rows-[4.75rem,1fr] ${imagesGap}`}
+          >
             <div
               onClick={() => imageInput.current.click()}
               className={`flex cursor-pointer select-none flex-col items-center justify-center rounded-xl border-2 border-dashed bg-[#E1E1E1] text-soft-black dark:bg-[#C0BCBB]  ${dragBorderStyle} ${rowSpan}`}
             >
               <BiImageAdd className="text-4xl" />
-              <p className="font-bold">Drag and drop photos here</p>
+              <p className="hidden font-bold md:block">
+                Drag and drop photos here
+              </p>
               <input
                 onChange={onImageSelect}
                 ref={imageInput}
@@ -101,14 +104,14 @@ const PostCreation = () => {
               <p className="select-none text-[#C0C0C0]">Description</p>
               <textarea className="flex-grow resize-none rounded-xl border-2 border-[#E1E1E1] bg-soft-white p-2 text-soft-black outline-none dark:border-[#ABABAB] dark:bg-soft-black dark:text-soft-white"></textarea>
             </div>
-            <div className="flex gap-10 ">
+            <div className="flex gap-5 ">
               <button
                 onClick={() => navigate("/posts")}
                 className="grow rounded-xl bg-[#D96060] font-semibold text-soft-white hover:bg-[#B04E4E]"
               >
                 Cancel
               </button>
-              <button className="grow rounded-xl bg-soft-black font-semibold text-soft-white hover:bg-soft-black-hover dark:bg-[#D9D9D9] dark:text-soft-black dark:hover:bg-soft-white-hover">
+              <button className="grow rounded-xl bg-soft-black font-semibold text-soft-white hover:bg-soft-black-hover dark:bg-[#D9D9D9] dark:text-soft-black dark:hover:bg-[#939393]">
                 Share
               </button>
             </div>
