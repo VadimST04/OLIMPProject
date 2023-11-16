@@ -30,8 +30,12 @@ const MusicItem = ({
         {language}
         <AiOutlineHeart className="cursor-pointer text-[20px]" />
       </div>
-      <div className="h-24 w-24 overflow-hidden rounded-full">
-        <img src={image} alt="" className="h-full w-full object-cover" />
+      <div className="relative h-24 w-24 overflow-hidden rounded-full">
+        <img
+          src={image}
+          alt=""
+          className="absolute h-full w-full object-cover"
+        />
       </div>
       <p className="w-full truncate text-center font-semibold">{title}</p>
       <p className="w-full truncate text-center text-[14px]">{author}</p>
