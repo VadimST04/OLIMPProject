@@ -2,6 +2,7 @@ import React from "react";
 import { AiOutlineHeart } from "react-icons/ai";
 import { SIGN_IN_FORM_OPEN } from "../store/constants/fromsConstants";
 import { useDispatch, useSelector } from "react-redux";
+import ImageLoader from "./ImageLoader";
 
 const MusicItem = ({
   language,
@@ -30,12 +31,8 @@ const MusicItem = ({
         {language}
         <AiOutlineHeart className="cursor-pointer text-[20px]" />
       </div>
-      <div className="relative h-24 w-24 overflow-hidden rounded-full">
-        <img
-          src={image}
-          alt=""
-          className="absolute h-full w-full object-cover"
-        />
+      <div className="h-24 w-24 overflow-hidden rounded-full">
+        <ImageLoader src={image} />
       </div>
       <p className="w-full truncate text-center font-semibold">{title}</p>
       <p className="w-full truncate text-center text-[14px]">{author}</p>
