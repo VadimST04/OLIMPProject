@@ -5,7 +5,7 @@ import {
 } from "../constants/booksConstants";
 import axios from "axios";
 
-export const booksList = () => async (dispatch) => {
+export const booksList = (learning_langs) => async (dispatch) => {
   try {
     dispatch({
       type: BOOKS_REQUEST,
@@ -17,8 +17,9 @@ export const booksList = () => async (dispatch) => {
       },
     };
 
-    const { data } = await axios.get(
+    const { data } = await axios.post(
       "http://127.0.0.1:8000/api/books/view/",
+      { learning_langs },
       config,
     );
 

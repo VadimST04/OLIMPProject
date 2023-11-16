@@ -1,16 +1,19 @@
 import React, { useEffect, useRef, useState } from "react";
 
 import { MdLanguage } from "react-icons/md";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import Checkbox from "./Checkbox";
+import { SIGN_IN_FORM_OPEN } from "../store/constants/fromsConstants";
 
 const LanguageDropDown = () => {
   const [languageDropDownOpen, setLanguageDropDownOpen] = useState(false);
   const [learningLanguages, setLearningLanguages] = useState([]);
   const { userProfile } = useSelector((state) => state.userProfile);
+  const { userToken } = useSelector((state) => state.userToken);
   const selfRef = useRef();
   const dropDownVisibility = languageDropDownOpen ? "" : "hidden";
+  const dispatch = useDispatch();
 
   const onOutsideClick = (e) => {
     if (!selfRef.current.contains(e.target)) setLanguageDropDownOpen(false);
@@ -24,22 +27,25 @@ const LanguageDropDown = () => {
   }, []);
 
   useEffect(() => {
-    setLearningLanguages(userProfile ? userProfile[0].learning_langs : []);
+    setLearningLanguages(userProfile ? userProfile.learning_langs : []);
   }, [userProfile]);
 
   const onClickHandler = () => {
+    if (!userToken) {
+      dispatch({ type: SIGN_IN_FORM_OPEN });
+    }
     setLanguageDropDownOpen(true);
   };
 
   return (
-    <div onClick={() => onClickHandler()} ref={selfRef} className="relative">
+    <button onClick={() => onClickHandler()} ref={selfRef} className="relative">
       <div className="group cursor-pointer rounded-md p-2 text-[26px] hover:bg-main-dark-green">
         <div className="flex items-center justify-center text-soft-white transition-all duration-150 group-hover:scale-110">
           <MdLanguage />
         </div>
       </div>
       <div
-        className={`absolute right-0 top-[100%] flex max-h-64 w-max cursor-pointer overflow-y-auto rounded-md bg-soft-white ${dropDownVisibility}`}
+        className={`absolute right-0 top-[100%] z-[1] flex max-h-64 w-max cursor-pointer overflow-y-auto rounded-md bg-soft-white ${dropDownVisibility}`}
       >
         <div className="">
           {learningLanguages?.map((lang, index) => (
@@ -47,7 +53,7 @@ const LanguageDropDown = () => {
           ))}
         </div>
       </div>
-    </div>
+    </button>
   );
 };
 

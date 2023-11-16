@@ -7,6 +7,9 @@ from rest_framework_simplejwt.views import (
 
 from baseApp.views import MyTokenObtainPairView
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     # authentication urls
     path('login/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
@@ -18,3 +21,5 @@ urlpatterns = [
     path('users/profile/update/', views.UserProfileUpdate.as_view(), name='users-profile'),
     path('languages/', views.LanguageList.as_view(), name='languages-list'),
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { MdOutlineExpandMore } from "react-icons/md";
 import { AiOutlineClose } from "react-icons/ai";
 import { useNavigate } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { SIGN_IN_FORM_OPEN } from "../store/constants/fromsConstants";
 
 function useOnClickOutside(ref, handler) {
   useEffect(() => {
@@ -19,11 +21,13 @@ function useOnClickOutside(ref, handler) {
 const DropdownButton = ({ buttons }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeButtonIndex, setActiveButtonIndex] = useState(
-    localStorage.getItem("activeButtonIndex")
-      ? localStorage.getItem("activeButtonIndex")
+    sessionStorage.getItem("activeButtonIndex")
+      ? sessionStorage.getItem("activeButtonIndex")
       : 0,
   );
+  const { userToken } = useSelector((state) => state.userToken);
   const wrapperRef = useRef(null);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const menuOpacity = isOpen ? " opacity-100" : " opacity-0";
   const menuTranslate = isOpen ? " translate-y-0" : " -translate-y-5";
@@ -34,8 +38,16 @@ const DropdownButton = ({ buttons }) => {
     : " bg-beig-dark";
 
   const buttonClickHandler = (index) => {
+    if (
+      !userToken &&
+      (buttons.at(index).link === "/posts" ||
+        buttons.at(index).link === "/users")
+    ) {
+      dispatch({ type: SIGN_IN_FORM_OPEN });
+      return;
+    }
     if (!isOpen) return;
-    localStorage.setItem(
+    sessionStorage.setItem(
       "activeButtonIndex",
       buttons.indexOf(buttons.at(index)),
     );
@@ -52,7 +64,7 @@ const DropdownButton = ({ buttons }) => {
     >
       <div
         onClick={() => setIsOpen(!isOpen)}
-        className={`flex w-[5rem] cursor-pointer items-center justify-center gap-2 rounded-md px-5 py-[7px] md:w-[9rem] ${activeButtonBg}`}
+        className={`flex cursor-pointer items-center justify-center gap-2 rounded-md px-5 py-[7px] ${activeButtonBg}`}
       >
         {buttons.at(activeButtonIndex).icon}
         <p className="hidden md:block">{buttons.at(activeButtonIndex).title}</p>
@@ -67,10 +79,10 @@ const DropdownButton = ({ buttons }) => {
             <button
               key={index}
               onClick={() => buttonClickHandler(buttons.indexOf(button))}
-              className={`flex w-full items-center justify-center gap-2 bg-beig px-6 py-3 hover:bg-beig-dark sm:justify-normal ${buttonCursor}`}
+              className={`flex w-full items-center justify-center gap-2 bg-beig px-6 py-3 hover:bg-beig-dark md:justify-normal ${buttonCursor}`}
             >
               {button.icon}
-              <p className="hidden sm:block">{button.title}</p>
+              <p className="hidden md:block">{button.title}</p>
             </button>
           ))}
       </div>

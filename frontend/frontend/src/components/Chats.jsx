@@ -6,7 +6,11 @@ import { AiOutlineRight } from "react-icons/ai";
 const Chats = () => {
   const { userProfile } = useSelector((state) => state.userProfile);
   const [activeChatIndex, setActiveChatIndex] = useState(0);
-  const [chatsCollapsed, setChatsCollapsed] = useState(false);
+  const [chatsCollapsed, setChatsCollapsed] = useState(
+    localStorage.getItem("chatsCollapse")
+      ? localStorage.getItem("chatsCollapse")
+      : false,
+  );
   const collapseButtonRotation = chatsCollapsed ? "rotate-180" : "";
   const chatsWidth = !chatsCollapsed ? "w-[22rem]" : "w-0";
 
@@ -39,12 +43,15 @@ const Chats = () => {
   return (
     <div
       className={`relative flex items-center transition-all duration-500 ${
-        !chatsCollapsed ? "px-6" : "px-2"
+        !chatsCollapsed ? "px-6" : ""
       }`}
     >
       <div
-        onClick={() => setChatsCollapsed(!chatsCollapsed)}
-        className="absolute -left-3 cursor-pointer rounded-full bg-main-green p-1 text-[24px] text-soft-white hover:bg-main-dark-green dark:text-soft-white"
+        onClick={() => {
+          localStorage.setItem("chatsCollapse", !chatsCollapsed);
+          setChatsCollapsed(!chatsCollapsed);
+        }}
+        className="absolute -left-4 hidden cursor-pointer rounded-full bg-main-green p-1 text-[24px] text-soft-white hover:bg-main-dark-green dark:text-soft-white md:block"
       >
         <AiOutlineRight
           className={`transition-transform duration-500 ${collapseButtonRotation}`}

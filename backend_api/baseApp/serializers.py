@@ -20,11 +20,6 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         """
         data = super().validate(attrs)
 
-        user_profile = UserProfile.objects.get(user=self.user)
-
-        request = self.context.get('request')
-        if request:
-            data['image'] = request.build_absolute_uri(user_profile.image.url)
         return data
 
 
@@ -56,6 +51,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
     app_lang = serializers.StringRelatedField()
     learning_langs = serializers.StringRelatedField(many=True)
+    image = serializers.ImageField(required=False)
 
     class Meta:
         """

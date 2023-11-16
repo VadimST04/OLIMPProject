@@ -4,18 +4,25 @@ import { postsList } from "../store/actions/postsActions";
 
 import PostItem from "../components/PostItem";
 
+import { MdCreate } from "react-icons/md";
+import { PiGridFour } from "react-icons/pi";
+import { BiImage } from "react-icons/bi";
+import PostCreation from "../components/PostCreation";
+import { useNavigate } from "react-router";
+import PostsNavbar from "../components/PostsNavbar";
+
 function PostsPage() {
   const dispatch = useDispatch();
-
+  const [postCreation, setPostCreation] = useState(false);
   const { posts } = useSelector((state) => state.postsList);
+
   useEffect(() => {
     dispatch(postsList());
   }, [dispatch]);
 
-  console.log(posts);
-
   return (
-    <div className="flex h-full flex-col items-center gap-5 overflow-y-auto p-5">
+    <div className="flex h-full flex-col items-center gap-5 overflow-y-auto">
+      <PostsNavbar />
       {posts &&
         posts.map((item) => (
           <PostItem
@@ -29,6 +36,9 @@ function PostsPage() {
             commentDate={item.created_at}
           />
         ))}
+      {postCreation && (
+        <PostCreation closeForm={() => setPostCreation(false)} />
+      )}
     </div>
   );
 }

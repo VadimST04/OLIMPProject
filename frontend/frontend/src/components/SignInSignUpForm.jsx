@@ -7,6 +7,7 @@ import { RiLockPasswordLine } from "react-icons/ri";
 import { FcGoogle } from "react-icons/fc";
 import { SiFacebook } from "react-icons/si";
 import logo from "../assets/OLIMPlogo.png";
+import { SIGN_IN_FORM_CLOSE } from "../store/constants/fromsConstants";
 
 const SignInSignUpForm = ({ closeFormCallback, registrationFormOpen }) => {
   const dispatch = useDispatch();
@@ -42,12 +43,15 @@ const SignInSignUpForm = ({ closeFormCallback, registrationFormOpen }) => {
 
     if (Object.keys(validationErrors).length === 0) {
       dispatch(login(formData.username, formData.password));
+      dispatch({ type: SIGN_IN_FORM_CLOSE });
       closeFormCallback();
     }
   };
 
   const closeForm = (e) => {
-    if (e.target === formBg.current) closeFormCallback();
+    if (e.target === formBg.current) {
+      dispatch({ type: SIGN_IN_FORM_CLOSE });
+    }
   };
 
   const fieldChangeHandle = (e) => {
