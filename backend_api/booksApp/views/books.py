@@ -1,6 +1,6 @@
 from rest_framework.response import Response
 from django.contrib.auth.models import AnonymousUser
-from rest_framework import generics
+from rest_framework import generics, filters
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.views import APIView
 
@@ -49,9 +49,26 @@ class BooksListAPIView(APIView):
     def post(self, request):
         """
         This method customize request for Book model
-        :return: Returns books with the user's learning languages or all books if the user is Anonym
+        :return: Returns books with the user's learning languages or all books if the user is unauthorized
         """
-        data = request.data
-        books = Book.objects.filter(languages__name__in=data.getlist('learning_langs'))
-        serializer = BookRUDSerializer(books, many=True)
-        return Response(serializer.data)
+        if request.user.is_authenticated:
+            data = request.data
+            books = Book.objects.filter(languages__name__in=data['learning_langs'])
+            serializer = BookRUDSerializer(books, many=True)
+            return Response(serializer.data)
+        else:
+            books = Book.objects.all()
+            serializer = BookRUDSerializer(books, many=True)
+            return Response(serializer.data)
+
+
+class BookSearch(generics.ListAPIView):
+    """
+    This endpoint allows users to retrieve a list of books based on search criteria,
+    such as title or author's name.
+    """
+
+    queryset = Book.objects.all()
+    serializer_class = BookRUDSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['title', 'author__name']
