@@ -18,7 +18,7 @@ const ProfileButton = () => {
   const { isOpen } = useSelector((state) => state.formIsOpen);
   useEffect(() => {
     if (!userProfile) dispatch(getUserProfile());
-    else setProfileImage(userProfile.image);
+    else setProfileImage(`data:image/jpeg;base64,${userProfile.image_data}`);
   }, [dispatch, userProfile]);
 
   useEffect(() => {

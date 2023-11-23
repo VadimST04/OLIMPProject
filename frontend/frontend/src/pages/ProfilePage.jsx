@@ -17,7 +17,7 @@ const ProfilePage = () => {
   const navigate = useNavigate();
   const imageInput = useRef();
   const { userProfile } = useSelector((state) => state.userProfile);
-  console.log(userProfile);
+  console.log("userProfile", userProfile);
   // const { languages } = useSelector((state) => state.languagesList);
   // console.log(languages);
   const [imageFileOld, setImageFileOld] = useState("");
@@ -42,7 +42,7 @@ const ProfilePage = () => {
         password: "",
         appLanguage: userProfile.app_lang,
         learningLanguages: [...userProfile.learning_langs],
-        image: userProfile.image,
+        image: `data:image/jpeg;base64,${userProfile.image_data}`,
         imageName: imageFile,
       });
     } else {
