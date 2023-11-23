@@ -31,17 +31,18 @@ class BookFactory(factory.django.DjangoModelFactory):
     text = factory.Sequence(lambda n: f'test_text_link_{n}')
     author = factory.SubFactory(AuthorFactory)
     cover_image = None
+    languages = factory.SubFactory(LanguageFactory)
 
-    @factory.post_generation  # разобрать как работает
-    def languages(self, create, extracted, **kwargs):
-        if not create:
-            # Simple build, do nothing.
-            return
-
-        if extracted:
-            # A list of items were passed in, use them
-            for lang in extracted:
-                self.languages.add(lang)
+    # @factory.post_generation  # разобрать как работает
+    # def languages(self, create, extracted, **kwargs):
+    #     if not create:
+    #         # Simple build, do nothing.
+    #         return
+    #
+    #     if extracted:
+    #         # A list of items were passed in, use them
+    #         for lang in extracted:
+    #             self.languages.add(lang)
 
 
 class SongFactory(factory.django.DjangoModelFactory):
@@ -54,17 +55,19 @@ class SongFactory(factory.django.DjangoModelFactory):
     audio_file = None
     audio_link = factory.Sequence(lambda n: f'test__{n}')
     duration = factory.Sequence(lambda n: f'test_duration_{n}')
+    language = factory.SubFactory(LanguageFactory)
 
-    @factory.post_generation  # разобрать как работает
-    def language(self, create, extracted=('English',), **kwargs):
-        if not create:
-            # Simple build, do nothing.
-            return
 
-        if extracted:
-            # A list of items were passed in, use them
-            for lang in extracted:
-                self.language.add(lang)
+    # @factory.post_generation  # разобрать как работает
+    # def language(self, create, extracted=('English',), **kwargs):
+    #     if not create:
+    #         # Simple build, do nothing.
+    #         return
+    #
+    #     if extracted:
+    #         # A list of items were passed in, use them
+    #         for lang in extracted:
+    #             self.language.add(lang)
 
 
 class UserFactory(factory.django.DjangoModelFactory):
@@ -83,7 +86,7 @@ class UserProfileFactory(factory.django.DjangoModelFactory):
         model = UserProfile
 
     user = factory.SubFactory(UserFactory)
-    image = 'backend/static/images/test.png'
+    image = '../backend_api/static/images/Снимок_экрана_2023-11-19_212933.png'
     description = factory.Sequence(lambda n: f'test_description_{n}')
     app_lang = factory.SubFactory(LanguageFactory)
 

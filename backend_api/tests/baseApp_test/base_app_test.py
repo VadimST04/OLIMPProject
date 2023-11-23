@@ -22,7 +22,6 @@ class TestUserAuth:
 
         test_profile = UserProfile.objects.create(user_id=admin.pk, image='backend/static/images/test.png',
                                                   description=None, app_lang=eng)
-        test_profile.learning_langs.set([eng])
 
         response = api_client().post(self.login_endpoint,
                                      {'username': username, 'password': password}, format='json')
@@ -39,7 +38,7 @@ class TestUser:
                                     HTTP_AUTHORIZATION=f'Bearer {regular_user.token}')
 
         assert response.status_code == 200
-        content = json.loads(response.content)[0]
+        content = json.loads(response.content)
         user_content = content.get('user', None)
         langs = [lang.name for lang in regular_user.data.user_profile.learning_langs.all()]
 
@@ -58,12 +57,11 @@ class TestUser:
         assert response.status_code == 200
         assert len(json.loads(response.content)) == len(User.objects.all())
 
-    def test_user_profile_update(self, api_client, regular_user, user_profile_factory):
-        new_user = user_profile_factory.create()
-        new_user_data = {'username': new_user.user.username, 'email': new_user.user.email,
-                         'password': new_user.user.password, 'image': new_user.image,
-                         'description': new_user.description, 'app_lang': new_user.app_lang,
-                         'learning_langs': new_user.learning_langs}
+    def test_user_profile_update(self, api_client, regular_user):
+        new_user_data = {'username': 'updated_user', 'email': 'updated_email',
+                         'password': 'updated_password', 'image': '../backend_api/static/images/Снимок_экрана_2023-11-19_212933.png',
+                         'description': 'updated_description', 'app_lang': 'German',
+                         'learning_langs': ['German', 'English']}
 
         endpoint = self.user_profile_endpoint + 'update/'
         response = api_client().patch(endpoint, data=new_user_data,
