@@ -1,7 +1,9 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.db.models.signals import post_migrate
+from django.dispatch import receiver
 
-from backend import settings
+from baseApp.auto_language_migrate import create_default_languages
 
 
 class Language(models.Model):
@@ -25,3 +27,11 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return f'{self.user.username} Profile'
+
+
+# after migration run
+
+@receiver(post_migrate)
+def on_post_migrate(sender, **kwargs):
+    if sender.name == 'baseApp':
+        create_default_languages()
