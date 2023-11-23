@@ -5,8 +5,8 @@ from django.contrib.auth.models import User
 
 from baseApp.models import Language, UserProfile
 from booksApp.models import Book, Author
-from musicApp.models import Song
-from postsApp.models import Post
+from musicApp.models import Song, Artist
+from postsApp.models import Post, ImagePost, Comment
 
 
 class AuthorFactory(factory.django.DjangoModelFactory):
@@ -45,12 +45,19 @@ class BookFactory(factory.django.DjangoModelFactory):
     #             self.languages.add(lang)
 
 
+class ArtistFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = Artist
+
+    name = factory.Sequence(lambda n: f'test_artist_{n}')
+
+
 class SongFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Song
 
     title = factory.Sequence(lambda n: f'test_song_{n}')
-    artist = factory.Sequence(lambda n: f'test_artist_{n}')
+    artist = factory.SubFactory(ArtistFactory)
     image = None
     audio_file = None
     audio_link = factory.Sequence(lambda n: f'test__{n}')
@@ -102,15 +109,30 @@ class UserProfileFactory(factory.django.DjangoModelFactory):
                 self.learning_langs.add(lang)
 
 
-# class PostFactory(factory.django.DjangoModelFactory):
-#     class Meta:
-#         model = Post
-#
-#     user = factory.SubFactory(UserFactory)
-#     content = factory.Sequence(lambda n: f'test_content_{n}')
-#     likes = factory.Sequence(lambda n: n + 10)
-#     created_at = datetime.datetime.now()
-#
-#
-# class CommentFactory(factory.django.DjangoModelFactory):
-#
+class PostFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = Post
+
+    user = factory.SubFactory(UserFactory)
+    content = factory.Sequence(lambda n: f'test_content_{n}')
+    likes = factory.Sequence(lambda n: n + 10)
+    created_at = datetime.datetime.now()
+
+
+class ImagePostFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = ImagePost
+
+    image = '../backend_api/static/images/Снимок_экрана_2023-11-19_212933.png'
+    post = factory.SubFactory(PostFactory)
+
+
+class CommentFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = Comment
+
+    post = factory.SubFactory(PostFactory)
+    user = factory.SubFactory(UserProfileFactory)
+    text = factory.Sequence(lambda n: f'test_text_field_{n}')
+    likes = factory.Sequence(lambda n: n + 10)
+    created_at = datetime.datetime.now()
