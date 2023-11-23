@@ -8,7 +8,7 @@ class News:
     Class for news representation
     """
 
-    API_URL = 'https://newsdata.io/api/1/news?apikey=pub_327863a2fe9d3a662e36bb0feeb69dbe558f2&timeframe=24&full_content=1&image=1'
+    API_URL = 'https://newsdata.io/api/1/news?apikey=pub_3343026f2f6cde66d2da82dff77341bfda05e&timeframe=24&full_content=1&image=1'
 
     LANGUAGES_NEWS = {
         'English': requests.get(
