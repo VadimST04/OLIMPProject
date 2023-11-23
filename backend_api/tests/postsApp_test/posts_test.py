@@ -27,3 +27,18 @@ class TestPostsPage:
 
         assert response.status_code == 200
         assert len(json.loads(response.content)) == 5
+
+    def test_view_single_post(self, api_client, regular_user, image_post_factory, comment_factory, post_factory):
+        post = post_factory.create(user=regular_user.data)
+        image_post_factory.create(post=post)
+        for _ in range(10):
+            comment_factory.create(user=regular_user.data, post=post)
+
+        post_view_endpoint = self.endpoint + f'{post.pk}'
+        response = api_client().get(post_view_endpoint, HTTP_AUTHORIZATION='Bearer ' + regular_user.token)
+
+        assert response.status_code == 200
+
+        content = json.loads(response.content)
+        assert len(content.get('comments')) == 10
+
