@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ChatItem from "./ChatItem";
 import { useSelector } from "react-redux";
 import { AiOutlineRight } from "react-icons/ai";
@@ -7,14 +7,12 @@ const Chats = () => {
   const { userProfile } = useSelector((state) => state.userProfile);
   const [activeChatIndex, setActiveChatIndex] = useState(0);
   const [chatsCollapsed, setChatsCollapsed] = useState(
-    localStorage.getItem("chatsCollapse")
-      ? localStorage.getItem("chatsCollapse")
-      : false,
+    localStorage.getItem("chatsCollapse") === "true",
   );
   const collapseButtonRotation = chatsCollapsed ? "rotate-180" : "";
   const collapseButtonLeft = chatsCollapsed ? "-left-4" : "";
   const chatsWidth = !chatsCollapsed ? "w-[22rem]" : "w-0";
-
+  console.log(chatsWidth);
   const testImg =
     "https://upload.wikimedia.org/wikipedia/commons/a/ae/Aristotle_Altemps_Inv8575.jpg";
 
