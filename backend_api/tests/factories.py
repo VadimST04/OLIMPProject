@@ -113,7 +113,7 @@ class PostFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Post
 
-    user = factory.SubFactory(UserFactory)
+    user = factory.Sequence(lambda _: UserProfileFactory.create().user)
     content = factory.Sequence(lambda n: f'test_content_{n}')
     likes = factory.Sequence(lambda n: n + 10)
     created_at = datetime.datetime.now()
@@ -132,7 +132,7 @@ class CommentFactory(factory.django.DjangoModelFactory):
         model = Comment
 
     post = factory.SubFactory(PostFactory)
-    user = factory.SubFactory(UserProfileFactory)
+    user = factory.Sequence(lambda _: UserProfileFactory.create().user)
     text = factory.Sequence(lambda n: f'test_text_field_{n}')
     likes = factory.Sequence(lambda n: n + 10)
     created_at = datetime.datetime.now()
