@@ -18,12 +18,12 @@ class TestMusic:
         eng = Language.objects.get(name='English')
         ital = Language.objects.create(name='Italian')
 
-        ger_songs = song_factory.create_batch(5, language=[ger])
-        eng_songs = song_factory.create_batch(5, language=[eng])
-        song_factory.create_batch(5, language=[ital])
+        ger_songs = song_factory.create_batch(5, language=ger)
+        eng_songs = song_factory.create_batch(5, language=eng)
+        song_factory.create_batch(5, language=ital)
 
-        response = api_client().get(path=self.get_music_endpoint, data={'learning_langs': ['English', 'German']},
-                                    HTTP_AUTHORIZATION='Bearer ' + regular_user.token)
+        response = api_client().post(path=self.get_music_endpoint, data={'learning_langs': ['English', 'German']},
+                                     HTTP_AUTHORIZATION='Bearer ' + regular_user.token)
 
         assert response.status_code == 200
 
@@ -33,7 +33,7 @@ class TestMusic:
     def test_view_all_songs_unauthorized(self, api_client, song_factory):
         song_factory.create_batch(5)
 
-        response = api_client().get(self.get_music_endpoint)
+        response = api_client().post(self.get_music_endpoint)
 
         assert response.status_code == 200
         assert len(json.loads(response.content)) == 5

@@ -2,7 +2,7 @@ class TestNewsPage:
     endpoint = '/api/news/'
 
     def test_news_page_unauthorized(self, api_client):
-        response = api_client().post(self.endpoint, data={'learning_langs': ['English']})
+        response = api_client().post(self.endpoint, content_type='application/json', data={'learning_langs': ['English']})
 
         assert response.status_code == 200
 
