@@ -8,11 +8,12 @@ const ImageLoader = ({ src, displayErrors = true }) => {
   const sceletonVisibility = isLoading ? "block" : "hidden";
   return (
     <div className="relative h-full w-full">
-      {!isError && (
-        <div
-          className={`h-full w-full animate-[pulse_1s_ease-in-out_infinite] bg-[#999999] ${sceletonVisibility}`}
-        ></div>
-      )}
+      {!isError ||
+        (!displayErrors && (
+          <div
+            className={`h-full w-full animate-[pulse_1s_ease-in-out_infinite] bg-[#999999] ${sceletonVisibility}`}
+          ></div>
+        ))}
       {isError && displayErrors && (
         <div className="flex h-full w-full items-center justify-center ">
           <MdOutlineHideImage className="text-4xl" />
