@@ -1,14 +1,21 @@
+# import os
 import requests
-from random import shuffle
+from random import sample
 from itertools import chain
+
+
+# from dotenv import load_dotenv
+#
+# load_dotenv()
 
 
 class News:
     """
     Class for news representation
     """
-
-    API_URL = 'https://newsdata.io/api/1/news?apikey=pub_327863a2fe9d3a662e36bb0feeb69dbe558f2&timeframe=24&full_content=1&image=1'
+    # KEY = os.environ.get('NEWS_API_KEY')
+    KEY = 'pub_3343026f2f6cde66d2da82dff77341bfda05e'
+    API_URL = f'https://newsdata.io/api/1/news?apikey={KEY}&timeframe=24&full_content=1&image=1'
 
     LANGUAGES_NEWS = {
         'English': requests.get(
@@ -17,10 +24,35 @@ class News:
         'German': requests.get(
             f'{API_URL}&language=de').json()[
             'results'],
+        'French': requests.get(
+            f'{API_URL}&language=fr').json()[
+            'results'],
+        'Hebrew': requests.get(
+            f'{API_URL}&language=he').json()[
+            'results'],
+        'Italian': requests.get(
+            f'{API_URL}&language=it').json()[
+            'results'],
+        'Arabic': requests.get(
+            f'{API_URL}&language=ar').json()[
+            'results'],
+        'Armenian': requests.get(
+            f'{API_URL}&language=hy').json()[
+            'results'],
+        'Ukrainian': requests.get(
+            f'{API_URL}&language=uk').json()[
+            'results'],
+        'Spanish': requests.get(
+            f'{API_URL}&language=sp').json()[
+            'results'],
+        'Swedish': requests.get(
+            f'{API_URL}&language=sv').json()[
+            'results'],
     }
 
     @staticmethod
     def create_news_object(item):
+        print(item)
         return {
             'title': item['title'],
             'link': item['link'],
@@ -41,10 +73,13 @@ class News:
         :param langs: list of languages that user learns
         :return: article objects (dictionaries)
         """
+
+        print(langs)
         news = [cls.LANGUAGES_NEWS[lang] for lang in langs]
         news = list(chain.from_iterable(news))
         news = list(map(cls.create_news_object, news))
-        shuffle(news)
+        news = sample(news, len(news))
+
         return news
 
     @classmethod
