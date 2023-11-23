@@ -150,7 +150,7 @@ const ProfilePage = () => {
             className="relative aspect-square h-32 rounded-full"
           >
             <div className="h-full w-full cursor-pointer overflow-hidden rounded-full">
-              <ImageLoader src={formData.image} />
+              <ImageLoader src={formData.image} displayErrors={false} />
             </div>
             <div className="absolute bottom-2 right-2 z-10 flex h-6 w-6 cursor-pointer items-center justify-center rounded-full bg-[#EDC5AB] text-[20px]">
               <BiSolidPencil className="text-soft-black" />
