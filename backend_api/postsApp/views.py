@@ -1,3 +1,4 @@
+from drf_spectacular.utils import extend_schema
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 
@@ -6,6 +7,7 @@ from postsApp.permissions import IsAuthorOrIsAuthenticated
 from postsApp.serializers import PostSerializer, CommentSerializer
 
 
+@extend_schema(tags=["Posts"])
 class PostList(generics.ListCreateAPIView):
     """
     View class for listing and creating posts.
@@ -18,6 +20,7 @@ class PostList(generics.ListCreateAPIView):
     permission_classes = (IsAuthenticated,)
 
 
+@extend_schema(tags=["Posts"])
 class PostUpdateDelete(generics.RetrieveUpdateDestroyAPIView):
     """
     View class for updating and destroying posts.
@@ -30,6 +33,7 @@ class PostUpdateDelete(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAuthenticated, IsAuthorOrIsAuthenticated)
 
 
+@extend_schema(tags=["Posts"])
 class MyPostList(generics.ListCreateAPIView):
     """
     View class for listing and creating posts of user.
@@ -49,6 +53,7 @@ class MyPostList(generics.ListCreateAPIView):
     permission_classes = (IsAuthenticated, IsAuthorOrIsAuthenticated)
 
 
+@extend_schema(tags=["Comments"])
 class PostCommentCreate(generics.CreateAPIView):
     """
     View class for creating comments on posts.
@@ -61,6 +66,7 @@ class PostCommentCreate(generics.CreateAPIView):
     permission_classes = (IsAuthenticated,)
 
 
+@extend_schema(tags=["Comments"])
 class PostCommentUpdateDelete(generics.RetrieveUpdateDestroyAPIView):
     """
     View class for updating and deleting comments on posts.
