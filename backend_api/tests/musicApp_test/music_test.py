@@ -12,7 +12,6 @@ class TestMusic:
     get_music_endpoint = '/api/music/'
     settings_music_endpoint = '/api/music/settings/'
 
-    # TODO: add view to authorized user all songs to his languages
     def test_all_song_view_authorized(self, api_client, song_factory, regular_user):  # не работает по заданным языкам
         ger = Language.objects.get(name='German')
         eng = Language.objects.get(name='English')
@@ -22,7 +21,8 @@ class TestMusic:
         eng_songs = song_factory.create_batch(5, language=eng)
         song_factory.create_batch(5, language=ital)
 
-        response = api_client().post(path=self.get_music_endpoint, data={'learning_langs': ['English', 'German']},
+        response = api_client().post(path=self.get_music_endpoint, format='json',
+                                     data={'learning_langs': ['English', 'German']},
                                      HTTP_AUTHORIZATION='Bearer ' + regular_user.token)
 
         assert response.status_code == 200

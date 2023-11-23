@@ -19,7 +19,8 @@ class TestBookModel:
         eng_books = book_factory.create_batch(5, languages=eng)
         book_factory.create_batch(5, languages=ital)
 
-        response = api_client().post(path=self.books_view_endpoint, data={'learning_langs': ['English', 'German']},
+        response = api_client().post(path=self.books_view_endpoint, format='json',
+                                     data={'learning_langs': ['English', 'German']},
                                      HTTP_AUTHORIZATION='Bearer ' + regular_user.token)
 
         assert response.status_code == 200
@@ -27,7 +28,8 @@ class TestBookModel:
         response_books = json.loads(response.content)
         assert len(eng_books) + len(ger_books) == len(response_books)
 
-    def test_get_one_book_authorized(self, api_client, book_factory, regular_user):  # TODO: добавить проверку на тип возвращаемых данных
+    def test_get_one_book_authorized(self, api_client, book_factory,
+                                     regular_user):  # TODO: добавить проверку на тип возвращаемых данных
         book_link_to_test = 'https://gutenberg.org/cache/epub/71996/pg71996-images.html'
         book = book_factory.create(text=book_link_to_test)
 

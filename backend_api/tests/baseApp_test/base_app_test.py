@@ -64,6 +64,6 @@ class TestUser:
                          'learning_langs': ['German', 'English']}
 
         endpoint = self.user_profile_endpoint + 'update/'
-        response = api_client().patch(endpoint, data=new_user_data,
+        response = api_client().patch(endpoint, data=new_user_data, format='json',
                                       HTTP_AUTHORIZATION=f'Bearer {regular_user.token}')
         assert response.status_code == 200
