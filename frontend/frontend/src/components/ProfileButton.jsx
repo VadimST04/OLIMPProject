@@ -6,6 +6,7 @@ import SignInSignUpForm from "./SignInSignUpForm";
 import RegistrationForm from "./RegistrationForm";
 import { getUserProfile } from "../store/actions/profileActions";
 import { SIGN_IN_FORM_OPEN } from "../store/constants/fromsConstants";
+import ImageLoader from "./ImageLoader";
 
 const ProfileButton = () => {
   const [profileImage, setProfileImage] = useState();
@@ -33,11 +34,9 @@ const ProfileButton = () => {
           className="group cursor-pointer rounded-full p-2.5 transition-all duration-150 hover:bg-main-dark-green"
         >
           <div className="flex aspect-square w-9 items-center justify-center text-soft-white transition-all duration-150 group-hover:scale-125">
-            <img
-              src={profileImage}
-              alt=""
-              className="h-full w-full rounded-full object-cover"
-            />
+            <div className="h-full w-full overflow-hidden rounded-full">
+              <ImageLoader src={profileImage} />
+            </div>
           </div>
         </div>
       )}
