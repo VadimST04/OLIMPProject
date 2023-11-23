@@ -1,4 +1,5 @@
 from django_filters.rest_framework import DjangoFilterBackend
+from drf_spectacular.utils import extend_schema
 from rest_framework import generics, filters
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
@@ -8,6 +9,7 @@ from musicApp.models import Song
 from musicApp.serializers import SongSerializer
 
 
+@extend_schema(tags=["Music"])
 class SongList(APIView):
     """
     A view for listing Song instances.
@@ -30,6 +32,7 @@ class SongList(APIView):
             return Response(serializer.data)
 
 
+@extend_schema(tags=["Music"])
 class SongRetrieve(generics.RetrieveAPIView):
     """
     A view for retrieving a single Song instance.
@@ -41,6 +44,7 @@ class SongRetrieve(generics.RetrieveAPIView):
     permission_classes = (IsAuthenticated,)
 
 
+@extend_schema(tags=["Music Settings"])
 class SongSettings(generics.CreateAPIView,
                    generics.UpdateAPIView,
                    generics.DestroyAPIView):
@@ -54,6 +58,7 @@ class SongSettings(generics.CreateAPIView,
     permission_classes = (IsAuthenticated, IsAdminUser)
 
 
+@extend_schema(tags=["Music"])
 class SongSearch(generics.ListAPIView):
     """
     This endpoint allows users to retrieve a list of songs based on search criteria,
