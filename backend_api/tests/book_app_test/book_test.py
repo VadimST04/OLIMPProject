@@ -15,9 +15,9 @@ class TestBookModel:
         eng = Language.objects.get(name='English')
         ital = Language.objects.create(name='Italian')
 
-        ger_books = book_factory.create_batch(5, languages=[ger])
-        eng_books = book_factory.create_batch(5, languages=[eng])
-        book_factory.create_batch(5, languages=[ital])
+        ger_books = book_factory.create_batch(5, languages=ger)
+        eng_books = book_factory.create_batch(5, languages=eng)
+        book_factory.create_batch(5, languages=ital)
 
         response = api_client().post(path=self.books_view_endpoint, data={'learning_langs': ['English', 'German']},
                                      HTTP_AUTHORIZATION='Bearer ' + regular_user.token)
