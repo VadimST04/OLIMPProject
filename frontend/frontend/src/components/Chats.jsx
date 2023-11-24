@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ChatItem from "./ChatItem";
 import { useSelector } from "react-redux";
 import { AiOutlineRight } from "react-icons/ai";
+import CollapseIcon from "./CollapseIcon";
 
 const Chats = () => {
   const { userProfile } = useSelector((state) => state.userProfile);
@@ -11,7 +12,7 @@ const Chats = () => {
   );
   const collapseButtonRotation = chatsCollapsed ? "rotate-180" : "";
   const chatsWidth = chatsCollapsed ? "w-0" : "w-[22rem]";
-  const colapsedGap = chatsCollapsed ? "gap-0" : "gap-5";
+  const colapsedGap = chatsCollapsed ? "gap-0" : "gap-3 mr-3";
   const testImg =
     "https://upload.wikimedia.org/wikipedia/commons/a/ae/Aristotle_Altemps_Inv8575.jpg";
 
@@ -48,11 +49,8 @@ const Chats = () => {
           localStorage.setItem("chatsCollapse", !chatsCollapsed);
           setChatsCollapsed(!chatsCollapsed);
         }}
-        className="rounded-full bg-main-green p-1 hover:bg-main-dark-green"
       >
-        <AiOutlineRight
-          className={`text-2xl text-soft-white transition-transform duration-300 ${collapseButtonRotation}`}
-        />
+        <CollapseIcon arrowDirectionRight={chatsCollapsed} />
       </button>
 
       <div
