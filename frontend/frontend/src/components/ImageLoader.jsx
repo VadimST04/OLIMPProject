@@ -10,7 +10,7 @@ const ImageLoader = ({ src }) => {
     <div className="relative h-full w-full">
       {!isError && (
         <div
-          className={`h-full w-full animate-[pulse_1s_ease-in-out_infinite] bg-[#999999] ${sceletonVisibility}`}
+          className={`h-full w-full animate-[pulse_1s_ease-in-out_infinite] bg-soft-black dark:bg-soft-white ${sceletonVisibility}`}
         ></div>
       )}
       {isError && (

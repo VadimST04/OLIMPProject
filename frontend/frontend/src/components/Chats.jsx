@@ -12,7 +12,7 @@ const Chats = () => {
   );
   const collapseButtonRotation = chatsCollapsed ? "rotate-180" : "";
   const chatsWidth = chatsCollapsed ? "w-0" : "w-[22rem]";
-  const colapsedGap = chatsCollapsed ? "gap-0" : "gap-3 mr-3";
+  const colapsedGap = chatsCollapsed ? "gap-0" : "gap-5 mr-5";
   const testImg =
     "https://upload.wikimedia.org/wikipedia/commons/a/ae/Aristotle_Altemps_Inv8575.jpg";
 
