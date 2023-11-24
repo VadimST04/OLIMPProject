@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { BsNewspaper, BsFileEarmarkText } from "react-icons/bs";
 import { PiBooksDuotone } from "react-icons/pi";
@@ -13,12 +13,14 @@ import ProfileButton from "./ProfileButton";
 import SettingsButton from "./SettingsButton";
 import { useNavigate } from "react-router";
 import { RxCross1 } from "react-icons/rx";
+import { SIGN_IN_FORM_OPEN } from "../store/constants/fromsConstants";
 
 function Navbar() {
   const { userToken } = useSelector((state) => state.userToken);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const sidebarRef = useRef();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const buttonOptions = [
     { title: "News", icon: <BsNewspaper />, link: "/" },
     { title: "Books", icon: <PiBooksDuotone />, link: "/books" },
@@ -83,6 +85,13 @@ function Navbar() {
             {buttonOptions.map((item, index) => (
               <button
                 onClick={() => {
+                  if (
+                    !userToken &&
+                    (item.link === "/posts" || item.link === "/users")
+                  ) {
+                    dispatch({ type: SIGN_IN_FORM_OPEN });
+                    return;
+                  }
                   navigate(item.link);
                   setSidebarOpen(false);
                 }}
