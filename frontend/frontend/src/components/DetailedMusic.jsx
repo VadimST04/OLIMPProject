@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 import { BiSkipPrevious, BiSkipNext } from "react-icons/bi";
 import { AiFillPlayCircle, AiFillPauseCircle } from "react-icons/ai";
+import ImageLoader from "./ImageLoader";
 
 const DetailedMusic = ({
   lyrics,
@@ -14,20 +15,16 @@ const DetailedMusic = ({
   const [isPaused, setPaused] = useState(true);
 
   return (
-    <div className="relative grid h-full grid-cols-2 gap-5">
+    <div className="relative h-full gap-5 sm:grid sm:grid-cols-2">
       <button
         onClick={() => hideDetailedMusic()}
         className="absolute left-0 top-0 z-[1] text-3xl hover:text-soft-black-hover dark:hover:text-soft-white-hover"
       >
         <BsFillArrowLeftCircleFill />
       </button>
-      <div className="grid grid-rows-[1fr,0.5fr] items-center">
-        <div className="relative h-full w-full max-w-[28rem] justify-self-center">
-          <img
-            src={image}
-            alt=""
-            className="pointer-events-none absolute h-full w-full select-none object-cover"
-          />
+      <div className="grid h-full grid-rows-[1fr,0.5fr] items-center">
+        <div className="h-full w-full max-w-[28rem] justify-self-center">
+          <ImageLoader src={image} />
         </div>
         <div className="w-full max-w-[28rem] space-y-4 justify-self-center text-center">
           <span>Song language - </span>
