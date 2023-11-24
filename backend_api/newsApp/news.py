@@ -52,7 +52,7 @@ class News:
 
     @staticmethod
     def create_news_object(item):
-        print(item)
+        # print(item)
         return {
             'title': item['title'],
             'link': item['link'],
@@ -74,7 +74,7 @@ class News:
         :return: article objects (dictionaries)
         """
 
-        print(langs)
+        # print(langs)
         news = [cls.LANGUAGES_NEWS[lang] for lang in langs]
         news = list(chain.from_iterable(news))
         news = list(map(cls.create_news_object, news))

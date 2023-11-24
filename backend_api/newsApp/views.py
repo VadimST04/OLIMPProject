@@ -30,4 +30,4 @@ class NewsList(APIView):
         except KeyError:
             return Response({'detail': 'This languages do not exist or something else went wrong'})
         except TypeError:
-            return Response({'detail': 'Your API key is invalid or something else went wrong'})
+            return Response({'detail': 'The request level is too intense. Please reload this page later'})
