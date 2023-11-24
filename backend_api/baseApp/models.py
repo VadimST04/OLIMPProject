@@ -16,7 +16,7 @@ class UserProfile(models.Model):
     objects = models.Manager()
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='user_profile')
     image = models.ImageField(blank=True, null=True)
-    image_data = models.BinaryField()
+    image_data = models.BinaryField(null=True)
     description = models.TextField(max_length=500, blank=True, null=True)
     app_lang = models.ForeignKey(Language,
                                  null=True,
