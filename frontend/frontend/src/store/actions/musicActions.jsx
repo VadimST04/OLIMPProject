@@ -5,7 +5,7 @@ import {
 } from "../constants/musicConstants";
 import axios from "axios";
 
-export const musicList = () => async (dispatch) => {
+export const musicList = (learning_langs) => async (dispatch) => {
   try {
     dispatch({
       type: MUSIC_REQUEST,
@@ -17,8 +17,11 @@ export const musicList = () => async (dispatch) => {
       },
     };
 
-    const { data } = await axios.get(
+    const { data } = await axios.post(
       "http://127.0.0.1:8000/api/music/",
+      {
+        learning_langs: learning_langs,
+      },
       config,
     );
 

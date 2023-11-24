@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserProfile } from "../store/actions/profileActions";
 import { newsList } from "../store/actions/newsActions";
 import NewsItem from "../components/NewsItem";
 import NewsSection from "../components/NewsSection";

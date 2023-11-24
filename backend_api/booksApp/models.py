@@ -17,7 +17,7 @@ class Book(models.Model):
     text = models.TextField()
     author = models.ForeignKey(Author, blank=True, null=True, on_delete=models.SET_NULL)
     cover_image = models.ImageField(null=True)
-    languages = models.ManyToManyField(Language)
+    languages = models.ForeignKey(Language, on_delete=models.PROTECT)
 
     def __str__(self):
         return f'{self.title}'

@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { MdOutlineExpandMore } from "react-icons/md";
 import { AiOutlineClose } from "react-icons/ai";
 import { useNavigate } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { SIGN_IN_FORM_OPEN } from "../store/constants/fromsConstants";
 
 function useOnClickOutside(ref, handler) {
   useEffect(() => {
@@ -23,7 +25,9 @@ const DropdownButton = ({ buttons }) => {
       ? sessionStorage.getItem("activeButtonIndex")
       : 0,
   );
+  const { userToken } = useSelector((state) => state.userToken);
   const wrapperRef = useRef(null);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const menuOpacity = isOpen ? " opacity-100" : " opacity-0";
   const menuTranslate = isOpen ? " translate-y-0" : " -translate-y-5";
@@ -34,6 +38,14 @@ const DropdownButton = ({ buttons }) => {
     : " bg-beig-dark";
 
   const buttonClickHandler = (index) => {
+    if (
+      !userToken &&
+      (buttons.at(index).link === "/posts" ||
+        buttons.at(index).link === "/users")
+    ) {
+      dispatch({ type: SIGN_IN_FORM_OPEN });
+      return;
+    }
     if (!isOpen) return;
     sessionStorage.setItem(
       "activeButtonIndex",

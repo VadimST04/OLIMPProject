@@ -11,6 +11,7 @@ import { useState } from "react";
 import { useRef } from "react";
 import { BiSolidPencil } from "react-icons/bi";
 import { RxCross1 } from "react-icons/rx";
+import ImageLoader from "../components/ImageLoader";
 
 const ProfilePage = () => {
   const dispatch = useDispatch();
@@ -148,11 +149,9 @@ const ProfilePage = () => {
             onClick={() => imageInput.current.click()}
             className="relative aspect-square h-32 rounded-full"
           >
-            <img
-              src={formData.image}
-              alt=""
-              className="h-full w-full cursor-pointer rounded-full object-cover"
-            />
+            <div className="h-full w-full cursor-pointer overflow-hidden rounded-full">
+              <ImageLoader src={formData.image} />
+            </div>
             <div className="absolute bottom-2 right-2 z-10 flex h-6 w-6 cursor-pointer items-center justify-center rounded-full bg-[#EDC5AB] text-[20px]">
               <BiSolidPencil className="text-soft-black" />
             </div>

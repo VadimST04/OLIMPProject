@@ -6,6 +6,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { booksList } from "../store/actions/booksAction";
 import BookPreview from "../components/BookPreview";
 import DetailedBook from "../components/DetailedBook";
+import { PiBooksDuotone } from "react-icons/pi";
+import { MAIN_BUTTON_CHANGE_NAME } from "../store/constants/buttonsConstants";
 
 const BooksPage = () => {
   const dispatch = useDispatch();
@@ -21,7 +23,6 @@ const BooksPage = () => {
   const { userProfile } = useSelector((state) => state.userProfile);
 
   const { books } = useSelector((state) => state.booksList);
-  console.log(books);
 
   useEffect(() => {
     dispatch(booksList(userProfile ? userProfile.learning_langs : ["english"]));
