@@ -43,7 +43,9 @@ const ProfileButton = () => {
 
       {!userToken && (
         <button
-          onClick={() => setSignInFormOpen(true)}
+          onClick={() => {
+            dispatch({ type: SIGN_IN_FORM_OPEN });
+          }}
           className="group flex h-10 w-10 items-center justify-center rounded-md text-soft-white hover:bg-main-dark-green"
         >
           <HiOutlineUserCircle className="text-3xl transition-transform duration-150 group-hover:scale-[115%]" />
