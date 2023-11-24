@@ -23,7 +23,6 @@ const BooksPage = () => {
   const { userProfile } = useSelector((state) => state.userProfile);
 
   const { books } = useSelector((state) => state.booksList);
-  console.log(books);
 
   useEffect(() => {
     dispatch(booksList(userProfile ? userProfile.learning_langs : ["english"]));
