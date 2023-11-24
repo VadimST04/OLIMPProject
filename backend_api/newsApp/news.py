@@ -13,6 +13,7 @@ class News:
     """
     Class for news representation
     """
+
     # KEY = os.environ.get('NEWS_API_KEY')
     KEY = 'pub_3343026f2f6cde66d2da82dff77341bfda05e'
     API_URL = f'https://newsdata.io/api/1/news?apikey={KEY}&timeframe=24&full_content=1&image=1'

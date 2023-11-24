@@ -1,4 +1,5 @@
 import React from "react";
+import ImageLoader from "./ImageLoader";
 
 const NewsItem = ({
   title,
@@ -34,11 +35,10 @@ const NewsItem = ({
       }}
       className="relative h-[calc(50%-0.75rem)] w-full md:h-full"
     >
-      <img
-        src={image_url}
-        alt=""
-        className="absolute z-[0] h-full w-full select-none object-cover"
-      />
+      <div className="h-full w-full select-none">
+        <ImageLoader src={image_url} />
+      </div>
+
       <div className="group absolute bottom-0 left-0 flex h-full w-full cursor-pointer flex-col justify-end bg-gradient-to-t from-black to-[50%] px-5 pb-5 font-semibold">
         <p className="line-clamp-1 w-full text-[18px] text-soft-white">
           {title}
