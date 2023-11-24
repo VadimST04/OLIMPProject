@@ -10,10 +10,10 @@ const CollapseIcon = ({ arrowDirectionRight = true }) => {
   return (
     <div className="group flex h-32 w-10 flex-col items-center justify-center">
       <div
-        className={`h-4 w-1 translate-y-[2.5px] rounded-full bg-main-green transition-all duration-200 group-hover:bg-main-dark-green ${topStrokeRotation}`}
+        className={`h-4 w-1 translate-y-[2.5px] rounded-full bg-main-green transition-all duration-200 ${topStrokeRotation}`}
       ></div>
       <div
-        className={`h-4 w-1 -translate-y-[2.5px] rounded-full bg-main-green transition-all duration-200 group-hover:bg-main-dark-green ${bottomStrokeRotation}`}
+        className={`h-4 w-1 -translate-y-[2.5px] rounded-full bg-main-green transition-all duration-200 ${bottomStrokeRotation}`}
       ></div>
     </div>
   );
