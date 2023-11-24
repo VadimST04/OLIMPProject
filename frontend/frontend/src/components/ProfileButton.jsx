@@ -38,14 +38,12 @@ const ProfileButton = () => {
       )}
 
       {!userToken && (
-        <div
+        <button
           onClick={() => setSignInFormOpen(true)}
-          className="group cursor-pointer rounded-md p-2 text-[26px] hover:bg-main-dark-green"
+          className="group flex h-10 w-10 items-center justify-center rounded-md text-soft-white hover:bg-main-dark-green"
         >
-          <div className="flex items-center justify-center text-soft-white transition-all duration-150 group-hover:scale-110">
-            <HiOutlineUserCircle />
-          </div>
-        </div>
+          <HiOutlineUserCircle className="text-3xl transition-transform duration-150 group-hover:scale-[115%]" />
+        </button>
       )}
 
       {isSignInFormOpen && (

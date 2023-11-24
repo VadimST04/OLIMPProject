@@ -48,14 +48,14 @@ const DropdownButton = ({ buttons }) => {
   return (
     <div
       ref={wrapperRef}
-      className="relative z-[2] select-none font-euclid text-[18px] text-soft-black"
+      className="relative z-[2] hidden min-w-[10rem] select-none font-euclid text-[18px] text-soft-black sm:block"
     >
       <div
         onClick={() => setIsOpen(!isOpen)}
         className={`flex cursor-pointer items-center justify-center gap-2 rounded-md px-5 py-[7px] ${activeButtonBg}`}
       >
         {buttons.at(activeButtonIndex).icon}
-        <p className="hidden md:block">{buttons.at(activeButtonIndex).title}</p>
+        <p className="">{buttons.at(activeButtonIndex).title}</p>
         {isOpen ? <AiOutlineClose /> : <MdOutlineExpandMore />}
       </div>
       <div
@@ -70,7 +70,7 @@ const DropdownButton = ({ buttons }) => {
               className={`flex w-full items-center justify-center gap-2 bg-beig px-6 py-3 hover:bg-beig-dark md:justify-normal ${buttonCursor}`}
             >
               {button.icon}
-              <p className="hidden md:block">{button.title}</p>
+              <p className="">{button.title}</p>
             </button>
           ))}
       </div>
