@@ -12,7 +12,7 @@ const Chats = () => {
   );
   const collapseButtonRotation = chatsCollapsed ? "rotate-180" : "";
   const chatsWidth = chatsCollapsed ? "w-0" : "w-[22rem]";
-  const colapsedGap = chatsCollapsed ? "gap-0" : "gap-5 mr-5";
+  const colapsedMargin = chatsCollapsed ? "" : "mr-5";
   const testImg =
     "https://upload.wikimedia.org/wikipedia/commons/a/ae/Aristotle_Altemps_Inv8575.jpg";
 
@@ -41,7 +41,7 @@ const Chats = () => {
 
   return (
     <div
-      className={`hidden h-full min-h-0 items-center transition-all duration-300 sm:flex ${colapsedGap}`}
+      className={`hidden h-full min-h-0 items-center transition-all duration-300 sm:flex ${colapsedMargin}`}
     >
       {/* Collapse button */}
       <button
@@ -49,22 +49,23 @@ const Chats = () => {
           localStorage.setItem("chatsCollapse", !chatsCollapsed);
           setChatsCollapsed(!chatsCollapsed);
         }}
+        className="outline-none"
       >
         <CollapseIcon arrowDirectionRight={chatsCollapsed} />
       </button>
 
       <div
-        className={`h-full overflow-y-auto transition-all duration-300 ${chatsWidth}`}
+        className={`h-full overflow-y-auto transition-all space-y-1 duration-300 ${chatsWidth}`}
       >
         {/* Not logged in */}
-        {!userProfile && (
+        {!true && (
           <div className="flex h-full w-full items-center justify-center dark:text-soft-white">
             <p className="text-[20px] font-semibold">Log in to use chats</p>
           </div>
         )}
 
         {/* Logged in and has chats */}
-        {userProfile &&
+        {true &&
           testChats.map((item, index) => (
             <ChatItem
               key={index}

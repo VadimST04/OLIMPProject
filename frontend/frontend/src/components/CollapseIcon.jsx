@@ -8,12 +8,12 @@ const CollapseIcon = ({ arrowDirectionRight = true }) => {
     ? "group-hover:rotate-[-32deg]"
     : "group-hover:rotate-[32deg]";
   return (
-    <div className="group flex h-32 w-10 flex-col items-center justify-center">
+    <div className="group flex h-32 w-12 flex-col items-center justify-center">
       <div
-        className={`h-4 w-1 translate-y-[2.5px] rounded-full bg-main-green transition-all duration-200 ${topStrokeRotation}`}
+        className={`h-4 w-1 translate-y-[2.5px] rounded-full bg-main-green dark:brightness-125 transition-all duration-200 ${topStrokeRotation}`}
       ></div>
       <div
-        className={`h-4 w-1 -translate-y-[2.5px] rounded-full bg-main-green transition-all duration-200 ${bottomStrokeRotation}`}
+        className={`h-4 w-1 -translate-y-[2.5px] rounded-full bg-main-green dark:brightness-125 transition-all duration-200 ${bottomStrokeRotation}`}
       ></div>
     </div>
   );
