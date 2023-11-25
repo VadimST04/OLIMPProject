@@ -15,7 +15,7 @@ const DetailedMusic = ({
   const [isPaused, setPaused] = useState(true);
 
   return (
-    <div className="relative h-full gap-5 sm:grid sm:grid-cols-2">
+    <div className="relative h-full gap-5 px-10 sm:grid sm:grid-cols-2">
       <button
         onClick={() => hideDetailedMusic()}
         className="absolute left-0 top-0 z-[1] text-3xl hover:text-soft-black-hover dark:hover:text-soft-white-hover"
