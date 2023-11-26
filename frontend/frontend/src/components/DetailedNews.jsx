@@ -1,5 +1,6 @@
 import React from "react";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
+import ImageLoader from "./ImageLoader";
 const DetailedNews = ({
   title,
   link,
@@ -22,7 +23,6 @@ const DetailedNews = ({
 
   const url = new URL(link);
   const websiteName = url.hostname.replace("www.", "");
-  console.log(author);
   return (
     <div className="flex h-full w-full gap-5 overflow-y-auto pr-2">
       <div
@@ -32,11 +32,9 @@ const DetailedNews = ({
         <BsFillArrowLeftCircleFill />
       </div>
       <div className="flex-grow">
-        <img
-          src={image_url}
-          alt=""
-          className="float-left mr-3 aspect-square w-[28rem] object-cover"
-        />
+        <div className="float-left mr-3 aspect-square w-[28rem] ">
+          <ImageLoader src={image_url} />
+        </div>
         <div className="w-full space-y-1">
           <p className="text-[#737373]">{websiteName}</p>
           <p className="text-[22px] font-semibold">{title}</p>

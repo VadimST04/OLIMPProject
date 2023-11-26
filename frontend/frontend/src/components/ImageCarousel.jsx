@@ -3,6 +3,7 @@ import {
   BiSolidChevronRightCircle,
   BiSolidChevronLeftCircle,
 } from "react-icons/bi";
+import ImageLoader from "./ImageLoader";
 
 const ImageCarousel = ({ images }) => {
   const [activeImageIndex, setActiveImage] = useState(0);
@@ -32,12 +33,8 @@ const ImageCarousel = ({ images }) => {
         className="flex h-full w-full transition-transform duration-300 will-change-transform"
       >
         {images.map((image, index) => (
-          <div className="relative h-full w-full flex-shrink-0" key={index}>
-            <img
-              src={image}
-              alt=""
-              className="absolute h-full w-full select-none object-cover"
-            />
+          <div className="h-full w-full flex-shrink-0" key={index}>
+            <ImageLoader src={image} />
           </div>
         ))}
       </div>

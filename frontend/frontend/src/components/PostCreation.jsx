@@ -3,6 +3,7 @@ import { BiImageAdd } from "react-icons/bi";
 import ImageCarousel from "./ImageCarousel";
 import PostsNavbar from "./PostsNavbar";
 import { useNavigate } from "react-router";
+import ImageLoader from "./ImageLoader";
 
 const PostCreation = () => {
   const imageInput = useRef();
@@ -93,11 +94,9 @@ const PostCreation = () => {
           </div>
           <div className="grid grid-rows-[3rem,1fr,3rem] gap-5">
             <div className="flex items-center gap-2">
-              <img
-                src={profileImage}
-                alt=""
-                className="h-12 w-12 rounded-full object-cover"
-              />
+              <div className="h-12 w-12 overflow-hidden rounded-full">
+                <ImageLoader src={profileImage} />
+              </div>
               <span className="font-semibold">{username}</span>
             </div>
             <div className="flex flex-col gap-1">

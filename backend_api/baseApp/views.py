@@ -1,6 +1,7 @@
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User
 from django.db import IntegrityError
+from drf_spectacular.utils import extend_schema, extend_schema_view
 from rest_framework import generics, status
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
@@ -17,6 +18,7 @@ import json
 import os
 
 
+@extend_schema(tags=["User Management"])
 class MyTokenObtainPairView(TokenObtainPairView):
     """
     This view extends the TokenObtainPairView from the SimpleJWT library to use a custom view
@@ -27,6 +29,7 @@ class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
 
+@extend_schema(tags=["User Management"])
 class UserRegistration(APIView):
     """
     View for registering new users.
@@ -75,6 +78,7 @@ class UserRegistration(APIView):
             return Response(message, status=status.HTTP_400_BAD_REQUEST)
 
 
+@extend_schema(tags=["User Management"])
 class UserList(generics.ListAPIView):
     """
     A view for retrieving a list of User objects.
@@ -85,6 +89,7 @@ class UserList(generics.ListAPIView):
     permission_classes = (IsAuthenticated,)
 
 
+@extend_schema(tags=["User Management"])
 class UserProfileGet(generics.RetrieveAPIView):
     """
     A view for retrieving the profile of a specific user
@@ -103,6 +108,7 @@ class UserProfileGet(generics.RetrieveAPIView):
     permission_classes = (IsAuthenticated, IsAuthorOrIsAuthenticated)
 
 
+@extend_schema(tags=["User Management"])
 class UserProfileUpdate(APIView):
     """
     A view for updating user and user profile information
@@ -149,6 +155,7 @@ class UserProfileUpdate(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+@extend_schema(tags=["Languages"])
 class LanguageList(generics.ListAPIView):
     """
     A view for listing Language instances.

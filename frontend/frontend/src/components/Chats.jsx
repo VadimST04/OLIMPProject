@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ChatItem from "./ChatItem";
 import { useSelector } from "react-redux";
 import { AiOutlineRight } from "react-icons/ai";
@@ -7,13 +7,12 @@ const Chats = () => {
   const { userProfile } = useSelector((state) => state.userProfile);
   const [activeChatIndex, setActiveChatIndex] = useState(0);
   const [chatsCollapsed, setChatsCollapsed] = useState(
-    localStorage.getItem("chatsCollapse")
-      ? localStorage.getItem("chatsCollapse")
-      : false,
+    localStorage.getItem("chatsCollapse") === "true",
   );
   const collapseButtonRotation = chatsCollapsed ? "rotate-180" : "";
+  const collapseButtonLeft = chatsCollapsed ? "-left-4" : "";
   const chatsWidth = !chatsCollapsed ? "w-[22rem]" : "w-0";
-
+  console.log(chatsWidth);
   const testImg =
     "https://upload.wikimedia.org/wikipedia/commons/a/ae/Aristotle_Altemps_Inv8575.jpg";
 
@@ -51,7 +50,7 @@ const Chats = () => {
           localStorage.setItem("chatsCollapse", !chatsCollapsed);
           setChatsCollapsed(!chatsCollapsed);
         }}
-        className="absolute -left-4 hidden cursor-pointer rounded-full bg-main-green p-1 text-[24px] text-soft-white hover:bg-main-dark-green dark:text-soft-white md:block"
+        className={`absolute hidden cursor-pointer rounded-full bg-main-green p-1 text-[24px] text-soft-white hover:bg-main-dark-green dark:text-soft-white md:block ${collapseButtonLeft}`}
       >
         <AiOutlineRight
           className={`transition-transform duration-500 ${collapseButtonRotation}`}
