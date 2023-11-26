@@ -35,7 +35,7 @@ class News:
             f'{API_URL}&language=it').json()[
             'results'],
         'Arabic': requests.get(
-            f'{API_URL}&language=ar').json()[
+            f'{API_URL}&&language=ar').json()[
             'results'],
         'Armenian': requests.get(
             f'{API_URL}&language=hy').json()[
@@ -44,7 +44,7 @@ class News:
             f'{API_URL}&language=uk').json()[
             'results'],
         'Spanish': requests.get(
-            f'{API_URL}&language=sp').json()[
+            f'{API_URL}&language=es').json()[
             'results'],
         'Swedish': requests.get(
             f'{API_URL}&language=sv').json()[
@@ -53,7 +53,7 @@ class News:
 
     @staticmethod
     def create_news_object(item):
-        # print(item)
+        print(item)
         return {
             'title': item['title'],
             'link': item['link'],
@@ -75,8 +75,9 @@ class News:
         :return: article objects (dictionaries)
         """
 
-        # print(langs)
+        print(langs)
         news = [cls.LANGUAGES_NEWS[lang] for lang in langs]
+        print(news)
         news = list(chain.from_iterable(news))
         news = list(map(cls.create_news_object, news))
         news = sample(news, len(news))
