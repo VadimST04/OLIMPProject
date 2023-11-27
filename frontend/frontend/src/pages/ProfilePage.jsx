@@ -18,7 +18,7 @@ const ProfilePage = () => {
   const navigate = useNavigate();
   const imageInput = useRef();
   const { userProfile } = useSelector((state) => state.userProfile);
-  console.log(userProfile);
+  console.log("userProfile", userProfile);
   // const { languages } = useSelector((state) => state.languagesList);
   // console.log(languages);
   const [imageFileOld, setImageFileOld] = useState("");
@@ -43,7 +43,7 @@ const ProfilePage = () => {
         password: "",
         appLanguage: userProfile.app_lang,
         learningLanguages: [...userProfile.learning_langs],
-        image: userProfile.image,
+        image: `data:image/jpeg;base64,${userProfile.image_data}`,
         imageName: imageFile,
       });
     } else {
@@ -150,7 +150,7 @@ const ProfilePage = () => {
             className="relative aspect-square h-32 rounded-full"
           >
             <div className="h-full w-full cursor-pointer overflow-hidden rounded-full">
-              <ImageLoader src={formData.image} />
+              <ImageLoader src={formData.image} displayErrors={false} />
             </div>
             <div className="absolute bottom-2 right-2 z-10 flex h-6 w-6 cursor-pointer items-center justify-center rounded-full bg-[#EDC5AB] text-[20px]">
               <BiSolidPencil className="text-soft-black" />
