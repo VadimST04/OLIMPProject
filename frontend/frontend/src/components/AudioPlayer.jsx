@@ -36,7 +36,6 @@ const AudioPlayer = () => {
 
   const onSliderChange = () => {
     const newTime = parseFloat(slider.current.value);
-    console.log(newTime);
     const formattedMinutes = String(Math.floor(newTime / 60)).padStart(2, "0");
     const formattedSeconds = String(Math.floor(newTime % 60)).padStart(2, "0");
     setTimer(`${formattedMinutes}:${formattedSeconds}`);
