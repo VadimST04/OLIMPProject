@@ -42,10 +42,10 @@ const PostsNavbar = ({}) => {
             sessionStorage.setItem("postNavbarActiveButton", index);
             navigate(item.link);
           }}
-          className="flex w-[5rem] items-center justify-center gap-1 rounded-xl bg-[#D9D9D9] px-4 py-2 hover:bg-[#BEBEBE] md:w-[12rem]"
+          className="flex w-[4rem] items-center justify-center gap-1 rounded-md bg-[#D9D9D9] py-2 hover:bg-[#BEBEBE] sm:w-[10rem]"
         >
-          {item.icon}
-          <span className="hidden md:inline">{item.title}</span>
+          <span className="text-xl">{item.icon}</span>
+          <span className="hidden sm:inline">{item.title}</span>
         </button>
       ))}
     </div>

@@ -5,11 +5,10 @@ const SettingsButton = () => {
   return (
     <button
       onClick={() => {}}
-      className="group cursor-pointer rounded-md p-2 text-[26px] hover:bg-main-dark-green"
+      className="group relative flex h-10 w-full items-center justify-start gap-2 rounded-md text-soft-white sm:w-10 sm:justify-center sm:hover:bg-main-dark-green"
     >
-      <div className="flex items-center justify-center text-soft-white transition-all duration-150 group-hover:scale-110">
-        <MdSettings />
-      </div>
+      <p className="sm:hidden">Settings</p>
+      <MdSettings className="text-2xl transition-transform duration-150 group-hover:scale-[115%]" />
     </button>
   );
 };

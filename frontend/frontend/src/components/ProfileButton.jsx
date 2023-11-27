@@ -29,29 +29,29 @@ const ProfileButton = () => {
   return (
     <>
       {userToken && (
-        <div
+        <button
           onClick={() => navigate("/user/profile")}
-          className="group cursor-pointer rounded-full p-2.5 transition-all duration-150 hover:bg-main-dark-green"
+          className="group h-14 w-14 rounded-full p-1.5 hover:bg-main-dark-green"
         >
-          <div className="flex aspect-square w-9 items-center justify-center text-soft-white transition-all duration-150 group-hover:scale-125">
-            <div className="h-full w-full overflow-hidden rounded-full">
-              <ImageLoader src={profileImage} />
-            </div>
+          <div className="h-full w-full overflow-hidden rounded-full transition-all duration-150 group-hover:scale-[115%]">
+            <ImageLoader
+              src={
+                "https://images.unsplash.com/photo-1700585560129-2c03e2a3f511?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxNXx8fGVufDB8fHx8fA%3D%3D"
+              }
+            />
           </div>
-        </div>
+        </button>
       )}
 
       {!userToken && (
-        <div
+        <button
           onClick={() => {
             dispatch({ type: SIGN_IN_FORM_OPEN });
           }}
-          className="group cursor-pointer rounded-md p-2 text-[26px] hover:bg-main-dark-green"
+          className="group flex h-10 w-10 items-center justify-center rounded-md text-soft-white hover:bg-main-dark-green"
         >
-          <div className="flex items-center justify-center text-soft-white transition-all duration-150 group-hover:scale-110">
-            <HiOutlineUserCircle />
-          </div>
-        </div>
+          <HiOutlineUserCircle className="text-3xl transition-transform duration-150 group-hover:scale-[115%]" />
+        </button>
       )}
 
       {isSignInFormOpen && (

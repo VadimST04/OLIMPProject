@@ -23,6 +23,7 @@ const DetailedNews = ({
 
   const url = new URL(link);
   const websiteName = url.hostname.replace("www.", "");
+  console.log(author);
   return (
     <div className="flex h-full w-full gap-5 overflow-y-auto pr-2">
       <div

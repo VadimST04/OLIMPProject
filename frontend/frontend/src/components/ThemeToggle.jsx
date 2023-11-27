@@ -15,24 +15,14 @@ const ThemeToggle = () => {
   }, [theme]);
 
   return (
-    <>
-      <button
-        onClick={() => setTheme("dark")}
-        className="group cursor-pointer rounded-md p-[11px] text-[20px] hover:bg-main-dark-green dark:hidden"
-      >
-        <div className="flex items-center justify-center text-soft-white transition-all duration-150 group-hover:scale-110">
-          <BsMoonFill />
-        </div>
-      </button>
-      <button
-        onClick={() => setTheme("light")}
-        className="group hidden rounded-md p-2 text-[26px] hover:bg-main-dark-green dark:block"
-      >
-        <div className="flex items-center justify-center text-soft-white transition-all duration-150 group-hover:scale-110">
-          <BsFillSunFill />
-        </div>
-      </button>
-    </>
+    <button
+      onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+      className="group relative flex h-10 w-full items-center justify-start gap-2 rounded-md text-soft-white sm:w-10 sm:justify-center sm:hover:bg-main-dark-green"
+    >
+      <p className="sm:hidden">Theme</p>
+      <BsMoonFill className="text-[22px] transition-transform duration-150 group-hover:scale-[115%] dark:hidden" />
+      <BsFillSunFill className="hidden text-[28px] transition-transform duration-150 group-hover:scale-[115%] dark:block" />
+    </button>
   );
 };
 

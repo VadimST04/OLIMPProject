@@ -67,16 +67,16 @@ const PostCreation = () => {
           Create a post
         </p>
         <hr className="w-full self-center rounded-full border-soft-black dark:border-[#ABABAB]" />
-        <div className="grid h-full flex-grow grid-cols-1 grid-rows-2 gap-5 overflow-y-auto py-5 text-soft-black dark:text-soft-white md:grid-cols-2 md:grid-rows-1 md:overflow-y-hidden">
+        <div className="grid h-full flex-grow grid-cols-1 grid-rows-2 gap-5 overflow-y-auto py-5 text-soft-black dark:text-soft-white sm:grid-cols-2 sm:grid-rows-1 sm:overflow-y-hidden">
           <div
-            className={`grid grid-rows-[auto,1fr] md:grid-rows-[4.75rem,1fr] ${imagesGap}`}
+            className={`grid grid-rows-[auto,1fr] sm:grid-rows-[4.75rem,1fr] ${imagesGap}`}
           >
             <div
               onClick={() => imageInput.current.click()}
               className={`flex cursor-pointer select-none flex-col items-center justify-center rounded-xl border-2 border-dashed bg-[#E1E1E1] text-soft-black dark:bg-[#C0BCBB]  ${dragBorderStyle} ${rowSpan}`}
             >
               <BiImageAdd className="text-4xl" />
-              <p className="hidden font-bold md:block">
+              <p className="hidden font-bold sm:block">
                 Drag and drop photos here
               </p>
               <input

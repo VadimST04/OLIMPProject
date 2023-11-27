@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { BsNewspaper, BsFileEarmarkText } from "react-icons/bs";
 import { PiBooksDuotone } from "react-icons/pi";
@@ -12,13 +12,15 @@ import ThemeToggle from "./ThemeToggle";
 import ProfileButton from "./ProfileButton";
 import SettingsButton from "./SettingsButton";
 import { useNavigate } from "react-router";
+import { RxCross1 } from "react-icons/rx";
+import { SIGN_IN_FORM_OPEN } from "../store/constants/fromsConstants";
 
 function Navbar() {
   const { userToken } = useSelector((state) => state.userToken);
-  const navPadding = userToken ? "py-[4px]" : "py-2.5";
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const sidebarRef = useRef();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const buttonOptions = [
     { title: "News", icon: <BsNewspaper />, link: "/" },
     { title: "Books", icon: <PiBooksDuotone />, link: "/books" },
@@ -42,70 +44,72 @@ function Navbar() {
 
   return (
     <>
-      <div
-        className={`hidden items-center justify-between bg-main-green px-5 sm:flex ${navPadding} h-16`}
-      >
-        <div className="flex w-[168px] items-center gap-5">
-          <DropdownButton buttons={buttonOptions} />
-        </div>
-        <div className="pointer-events-none hidden select-none font-bruno-ace text-4xl uppercase text-soft-white sm:block">
+      <div className="flex h-full items-center justify-between bg-main-green px-5 text-soft-white">
+        <DropdownButton buttons={buttonOptions} />
+        <button
+          onClick={() => setSidebarOpen(true)}
+          className="group flex h-10 w-10 items-center justify-center rounded-md hover:bg-main-dark-green sm:hidden"
+        >
+          <BiMenuAltLeft className="text-3xl" />
+        </button>
+
+        <div className="pointer-events-none select-none font-bruno-ace text-3xl uppercase text-soft-white">
           olimp
         </div>
-        <div className="flex items-center">
+
+        <div className="hidden items-center sm:flex">
           <ThemeToggle />
           <LanguageDropDown />
-          <SettingsButton />
+          {/* <SettingsButton /> */}
+          <ProfileButton />
+        </div>
+        <div className="sm:hidden">
           <ProfileButton />
         </div>
       </div>
-      <div className="relative flex h-16 items-center justify-between bg-main-green px-5 py-2.5 sm:hidden">
-        <button
-          onClick={() => setSidebarOpen(true)}
-          className="text-4xl text-beig hover:text-beig-dark"
+
+      {sidebarOpen && (
+        <div
+          ref={sidebarRef}
+          className={`absolute left-0 top-0 z-[2] flex h-[100dvh] w-[50%] min-w-[15rem] flex-col justify-between bg-soft-black/90 py-2 text-soft-white sm:hidden`}
         >
-          <BiMenuAltLeft />
-        </button>
-        <div className="pointer-events-none select-none font-bruno-ace text-3xl uppercase text-soft-white sm:block">
-          olimp
-        </div>
-        <ProfileButton />
-        {sidebarOpen && (
-          <div
-            ref={sidebarRef}
-            className={`absolute left-0 top-0 z-[2] flex h-[100dvh] w-[50%] min-w-[15rem] flex-col justify-between bg-soft-black/90 py-2 text-soft-white`}
-          >
-            <div className="flex flex-col gap-2 px-5">
-              {buttonOptions.map((item, index) => (
-                <button
-                  onClick={() => {
-                    navigate(item.link);
-                    setSidebarOpen(false);
-                  }}
-                  key={index}
-                  className="flex w-full items-center gap-2 py-2"
-                >
-                  {item.title}
-                  <div className="text-2xl">{item.icon}</div>
-                </button>
-              ))}
-            </div>
-            <div className="px-5">
-              <div className="flex w-full items-center justify-between gap-2">
-                <span>Enabled languages</span>
-                <LanguageDropDown />
-              </div>
-              <div className="flex w-full items-center justify-between gap-2">
-                <span>Settings</span>
-                <SettingsButton />
-              </div>
-              <div className="flex w-full items-center justify-between gap-2">
-                <span>Change theme</span>
-                <ThemeToggle />
-              </div>
-            </div>
+          <div className="flex flex-col gap-2 px-3">
+            <button
+              onClick={() => {
+                setSidebarOpen(false);
+              }}
+              className="flex w-full items-center gap-2 rounded-md py-2 hover:bg-black/50"
+            >
+              <RxCross1 className="text-2xl" />
+            </button>
+            {buttonOptions.map((item, index) => (
+              <button
+                onClick={() => {
+                  if (
+                    !userToken &&
+                    (item.link === "/posts" || item.link === "/users")
+                  ) {
+                    dispatch({ type: SIGN_IN_FORM_OPEN });
+                    return;
+                  }
+                  navigate(item.link);
+                  setSidebarOpen(false);
+                }}
+                key={index}
+                className="flex w-full items-center gap-2 rounded-md py-2 hover:bg-black/50"
+              >
+                {item.title}
+                <div className="text-2xl">{item.icon}</div>
+              </button>
+            ))}
           </div>
-        )}
-      </div>
+          <div className="px-3">
+            <LanguageDropDown openUpwards={true} />
+            {/* <SettingsButton /> */}
+            <ThemeToggle />
+          </div>
+        </div>
+      )}
     </>
   );
 }
