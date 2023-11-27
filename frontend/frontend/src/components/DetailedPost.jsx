@@ -173,8 +173,9 @@ const DetailedPost = ({
             <div className="h-full w-full gap-2 overflow-hidden rounded-md">
               <ImageCarousel images={images} />
             </div>
-            {testComments.map((item) => (
+            {testComments.map((item, index) => (
               <CommentItem
+                key={index}
                 profileImg={item.profileImg}
                 commentDate={item.commentDate}
                 commentContent={item.commentContent}
