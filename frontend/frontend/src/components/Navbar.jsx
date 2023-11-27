@@ -44,7 +44,7 @@ function Navbar() {
 
   return (
     <>
-      <div className="flex h-full items-center justify-between bg-main-green px-2 text-soft-white">
+      <div className="flex h-full items-center justify-between bg-main-green px-5 text-soft-white">
         <DropdownButton buttons={buttonOptions} />
         <button
           onClick={() => setSidebarOpen(true)}
@@ -57,7 +57,7 @@ function Navbar() {
           olimp
         </div>
 
-        <div className="hidden sm:flex">
+        <div className="hidden items-center sm:flex">
           <ThemeToggle />
           <LanguageDropDown />
           {/* <SettingsButton /> */}
