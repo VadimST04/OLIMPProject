@@ -55,17 +55,17 @@ const Chats = () => {
       </button>
 
       <div
-        className={`h-full overflow-y-auto transition-all space-y-1 duration-300 ${chatsWidth}`}
+        className={`h-full space-y-1 overflow-y-auto transition-all duration-300 ${chatsWidth}`}
       >
         {/* Not logged in */}
-        {!true && (
+        {!userProfile && (
           <div className="flex h-full w-full items-center justify-center dark:text-soft-white">
             <p className="text-[20px] font-semibold">Log in to use chats</p>
           </div>
         )}
 
         {/* Logged in and has chats */}
-        {true &&
+        {userProfile &&
           testChats.map((item, index) => (
             <ChatItem
               key={index}
