@@ -24,7 +24,7 @@ const MusicPage = () => {
 
   useEffect(() => {
     if (!userProfile) dispatch(getUserProfile());
-    dispatch(musicList(userProfile ? userProfile.learning_langs : ["English"]));
+    dispatch(musicList(userProfile ? userProfile.learning_langs : [""]));
   }, [dispatch, userProfile]);
 
   const tags = [

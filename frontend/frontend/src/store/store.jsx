@@ -12,7 +12,7 @@ import {
 import { postsListReducer } from "../store/reducers/postsReducers";
 import { userProfileReducer } from "../store/reducers/profileReducers";
 import { newsListReducer } from "../store/reducers/newsReducers";
-import { musicListReducer } from "../store/reducers/musicReducers";
+import { musicDetailsReducer, musicListReducer } from "../store/reducers/musicReducers";
 import { mainButtonReducer } from "../store/reducers/buttonsReducers";
 import { signInFormToggler } from "../store/reducers/formsReducers";
 import { booksDetailReducer, booksListReducer } from "../store/reducers/booksReducers";
@@ -23,9 +23,13 @@ const reducer = combineReducers({
   usersList: userListReducer,
   languagesList: languagesListReducer,
   postsList: postsListReducer,
+
   musicList: musicListReducer,
+  musicDetails: musicDetailsReducer,
+
   userProfile: userProfileReducer,
   newsList: newsListReducer,
+
   booksList: booksListReducer,
   bookDetail: booksDetailReducer,
 

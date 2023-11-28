@@ -85,9 +85,6 @@ export const bookDetails = (bookId) => async (dispatch, getState) => {
 
 export const booksSearch = (query) => async (dispatch, getState) => {
   try {
-    // dispatch({
-    //   type: BOOKS_REQUEST,
-    // });
 
     const { userToken } = getState().userToken;
 
