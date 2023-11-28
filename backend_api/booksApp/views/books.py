@@ -7,7 +7,7 @@ from rest_framework.views import APIView
 
 from booksApp import utils
 from booksApp.models import Book
-from booksApp.serializers.books import BookCreateSerializer, BookRUDSerializer
+from booksApp.serializers.books import BookCreateSerializer, BookRUDSerializer, BookRetrieveDSerializer
 
 
 @extend_schema(tags=["Books"])
@@ -28,7 +28,7 @@ class BookRUDView(generics.RetrieveUpdateDestroyAPIView):
     """
 
     queryset = Book.objects.all()
-    serializer_class = BookRUDSerializer
+    serializer_class = BookRetrieveDSerializer
     permission_classes = (IsAuthenticated, )
 
     # def get(self, request, *args, **kwargs):

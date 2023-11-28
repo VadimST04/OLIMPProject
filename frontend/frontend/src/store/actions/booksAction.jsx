@@ -17,10 +17,14 @@ export const booksList = (learning_langs) => async (dispatch, getState) => {
 
     const { userToken } = getState().userToken;
 
+    console.log("bookList action", learning_langs?.at(0));
+
     const config = {
       headers: {
         "Content-type": "application/json",
-        Authorization: `Bearer ${userToken.access}`,
+        Authorization: learning_langs?.at(0)
+          ? `Bearer ${userToken.access}`
+          : "",
       },
     };
 
