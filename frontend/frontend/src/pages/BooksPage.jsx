@@ -95,6 +95,11 @@ const BooksPage = () => {
               />
             ))}
           </div>
+          {books?.length < 1 && (
+            <div className="flex w-full items-center justify-center">
+              <p className="text-3xl">No books found</p>
+            </div>
+          )}
         </div>
       )}
 
