@@ -6,7 +6,7 @@ from booksApp.models import Book, Author
 from booksApp import utils
 
 
-class BookRUDSerializer(serializers.ModelSerializer):
+class BookRetrieveDSerializer(serializers.ModelSerializer):
     """
     A serializer for the Book model designed for Retrieve, Update, and Destroy operations.
     This serializer is used to convert Book model instances to JSON data and vice versa, specifically for
@@ -29,6 +29,31 @@ class BookRUDSerializer(serializers.ModelSerializer):
 
         model = Book
         fields = '__all__'
+
+
+class BookRUDSerializer(serializers.ModelSerializer):
+    """
+    A serializer for the Book model designed for Retrieve, Update, and Destroy operations.
+    This serializer is used to convert Book model instances to JSON data and vice versa, specifically for
+    retrieval, update, and deletion operations.
+    """
+
+    author = serializers.SlugRelatedField(
+        queryset=Author.objects.all(),
+        slug_field='name')
+    languages = serializers.SlugRelatedField(
+        queryset=Language.objects.all(),
+        slug_field='name',
+    )
+
+    class Meta:
+        """
+        model (Model): The model class associated with the serializer.
+        fields (str or tuple): The fields to include in the serialized representation.
+        """
+
+        model = Book
+        fields = ['id', 'cover_image_data', 'author', 'title', 'languages']
 
 
 class BookCreateSerializer(serializers.ModelSerializer):

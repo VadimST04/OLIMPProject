@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from musicApp.models import Song
-from musicApp.serializers import SongSerializer
+from musicApp.serializers import SongSerializer, SongListSerializer
 
 
 @extend_schema(tags=["Music"])
@@ -24,11 +24,11 @@ class SongList(APIView):
         if request.user.is_authenticated:
             data = request.data
             songs = Song.objects.filter(language__name__in=data['learning_langs'])
-            serializer = SongSerializer(songs, many=True)
+            serializer = SongListSerializer(songs, many=True)
             return Response(serializer.data)
         else:
             songs = Song.objects.all()
-            serializer = SongSerializer(songs, many=True)
+            serializer = SongListSerializer(songs, many=True)
             return Response(serializer.data)
 
 
