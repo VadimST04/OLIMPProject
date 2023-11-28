@@ -60,7 +60,7 @@ const HorizontalCarousel = ({ items, onItemClick }) => {
             key={index}
             onClick={() => {
               setActiveIndex(index);
-              onItemClick(item);
+              if (onItemClick) onItemClick(item);
             }}
             className={`shrink-0 cursor-pointer select-none rounded-md border border-soft-white-hover px-2 py-1 font-semibold  sm:border-none ${
               index === activeIndex
