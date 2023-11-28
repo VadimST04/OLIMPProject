@@ -16,7 +16,16 @@ class Post(models.Model):
 class ImagePost(models.Model):
     object = models.Manager()
     image = models.ImageField()
+    image_data = models.BinaryField(null=True)
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='image_post')
+
+    def save(self, *args, **kwargs):
+        if self.image:
+            self.image_data = self.image.read()
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f'image {self.id} of {self.post.user} post'
 
 
 class Comment(models.Model):

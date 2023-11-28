@@ -17,7 +17,7 @@ import PostCreation from "./components/PostCreation";
 
 const Root = () => {
   return (
-    <div className="flex h-[100dvh] flex-col">
+    <div className="grid h-[100dvh] grid-rows-[4rem,1fr]">
       <Navbar />
       <MainContent />
     </div>

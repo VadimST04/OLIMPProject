@@ -2,18 +2,17 @@ import React, { useState } from "react";
 import ChatItem from "./ChatItem";
 import { useSelector } from "react-redux";
 import { AiOutlineRight } from "react-icons/ai";
+import CollapseIcon from "./CollapseIcon";
 
 const Chats = () => {
   const { userProfile } = useSelector((state) => state.userProfile);
   const [activeChatIndex, setActiveChatIndex] = useState(0);
   const [chatsCollapsed, setChatsCollapsed] = useState(
-    localStorage.getItem("chatsCollapse")
-      ? localStorage.getItem("chatsCollapse")
-      : false,
+    localStorage.getItem("chatsCollapse") === "true",
   );
   const collapseButtonRotation = chatsCollapsed ? "rotate-180" : "";
-  const chatsWidth = !chatsCollapsed ? "w-[22rem]" : "w-0";
-
+  const chatsWidth = chatsCollapsed ? "w-0" : "w-[22rem]";
+  const colapsedMargin = chatsCollapsed ? "" : "mr-5";
   const testImg =
     "https://upload.wikimedia.org/wikipedia/commons/a/ae/Aristotle_Altemps_Inv8575.jpg";
 
@@ -42,39 +41,30 @@ const Chats = () => {
 
   return (
     <div
-      className={`relative flex items-center transition-all duration-500 ${
-        !chatsCollapsed ? "px-6" : ""
-      }`}
+      className={`hidden h-full min-h-0 items-center transition-all duration-300 sm:flex ${colapsedMargin}`}
     >
-      <div
+      {/* Collapse button */}
+      <button
         onClick={() => {
           localStorage.setItem("chatsCollapse", !chatsCollapsed);
           setChatsCollapsed(!chatsCollapsed);
         }}
-        className="absolute -left-4 hidden cursor-pointer rounded-full bg-main-green p-1 text-[24px] text-soft-white hover:bg-main-dark-green dark:text-soft-white md:block"
+        className="outline-none"
       >
-        <AiOutlineRight
-          className={`transition-transform duration-500 ${collapseButtonRotation}`}
-        />
-      </div>
+        <CollapseIcon arrowDirectionRight={chatsCollapsed} />
+      </button>
 
       <div
-        className={`h-full flex-shrink-0 space-y-1 overflow-y-auto overflow-x-hidden text-soft-black transition-all duration-500 ${chatsWidth} ${
-          !chatsCollapsed ? "pr-2" : ""
-        }`}
+        className={`h-full space-y-1 overflow-y-auto transition-all duration-300 ${chatsWidth}`}
       >
-        {testChats.length === 0 && userProfile && (
-          <div className="flex h-full w-full items-center justify-center">
-            <div className="flex w-full cursor-pointer select-none items-center justify-center gap-2 rounded-md border border-transparent bg-main-green p-5 text-soft-white">
-              You don't have any chats yet
-            </div>
-          </div>
-        )}
+        {/* Not logged in */}
         {!userProfile && (
           <div className="flex h-full w-full items-center justify-center dark:text-soft-white">
             <p className="text-[20px] font-semibold">Log in to use chats</p>
           </div>
         )}
+
+        {/* Logged in and has chats */}
         {userProfile &&
           testChats.map((item, index) => (
             <ChatItem
@@ -84,6 +74,15 @@ const Chats = () => {
               {...item}
             />
           ))}
+
+        {/* Logged in and no chats yet */}
+        {testChats.length === 0 && userProfile && (
+          <div className="flex h-full w-full items-center justify-center dark:text-soft-white">
+            <p className="text-[20px] font-semibold">
+              You don't have any chats yet
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );

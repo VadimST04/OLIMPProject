@@ -6,14 +6,14 @@ import { useDispatch, useSelector } from "react-redux";
 import Checkbox from "./Checkbox";
 import { SIGN_IN_FORM_OPEN } from "../store/constants/fromsConstants";
 
-const LanguageDropDown = () => {
+const LanguageDropDown = ({ openUpwards = false }) => {
   const [languageDropDownOpen, setLanguageDropDownOpen] = useState(false);
   const [learningLanguages, setLearningLanguages] = useState([]);
   const { userProfile } = useSelector((state) => state.userProfile);
   const { userToken } = useSelector((state) => state.userToken);
   const selfRef = useRef();
   const dropDownVisibility = languageDropDownOpen ? "" : "hidden";
-  const dispatch = useDispatch();
+  const openStyle = openUpwards ? "bottom-[100%]" : "top-[100%]";
 
   const onOutsideClick = (e) => {
     if (!selfRef.current.contains(e.target)) setLanguageDropDownOpen(false);
@@ -28,26 +28,21 @@ const LanguageDropDown = () => {
 
   useEffect(() => {
     setLearningLanguages(userProfile ? userProfile.learning_langs : []);
+    setLearningLanguages(["English", "Ukrainian", "German", "French"]);
   }, [userProfile]);
 
-  const onClickHandler = () => {
-    if (!userToken) {
-      dispatch({ type: SIGN_IN_FORM_OPEN });
-    }
-    setLanguageDropDownOpen(true);
-  };
-
   return (
-    <button onClick={() => onClickHandler()} ref={selfRef} className="relative">
-      <div className="group cursor-pointer rounded-md p-2 text-[26px] hover:bg-main-dark-green">
-        <div className="flex items-center justify-center text-soft-white transition-all duration-150 group-hover:scale-110">
-          <MdLanguage />
-        </div>
-      </div>
+    <button
+      onClick={() => setLanguageDropDownOpen(true)}
+      ref={selfRef}
+      className="group relative flex h-10 w-full items-center justify-start gap-2 rounded-md text-soft-white sm:w-10 sm:justify-center sm:hover:bg-main-dark-green"
+    >
+      <p className="sm:hidden">Languages</p>
+      <MdLanguage className="text-[28px] transition-transform duration-150 group-hover:scale-[115%]" />
       <div
-        className={`absolute right-0 top-[100%] z-[1] flex max-h-64 w-max cursor-pointer overflow-y-auto rounded-md bg-soft-white ${dropDownVisibility}`}
+        className={`absolute right-0  z-[1] flex max-h-64 w-max cursor-pointer overflow-y-auto rounded-md bg-soft-white ${dropDownVisibility} ${openStyle}`}
       >
-        <div className="">
+        <div className="text-soft-black">
           {learningLanguages?.map((lang, index) => (
             <Checkbox key={index} label={lang} checkedByDefault={true} />
           ))}

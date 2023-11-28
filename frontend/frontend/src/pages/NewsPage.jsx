@@ -14,6 +14,7 @@ const NewsPage = () => {
 
   const { userProfile } = useSelector((state) => state.userProfile);
   const { news } = useSelector((state) => state.newsList);
+  console.log(news);
 
   useEffect(() => {
     if (userProfile) {

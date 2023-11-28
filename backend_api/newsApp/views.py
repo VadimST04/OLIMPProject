@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from newsApp.news import News
+from newsApp.pagination import StandardResultsSetPagination
 
 
 @extend_schema(tags=["News"])
@@ -12,6 +13,8 @@ class NewsList(APIView):
     View for getting news depending on languages
     """
 
+    # pagination_class = StandardResultsSetPagination
+
     def post(self, request):
         """
         Handle POST requests for the view.d
@@ -19,7 +22,15 @@ class NewsList(APIView):
         :return: Returns list of article objects
         """
 
-        news = News.get_news(langs=request.data['learning_langs'])
-        if not news:
-            return Response({'detail': 'Something went wrong with news'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-        return Response(news, status=status.HTTP_200_OK)
+        data = request.data
+        learning_langs = data['learning_langs']
+        try:
+            news = News.get_news(langs=learning_langs)
+            if not news:
+                return Response({'detail': 'Something went wrong with news'},
+                                status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response(news, status=status.HTTP_200_OK)
+        except KeyError:
+            return Response({'detail': 'This languages do not exist or something else went wrong'})
+        except TypeError:
+            return Response({'detail': 'Rate limit exceeded. Please reload this page later'})

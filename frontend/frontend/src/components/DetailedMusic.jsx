@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 import { BiSkipPrevious, BiSkipNext } from "react-icons/bi";
 import { AiFillPlayCircle, AiFillPauseCircle } from "react-icons/ai";
+import ImageLoader from "./ImageLoader";
+import AudioPlayer from "./AudioPlayer";
 
 const DetailedMusic = ({
   lyrics,
@@ -11,64 +13,30 @@ const DetailedMusic = ({
   author,
   hideDetailedMusic,
 }) => {
-  const [isPaused, setPaused] = useState(true);
-
   return (
-    <div className="relative grid h-full grid-cols-2 gap-5">
+    <div className="relative mx-auto h-full max-w-[64rem] gap-5 px-10 sm:grid sm:grid-cols-2">
       <button
         onClick={() => hideDetailedMusic()}
         className="absolute left-0 top-0 z-[1] text-3xl hover:text-soft-black-hover dark:hover:text-soft-white-hover"
       >
         <BsFillArrowLeftCircleFill />
       </button>
-      <div className="grid grid-rows-[1fr,0.5fr] items-center">
-        <div className="relative h-full w-full max-w-[28rem] justify-self-center">
-          <img
-            src={image}
-            alt=""
-            className="pointer-events-none absolute h-full w-full select-none object-cover"
-          />
+      <div className="grid h-full max-w-[28rem] grid-rows-[1fr,0.5fr] items-center">
+        <div className="h-full w-full justify-self-center">
+          <ImageLoader src={image} />
         </div>
-        <div className="w-full max-w-[28rem] space-y-4 justify-self-center text-center">
+        <div className="w-full space-y-4 justify-self-center text-center">
           <span>Song language - </span>
           <span className="font-semibold">{language}</span>
-          <div className="">
+          <div>
             <p className="text-3xl font-bold">{title}</p>
             <p className="font-semibold">{author}</p>
           </div>
-          <div className="space-y-2">
-            <input
-              type="range"
-              className="h-1 w-full rounded-full bg-soft-white-hover accent-soft-black dark:bg-soft-black-hover dark:accent-soft-white"
-            />
-            <div className="flex justify-center gap-5">
-              <button className="rounded-full text-5xl hover:bg-soft-white-hover dark:hover:bg-soft-black-hover">
-                <BiSkipPrevious />
-              </button>
-              {isPaused && (
-                <button
-                  onClick={() => setPaused(false)}
-                  className="rounded-full text-5xl hover:bg-soft-white-hover dark:hover:bg-soft-black-hover"
-                >
-                  <AiFillPlayCircle />
-                </button>
-              )}
-              {!isPaused && (
-                <button
-                  onClick={() => setPaused(true)}
-                  className="rounded-full text-5xl hover:bg-soft-white-hover dark:hover:bg-soft-black-hover"
-                >
-                  <AiFillPauseCircle />
-                </button>
-              )}
-              <button className="rounded-full text-5xl hover:bg-soft-white-hover dark:hover:bg-soft-black-hover">
-                <BiSkipNext />
-              </button>
-            </div>
-          </div>
+          <AudioPlayer />
         </div>
       </div>
-      <div className="overflow-y-auto px-[min(8rem,10%)]">
+
+      <div className="overflow-y-auto">
         <p className="p-3">
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit quo in
           eaque quaerat ad provident nemo ipsam quasi libero asperiores non,
