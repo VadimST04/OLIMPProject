@@ -201,12 +201,22 @@ const BooksPage = () => {
     "Top 10 Books",
   ];
 
+  const inputChange = (e) => {
+    if (e.target.value === "") return;
+
+    dispatch(booksSearch(e.target.value));
+  };
+
   return (
     <>
       {!bookPreview && !bookDetails && (
         <div className="h-full w-full space-y-5">
           <div className="h-10 w-full dark:text-soft-black">
-            <SearchBar inputStyling="h-full w-full rounded-2xl bg-[#D9D9D9] outline-none p-2 px-6" />
+            <input
+              type="text"
+              onChange={inputChange}
+              className="h-full w-full rounded-2xl bg-[#D9D9D9] p-2 px-6 outline-none"
+            />
           </div>
           <HorizontalCarousel items={testTags} />
           <div className="grid grid-cols-[repeat(auto-fill,minmax(11rem,1fr))] gap-4">
