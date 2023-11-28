@@ -202,7 +202,10 @@ const BooksPage = () => {
   ];
 
   const inputChange = (e) => {
-    if (e.target.value === "") return;
+    if (e.target.value === "")
+      dispatch(
+        booksList(userProfile ? userProfile.learning_langs : ["English"]),
+      );
 
     dispatch(booksSearch(e.target.value));
   };

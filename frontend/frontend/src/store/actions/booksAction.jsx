@@ -2,6 +2,7 @@ import {
   BOOKS_REQUEST,
   BOOKS_SUCCESS,
   BOOKS_FAIL,
+  BOOK_SEARCH,
 } from "../constants/booksConstants";
 import axios from "axios";
 
@@ -74,9 +75,9 @@ export const bookDetails = () => async (dispatch, getState) => {
 
 export const booksSearch = (query) => async (dispatch, getState) => {
   try {
-    dispatch({
-      type: BOOKS_REQUEST,
-    });
+    // dispatch({
+    //   type: BOOKS_REQUEST,
+    // });
 
     const { userToken } = getState().userToken;
 
@@ -93,7 +94,7 @@ export const booksSearch = (query) => async (dispatch, getState) => {
     );
 
     dispatch({
-      type: BOOKS_SUCCESS,
+      type: BOOK_SEARCH,
       payload: data,
     });
   } catch (error) {
