@@ -38,7 +38,7 @@ export const booksList = (learning_langs) => async (dispatch) => {
   }
 };
 
-export const bookDetails = () => async (dispatch, getState) => {
+export const bookDetails = (bookId) => async (dispatch, getState) => {
   try {
     dispatch({
       type: BOOKS_REQUEST,
@@ -54,7 +54,7 @@ export const bookDetails = () => async (dispatch, getState) => {
     };
 
     const { data } = await axios.get(
-      "http://127.0.0.1:8000/api/books/view/1/",
+      `http://127.0.0.1:8000/api/books/view/${bookId}/`,
       config,
     );
     dispatch({

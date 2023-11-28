@@ -30,7 +30,7 @@ const BookPreview = ({
   console.log(book);
 
   useState(() => {
-    dispatch(bookDetails());
+    dispatch(bookDetails(bookId));
   }, [dispatch, book]);
 
   console.log(bookId);
