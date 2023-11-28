@@ -35,7 +35,7 @@ const BookPreview = ({
 
   console.log(bookId);
 
-  const paragraphs = book?.text.split("\n").slice(0, 20);
+  const paragraphs = book?.text.split("\n").slice(0, 30);
 
   return (
     <div className="grid h-full w-full grid-cols-1 gap-5 md:grid-cols-[0.3fr,1fr]">
@@ -88,7 +88,6 @@ const BookPreview = ({
               {paragraph}
             </p>
           ))}
-          <p className="text-center text-3xl">Read more...</p>
         </div>
       </div>
     </div>
