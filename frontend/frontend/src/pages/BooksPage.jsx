@@ -8,6 +8,7 @@ import BookPreview from "../components/BookPreview";
 import DetailedBook from "../components/DetailedBook";
 import { PiBooksDuotone } from "react-icons/pi";
 import { MAIN_BUTTON_CHANGE_NAME } from "../store/constants/buttonsConstants";
+import { BiSearch } from "react-icons/bi";
 
 const BooksPage = () => {
   const dispatch = useDispatch();
@@ -179,32 +180,29 @@ const BooksPage = () => {
   ];
 
   const testTags = [
-    "All",
-    "Recently read",
-    "Bestsellers",
-    "English Books",
-    "Classic Books",
-    "German Books",
-    "Japanese Books",
-    "Ukrainian Books",
-    "Top 10 Books",
-    "All",
-    "Recently read",
-    "Bestsellers",
-    "English Books",
-    "Classic Books",
-    "German Books",
-    "Japanese Books",
-    "Ukrainian Books",
-    "Top 10 Books",
+    "All books",
+    "English books",
+    "Ukrainian books",
+    "German books",
+    "French books",
+    "Itaian books",
+    "Spanish books",
+    "Polish books",
+    "Japanese books",
+    "Hebrew books",
+    "Arabian books",
+    "Armenian books",
   ];
 
   const inputChange = (e) => {
-    if (e.target.value === "")
-      dispatch(
-        booksList(userProfile ? userProfile.learning_langs : ["English"]),
-      );
+    if (
+      e.key !== "Enter" ||
+      e.target.value.length > 30 ||
+      e.target.value === ""
+    )
+      return;
 
+    dispatch(booksList(userProfile ? userProfile.learning_langs : ["English"]));
     dispatch(booksSearch(e.target.value));
   };
 
@@ -212,11 +210,12 @@ const BooksPage = () => {
     <>
       {!bookPreview && !bookDetails && (
         <div className="h-full w-full space-y-5">
-          <div className="h-10 w-full dark:text-soft-black">
+          <div className="relative flex h-10 w-full items-center dark:text-soft-black">
+            <BiSearch className="absolute right-3 text-xl" />
             <input
+              onKeyDown={inputChange}
               type="text"
-              onChange={inputChange}
-              className="h-full w-full rounded-2xl bg-[#D9D9D9] p-2 px-6 outline-none"
+              className="h-full w-full rounded-2xl bg-[#D9D9D9] p-2 px-8 outline-none"
             />
           </div>
           <HorizontalCarousel items={testTags} />
