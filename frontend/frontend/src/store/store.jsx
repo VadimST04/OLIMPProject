@@ -15,7 +15,7 @@ import { newsListReducer } from "../store/reducers/newsReducers";
 import { musicListReducer } from "../store/reducers/musicReducers";
 import { mainButtonReducer } from "../store/reducers/buttonsReducers";
 import { signInFormToggler } from "../store/reducers/formsReducers";
-import { booksListReducer } from "../store/reducers/booksReducers";
+import { booksDetailReducer, booksListReducer } from "../store/reducers/booksReducers";
 import { languagesListReducer } from "../store/reducers/languagesReducers";
 
 const reducer = combineReducers({
@@ -27,6 +27,7 @@ const reducer = combineReducers({
   userProfile: userProfileReducer,
   newsList: newsListReducer,
   booksList: booksListReducer,
+  bookDetail: booksDetailReducer,
 
   formIsOpen: signInFormToggler,
   mainButtonName: mainButtonReducer,

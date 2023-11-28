@@ -26,12 +26,12 @@ const BookPreview = ({
     window.scrollTo(0, 0);
   }, []);
 
-  const { books } = useSelector((state) => state.booksList);
-  console.log(books);
+  const { book } = useSelector((state) => state.bookDetail);
+  console.log(book);
 
   useState(() => {
     dispatch(bookDetails());
-  }, [dispatch, books]);
+  }, [dispatch, book]);
 
   console.log(bookId);
 

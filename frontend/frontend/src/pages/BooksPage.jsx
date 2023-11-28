@@ -27,8 +27,11 @@ const BooksPage = () => {
   console.log(books);
 
   useEffect(() => {
-    dispatch(booksList(userProfile ? userProfile.learning_langs : ["English"]));
-  }, [dispatch]);
+    if (!books)
+      dispatch(
+        booksList(userProfile ? userProfile.learning_langs : ["English"]),
+      );
+  }, [dispatch, books]);
 
   const testBooks = [
     {

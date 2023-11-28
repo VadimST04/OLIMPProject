@@ -38,15 +38,18 @@ export const booksList = (learning_langs) => async (dispatch) => {
   }
 };
 
-export const bookDetails = () => async (dispatch) => {
+export const bookDetails = () => async (dispatch, getState) => {
   try {
     dispatch({
       type: BOOKS_REQUEST,
     });
 
+    const { userToken } = getState().userToken;
+
     const config = {
       headers: {
         "Content-type": "application/json",
+        Authorization: `Bearer ${userToken.access}`,
       },
     };
 
