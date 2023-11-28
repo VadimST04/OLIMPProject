@@ -35,6 +35,8 @@ const BookPreview = ({
 
   console.log(bookId);
 
+  const paragraphs = book?.text.split("\n").slice(0, 20);
+
   return (
     <div className="grid h-full w-full grid-cols-1 gap-5 md:grid-cols-[0.3fr,1fr]">
       <div className="relative grid md:grid-rows-[1fr,0.5fr]">
@@ -81,60 +83,12 @@ const BookPreview = ({
           <span>{language}</span>
         </p>
         <div className="space-y-4 pt-5">
-          <p>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vero dolor
-            sit reiciendis, libero sint soluta expedita. Dicta facilis
-            aspernatur laudantium! At quasi impedit temporibus maiores ipsa
-            delectus harum voluptatem libero.
-          </p>
-          <p>
-            Ut, repellat maiores deleniti iure nostrum ex adipisci,
-            exercitationem illo voluptatum expedita labore facere! Eos fugiat
-            molestiae, voluptatem tempore facilis repellendus impedit doloremque
-            quas excepturi? Laudantium earum voluptatum quo eligendi.
-          </p>
-          <p>
-            Assumenda blanditiis, suscipit quasi maxime repellendus
-            reprehenderit, temporibus soluta magni, quos molestiae vitae totam
-            beatae laudantium consequatur tempora vero dicta eum sit? Beatae
-            ratione unde facilis nihil sed sint? Veniam.
-          </p>
-          <p>
-            Deserunt dolorem dicta voluptatem porro. Amet minima iusto vitae
-            recusandae fugit asperiores aperiam at nesciunt unde aspernatur.
-            Quas, illo optio! Autem consequuntur facere accusamus blanditiis ea
-            illo vel itaque! Alias?
-          </p>
-          <p>
-            Quas veniam, nisi ipsum placeat obcaecati tempore quibusdam!
-            Accusamus neque quod ipsa enim aperiam, esse fuga sunt quibusdam
-            ullam temporibus, veniam fugiat quas, iusto blanditiis ex qui
-            perspiciatis reiciendis? Quae!
-          </p>
-          <p>
-            Adipisci est amet laboriosam iste. Omnis quasi impedit magni. Sequi
-            eligendi nobis vel, excepturi odit earum, illum distinctio beatae et
-            sapiente asperiores totam soluta a nesciunt fugit delectus. Sed,
-            ipsum?
-          </p>
-          <p>
-            Quam sed expedita officiis eius! Voluptatum deserunt cupiditate,
-            voluptatibus, accusamus quis assumenda quae nemo nam autem laborum
-            mollitia? Quibusdam nulla consequatur, voluptates exercitationem hic
-            dolorum accusantium quis eum impedit quos?
-          </p>
-          <p>
-            Laudantium, quae suscipit tempore sequi incidunt earum velit culpa
-            natus nihil sint. Assumenda quae, illo esse modi sequi quos itaque,
-            ducimus accusantium quo repudiandae maxime rerum, possimus aliquam
-            neque corrupti!
-          </p>
-          <p>
-            Ut ullam placeat obcaecati nihil doloribus cum dolore, voluptate
-            sapiente veritatis eius. Ea pariatur architecto libero obcaecati
-            impedit consectetur ipsam reprehenderit eligendi cupiditate
-            delectus, est nesciunt consequatur totam repudiandae tenetur.
-          </p>
+          {paragraphs?.map((paragraph, index) => (
+            <p key={index} className="text-center">
+              {paragraph}
+            </p>
+          ))}
+          <p className="text-center text-3xl">Read more...</p>
         </div>
       </div>
     </div>
