@@ -2,6 +2,9 @@ import {
   BOOKS_REQUEST,
   BOOKS_SUCCESS,
   BOOKS_FAIL,
+  BOOK_DETAILS_REQUEST,
+  BOOK_DETAILS_SUCCESS,
+  BOOK_DETAILS_FAIL,
   BOOK_SEARCH,
 } from "../constants/booksConstants";
 import axios from "axios";
@@ -39,10 +42,10 @@ export const booksList = (learning_langs) => async (dispatch) => {
   }
 };
 
-export const bookDetails = () => async (dispatch, getState) => {
+export const bookDetails = (bookId) => async (dispatch, getState) => {
   try {
     dispatch({
-      type: BOOKS_REQUEST,
+      type: BOOK_DETAILS_REQUEST,
     });
 
     const { userToken } = getState().userToken;
@@ -55,16 +58,16 @@ export const bookDetails = () => async (dispatch, getState) => {
     };
 
     const { data } = await axios.get(
-      "http://127.0.0.1:8000/api/books/view/1/",
+      `http://127.0.0.1:8000/api/books/view/${bookId}/`,
       config,
     );
     dispatch({
-      type: BOOKS_SUCCESS,
+      type: BOOK_DETAILS_SUCCESS,
       payload: data,
     });
   } catch (error) {
     dispatch({
-      type: BOOKS_FAIL,
+      type: BOOK_DETAILS_FAIL,
       payload:
         error.response && error.response.data.detail
           ? error.response.data.detail

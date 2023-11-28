@@ -2,9 +2,9 @@ import {
   BOOKS_REQUEST,
   BOOKS_SUCCESS,
   BOOKS_FAIL,
-  BOOK_DETAUIL_REQUEST,
-  BOOK_DETAUIL_SUCCESS,
-  BOOK_DETAUIL_FAIL,
+  BOOK_DETAILS_REQUEST,
+  BOOK_DETAILS_SUCCESS,
+  BOOK_DETAILS_FAIL,
   BOOK_SEARCH,
 } from "../constants/booksConstants";
 
@@ -29,13 +29,13 @@ export const booksListReducer = (state = {}, action) => {
 
 export const booksDetailReducer = (state = {}, action) => {
   switch (action.type) {
-    case BOOK_DETAUIL_REQUEST:
+    case BOOK_DETAILS_REQUEST:
       return { loading: true };
 
-    case BOOK_DETAUIL_SUCCESS:
+    case BOOK_DETAILS_SUCCESS:
       return { loading: false, book: action.payload };
 
-    case BOOK_DETAUIL_FAIL:
+    case BOOK_DETAILS_FAIL:
       return { loading: false, error: action.payload };
 
     default:
