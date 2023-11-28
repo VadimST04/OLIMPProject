@@ -13,10 +13,10 @@ const BookPreview = ({
   firstPageContent,
   closePreviewHandler,
   readMoreHandler,
+  bookId,
 }) => {
   // image = "https://images.unsplash.com/photo-1589998059171-988d887df646";
   // title = "Twisted love";
-  genre = "Romance novels";
   // author = "Ana Huang";
   // language = "English";
   const { userToken } = useSelector((state) => state.userToken);
@@ -32,6 +32,8 @@ const BookPreview = ({
   useState(() => {
     dispatch(bookDetails());
   }, [dispatch, books]);
+
+  console.log(bookId);
 
   return (
     <div className="grid h-full w-full grid-cols-1 gap-5 md:grid-cols-[0.3fr,1fr]">
@@ -68,7 +70,7 @@ const BookPreview = ({
       <div className="space-y-2 pr-5 pt-5 text-lg md:overflow-y-auto">
         <div className="flex flex-wrap items-center justify-between">
           <p className="truncate text-3xl font-bold">{title}</p>
-          <p className="font-semibold text-[#737373]">{genre}</p>
+          {/* <p className="font-semibold text-[#737373]"></p> */}
         </div>
         <p>
           <span className="font-semibold">Author - </span>

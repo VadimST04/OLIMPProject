@@ -18,6 +18,7 @@ const BooksPage = () => {
     title: "",
     author: "",
     language: "",
+    bookId: 0,
   });
 
   const { userProfile } = useSelector((state) => state.userProfile);
@@ -215,6 +216,7 @@ const BooksPage = () => {
                 language={item.languages}
                 previewHandler={() => setBookPreview(true)}
                 setBook={setCurrentBook}
+                bookId={item.id}
               />
             ))}
           </div>
