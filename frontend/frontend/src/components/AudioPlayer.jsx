@@ -6,8 +6,8 @@ import {
   BiSolidVolumeFull,
   BiSolidVolumeMute,
 } from "react-icons/bi";
-import song from "../assets/song.mp3";
-const AudioPlayer = () => {
+
+const AudioPlayer = ({ file, defaultDuration }) => {
   const audio = useRef();
   const slider = useRef();
   const volumeSlider = useRef();
@@ -17,8 +17,10 @@ const AudioPlayer = () => {
   const [duration, setDuration] = useState();
   const [volume, setVolume] = useState(1);
   const [lastVolume, setLastVolume] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   const onTimeUpdateHandler = () => {
+    if (loading) return;
     if (!changeSlider) return;
     const currentTime = audio.current.currentTime;
     const duration = audio.current.duration;
@@ -85,98 +87,113 @@ const AudioPlayer = () => {
   return (
     <div className="space-y-2">
       <audio
+        onLoadedData={() => {
+          console.log("loaded");
+          setLoading(false);
+        }}
         ref={audio}
-        src={song}
+        src={file}
         onTimeUpdate={onTimeUpdateHandler}
         onEnded={onEndedHandler}
       ></audio>
-      <div className="flex items-center gap-1 text-xs font-semibold">
-        <span>{timer}</span>
-        <input
-          defaultValue={0}
-          onChange={() => onSliderChange()}
-          onMouseDown={() => setChangeSlider(false)}
-          onMouseUp={() => {
-            setTime(slider.current.value);
-            setChangeSlider(true);
-          }}
-          ref={slider}
-          step={0.5}
-          type="range"
-          className="h-1 w-full rounded-full bg-soft-white-hover accent-soft-black dark:bg-soft-black-hover dark:accent-soft-white"
-        />
-        <span>{duration}</span>
-      </div>
-      <div className="relative flex items-center justify-center gap-5">
-        <button
-          onClick={() => {
-            setTime(parseFloat(slider.current.value) - 15);
-          }}
-          className="relative flex items-center justify-center rounded-full text-5xl hover:bg-soft-white-hover dark:hover:bg-soft-black-hover"
-        >
-          <BiSkipPrevious />
-          <span className="absolute bottom-0 text-[10px] font-bold">-15</span>
-        </button>
-        {isPaused && (
-          <button
-            onClick={() => {
-              setPaused(false);
-              audio.current.play();
-            }}
-            className="rounded-full text-5xl hover:bg-soft-white-hover dark:hover:bg-soft-black-hover"
-          >
-            <AiFillPlayCircle />
-          </button>
-        )}
-        {!isPaused && (
-          <button
-            onClick={() => {
-              setPaused(true);
-              audio.current.pause();
-            }}
-            className="rounded-full text-5xl hover:bg-soft-white-hover dark:hover:bg-soft-black-hover"
-          >
-            <AiFillPauseCircle />
-          </button>
-        )}
-        <button
-          onClick={() => {
-            setTime(parseFloat(slider.current.value) + 15);
-          }}
-          className="relative flex items-center justify-center rounded-full text-5xl hover:bg-soft-white-hover dark:hover:bg-soft-black-hover"
-        >
-          <BiSkipNext />
-          <span className="absolute bottom-0 text-[10px] font-bold">+15</span>
-        </button>
-      </div>
-      <div className="flex w-full items-center justify-center">
-        {volume <= 0 && (
-          <BiSolidVolumeMute
-            onClick={unmuteVolume}
-            className="cursor-pointer"
-          />
-        )}
-        {volume <= 50 && volume > 0 && (
-          <BiSolidVolumeLow
-            onClick={() => muteVolume()}
-            className="cursor-pointer"
-          />
-        )}
-        {volume > 50 && (
-          <BiSolidVolumeFull
-            onClick={() => muteVolume()}
-            className="cursor-pointer"
-          />
-        )}
-        <input
-          ref={volumeSlider}
-          max={101}
-          onChange={onVolumeChange}
-          min={-1}
-          type="range"
-          className=" h-1 w-[50%] rounded-full bg-soft-white-hover accent-soft-black dark:bg-soft-black-hover dark:accent-soft-white"
-        />
-      </div>
+
+      {loading && <p className="text-xl">Loading...</p>}
+
+      {!loading && (
+        <>
+          <div className="flex items-center gap-1 text-xs font-semibold">
+            <span>{timer}</span>
+            <input
+              defaultValue={0}
+              onChange={() => onSliderChange()}
+              onMouseDown={() => setChangeSlider(false)}
+              onMouseUp={() => {
+                setTime(slider.current.value);
+                setChangeSlider(true);
+              }}
+              ref={slider}
+              step={0.5}
+              type="range"
+              className="h-1 w-full rounded-full bg-soft-white-hover accent-soft-black dark:bg-soft-black-hover dark:accent-soft-white"
+            />
+            <span>{duration || defaultDuration}</span>
+          </div>
+          <div className="relative flex items-center justify-center gap-5">
+            <button
+              onClick={() => {
+                setTime(parseFloat(slider.current.value) - 15);
+              }}
+              className="relative flex items-center justify-center rounded-full text-5xl hover:bg-soft-white-hover dark:hover:bg-soft-black-hover"
+            >
+              <BiSkipPrevious />
+              <span className="absolute bottom-0 text-[10px] font-bold">
+                -15
+              </span>
+            </button>
+            {isPaused && (
+              <button
+                onClick={() => {
+                  setPaused(false);
+                  audio.current.play();
+                }}
+                className="rounded-full text-5xl hover:bg-soft-white-hover dark:hover:bg-soft-black-hover"
+              >
+                <AiFillPlayCircle />
+              </button>
+            )}
+            {!isPaused && (
+              <button
+                onClick={() => {
+                  setPaused(true);
+                  audio.current.pause();
+                }}
+                className="rounded-full text-5xl hover:bg-soft-white-hover dark:hover:bg-soft-black-hover"
+              >
+                <AiFillPauseCircle />
+              </button>
+            )}
+            <button
+              onClick={() => {
+                setTime(parseFloat(slider.current.value) + 15);
+              }}
+              className="relative flex items-center justify-center rounded-full text-5xl hover:bg-soft-white-hover dark:hover:bg-soft-black-hover"
+            >
+              <BiSkipNext />
+              <span className="absolute bottom-0 text-[10px] font-bold">
+                +15
+              </span>
+            </button>
+          </div>
+          <div className="flex w-full items-center justify-center">
+            {volume <= 0 && (
+              <BiSolidVolumeMute
+                onClick={unmuteVolume}
+                className="cursor-pointer"
+              />
+            )}
+            {volume <= 50 && volume > 0 && (
+              <BiSolidVolumeLow
+                onClick={() => muteVolume()}
+                className="cursor-pointer"
+              />
+            )}
+            {volume > 50 && (
+              <BiSolidVolumeFull
+                onClick={() => muteVolume()}
+                className="cursor-pointer"
+              />
+            )}
+            <input
+              ref={volumeSlider}
+              max={101}
+              onChange={onVolumeChange}
+              min={-1}
+              type="range"
+              className=" h-1 w-[50%] rounded-full bg-soft-white-hover accent-soft-black dark:bg-soft-black-hover dark:accent-soft-white"
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 };

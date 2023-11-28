@@ -32,9 +32,7 @@ const DetailedBook = ({ title, author, pages, closeBookHandler }) => {
           </p>
         </div>
       </div>
-      <div className="overflow-y-auto">
-        
-      </div>
+      <div className="overflow-y-auto"></div>
       <div className="self-center justify-self-center">
         <button
           onClick={leftClick}

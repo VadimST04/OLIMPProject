@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ImageLoader from "./ImageLoader";
 
 const MusicItem = ({
+  musicId,
   language,
   isLiked,
   image,
@@ -23,7 +24,7 @@ const MusicItem = ({
           dispatch({ type: SIGN_IN_FORM_OPEN });
           return;
         }
-        onClickHandler(lyrics, language, image, title, artist);
+        onClickHandler(musicId, lyrics, language, image, title, artist, length);
       }}
       className="flex w-full cursor-pointer flex-col items-center justify-center rounded-2xl bg-[#DBDBDB] p-2 transition-all duration-200 hover:bg-[#A9A9A9] dark:bg-[#737373] dark:hover:bg-soft-black-hover"
     >

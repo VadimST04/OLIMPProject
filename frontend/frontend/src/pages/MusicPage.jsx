@@ -12,13 +12,7 @@ const MusicPage = () => {
   const [showDetailedMusic, setShowDetailedMusic] = useState(false);
   const { music } = useSelector((state) => state.musicList);
 
-  const [currentDetailedMusic, setCurrentDetailedMusic] = useState({
-    lyrics: "",
-    language: "",
-    image: "",
-    title: "",
-    artist: "",
-  });
+  const [currentDetailedMusic, setCurrentDetailedMusic] = useState({});
 
   const { userProfile } = useSelector((state) => state.userProfile);
 
@@ -42,9 +36,25 @@ const MusicPage = () => {
     { "Armenian music": "Armenian" },
   ];
 
-  const musicItemClick = (lyrics, language, image, title, artist) => {
+  const musicItemClick = (
+    musicId,
+    lyrics,
+    language,
+    image,
+    title,
+    artist,
+    length,
+  ) => {
     setShowDetailedMusic(true);
-    setCurrentDetailedMusic({ lyrics, language, image, title, artist });
+    setCurrentDetailedMusic({
+      musicId,
+      lyrics,
+      language,
+      image,
+      title,
+      artist,
+      length,
+    });
   };
 
   return (
@@ -58,6 +68,7 @@ const MusicPage = () => {
           <div className="grid w-full grid-cols-[repeat(auto-fill,minmax(11rem,1fr))] gap-4">
             {music?.map((item) => (
               <MusicItem
+                musicId={item.id}
                 artist={item.artist}
                 length={item.duration}
                 key={item.id}
