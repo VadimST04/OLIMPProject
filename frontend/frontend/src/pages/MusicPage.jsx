@@ -8,95 +8,9 @@ import HorizontalCarousel from "../components/HorizontalCarousel";
 import SearchBar from "../components/SearchBar";
 
 const MusicPage = () => {
-  const [showDetailedMusic, setShowDetailedMusic] = useState(false);
   const dispatch = useDispatch();
+  const [showDetailedMusic, setShowDetailedMusic] = useState(false);
   const { music } = useSelector((state) => state.musicList);
-  // const music = [
-  //   {
-  //     artist: "Lorem",
-  //     length: "3:31",
-  //     image: "https://images.unsplash.com/photo-1682687220199-d0124f48f95b",
-  //     title: "Test song title",
-  //     language: ["English"],
-  //   },
-  //   {
-  //     artist: "Lorem",
-  //     length: "3:31",
-  //     image: "https://images.unsplash.com/photo-1682687220199-d0124f48f95b",
-  //     title: "Test song title",
-  //     language: ["English"],
-  //   },
-  //   {
-  //     artist: "Lorem",
-  //     length: "3:31",
-  //     image: "https://images.unsplash.com/photo-1682687220199-d0124f48f95b",
-  //     title: "Test song title",
-  //     language: ["English"],
-  //   },
-  //   {
-  //     artist: "Lorem",
-  //     length: "3:31",
-  //     image: "https://images.unsplash.com/photo-1682687220199-d0124f48f95b",
-  //     title: "Test song title",
-  //     language: ["English"],
-  //   },
-  //   {
-  //     artist: "Lorem",
-  //     length: "3:31",
-  //     image: "https://images.unsplash.com/photo-1682687220199-d0124f48f95b",
-  //     title: "Test song title",
-  //     language: ["English"],
-  //   },
-  //   {
-  //     artist: "Lorem",
-  //     length: "3:31",
-  //     image: "https://images.unsplash.com/photo-1682687220199-d0124f48f95b",
-  //     title: "Test song title",
-  //     language: ["English"],
-  //   },
-  //   {
-  //     artist: "Lorem",
-  //     length: "3:31",
-  //     image: "https://images.unsplash.com/photo-1682687220199-d0124f48f95b",
-  //     title: "Test song title",
-  //     language: ["English"],
-  //   },
-  //   {
-  //     artist: "Lorem",
-  //     length: "3:31",
-  //     image: "https://images.unsplash.com/photo-1682687220199-d0124f48f95b",
-  //     title: "Test song title",
-  //     language: ["English"],
-  //   },
-  //   {
-  //     artist: "Lorem",
-  //     length: "3:31",
-  //     image: "https://images.unsplash.com/photo-1682687220199-d0124f48f95b",
-  //     title: "Test song title",
-  //     language: ["English"],
-  //   },
-  //   {
-  //     artist: "Lorem",
-  //     length: "3:31",
-  //     image: "https://images.unsplash.com/photo-1682687220199-d0124f48f95b",
-  //     title: "Test song title",
-  //     language: ["English"],
-  //   },
-  //   {
-  //     artist: "Lorem",
-  //     length: "3:31",
-  //     image: "https://images.unsplash.com/photo-1682687220199-d0124f48f95b",
-  //     title: "Test song title",
-  //     language: ["English"],
-  //   },
-  //   {
-  //     artist: "Lorem",
-  //     length: "3:31",
-  //     image: "https://images.unsplash.com/photo-1682687220199-d0124f48f95b",
-  //     title: "Test song title",
-  //     language: ["English"],
-  //   },
-  // ];
 
   const [currentDetailedMusic, setCurrentDetailedMusic] = useState({
     lyrics: "",
@@ -114,23 +28,18 @@ const MusicPage = () => {
   }, [dispatch, userProfile]);
 
   const tags = [
-    "Historical songs",
-    "Tik tok songs",
-    "New hit 2023",
-    "Pop",
-    "Japanese songs",
-    "Sport",
-    "Popular songs",
-    "Rock",
-    "Playlist",
-    "Study",
-    "Sport",
-    "Meditation",
-    "English",
-    "Ukrainian",
-    "Japanese",
-    "Arabic",
-    "Turkish",
+    { "All music": "" },
+    { "English music": "English" },
+    { "Ukrainian music": "Ukrainian" },
+    { "German music": "German" },
+    { "French music": "French" },
+    { "Itaian music": "Itaian" },
+    { "Spanish music": "Spanish" },
+    { "Polish music": "Polish" },
+    { "Japanese music": "Japanese" },
+    { "Hebrew music": "Hebrew" },
+    { "Arabian music": "Arabian" },
+    { "Armenian music": "Armenian" },
   ];
 
   const musicItemClick = (lyrics, language, image, title, artist) => {
@@ -145,17 +54,16 @@ const MusicPage = () => {
           <div className="h-10 w-full dark:text-soft-black">
             <SearchBar inputStyling="h-full w-full rounded-2xl bg-[#D9D9D9] outline-none p-2 px-6" />
           </div>
-          <HorizontalCarousel items={tags} />
+          <HorizontalCarousel items={tags.map((obj) => Object.keys(obj)[0])} />
           <div className="grid w-full grid-cols-[repeat(auto-fill,minmax(11rem,1fr))] gap-4">
-            {music?.map((item, index) => (
+            {music?.map((item) => (
               <MusicItem
                 artist={item.artist}
                 length={item.duration}
-                // key={item.id}
-                key={index}
-                image={item.image}
+                key={item.id}
+                image={`data:image/jpeg;base64,${item.image_data}`}
                 title={item.title}
-                language={item.language[0]}
+                language={item.language}
                 onClickHandler={musicItemClick}
               />
             ))}
