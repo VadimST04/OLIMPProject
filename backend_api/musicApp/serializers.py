@@ -23,7 +23,7 @@ class SongSerializer(serializers.ModelSerializer):
         """
 
         model = Song
-        fields = '__all__'
+        exclude = ['audio_file', 'image']
 
 
 class SongListSerializer(serializers.ModelSerializer):
