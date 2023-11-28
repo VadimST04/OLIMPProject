@@ -2,9 +2,6 @@ import {
   BOOKS_REQUEST,
   BOOKS_SUCCESS,
   BOOKS_FAIL,
-  BOOK_DETAUIL_REQUEST,
-  BOOK_DETAUIL_SUCCESS,
-  BOOK_DETAUIL_FAIL,
 } from "../constants/booksConstants";
 import axios from "axios";
 
@@ -41,10 +38,10 @@ export const booksList = (learning_langs) => async (dispatch) => {
   }
 };
 
-export const bookDetails = (bookId) => async (dispatch, getState) => {
+export const bookDetails = () => async (dispatch, getState) => {
   try {
     dispatch({
-      type: BOOK_DETAUIL_REQUEST,
+      type: BOOKS_REQUEST,
     });
 
     const { userToken } = getState().userToken;
@@ -57,16 +54,51 @@ export const bookDetails = (bookId) => async (dispatch, getState) => {
     };
 
     const { data } = await axios.get(
-      `http://127.0.0.1:8000/api/books/view/${bookId}/`,
+      "http://127.0.0.1:8000/api/books/view/1/",
       config,
     );
     dispatch({
-      type: BOOK_DETAUIL_SUCCESS,
+      type: BOOKS_SUCCESS,
       payload: data,
     });
   } catch (error) {
     dispatch({
-      type: BOOK_DETAUIL_FAIL,
+      type: BOOKS_FAIL,
+      payload:
+        error.response && error.response.data.detail
+          ? error.response.data.detail
+          : error.response,
+    });
+  }
+};
+
+export const booksSearch = (query) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: BOOKS_REQUEST,
+    });
+
+    const { userToken } = getState().userToken;
+
+    const config = {
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${userToken.access}`,
+      },
+    };
+
+    const { data } = await axios.get(
+      `http://127.0.0.1:8000/api/books/search?search=${query}`,
+      config,
+    );
+
+    dispatch({
+      type: BOOKS_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: BOOKS_FAIL,
       payload:
         error.response && error.response.data.detail
           ? error.response.data.detail

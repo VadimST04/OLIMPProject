@@ -3,7 +3,7 @@ import BookItem from "../components/BookItem";
 import SearchBar from "../components/SearchBar";
 import HorizontalCarousel from "../components/HorizontalCarousel";
 import { useSelector, useDispatch } from "react-redux";
-import { booksList } from "../store/actions/booksAction";
+import { booksList, booksSearch } from "../store/actions/booksAction";
 import BookPreview from "../components/BookPreview";
 import DetailedBook from "../components/DetailedBook";
 import { PiBooksDuotone } from "react-icons/pi";
