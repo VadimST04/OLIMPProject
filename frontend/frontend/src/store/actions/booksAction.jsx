@@ -37,3 +37,34 @@ export const booksList = (learning_langs) => async (dispatch) => {
     });
   }
 };
+
+export const bookDetails = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: BOOKS_REQUEST,
+    });
+
+    const config = {
+      headers: {
+        "Content-type": "application/json",
+      },
+    };
+
+    const { data } = await axios.get(
+      "http://127.0.0.1:8000/api/books/view/1/",
+      config,
+    );
+    dispatch({
+      type: BOOKS_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: BOOKS_FAIL,
+      payload:
+        error.response && error.response.data.detail
+          ? error.response.data.detail
+          : error.response,
+    });
+  }
+};

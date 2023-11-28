@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { SIGN_IN_FORM_OPEN } from "../store/constants/fromsConstants";
+import { bookDetails } from "../store/actions/booksAction";
 
 const BookPreview = ({
   image,
@@ -24,6 +25,13 @@ const BookPreview = ({
   useState(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const { books } = useSelector((state) => state.booksList);
+  console.log(books);
+
+  useState(() => {
+    dispatch(bookDetails());
+  }, [dispatch, books]);
 
   return (
     <div className="grid h-full w-full grid-cols-1 gap-5 md:grid-cols-[0.3fr,1fr]">

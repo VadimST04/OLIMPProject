@@ -23,9 +23,10 @@ const BooksPage = () => {
   const { userProfile } = useSelector((state) => state.userProfile);
 
   const { books } = useSelector((state) => state.booksList);
+  console.log(books);
 
   useEffect(() => {
-    dispatch(booksList(userProfile ? userProfile.learning_langs : ["english"]));
+    dispatch(booksList(userProfile ? userProfile.learning_langs : ["English"]));
   }, [dispatch]);
 
   const testBooks = [
@@ -205,13 +206,13 @@ const BooksPage = () => {
           </div>
           <HorizontalCarousel items={testTags} />
           <div className="grid grid-cols-[repeat(auto-fill,minmax(11rem,1fr))] gap-4">
-            {testBooks.map((item, index) => (
+            {books?.map((item, index) => (
               <BookItem
-                key={index}
-                image={item.image}
+                key={item.id}
+                image={`data:image/jpeg;base64,${item.cover_image_data}`}
                 title={item.title}
                 author={item.author}
-                language={item.language}
+                language={item.languages}
                 previewHandler={() => setBookPreview(true)}
                 setBook={setCurrentBook}
               />
