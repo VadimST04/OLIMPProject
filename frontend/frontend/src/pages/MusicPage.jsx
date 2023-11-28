@@ -10,93 +10,93 @@ import SearchBar from "../components/SearchBar";
 const MusicPage = () => {
   const [showDetailedMusic, setShowDetailedMusic] = useState(false);
   const dispatch = useDispatch();
-  // const { music } = useSelector((state) => state.musicList);
-  const music = [
-    {
-      artist: "Lorem",
-      length: "3:31",
-      image: "https://images.unsplash.com/photo-1682687220199-d0124f48f95b",
-      title: "Test song title",
-      language: ["English"],
-    },
-    {
-      artist: "Lorem",
-      length: "3:31",
-      image: "https://images.unsplash.com/photo-1682687220199-d0124f48f95b",
-      title: "Test song title",
-      language: ["English"],
-    },
-    {
-      artist: "Lorem",
-      length: "3:31",
-      image: "https://images.unsplash.com/photo-1682687220199-d0124f48f95b",
-      title: "Test song title",
-      language: ["English"],
-    },
-    {
-      artist: "Lorem",
-      length: "3:31",
-      image: "https://images.unsplash.com/photo-1682687220199-d0124f48f95b",
-      title: "Test song title",
-      language: ["English"],
-    },
-    {
-      artist: "Lorem",
-      length: "3:31",
-      image: "https://images.unsplash.com/photo-1682687220199-d0124f48f95b",
-      title: "Test song title",
-      language: ["English"],
-    },
-    {
-      artist: "Lorem",
-      length: "3:31",
-      image: "https://images.unsplash.com/photo-1682687220199-d0124f48f95b",
-      title: "Test song title",
-      language: ["English"],
-    },
-    {
-      artist: "Lorem",
-      length: "3:31",
-      image: "https://images.unsplash.com/photo-1682687220199-d0124f48f95b",
-      title: "Test song title",
-      language: ["English"],
-    },
-    {
-      artist: "Lorem",
-      length: "3:31",
-      image: "https://images.unsplash.com/photo-1682687220199-d0124f48f95b",
-      title: "Test song title",
-      language: ["English"],
-    },
-    {
-      artist: "Lorem",
-      length: "3:31",
-      image: "https://images.unsplash.com/photo-1682687220199-d0124f48f95b",
-      title: "Test song title",
-      language: ["English"],
-    },
-    {
-      artist: "Lorem",
-      length: "3:31",
-      image: "https://images.unsplash.com/photo-1682687220199-d0124f48f95b",
-      title: "Test song title",
-      language: ["English"],
-    },
-    {
-      artist: "Lorem",
-      length: "3:31",
-      image: "https://images.unsplash.com/photo-1682687220199-d0124f48f95b",
-      title: "Test song title",
-      language: ["English"],
-    },
-    {
-      artist: "Lorem",
-      length: "3:31",
-      image: "https://images.unsplash.com/photo-1682687220199-d0124f48f95b",
-      title: "Test song title",
-      language: ["English"],
-    },
-  ];
+  const { music } = useSelector((state) => state.musicList);
+  // const music = [
+  //   {
+  //     artist: "Lorem",
+  //     length: "3:31",
+  //     image: "https://images.unsplash.com/photo-1682687220199-d0124f48f95b",
+  //     title: "Test song title",
+  //     language: ["English"],
+  //   },
+  //   {
+  //     artist: "Lorem",
+  //     length: "3:31",
+  //     image: "https://images.unsplash.com/photo-1682687220199-d0124f48f95b",
+  //     title: "Test song title",
+  //     language: ["English"],
+  //   },
+  //   {
+  //     artist: "Lorem",
+  //     length: "3:31",
+  //     image: "https://images.unsplash.com/photo-1682687220199-d0124f48f95b",
+  //     title: "Test song title",
+  //     language: ["English"],
+  //   },
+  //   {
+  //     artist: "Lorem",
+  //     length: "3:31",
+  //     image: "https://images.unsplash.com/photo-1682687220199-d0124f48f95b",
+  //     title: "Test song title",
+  //     language: ["English"],
+  //   },
+  //   {
+  //     artist: "Lorem",
+  //     length: "3:31",
+  //     image: "https://images.unsplash.com/photo-1682687220199-d0124f48f95b",
+  //     title: "Test song title",
+  //     language: ["English"],
+  //   },
+  //   {
+  //     artist: "Lorem",
+  //     length: "3:31",
+  //     image: "https://images.unsplash.com/photo-1682687220199-d0124f48f95b",
+  //     title: "Test song title",
+  //     language: ["English"],
+  //   },
+  //   {
+  //     artist: "Lorem",
+  //     length: "3:31",
+  //     image: "https://images.unsplash.com/photo-1682687220199-d0124f48f95b",
+  //     title: "Test song title",
+  //     language: ["English"],
+  //   },
+  //   {
+  //     artist: "Lorem",
+  //     length: "3:31",
+  //     image: "https://images.unsplash.com/photo-1682687220199-d0124f48f95b",
+  //     title: "Test song title",
+  //     language: ["English"],
+  //   },
+  //   {
+  //     artist: "Lorem",
+  //     length: "3:31",
+  //     image: "https://images.unsplash.com/photo-1682687220199-d0124f48f95b",
+  //     title: "Test song title",
+  //     language: ["English"],
+  //   },
+  //   {
+  //     artist: "Lorem",
+  //     length: "3:31",
+  //     image: "https://images.unsplash.com/photo-1682687220199-d0124f48f95b",
+  //     title: "Test song title",
+  //     language: ["English"],
+  //   },
+  //   {
+  //     artist: "Lorem",
+  //     length: "3:31",
+  //     image: "https://images.unsplash.com/photo-1682687220199-d0124f48f95b",
+  //     title: "Test song title",
+  //     language: ["English"],
+  //   },
+  //   {
+  //     artist: "Lorem",
+  //     length: "3:31",
+  //     image: "https://images.unsplash.com/photo-1682687220199-d0124f48f95b",
+  //     title: "Test song title",
+  //     language: ["English"],
+  //   },
+  // ];
 
   const [currentDetailedMusic, setCurrentDetailedMusic] = useState({
     lyrics: "",
