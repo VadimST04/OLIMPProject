@@ -10,7 +10,7 @@ import SearchBar from "../components/SearchBar";
 const MusicPage = () => {
   const dispatch = useDispatch();
   const [showDetailedMusic, setShowDetailedMusic] = useState(false);
-  const { music } = useSelector((state) => state.musicList);
+  const { music, loading, error } = useSelector((state) => state.musicList);
 
   const [currentDetailedMusic, setCurrentDetailedMusic] = useState({
     lyrics: "",
