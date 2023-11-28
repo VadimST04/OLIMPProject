@@ -59,6 +59,7 @@ const HorizontalCarousel = ({ items, onItemClick }) => {
           <div
             key={index}
             onClick={() => {
+              if (index === activeIndex) return;
               setActiveIndex(index);
               if (onItemClick) onItemClick(item);
             }}
