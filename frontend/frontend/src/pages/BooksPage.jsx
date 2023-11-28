@@ -25,173 +25,27 @@ const BooksPage = () => {
   const { userProfile } = useSelector((state) => state.userProfile);
 
   const { books } = useSelector((state) => state.booksList);
-  console.log(books);
 
   useEffect(() => {
     if (books && books.length > 0) return;
+
+    console.log("test useEffect");
     dispatch(booksList(userProfile ? userProfile.learning_langs : ["English"]));
-  }, [books]);
+  }, []);
 
-  const testBooks = [
-    {
-      image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
-      title: "Book1Book1Book1Book1Book1Book1Book1",
-      author: "Author1",
-      language: "English",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
-      title: "Book1Book1Book1Book1Book1Book1Book1",
-      author: "Author1",
-      language: "English",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
-      title: "Book1Book1Book1Book1Book1Book1Book1",
-      author: "Author1",
-      language: "English",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
-      title: "Book1Book1Book1Book1Book1Book1Book1",
-      author: "Author1",
-      language: "English",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
-      title: "Book1Book1Book1Book1Book1Book1Book1",
-      author: "Author1",
-      language: "English",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
-      title: "Book1Book1Book1Book1Book1Book1Book1",
-      author: "Author1",
-      language: "English",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
-      title: "Book1Book1Book1Book1Book1Book1Book1",
-      author: "Author1",
-      language: "English",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
-      title: "Book1Book1Book1Book1Book1Book1Book1",
-      author: "Author1",
-      language: "English",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
-      title: "Book1Book1Book1Book1Book1Book1Book1",
-      author: "Author1",
-      language: "English",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
-      title: "Book1Book1Book1Book1Book1Book1Book1",
-      author: "Author1",
-      language: "English",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
-      title: "Book1Book1Book1Book1Book1Book1Book1",
-      author: "Author1",
-      language: "English",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
-      title: "Book1Book1Book1Book1Book1Book1Book1",
-      author: "Author1",
-      language: "English",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
-      title: "Book1Book1Book1Book1Book1Book1Book1",
-      author: "Author1",
-      language: "English",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
-      title: "Book1Book1Book1Book1Book1Book1Book1",
-      author: "Author1",
-      language: "English",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
-      title: "Book1Book1Book1Book1Book1Book1Book1",
-      author: "Author1",
-      language: "English",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
-      title: "Book1Book1Book1Book1Book1Book1Book1",
-      author: "Author1",
-      language: "English",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
-      title: "Book1Book1Book1Book1Book1Book1Book1",
-      author: "Author1",
-      language: "English",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
-      title: "Book1Book1Book1Book1Book1Book1Book1",
-      author: "Author1",
-      language: "English",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
-      title: "Book1Book1Book1Book1Book1Book1Book1",
-      author: "Author1",
-      language: "English",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
-      title: "Book1Book1Book1Book1Book1Book1Book1",
-      author: "Author1",
-      language: "English",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
-      title: "Book1Book1Book1Book1Book1Book1Book1",
-      author: "Author1",
-      language: "English",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
-      title: "Book1Book1Book1Book1Book1Book1Book1",
-      author: "Author1",
-      language: "English",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
-      title: "Book1Book1Book1Book1Book1Book1Book1",
-      author: "Author1",
-      language: "English",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
-      title: "Book1Book1Book1Book1Book1Book1Book1",
-      author: "Author1",
-      language: "English",
-    },
-  ];
-
-  const testTags = [
-    "All books",
-    "English books",
-    "Ukrainian books",
-    "German books",
-    "French books",
-    "Itaian books",
-    "Spanish books",
-    "Polish books",
-    "Japanese books",
-    "Hebrew books",
-    "Arabian books",
-    "Armenian books",
+  const tags = [
+    { "All books": "" },
+    { "English books": "English" },
+    { "Ukrainian books": "Ukrainian" },
+    { "German books": "German" },
+    { "French books": "French" },
+    { "Itaian books": "Itaian" },
+    { "Spanish books": "Spanish" },
+    { "Polish books": "Polish" },
+    { "Japanese books": "Japanese" },
+    { "Hebrew books": "Hebrew" },
+    { "Arabian books": "Arabian" },
+    { "Armenian books": "Armenian" },
   ];
 
   const inputChange = (e) => {
@@ -202,8 +56,13 @@ const BooksPage = () => {
     )
       return;
 
-    dispatch(booksList(userProfile ? userProfile.learning_langs : ["English"]));
     dispatch(booksSearch(e.target.value));
+  };
+
+  const carouseItemClick = (item) => {
+    const language = tags.find((obj) => obj.hasOwnProperty(item))[item];
+    console.log(language);
+    dispatch(booksList([language]));
   };
 
   return (
@@ -218,7 +77,10 @@ const BooksPage = () => {
               className="h-full w-full rounded-2xl bg-[#D9D9D9] p-2 px-8 outline-none"
             />
           </div>
-          <HorizontalCarousel items={testTags} />
+          <HorizontalCarousel
+            onItemClick={(item) => carouseItemClick(item)}
+            items={tags.map((obj) => Object.keys(obj)[0])}
+          />
           <div className="grid grid-cols-[repeat(auto-fill,minmax(11rem,1fr))] gap-4">
             {books?.map((item, index) => (
               <BookItem

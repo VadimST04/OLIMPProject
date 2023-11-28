@@ -56,7 +56,7 @@ const HorizontalCarousel = ({ items, onItemClick }) => {
           <div
             key={index}
             onClick={() => {
-              // onItemClick();
+              onItemClick(item);
             }}
             className="shrink-0 cursor-pointer select-none rounded-md border border-soft-white-hover px-2 py-1 font-semibold hover:bg-soft-white-hover dark:hover:bg-soft-black-hover sm:border-none"
           >
