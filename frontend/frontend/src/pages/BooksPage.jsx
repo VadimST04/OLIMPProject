@@ -24,7 +24,7 @@ const BooksPage = () => {
 
   const { userProfile } = useSelector((state) => state.userProfile);
 
-  const { books } = useSelector((state) => state.booksList);
+  const { books, loading, error } = useSelector((state) => state.booksList);
 
   useEffect(() => {
     if (books && books.length > 0) return;
