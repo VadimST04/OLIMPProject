@@ -128,6 +128,7 @@ const PostItem = ({
 
       {detailedView && (
         <DetailedPost
+          userImage={userImage}
           images={images}
           likes={likes}
           comments={comments}

@@ -7,6 +7,7 @@ import { LuArrowDownSquare } from "react-icons/lu";
 import CommentItem from "./CommentItem";
 import { RxCross1 } from "react-icons/rx";
 import ImageCarousel from "./ImageCarousel";
+import ImageLoader from "./ImageLoader";
 
 const DetailedPost = ({
   images,
@@ -16,123 +17,13 @@ const DetailedPost = ({
   closePostCallback,
   commentDate,
   username,
+  userImage,
 }) => {
   const postBg = useRef(null);
+
   const closePost = (e) => {
     if (e.target === postBg.current) closePostCallback();
   };
-  const [activeImgIndex, setActiveImgIndex] = useState(0);
-
-  const testComments = [
-    {
-      profileImg:
-        "https://images.unsplash.com/photo-1696945157988-5dbff7a97d02",
-      commentDate: "Aug 30, 2023",
-      username: "user1",
-      commentContent: "Nice cars!",
-    },
-    {
-      profileImg:
-        "https://images.unsplash.com/photo-1696945157988-5dbff7a97d02",
-      commentDate: "Aug 30, 2023",
-      username: "user2",
-      commentContent:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem mollitia repellendus modi, officia voluptas reiciendis accusamus et distinctio laudantium aut esse sit est odit dolorem quibusdam corporis libero autem delectus.",
-    },
-    {
-      profileImg:
-        "https://images.unsplash.com/photo-1696945157988-5dbff7a97d02",
-      commentDate: "Aug 30, 2023",
-      username: "user3",
-      commentContent:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem mollitia repellendus modi, officia voluptas reiciendis accusamus et distinctio laudantium aut esse sit est odit dolorem quibusdam corporis libero autem delectus.",
-    },
-    {
-      profileImg:
-        "https://images.unsplash.com/photo-1696945157988-5dbff7a97d02",
-      commentDate: "Aug 30, 2023",
-      username: "user4",
-      commentContent:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi, incidunt ipsa dolore ex ab accusantium. Minima maiores eveniet sequi, quia corporis rerum in iusto expedita accusamus modi recusandae officiis corrupti.",
-    },
-    {
-      profileImg:
-        "https://images.unsplash.com/photo-1696945157988-5dbff7a97d02",
-      commentDate: "Aug 30, 2023",
-      username: "user1",
-      commentContent: "Nice cars!",
-    },
-    {
-      profileImg:
-        "https://images.unsplash.com/photo-1696945157988-5dbff7a97d02",
-      commentDate: "Aug 30, 2023",
-      username: "user2",
-      commentContent:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem mollitia repellendus modi, officia voluptas reiciendis accusamus et distinctio laudantium aut esse sit est odit dolorem quibusdam corporis libero autem delectus.",
-    },
-    {
-      profileImg:
-        "https://images.unsplash.com/photo-1696945157988-5dbff7a97d02",
-      commentDate: "Aug 30, 2023",
-      username: "user3",
-      commentContent:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem mollitia repellendus modi, officia voluptas reiciendis accusamus et distinctio laudantium aut esse sit est odit dolorem quibusdam corporis libero autem delectus.",
-    },
-    {
-      profileImg:
-        "https://images.unsplash.com/photo-1696945157988-5dbff7a97d02",
-      commentDate: "Aug 30, 2023",
-      username: "user1",
-      commentContent: "Nice cars!",
-    },
-    {
-      profileImg:
-        "https://images.unsplash.com/photo-1696945157988-5dbff7a97d02",
-      commentDate: "Aug 30, 2023",
-      username: "user2",
-      commentContent:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem mollitia repellendus modi, officia voluptas reiciendis accusamus et distinctio laudantium aut esse sit est odit dolorem quibusdam corporis libero autem delectus.",
-    },
-    {
-      profileImg:
-        "https://images.unsplash.com/photo-1696945157988-5dbff7a97d02",
-      commentDate: "Aug 30, 2023",
-      username: "user3",
-      commentContent:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem mollitia repellendus modi, officia voluptas reiciendis accusamus et distinctio laudantium aut esse sit est odit dolorem quibusdam corporis libero autem delectus.",
-    },
-    {
-      profileImg:
-        "https://images.unsplash.com/photo-1696945157988-5dbff7a97d02",
-      commentDate: "Aug 30, 2023",
-      username: "user4",
-      commentContent:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi, incidunt ipsa dolore ex ab accusantium. Minima maiores eveniet sequi, quia corporis rerum in iusto expedita accusamus modi recusandae officiis corrupti.",
-    },
-    {
-      profileImg:
-        "https://images.unsplash.com/photo-1696945157988-5dbff7a97d02",
-      commentDate: "Aug 30, 2023",
-      username: "user1",
-      commentContent: "Nice cars!",
-    },
-    {
-      profileImg:
-        "https://images.unsplash.com/photo-1696945157988-5dbff7a97d02",
-      commentDate: "Aug 30, 2023",
-      username: "user2",
-      commentContent:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem mollitia repellendus modi, officia voluptas reiciendis accusamus et distinctio laudantium aut esse sit est odit dolorem quibusdam corporis libero autem delectus.",
-    },
-    {
-      profileImg:
-        "https://images.unsplash.com/photo-1696945157988-5dbff7a97d02",
-      commentDate: "Aug 30, 2023",
-      username: "user3",
-      commentContent:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem mollitia repellendus modi, officia voluptas reiciendis accusamus et distinctio laudantium aut esse sit est odit dolorem quibusdam corporis libero autem delectus.",
-    },
-  ];
 
   return (
     <div
@@ -146,7 +37,23 @@ const DetailedPost = ({
         </div>
         <div className="grid min-h-0 grid-rows-[1fr,3rem] gap-5">
           <div className="h-full overflow-y-auto">
-            {testComments.map((item) => (
+            <div className="flex flex-col gap-2 pb-5">
+              <div className="flex items-center gap-2">
+                <div className="h-10 w-10 overflow-hidden rounded-full">
+                  <ImageLoader src={userImage} />
+                </div>
+                <p className="w-full items-center truncate">{username}</p>
+              </div>
+              {content}
+            </div>
+
+            {comments.length < 1 && (
+              <div className="flex items-center justify-center text-xl">
+                No comments yet...
+              </div>
+            )}
+
+            {comments?.map((item) => (
               <CommentItem
                 profileImg={item.profileImg}
                 commentDate={item.commentDate}
@@ -161,7 +68,7 @@ const DetailedPost = ({
               className="h-full w-full rounded-md bg-[#D9D9D9] px-3 pr-[3.5rem] outline-none dark:bg-soft-black-hover"
               placeholder="Add a comment..."
             />
-            <button className="absolute right-3 h-full cursor-pointer font-semibold text-main-green dark:brightness-125">
+            <button className="absolute right-3 h-full cursor-pointer font-semibold text-main-green dark:brightness-150">
               Send
             </button>
           </div>
@@ -173,7 +80,22 @@ const DetailedPost = ({
             <div className="h-full w-full gap-2 overflow-hidden rounded-md">
               <ImageCarousel images={images} />
             </div>
-            {testComments.map((item, index) => (
+            <div className="flex flex-col gap-2 py-5">
+              <div className="flex items-center gap-2">
+                <div className="h-10 w-10 overflow-hidden rounded-full">
+                  <ImageLoader src={userImage} />
+                </div>
+                <p className="w-full items-center truncate">{username}</p>
+              </div>
+              {content}
+            </div>
+
+            {comments.length < 1 && (
+              <div className="flex items-center justify-center text-xl">
+                No comments yet...
+              </div>
+            )}
+            {comments?.map((item, index) => (
               <CommentItem
                 key={index}
                 profileImg={item.profileImg}
