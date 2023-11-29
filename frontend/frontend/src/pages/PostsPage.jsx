@@ -15,6 +15,7 @@ function PostsPage() {
   const dispatch = useDispatch();
   const [postCreation, setPostCreation] = useState(false);
   const { posts } = useSelector((state) => state.postsList);
+  console.log(posts);
 
   const testPosts = [
     {
@@ -57,8 +58,8 @@ function PostsPage() {
     <div className="grid h-full grid-rows-[auto,1fr]">
       <PostsNavbar />
       <div className="flex h-full flex-col items-center gap-5 pt-5">
-        {testPosts &&
-          testPosts.map((item, index) => (
+        {posts &&
+          posts?.map((item, index) => (
             <PostItem
               liked={false}
               images={[...item.images]}
