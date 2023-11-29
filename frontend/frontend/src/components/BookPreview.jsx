@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { SIGN_IN_FORM_OPEN } from "../store/constants/fromsConstants";
+import { bookDetails } from "../store/actions/booksAction";
 
 const BookPreview = ({
   image,
@@ -12,10 +13,10 @@ const BookPreview = ({
   firstPageContent,
   closePreviewHandler,
   readMoreHandler,
+  bookId,
 }) => {
   // image = "https://images.unsplash.com/photo-1589998059171-988d887df646";
   // title = "Twisted love";
-  genre = "Romance novels";
   // author = "Ana Huang";
   // language = "English";
   const { userToken } = useSelector((state) => state.userToken);
@@ -24,6 +25,17 @@ const BookPreview = ({
   useState(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const { book } = useSelector((state) => state.bookDetail);
+  console.log(book);
+
+  useState(() => {
+    dispatch(bookDetails(bookId));
+  }, [dispatch, book]);
+
+  console.log(bookId);
+
+  const paragraphs = book?.text.split("\n").slice(0, 30);
 
   return (
     <div className="grid h-full w-full grid-cols-1 gap-5 md:grid-cols-[0.3fr,1fr]">
@@ -60,7 +72,7 @@ const BookPreview = ({
       <div className="space-y-2 pr-5 pt-5 text-lg md:overflow-y-auto">
         <div className="flex flex-wrap items-center justify-between">
           <p className="truncate text-3xl font-bold">{title}</p>
-          <p className="font-semibold text-[#737373]">{genre}</p>
+          {/* <p className="font-semibold text-[#737373]"></p> */}
         </div>
         <p>
           <span className="font-semibold">Author - </span>
@@ -71,60 +83,11 @@ const BookPreview = ({
           <span>{language}</span>
         </p>
         <div className="space-y-4 pt-5">
-          <p>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vero dolor
-            sit reiciendis, libero sint soluta expedita. Dicta facilis
-            aspernatur laudantium! At quasi impedit temporibus maiores ipsa
-            delectus harum voluptatem libero.
-          </p>
-          <p>
-            Ut, repellat maiores deleniti iure nostrum ex adipisci,
-            exercitationem illo voluptatum expedita labore facere! Eos fugiat
-            molestiae, voluptatem tempore facilis repellendus impedit doloremque
-            quas excepturi? Laudantium earum voluptatum quo eligendi.
-          </p>
-          <p>
-            Assumenda blanditiis, suscipit quasi maxime repellendus
-            reprehenderit, temporibus soluta magni, quos molestiae vitae totam
-            beatae laudantium consequatur tempora vero dicta eum sit? Beatae
-            ratione unde facilis nihil sed sint? Veniam.
-          </p>
-          <p>
-            Deserunt dolorem dicta voluptatem porro. Amet minima iusto vitae
-            recusandae fugit asperiores aperiam at nesciunt unde aspernatur.
-            Quas, illo optio! Autem consequuntur facere accusamus blanditiis ea
-            illo vel itaque! Alias?
-          </p>
-          <p>
-            Quas veniam, nisi ipsum placeat obcaecati tempore quibusdam!
-            Accusamus neque quod ipsa enim aperiam, esse fuga sunt quibusdam
-            ullam temporibus, veniam fugiat quas, iusto blanditiis ex qui
-            perspiciatis reiciendis? Quae!
-          </p>
-          <p>
-            Adipisci est amet laboriosam iste. Omnis quasi impedit magni. Sequi
-            eligendi nobis vel, excepturi odit earum, illum distinctio beatae et
-            sapiente asperiores totam soluta a nesciunt fugit delectus. Sed,
-            ipsum?
-          </p>
-          <p>
-            Quam sed expedita officiis eius! Voluptatum deserunt cupiditate,
-            voluptatibus, accusamus quis assumenda quae nemo nam autem laborum
-            mollitia? Quibusdam nulla consequatur, voluptates exercitationem hic
-            dolorum accusantium quis eum impedit quos?
-          </p>
-          <p>
-            Laudantium, quae suscipit tempore sequi incidunt earum velit culpa
-            natus nihil sint. Assumenda quae, illo esse modi sequi quos itaque,
-            ducimus accusantium quo repudiandae maxime rerum, possimus aliquam
-            neque corrupti!
-          </p>
-          <p>
-            Ut ullam placeat obcaecati nihil doloribus cum dolore, voluptate
-            sapiente veritatis eius. Ea pariatur architecto libero obcaecati
-            impedit consectetur ipsam reprehenderit eligendi cupiditate
-            delectus, est nesciunt consequatur totam repudiandae tenetur.
-          </p>
+          {paragraphs?.map((paragraph, index) => (
+            <p key={index} className="text-center">
+              {paragraph}
+            </p>
+          ))}
         </div>
       </div>
     </div>

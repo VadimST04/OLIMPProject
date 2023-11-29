@@ -3,11 +3,12 @@ import BookItem from "../components/BookItem";
 import SearchBar from "../components/SearchBar";
 import HorizontalCarousel from "../components/HorizontalCarousel";
 import { useSelector, useDispatch } from "react-redux";
-import { booksList } from "../store/actions/booksAction";
+import { booksList, booksSearch } from "../store/actions/booksAction";
 import BookPreview from "../components/BookPreview";
 import DetailedBook from "../components/DetailedBook";
 import { PiBooksDuotone } from "react-icons/pi";
 import { MAIN_BUTTON_CHANGE_NAME } from "../store/constants/buttonsConstants";
+import { BiSearch } from "react-icons/bi";
 
 const BooksPage = () => {
   const dispatch = useDispatch();
@@ -18,205 +19,87 @@ const BooksPage = () => {
     title: "",
     author: "",
     language: "",
+    bookId: 0,
   });
 
   const { userProfile } = useSelector((state) => state.userProfile);
 
-  const { books } = useSelector((state) => state.booksList);
+  const { books, loading, error } = useSelector((state) => state.booksList);
 
   useEffect(() => {
-    dispatch(booksList(userProfile ? userProfile.learning_langs : ["english"]));
-  }, [dispatch]);
+    if (books && books.length > 0) return;
 
-  const testBooks = [
-    {
-      image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
-      title: "Book1Book1Book1Book1Book1Book1Book1",
-      author: "Author1",
-      language: "English",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
-      title: "Book1Book1Book1Book1Book1Book1Book1",
-      author: "Author1",
-      language: "English",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
-      title: "Book1Book1Book1Book1Book1Book1Book1",
-      author: "Author1",
-      language: "English",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
-      title: "Book1Book1Book1Book1Book1Book1Book1",
-      author: "Author1",
-      language: "English",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
-      title: "Book1Book1Book1Book1Book1Book1Book1",
-      author: "Author1",
-      language: "English",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
-      title: "Book1Book1Book1Book1Book1Book1Book1",
-      author: "Author1",
-      language: "English",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
-      title: "Book1Book1Book1Book1Book1Book1Book1",
-      author: "Author1",
-      language: "English",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
-      title: "Book1Book1Book1Book1Book1Book1Book1",
-      author: "Author1",
-      language: "English",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
-      title: "Book1Book1Book1Book1Book1Book1Book1",
-      author: "Author1",
-      language: "English",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
-      title: "Book1Book1Book1Book1Book1Book1Book1",
-      author: "Author1",
-      language: "English",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
-      title: "Book1Book1Book1Book1Book1Book1Book1",
-      author: "Author1",
-      language: "English",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
-      title: "Book1Book1Book1Book1Book1Book1Book1",
-      author: "Author1",
-      language: "English",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
-      title: "Book1Book1Book1Book1Book1Book1Book1",
-      author: "Author1",
-      language: "English",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
-      title: "Book1Book1Book1Book1Book1Book1Book1",
-      author: "Author1",
-      language: "English",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
-      title: "Book1Book1Book1Book1Book1Book1Book1",
-      author: "Author1",
-      language: "English",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
-      title: "Book1Book1Book1Book1Book1Book1Book1",
-      author: "Author1",
-      language: "English",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
-      title: "Book1Book1Book1Book1Book1Book1Book1",
-      author: "Author1",
-      language: "English",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
-      title: "Book1Book1Book1Book1Book1Book1Book1",
-      author: "Author1",
-      language: "English",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
-      title: "Book1Book1Book1Book1Book1Book1Book1",
-      author: "Author1",
-      language: "English",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
-      title: "Book1Book1Book1Book1Book1Book1Book1",
-      author: "Author1",
-      language: "English",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
-      title: "Book1Book1Book1Book1Book1Book1Book1",
-      author: "Author1",
-      language: "English",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
-      title: "Book1Book1Book1Book1Book1Book1Book1",
-      author: "Author1",
-      language: "English",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
-      title: "Book1Book1Book1Book1Book1Book1Book1",
-      author: "Author1",
-      language: "English",
-    },
-    {
-      image: "https://images.unsplash.com/photo-1544947950-fa07a98d237f",
-      title: "Book1Book1Book1Book1Book1Book1Book1",
-      author: "Author1",
-      language: "English",
-    },
+    console.log("test useEffect");
+    dispatch(booksList(userProfile ? userProfile.learning_langs : [""]));
+  }, []);
+
+  const tags = [
+    { "All books": "" },
+    { "English books": "English" },
+    { "Ukrainian books": "Ukrainian" },
+    { "German books": "German" },
+    { "French books": "French" },
+    { "Itaian books": "Itaian" },
+    { "Spanish books": "Spanish" },
+    { "Polish books": "Polish" },
+    { "Japanese books": "Japanese" },
+    { "Hebrew books": "Hebrew" },
+    { "Arabian books": "Arabian" },
+    { "Armenian books": "Armenian" },
   ];
 
-  const testTags = [
-    "All",
-    "Recently read",
-    "Bestsellers",
-    "English Books",
-    "Classic Books",
-    "German Books",
-    "Japanese Books",
-    "Ukrainian Books",
-    "Top 10 Books",
-    "All",
-    "Recently read",
-    "Bestsellers",
-    "English Books",
-    "Classic Books",
-    "German Books",
-    "Japanese Books",
-    "Ukrainian Books",
-    "Top 10 Books",
-  ];
+  const inputChange = (e) => {
+    if (
+      e.key !== "Enter" ||
+      e.target.value.length > 30 ||
+      e.target.value === ""
+    )
+      return;
+
+    dispatch(booksSearch(e.target.value));
+  };
+
+  const carouseItemClick = (item) => {
+    const language = tags.find((obj) => obj.hasOwnProperty(item))[item];
+    console.log(language);
+    dispatch(booksList([language]));
+  };
 
   return (
     <>
       {!bookPreview && !bookDetails && (
         <div className="h-full w-full space-y-5">
-          <div className="h-10 w-full dark:text-soft-black">
-            <SearchBar inputStyling="h-full w-full rounded-2xl bg-[#D9D9D9] outline-none p-2 px-6" />
+          <div className="relative flex h-10 w-full items-center dark:text-soft-black">
+            <BiSearch className="absolute right-3 text-xl" />
+            <input
+              onKeyDown={inputChange}
+              type="text"
+              className="h-full w-full rounded-2xl bg-[#D9D9D9] p-2 px-8 outline-none"
+            />
           </div>
-          <HorizontalCarousel items={testTags} />
+          <HorizontalCarousel
+            onItemClick={(item) => carouseItemClick(item)}
+            items={tags.map((obj) => Object.keys(obj)[0])}
+          />
           <div className="grid grid-cols-[repeat(auto-fill,minmax(11rem,1fr))] gap-4">
-            {testBooks.map((item, index) => (
+            {books?.map((item, index) => (
               <BookItem
-                key={index}
-                image={item.image}
+                key={item.id}
+                image={`data:image/jpeg;base64,${item.cover_image_data}`}
                 title={item.title}
                 author={item.author}
-                language={item.language}
+                language={item.languages}
                 previewHandler={() => setBookPreview(true)}
                 setBook={setCurrentBook}
+                bookId={item.id}
               />
             ))}
           </div>
+          {books?.length < 1 && (
+            <div className="flex w-full items-center justify-center">
+              <p className="text-3xl">No books found</p>
+            </div>
+          )}
         </div>
       )}
 

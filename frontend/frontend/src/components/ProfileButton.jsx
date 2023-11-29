@@ -34,11 +34,7 @@ const ProfileButton = () => {
           className="group h-14 w-14 rounded-full p-1.5 hover:bg-main-dark-green"
         >
           <div className="h-full w-full overflow-hidden rounded-full transition-all duration-150 group-hover:scale-[115%]">
-            <ImageLoader
-              src={
-                "https://images.unsplash.com/photo-1700585560129-2c03e2a3f511?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxNXx8fGVufDB8fHx8fA%3D%3D"
-              }
-            />
+            <ImageLoader src={profileImage} />
           </div>
         </button>
       )}
