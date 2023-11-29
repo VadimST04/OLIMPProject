@@ -1,3 +1,5 @@
+import base64
+
 from rest_framework import serializers
 from baseApp.models import UserProfile
 from postsApp.models import Post, Comment, ImagePost
@@ -24,7 +26,7 @@ class CommentSerializer(serializers.ModelSerializer):
 
     def get_user_image(self, obj):
         userprofile = UserProfile.objects.get(user=obj.user)
-        return userprofile.image_data
+        return base64.b64encode(userprofile.image_data).decode('utf-8')
 
 
 class ImageSerializer(serializers.ModelSerializer):
@@ -57,4 +59,4 @@ class PostSerializer(serializers.ModelSerializer):
 
     def get_user_image(self, obj):
         userprofile = UserProfile.objects.get(user=obj.user)
-        return userprofile.image_data
+        return base64.b64encode(userprofile.image_data).decode('utf-8')
