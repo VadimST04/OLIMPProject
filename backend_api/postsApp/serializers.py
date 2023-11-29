@@ -63,7 +63,7 @@ class PostSerializer(serializers.ModelSerializer):
         """
 
         model = Post
-        exclude = ['image', ]
+        fields = '__all__'
 
     def get_user_image(self, obj):
         userprofile = UserProfile.objects.get(user=obj.user)
