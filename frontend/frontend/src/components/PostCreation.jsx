@@ -7,6 +7,7 @@ import ImageLoader from "./ImageLoader";
 
 const PostCreation = () => {
   const imageInput = useRef();
+  const contentTextRef = useRef();
   const navigate = useNavigate();
   const [drag, setDrag] = useState(false);
   const dragBorderStyle = drag ? "border-soft-black" : "border-transparent";
@@ -24,7 +25,7 @@ const PostCreation = () => {
     const files = [...e.target.files];
 
     for (let i = 0; i < files.length; i++) {
-      newImages[i] = URL.createObjectURL(files[i]);
+      newImages[i] = files[i];
     }
 
     setImages(newImages);
@@ -46,11 +47,16 @@ const PostCreation = () => {
     const files = [...e.dataTransfer.files];
 
     for (let i = 0; i < files.length; i++) {
-      newImages[i] = URL.createObjectURL(files[i]);
+      newImages[i] = files[i];
     }
 
     setImages(newImages);
     setDrag(false);
+  };
+
+  const shareButtonCLick = () => {
+    console.log(images);
+    console.log(contentTextRef.current.value);
   };
 
   return (
@@ -89,7 +95,9 @@ const PostCreation = () => {
               />
             </div>
             <div className="overflow-hidden rounded-xl">
-              <ImageCarousel images={images} />
+              <ImageCarousel
+                images={images.map((item) => URL.createObjectURL(item))}
+              />
             </div>
           </div>
           <div className="grid grid-rows-[3rem,1fr,3rem] gap-5">
@@ -100,8 +108,11 @@ const PostCreation = () => {
               <span className="font-semibold">{username}</span>
             </div>
             <div className="flex flex-col gap-1">
-              <p className="select-none text-[#C0C0C0]">Description</p>
-              <textarea className="flex-grow resize-none rounded-xl border-2 border-[#E1E1E1] bg-soft-white p-2 text-soft-black outline-none dark:border-[#ABABAB] dark:bg-soft-black dark:text-soft-white"></textarea>
+              <p className="select-none text-[#C0C0C0]">Content</p>
+              <textarea
+                ref={contentTextRef}
+                className="flex-grow resize-none rounded-xl border-2 border-[#E1E1E1] bg-soft-white p-2 text-soft-black outline-none dark:border-[#ABABAB] dark:bg-soft-black dark:text-soft-white"
+              ></textarea>
             </div>
             <div className="flex gap-5 ">
               <button
@@ -110,7 +121,10 @@ const PostCreation = () => {
               >
                 Cancel
               </button>
-              <button className="grow rounded-xl bg-soft-black font-semibold text-soft-white hover:bg-soft-black-hover dark:bg-[#D9D9D9] dark:text-soft-black dark:hover:bg-[#939393]">
+              <button
+                onClick={shareButtonCLick}
+                className="grow rounded-xl bg-soft-black font-semibold text-soft-white hover:bg-soft-black-hover dark:bg-[#D9D9D9] dark:text-soft-black dark:hover:bg-[#939393]"
+              >
                 Share
               </button>
             </div>
