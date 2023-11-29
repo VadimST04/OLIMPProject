@@ -64,6 +64,7 @@ class UserRegistration(APIView):
             )
             new_user_profile.app_lang = app_lang
             new_user_profile.learning_langs.set(learning_langs)
+            new_user_profile.selected_learning_langs.set(learning_langs)
 
             serializer = UserProfileSerializer(new_user_profile)
 
@@ -147,6 +148,14 @@ class UserProfileUpdate(APIView):
 
             learning_langs = Language.objects.filter(name__in=data.get('learning_langs', []))
             userprofile.learning_langs.set(learning_langs)
+            userprofile.selected_learning_langs.set(learning_langs)
+
+        if data.get('selected_learning_langs'):
+            if isinstance(data['selected_learning_langs'], str):
+                data['selected_learning_langs'] = json.loads(data['selected_learning_langs'])
+
+            selected_learning_langs = Language.objects.filter(name__in=data.get('selected_learning_langs', []))
+            userprofile.selected_learning_langs.set(selected_learning_langs)
 
         userprofile.save()
 
