@@ -3,6 +3,7 @@ import ChatItem from "./ChatItem";
 import { useSelector } from "react-redux";
 import { AiOutlineRight } from "react-icons/ai";
 import CollapseIcon from "./CollapseIcon";
+import { useNavigate } from "react-router";
 
 const Chats = () => {
   const { userProfile } = useSelector((state) => state.userProfile);
@@ -10,6 +11,8 @@ const Chats = () => {
   const [chatsCollapsed, setChatsCollapsed] = useState(
     localStorage.getItem("chatsCollapse") === "true",
   );
+  const navigate = useNavigate();
+
   const collapseButtonRotation = chatsCollapsed ? "rotate-180" : "";
   const chatsWidth = chatsCollapsed ? "w-0" : "w-[22rem]";
   const colapsedMargin = chatsCollapsed ? "" : "mr-5";
@@ -70,7 +73,10 @@ const Chats = () => {
             <ChatItem
               key={index}
               isActive={index === activeChatIndex}
-              clickCallback={() => setActiveChatIndex(index)}
+              clickCallback={() => {
+                setActiveChatIndex(index);
+                navigate(`/chats/${index}`);
+              }}
               {...item}
             />
           ))}
