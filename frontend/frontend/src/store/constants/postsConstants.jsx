@@ -1,3 +1,7 @@
 export const POSTS_REQUEST = "POSTS_REQUEST";
 export const POSTS_SUCCESS = "POSTS_SUCCESS";
 export const POSTS_FAIL = "POSTS_FAIL";
+
+export const MY_POSTS_REQUEST = "MY_POSTS_REQUEST";
+export const MY_POSTS_SUCCESS = "MY_POSTS_SUCCESS";
+export const MY_POSTS_FAIL = "MY_POSTS_FAIL";
