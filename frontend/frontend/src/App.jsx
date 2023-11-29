@@ -29,8 +29,11 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />}>
       <Route index element={<NewsPage />} />
+
       <Route path="/posts" element={<PostsPage />} />
+      <Route path="/posts/my-posts" element={<PostsPage showMyPosts />} />
       <Route path="/posts/post-creation" element={<PostCreation />} />
+
       <Route path="/books" element={<BooksPage />} />
       <Route path="/users" element={<UsersPage />} />
       <Route path="/music" element={<MusicPage />} />
