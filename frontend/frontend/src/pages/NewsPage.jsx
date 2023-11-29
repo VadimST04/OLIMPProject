@@ -100,7 +100,7 @@ const NewsPage = () => {
           ))}
         </div>
         <div className="hidden h-full w-full space-y-5 md:block">
-          {generateSections().map((item, index) => (
+          {generateSections()?.map((item, index) => (
             <div key={index} className="h-full w-full">
               {item}
             </div>
