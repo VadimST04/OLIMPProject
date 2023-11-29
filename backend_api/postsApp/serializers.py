@@ -63,15 +63,8 @@ class PostSerializer(serializers.ModelSerializer):
         """
 
         model = Post
-        fields = '__all__'
+        exclude = ['image', ]
 
     def get_user_image(self, obj):
         userprofile = UserProfile.objects.get(user=obj.user)
-
-        try:
-            if userprofile.image:
-                request = self.context.get('request')
-                if request:
-                    return request.build_absolute_uri(userprofile.image.url)
-        except ValueError:
-            return None
+        return userprofile.image_data
