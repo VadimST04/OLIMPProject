@@ -62,14 +62,16 @@ function PostsPage() {
           posts?.map((item, index) => (
             <PostItem
               liked={false}
-              images={[...item.images]}
+              images={item.image_post.map(
+                (item) => `data:image/jpeg;base64,${item.image_data}`,
+              )}
               key={index}
-              username={item.username}
+              username={item.user}
               content={item.content}
               likes={item.likes}
               comments={item.comments}
               commentDate={item.created_at}
-              userImage={item.userImage}
+              userImage={`data:image/jpeg;base64,${item.user_image}`}
             />
           ))}
       </div>
