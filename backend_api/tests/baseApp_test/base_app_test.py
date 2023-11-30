@@ -1,4 +1,5 @@
 import json
+import os
 
 import pytest
 from django.contrib.auth.models import User
@@ -10,7 +11,7 @@ pytestmark = pytest.mark.django_db
 user_data = {'username': 'test_user_registration', 'password': 'test_password', 'email': 'test_@email.com'}
 fail_user_data = {'username': 'test_user_registration', 'email': 'aboba@email.com'}
 user_profile_data = {'app_lang': 'English', 'learning_langs': ['German', 'English'],
-                     'image': 'upload_2023_06_03_20_03_32_398.png',
+                     'image': None,
                      'description': 'test_description'}
 
 
@@ -27,7 +28,7 @@ class TestUserAuth:
         admin = django_user_model.objects.create_superuser(
             username=username, password=password, is_superuser=True)
 
-        UserProfile.objects.create(user_id=admin.pk, image='backend/static/images/test.png',
+        UserProfile.objects.create(user_id=admin.pk, image=None,
                                    description=None, app_lang=eng)
 
         response = api_client().post(self.login_endpoint,
@@ -49,7 +50,7 @@ class TestUserAuth:
         assert content.get('user').get('email') == user_data['email']
         for lang in user_profile_data['learning_langs']:
             assert lang in content.get('learning_langs')
-        assert content.get('image') == '/images/' + user_profile_data['image']
+        assert content.get('image') == user_profile_data['image']
         assert content.get('description') == user_profile_data['description']
 
     @pytest.mark.parametrize('error, error_message, user_data_field',
