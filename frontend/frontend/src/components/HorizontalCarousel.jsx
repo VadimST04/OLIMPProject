@@ -2,12 +2,15 @@ import React, { useEffect, useRef, useState } from "react";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
 const HorizontalCarousel = ({ items, onItemClick }) => {
+  const [activeIndex, setActiveIndex] = useState(0);
   const [translate, setTranslate] = useState(0);
   const [isLeftVisible, setIsLeftVisible] = useState(false);
   const [isRightVisible, setIsRightVisible] = useState(false);
   const containerRef = useRef();
 
   const translateAmount = 200;
+  const activeIndexBg =
+    "bg-soft-black text-soft-white dark:bg-soft-white dark:text-soft-black";
 
   const onLeftClick = () => {
     setTranslate((translate) => {
@@ -49,16 +52,21 @@ const HorizontalCarousel = ({ items, onItemClick }) => {
       className="relative flex items-center overflow-x-hidden"
     >
       <div
-        className="flex w-[max-content] gap-2 overflow-x-auto whitespace-nowrap transition-transform sm:overflow-x-visible"
+        className="flex w-[max-content] gap-2 overflow-x-auto whitespace-nowrap transition-transform sm:overflow-x-visible "
         style={{ transform: `translateX(-${translate}px)` }}
       >
         {items.map((item, index) => (
           <div
             key={index}
             onClick={() => {
-              // onItemClick();
+              setActiveIndex(index);
+              if (onItemClick) onItemClick(item);
             }}
-            className="shrink-0 cursor-pointer select-none rounded-md border border-soft-white-hover px-2 py-1 font-semibold hover:bg-soft-white-hover dark:hover:bg-soft-black-hover sm:border-none"
+            className={`shrink-0 cursor-pointer select-none rounded-md border border-soft-white-hover px-2 py-1 font-semibold  sm:border-none ${
+              index === activeIndex
+                ? activeIndexBg
+                : "hover:bg-soft-white-hover dark:hover:bg-soft-black-hover"
+            }`}
           >
             {item}
           </div>
