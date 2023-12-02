@@ -1,0 +1,117 @@
+#incluse bookcss.kv
+<HeroView>:
+    name: 'screenb'
+    fit_image: fit_image
+    title_textb: title_textb
+    author_textb: author_textb
+    language_textb: language_textb
+    lorem_book: lorem_book
+    on_pre_enter: self.apply_data()
+    MDBoxLayout:
+        orientation: 'vertical'
+
+        TopBar:
+            pos_hint: {'top': 1}
+            elevation: 0
+            md_bg_color: "#F3F3F3"
+            specific_text_color: "#333333"
+            left_action_items: [["chevron-left", lambda x: root.change_screen('book1')]]
+
+            right_action_items:
+                [
+                ["white-balance-sunny", lambda x: app.change_theme_dark()],
+                ["account-circle-outline", lambda x: app.sign_in()]
+                ]
+        MDFloatLayout:
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+            md_bg_color:'#F3F3F3'
+            size_hint: (1, 0.5)
+            padding: [15, 0, 0, 15]
+
+            MDCard:
+                size_hint: (0.75, 0.4)
+                orientation: 'vertical'
+                elevation: 0
+                radius: [15]
+                line_color: '#e1e0e0'
+                padding: '9dp'
+                pos_hint:{'center_x': 0.5, 'center_y': 0.8}
+                FitImage:
+                    id: fit_image
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                    size_hint: (0.95, 0.95)
+                    height: root.height / 1.5
+                    radius: [10, 10, 10, 10]
+            MDBoxLayout:
+                orientation: 'vertical'
+                size_hint: (1, 0.1)
+                pos_hint: {'center_x': 0.5, 'center_y': 0.54}
+
+                MDLabel:
+                    id: title_textb
+                    font_size: '20'
+                    halign: 'center'
+                    bold: True
+            MDGridLayout:
+                size_hint: (0.34, 0.03)
+                pos_hint: {'center_x': 0.5, 'center_y': 0.48}
+
+                cols: 2
+                MDLabel:
+                    text: 'Author:'
+                    font_size: '16'
+                    line_height: 1
+                MDLabel:
+                    id: author_textb
+                    font_size: '16'
+                    line_height: 1
+            MDGridLayout:
+                size_hint: (0.43, 0.03)
+                pos_hint: {'center_x': 0.5, 'center_y': 0.42}
+                cols: 2
+
+
+                MDLabel:
+                    text: 'Language:'
+                    font_size: '16'
+                    line_height: 1
+                MDLabel:
+                    id: language_textb
+                    font_size: '16'
+                    line_height: 1
+                    padding: [10, 0]
+
+            MDTextButton:
+                size_hint: (0.42, 0.07)
+                pos_hint: {'center_x': 0.5, 'center_y': 0.34}
+                text: 'Read more'
+                halign: 'center'
+                line_color: "#000000"
+                radius: [10, 10, 10, 10]
+
+            MDBoxLayout:
+                pos_hint: {'center_x': 0.5, 'center_y': 0.17}
+                size_hint: (0.9, 0.2)
+                MDLabel:
+                    id: lorem_book
+                    text: root.shorten_text(lorem_book.text, 255)
+                    halign: 'left'
+                    font_size: '12'
+    BotmBar:
+        size_hint: (1, 0.01)
+        panel_color: '#217074'
+        use_text: False
+        text_color_normal: '#F3F3F3'
+        text_color_active: '#2B2D30'
+        MDBottomNavigationItem:
+            icon: 'account-circle-outline'
+
+        MDBottomNavigationItem:
+            icon: 'home-outline'
+            on_tab_press:
+                root.manager.current = 'news1'
+        MDBottomNavigationItem:
+            icon: 'chat-outline'
+            on_tab_press:
+                root.manager.transition = NoTransition()
+                root.manager.current = 'book1'

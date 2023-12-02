@@ -1,0 +1,39 @@
+<FirstPage>:
+    name: 'mainwin'
+    MDFloatLayout:
+        md_bg_color: 1, 1, 1, 1
+        MDBoxLayout:
+            size_hint: (0.9, 0.4)
+            pos_hint: {'center_x': .5, 'center_y': .75}
+            Image:
+                source: 'OLIMPlogo.png'
+                size: self.parent.size
+                allow_stretch: True
+        MDLabel:
+            text: 'Welcome!'
+            font_size: '23sp'
+            pos_hint: {'center_y': .48}
+            halign: 'center'
+            color: rgba(34, 34, 34, 255)
+        MDLabel:
+            text: 'Best app for education!!'
+            font_size: '23sp'
+            pos_hint: {'center_y': .43}
+            halign: 'center'
+            color: rgba(127, 127, 127, 255)
+        Button:
+            text: 'Log in'
+            size_hint: {0.35, 0.06}
+            background_color: '#2fd481'
+            pos_hint: {'center_x': 0.5, 'center_y': 0.3}
+            on_release:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'login'
+        Button:
+            text: 'Sign Up'
+            size_hint: {0.35, 0.06}
+            background_color: '#03f0fc'
+            pos_hint: {'center_x': 0.5, 'center_y': 0.2}
+            on_release:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'signup'

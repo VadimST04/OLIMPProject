@@ -1,0 +1,93 @@
+#include bookcss.kv
+#include newscss.kv
+#<TopBar>
+#    id: top_app_bar
+#    pos_hint: {'top': 1}
+#    elevation: 0
+#    md_bg_color: "cyan"
+#    specific_text_color: "#333333"
+#    left_action_items: [["menu", lambda x: nav_drawer.set_state("open")]]
+##    app.root.ids.b.ids.ac
+#
+#    right_action_items:
+#        [
+#        ["white-balance-sunny", lambda x: app.change_theme_dark()],
+#        ["account-circle-outline", lambda x: app.sign_in()]
+#        ]
+
+<DrawerClickableItem@MDNavigationDrawerItem>
+    focus_color: "#e7e4c0"
+    text_color: "#4a4939"
+    icon_color: "#4a4939"
+    ripple_color: "#c5bdd2"
+    selected_color: "#0c6c4d"
+
+
+<DrawerLabelItem@MDNavigationDrawerItem>
+    text_color: "#4a4939"
+    icon_color: "#4a4939"
+    focus_behavior: False
+    selected_color: "#4a4939"
+    _no_ripple_effect: True
+
+
+#<BotmBar>
+#    size_hint: (1, 0.01)
+#    panel_color: '#217074'
+#    use_text: False
+#    text_color_normal: '#F3F3F3'
+#    text_color_active: '#2B2D30'
+#    MDBottomNavigationItem:
+#        icon: 'account-circle-outline'
+#
+#    MDBottomNavigationItem:
+#        icon: 'home-outline'
+#        on_tab_press:
+#            app.root.screen_manager.current = 'news1'
+#    MDBottomNavigationItem:
+#        icon: 'chat-outline'
+#        on_tab_press:
+#            app.root.screen_manager.current = 'book1'
+
+#<NavDraver>
+#    id: nav_drawer
+#    radius: (0, 16, 16, 0)
+#
+#    MDNavigationDrawerMenu:
+#
+#        DrawerClickableItem:
+#            icon: "book"
+#            text_right_color: "#4a4939"
+#            text: "BooksPage"
+#            on_release:
+#                root.manager.current = 'book1'
+#
+#        DrawerClickableItem:
+#            icon: "newspaper"
+#            text: "NewsPage"
+
+
+
+#  ^ Main components ^ #
+
+#<HeroCard>:
+#    size_hint: (root.width / 4, None)
+#    orientation: 'vertical'
+#    elevation: 0
+#    radius: [15]
+#    line_color: '#e1e0e0'
+#    focus_behavior: True
+#    ripple_behavior: True
+#    focus_color: "#f8f8f8"
+#    height: root.height / 3.5
+#    padding: '9dp'
+
+#    MDHeroFrom:
+#        id: hero_form
+#        size_hint: root.width / 4, None
+#        height: root.height / 3.5
+#
+#        FitImage:
+#            source: 'nature.jpg'
+#            size_hint: None, None
+#            size: hero_form.size

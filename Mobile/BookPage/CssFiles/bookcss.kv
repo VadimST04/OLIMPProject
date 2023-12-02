@@ -1,0 +1,173 @@
+#include css.kv
+<BookPageWindow>:
+    name: 'book1'
+    MDBoxLayout:
+        orientation: 'vertical'
+
+        TopBar:
+            id: top_app_bar
+            pos_hint: {'top': 1}
+            elevation: 0
+            md_bg_color: "#F3F3F3"
+            specific_text_color: "#333333"
+            left_action_items: [["menu", lambda x: nav_drawer.set_state("open")]]
+
+            right_action_items:
+                [
+                ["white-balance-sunny", lambda x: app.change_theme_dark()],
+                ["account-circle-outline", lambda x: app.sign_in()]
+                ]
+        MDFloatLayout:
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+            md_bg_color:'#F3F3F3'
+            size_hint: (1, 0.5)
+            padding: [15, 0, 0, 15]
+
+            MDTextField:
+                size_hint: (0.9, 0.1)
+                pos_hint: {'center_x': 0.5, 'center_y': 0.95}
+                active_line: False
+                multiline: False
+                mode: 'fill'
+                radius: [15]
+                hint_text: 'Search...'
+                hint_text_color_focus: "#217074"
+                icon_left: 'magnify'
+                icon_left_color_focus: "#217074"
+                fill_color_focus: '#fffbfc'
+                text_color_normal: 'black'
+                text_color_focus: 'gray'
+
+            MDBoxLayout:
+                size_hint: (1, 0.1)
+                pos_hint: {'center_x': 0.5, 'center_y': 0.85}
+                md_bg_color: '#F3F3F3'
+                MDScrollView:
+
+                    do_scroll_x: True
+                    do_scroll_y: False
+                    bar_width: 0
+                    MDBoxLayout:
+
+                        orientation: 'horizontal'
+                        adaptive_width: True
+                        spacing: root.height / 15
+                        padding: [root.height / 25 , 0, root.height / 25, 0]
+                        MDTextButton:
+                            pos_hint: {'center_y': 0.5}
+                            text: 'Recently read'
+                        MDTextButton:
+                            pos_hint: {'center_y': 0.5}
+                            text: 'Bestsellers'
+                        MDTextButton:
+                            pos_hint: {'center_y': 0.5}
+                            text: 'English Bestsellers'
+                        MDTextButton:
+                            pos_hint: {'center_y': 0.5}
+                            text: 'New Books'
+            MDBoxLayout:
+                size_hint: (1, 0.85)
+                padding: [0, root.height / 25, 0, root.height / 25]
+                MDScrollView:
+                    size: self.size
+                    adaptive_size: True
+                    bar_width: 0
+                    MDGridLayout:
+                        id: chamber
+                        cols: 2
+                        size_hint_y: None
+                        height: self.minimum_height
+                        width: self.minimum_width
+                        padding: root.height / 25, root.width / 30, root.height / 25, 0
+                        spacing: root.height / 35
+
+
+
+    BotmBar:
+        size_hint: (1, 0.01)
+        panel_color: '#217074'
+        use_text: False
+        text_color_normal: '#F3F3F3'
+        text_color_active: '#2B2D30'
+
+        MDBottomNavigationItem:
+            icon: 'account-circle-outline'
+
+        MDBottomNavigationItem:
+            icon: 'home-outline'
+            on_tab_press:
+                root.manager.current = 'news1'
+        MDBottomNavigationItem:
+            icon: 'chat-outline'
+            on_tab_press:
+                root.manager.current = 'book1'
+
+    NavDraver:
+        id: nav_drawer
+        radius: (0, 16, 16, 0)
+
+        MDNavigationDrawerMenu:
+
+            DrawerClickableItem:
+                icon: "book"
+                text_right_color: "#4a4939"
+                text: "BooksPage"
+                on_release:
+                    root.manager.current = 'book1'
+
+            DrawerClickableItem:
+                icon: "newspaper"
+                text: "NewsPage"
+
+
+<HeroCard>:
+    size_hint: (1, None)
+    orientation: 'vertical'
+    elevation: 0
+    radius: [15]
+    line_color: '#e1e0e0'
+    focus_behavior: True
+    ripple_behavior: True
+    focus_color: "#f8f8f8"
+    height: '180dp'
+    padding: '9dp'
+
+
+    MDBoxLayout:
+        orientation: 'vertical'
+        pos:self.parent.pos
+        width: self.parent.width
+        height: self.parent.height
+        MDRelativeLayout:
+            size_hint: (1, 0.4)
+            FitImage:
+                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                source: root.source
+                size_hint: (0.95, 0.95)
+                height: root.height / 1.5
+                radius: [10, 10, 10, 10]
+        MDRelativeLayout:
+            size_hint: (1, 0.1)
+            MDLabel:
+                halign: 'left'
+                text: root.shorten_text(root.text, 12)
+                bold: True
+                adaptive_height: True
+                font_size: '14'
+                size: self.texture_size
+        MDGridLayout:
+            size_hint: (1, 0.1)
+            cols: 3
+            MDLabel:
+                text: root.language_desc
+                font_size: '13'
+                halign: 'left'
+            MDLabel:
+                text: '•'
+                font_size: '32'
+                halign: 'center'
+
+            MDLabel:
+                text: root.shorten_text(root.author_desc, 5)
+                halign: 'right'
+                font_size: '13'

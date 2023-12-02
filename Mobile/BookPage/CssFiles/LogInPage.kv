@@ -1,0 +1,96 @@
+<SecondPg>:
+    name: 'login'
+    MDFloatLayout:
+        md_bg_color: 1, 1, 1, 1
+        MDIconButton:
+            icon: 'arrow-left'
+            pos_hint: {'center_x':0.08, 'center_y': 0.95}
+            font_size: '30sp'
+            on_release:
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'mainwin'
+        MDBoxLayout:
+            pos_hint: {'center_x':0.5, 'center_y': 0.8}
+            size_hint: {1, None}
+            MDLabel:
+                text:'Welcome'
+                halign: 'center'
+                font_size: '26sp'
+        MDFloatLayout:
+            MDTextField:
+                id: email_txt_field
+                hint_text: 'Email'
+                helper_text_mode: "on_error"
+                helper_text: 'Enter Email'
+                multiline: False
+#                required: True
+                line_color_focus: '#217074'
+                hint_text_color_focus: "#217074"
+                pos_hint:{'center_x': 0.5, 'center_y': 0.62}
+                size_hint: (0.5, 0.11)
+
+            MDTextField:
+                id: email_txt_field
+                hint_text: 'Password'
+                helper_text_mode: "on_error"
+                helper_text: 'Enter Password'
+                multiline: False
+#                required: True
+                line_color_focus: '#217074'
+                hint_text_color_focus: "#217074"
+                pos_hint:{'center_x': 0.5, 'center_y': 0.45}
+                size_hint: (0.5, 0.11)
+            Button:
+                text: 'Log in'
+                size_hint: {0.35, 0.06}
+                background_color: '#2fd481'
+                pos_hint: {'center_x': 0.5, 'center_y': 0.3}
+                on_release:
+                    root.manager.transition.direction = 'left'
+                    root.manager.current = 'news1'
+            MDLabel:
+                text: 'or'
+                color: rgba(52, 0, 231, 255)
+                pos_hint: {'center_y': .22}
+                font_size: '13sp'
+                halign: 'center'
+            MDFloatLayout:
+                md_bg_color: rgba(178, 178, 178, 255)
+                size_hint: .3, .002
+                pos_hint: {'center_x': .3, 'center_y': .218}
+            MDFloatLayout:
+                md_bg_color: rgba(178, 178, 178, 255)
+                size_hint: .3, .002
+                pos_hint: {'center_x': .7, 'center_y': .218}
+            MDLabel:
+                text: 'Social Media Log in'
+                font_size: '13sp'
+                halign: 'center'
+                pos_hint: {'center_y': .16}
+                color: rgba(135, 133, 193, 255)
+            MDGridLayout:
+                cols: 3
+                size_hint: .48, .07
+                pos_hint: {'center_x': .5, 'center_y': .1}
+                Image:
+                    source: 'gugl.jpg'
+                Image:
+                    source: 'Facebook2.jpg'
+                Image:
+                    source: 'aple.jpg'
+            MDGridLayout:
+                cols: 2
+                size_hint: .48, .03
+                pos_hint: {'center_x': .5, 'center_y': .03}
+                MDLabel:
+                    text: "Don`t have an account?"
+                    font_size: '11sp'
+                    color: rgba(135, 133, 193, 255)
+                MDTextButton:
+                    text: 'Sign up'
+                    font_size: '11sp'
+                    color: '#217074'
+                    on_release:
+                        root.manager.transition.direction = 'left'
+                        root.manager.current = 'signup'
+
