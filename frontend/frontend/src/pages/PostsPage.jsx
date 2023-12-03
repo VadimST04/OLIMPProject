@@ -20,9 +20,9 @@ function PostsPage({ showMyPosts = false }) {
   }, [dispatch]);
 
   return (
-    <div className="grid h-full grid-rows-[auto,1fr]">
+    <div className="grid h-full grid-rows-[auto,1fr] gap-5">
       <PostsNavbar />
-      <div className="flex h-full flex-col items-center gap-5 pt-5">
+      <div className="space-y-5 overflow-y-auto">
         {postsToDisplay &&
           postsToDisplay?.map((item, index) => (
             <PostItem
