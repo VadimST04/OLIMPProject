@@ -5,6 +5,9 @@ import {
   MY_POSTS_REQUEST,
   MY_POSTS_SUCCESS,
   MY_POSTS_FAIL,
+  POSTS_CREATE_REQUEST,
+  POSTS_CREATE_SUCCESS,
+  POSTS_CREATE_FAIL,
 } from "../constants/postsConstants";
 import axios from "axios";
 
@@ -81,7 +84,7 @@ export const myPostsList = () => async (dispatch, getState) => {
 export const createPost = (content, images) => async (dispatch, getState) => {
   try {
     dispatch({
-      type: POSTS_REQUEST,
+      type: POSTS_CREATE_REQUEST,
     });
 
     const { userToken } = getState().userToken;
@@ -109,12 +112,12 @@ export const createPost = (content, images) => async (dispatch, getState) => {
     );
 
     dispatch({
-      type: POSTS_SUCCESS,
+      type: POSTS_CREATE_SUCCESS,
       payload: data,
     });
   } catch (error) {
     dispatch({
-      type: POSTS_FAIL,
+      type: POSTS_CREATE_FAIL,
       payload:
         error.response && error.response.data.detail
           ? error.response.data.detail
