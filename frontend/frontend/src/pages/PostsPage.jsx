@@ -11,13 +11,14 @@ function PostsPage({ showMyPosts = false }) {
   const [postCreation, setPostCreation] = useState(false);
 
   const { posts } = useSelector((state) => state.postsList);
+  console.log(posts);
   const { myPosts } = useSelector((state) => state.myPostsList);
 
   const postsToDisplay = showMyPosts ? myPosts : posts;
 
   useEffect(() => {
     dispatch(showMyPosts ? myPostsList() : postsList());
-  }, [dispatch]);
+  }, []);
 
   return (
     <div className="grid h-full grid-rows-[auto,1fr] gap-5">

@@ -1,23 +1,22 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { BiImageAdd } from "react-icons/bi";
 import ImageCarousel from "./ImageCarousel";
 import PostsNavbar from "./PostsNavbar";
 import { useNavigate } from "react-router";
 import ImageLoader from "./ImageLoader";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createPost } from "../store/actions/postsActions";
+import { getUserProfile } from "../store/actions/profileActions";
 
 const PostCreation = () => {
   const dispatch = useDispatch();
-
+  const { userProfile } = useSelector((state) => state.userProfile);
   const imageInput = useRef();
   const contentTextRef = useRef();
   const navigate = useNavigate();
   const [drag, setDrag] = useState(false);
   const dragBorderStyle = drag ? "border-soft-black" : "border-transparent";
-  const profileImage =
-    "https://images.unsplash.com/photo-1682687220161-e3e7388e4fad";
-  const username = "Sophia Taylor";
+  const username = userProfile?.user.username;
   const [images, setImages] = useState([]);
 
   const rowSpan = images.length > 0 ? "" : "row-span-2";
@@ -62,7 +61,12 @@ const PostCreation = () => {
     console.log(images);
     console.log(contentTextRef.current.value);
     dispatch(createPost(contentTextRef.current.value, images));
+    navigate("/posts");
   };
+
+  useEffect(() => {
+    dispatch(getUserProfile());
+  }, []);
 
   return (
     <div className="flex h-full w-full flex-col items-center">
@@ -108,7 +112,10 @@ const PostCreation = () => {
           <div className="grid grid-rows-[3rem,1fr,3rem] gap-5">
             <div className="flex items-center gap-2">
               <div className="h-12 w-12 overflow-hidden rounded-full">
-                <ImageLoader src={profileImage} />
+                <ImageLoader
+                  src={`data:image/jpeg;base64,${userProfile?.image_data}`}
+                  displayErrors={false}
+                />
               </div>
               <span className="font-semibold">{username}</span>
             </div>

@@ -7,6 +7,14 @@ import axios from "axios";
 
 export const getUserProfile = () => async (dispatch, getState) => {
   try {
+    if (localStorage.getItem("userProfile")) {
+      dispatch({
+        type: USER_PROFILE_SUCCESS,
+        payload: JSON.parse(localStorage.getItem("userProfile")),
+      });
+      return;
+    }
+
     dispatch({
       type: USER_PROFILE_REQUEST,
     });
