@@ -4,8 +4,12 @@ import ImageCarousel from "./ImageCarousel";
 import PostsNavbar from "./PostsNavbar";
 import { useNavigate } from "react-router";
 import ImageLoader from "./ImageLoader";
+import { useDispatch } from "react-redux";
+import { createPost } from "../store/actions/postsActions";
 
 const PostCreation = () => {
+  const dispatch = useDispatch();
+
   const imageInput = useRef();
   const contentTextRef = useRef();
   const navigate = useNavigate();
@@ -57,6 +61,7 @@ const PostCreation = () => {
   const shareButtonCLick = () => {
     console.log(images);
     console.log(contentTextRef.current.value);
+    dispatch(createPost(contentTextRef.current.value, images));
   };
 
   return (

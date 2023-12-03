@@ -77,3 +77,48 @@ export const myPostsList = () => async (dispatch, getState) => {
     });
   }
 };
+
+export const createPost = (content, images) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: POSTS_REQUEST,
+    });
+
+    const { userToken } = getState().userToken;
+
+    const config = {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${userToken.access}`,
+      },
+    };
+    console.log("images", images);
+
+    const formData = new FormData();
+    for (let i = 0; i < images.length; i++) {
+      formData.append("images", images[i]);
+    }
+    formData.append("content", content);
+
+    console.log("formData", formData);
+
+    const { data } = await axios.post(
+      "http://127.0.0.1:8000/api/posts/create/",
+      formData,
+      config,
+    );
+
+    dispatch({
+      type: POSTS_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: POSTS_FAIL,
+      payload:
+        error.response && error.response.data.detail
+          ? error.response.data.detail
+          : error.response,
+    });
+  }
+};

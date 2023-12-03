@@ -1,14 +1,18 @@
-from drf_spectacular.utils import extend_schema
-from rest_framework import generics
-from rest_framework.permissions import IsAuthenticated
+import json
 
-from postsApp.models import Post, Comment
+from drf_spectacular.utils import extend_schema
+from rest_framework import generics, status
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.views import APIView
+
+from postsApp.models import Post, Comment, ImagePost
 from postsApp.permissions import IsAuthorOrIsAuthenticated
 from postsApp.serializers import PostSerializer, CommentSerializer
+from rest_framework.response import Response
 
 
 @extend_schema(tags=["Posts"])
-class PostList(generics.ListCreateAPIView):
+class PostList(generics.ListAPIView):
     """
     View class for listing and creating posts.
     This class provides an entry point for viewing a list of posts and creating new posts.
@@ -18,6 +22,26 @@ class PostList(generics.ListCreateAPIView):
     queryset = Post.objects.select_related('user').all()
     serializer_class = PostSerializer
     permission_classes = (IsAuthenticated,)
+
+
+class PostCreateAPIView(APIView):
+
+    def post(self, request):
+        data = {key: value for key, value in request.data.items()}
+        user = request.user
+        images = request.FILES.getlist('images')
+        print(images)
+
+        try:
+            new_post = Post.objects.create(user=user, content=data['content'])
+
+            for image in images:
+                ImagePost.object.create(image=image, post=new_post)
+
+            serializer = PostSerializer(new_post)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        except Exception:
+            return Response({'detail': 'Error'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 @extend_schema(tags=["Posts"])
