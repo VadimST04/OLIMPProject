@@ -22,7 +22,7 @@ const PostItem = ({
 
   return (
     <>
-      <div className="mx-auto grid h-full w-full max-w-[28rem] flex-shrink-0 grid-rows-[3rem,1fr,3rem,4.5rem] gap-1">
+      <div className="mx-auto grid h-full w-full max-w-[28rem] flex-shrink-0 grid-rows-[3rem,1fr,3rem,auto] gap-1">
         <div className="grid grid-cols-[3rem,1fr] gap-2">
           <div className="aspect-square h-full flex-shrink-0 overflow-hidden rounded-full">
             <ImageLoader src={userImage} />
@@ -45,7 +45,7 @@ const PostItem = ({
 
         <div
           onClick={() => setDetailedView(true)}
-          className="line-clamp-3 cursor-pointer hover:underline"
+          className="line-clamp-3 max-h-[4.5rem] cursor-pointer hover:underline"
         >
           {content}
         </div>
