@@ -4,15 +4,27 @@ import { BiSkipPrevious, BiSkipNext } from "react-icons/bi";
 import { AiFillPlayCircle, AiFillPauseCircle } from "react-icons/ai";
 import ImageLoader from "./ImageLoader";
 import AudioPlayer from "./AudioPlayer";
+import { musicDetails } from "../store/actions/musicActions";
+import { useDispatch, useSelector } from "react-redux";
 
 const DetailedMusic = ({
+  musicId,
   lyrics,
   language,
   image,
   title,
   author,
   hideDetailedMusic,
+  length,
 }) => {
+  const dispatch = useDispatch();
+  const { musicDetail } = useSelector((state) => state.musicDetails);
+  console.log(musicDetail);
+
+  useState(() => {
+    dispatch(musicDetails(musicId));
+  }, [dispatch, musicDetail]);
+
   return (
     <div className="relative mx-auto h-full max-w-[64rem] gap-5 px-10 sm:grid sm:grid-cols-2">
       <button
@@ -32,7 +44,10 @@ const DetailedMusic = ({
             <p className="text-3xl font-bold">{title}</p>
             <p className="font-semibold">{author}</p>
           </div>
-          <AudioPlayer />
+          <AudioPlayer
+            file={`data:audio/mp3;base64,${musicDetail?.audio_data}`}
+            defaultDuration={length}
+          />
         </div>
       </div>
 

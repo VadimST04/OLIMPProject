@@ -8,6 +8,7 @@ const BookItem = ({
   language,
   previewHandler,
   setBook,
+  bookId,
 }) => {
   return (
     <div
@@ -17,6 +18,7 @@ const BookItem = ({
           title: title,
           author: author,
           language: language,
+          bookId: bookId,
         });
         previewHandler();
       }}
@@ -29,7 +31,7 @@ const BookItem = ({
       <div className="flex w-full items-center justify-center gap-1 truncate text-center text-[14px]">
         <p>{language}</p>
         <p>&#x2022;</p>
-        <p>{author}</p>
+        <p className="truncate">{author}</p>
       </div>
     </div>
   );

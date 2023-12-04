@@ -26,7 +26,8 @@ class UserProfile(models.Model):
                                  null=True,
                                  on_delete=models.DO_NOTHING,
                                  related_name='app_language')
-    learning_langs = models.ManyToManyField(Language, null=True)
+    learning_langs = models.ManyToManyField(Language, related_name='learning_langs')
+    selected_learning_langs = models.ManyToManyField(Language, blank=True, related_name='selected_learning_langs')
 
     def save(self, *args, **kwargs):
         if self.image:

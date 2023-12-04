@@ -14,6 +14,7 @@ import BooksPage from "./pages/BooksPage";
 import ProfilePage from "./pages/ProfilePage";
 import NewsPage from "./pages/NewsPage";
 import PostCreation from "./components/PostCreation";
+import ChatsPage from "./pages/ChatsPage";
 
 const Root = () => {
   return (
@@ -33,6 +34,7 @@ const router = createBrowserRouter(
       <Route path="/books" element={<BooksPage />} />
       <Route path="/users" element={<UsersPage />} />
       <Route path="/music" element={<MusicPage />} />
+      <Route path="/chats/:id" element={<ChatsPage />} />
       <Route path="/user/profile" element={<ProfilePage />} />
     </Route>,
   ),

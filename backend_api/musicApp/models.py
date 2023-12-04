@@ -20,6 +20,7 @@ class Song(models.Model):
     audio_file = models.FileField()
     audio_data = models.BinaryField(null=True)
     audio_link = models.CharField(max_length=200, blank=True, null=True)
+    lyrics = models.TextField(blank=True, null=True)
     duration = models.CharField(max_length=20, blank=True, null=True)
     language = models.ForeignKey(Language, on_delete=models.PROTECT)
 
