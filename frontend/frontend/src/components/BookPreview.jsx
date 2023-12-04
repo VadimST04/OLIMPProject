@@ -9,22 +9,12 @@ const BookPreview = ({
   title,
   author,
   language,
-  genre,
-  firstPageContent,
   closePreviewHandler,
   readMoreHandler,
   bookId,
 }) => {
-  // image = "https://images.unsplash.com/photo-1589998059171-988d887df646";
-  // title = "Twisted love";
-  // author = "Ana Huang";
-  // language = "English";
   const { userToken } = useSelector((state) => state.userToken);
   const dispatch = useDispatch();
-
-  useState(() => {
-    window.scrollTo(0, 0);
-  }, []);
 
   const { book } = useSelector((state) => state.bookDetail);
   console.log(book);
@@ -72,7 +62,6 @@ const BookPreview = ({
       <div className="space-y-2 pr-5 pt-5 text-lg md:overflow-y-auto">
         <div className="flex flex-wrap items-center justify-between">
           <p className="truncate text-3xl font-bold">{title}</p>
-          {/* <p className="font-semibold text-[#737373]"></p> */}
         </div>
         <p>
           <span className="font-semibold">Author - </span>
