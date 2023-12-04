@@ -67,4 +67,42 @@ const PostItem = ({
   );
 };
 
+export const PostItemSkeleton = () => {
+  return (
+    <div className="mx-auto grid h-full w-full max-w-[28rem] flex-shrink-0 grid-rows-[3rem,1fr,3rem,auto] gap-3">
+      <div className="grid grid-cols-[3rem,1fr] gap-2">
+        <div className="aspect-square h-full flex-shrink-0 overflow-hidden rounded-full">
+          <div
+            className={`h-full w-full animate-[pulse_1s_ease-in-out_infinite] bg-soft-black dark:bg-soft-white`}
+          ></div>
+        </div>
+        <div className="flex gap-2">
+          <p className="h-1 w-full animate-[pulse_1s_ease-in-out_infinite] self-center truncate rounded-full bg-soft-black dark:bg-soft-white"></p>
+          <p className="h-1 w-[50%] animate-[pulse_1s_ease-in-out_infinite] self-center truncate rounded-full bg-soft-black dark:bg-soft-white"></p>
+        </div>
+      </div>
+
+      <div className="h-full w-full animate-[pulse_1s_ease-in-out_infinite] rounded-md bg-soft-black dark:bg-soft-white"></div>
+
+      <div className="space-y-2">
+        <div className="flex gap-2">
+          <p className="h-1 w-full animate-[pulse_1s_ease-in-out_infinite] self-center truncate rounded-full bg-soft-black dark:bg-soft-white"></p>
+          <p className="h-1 w-[30%] animate-[pulse_1s_ease-in-out_infinite] self-center truncate rounded-full bg-soft-black dark:bg-soft-white"></p>
+          <p className="h-1 w-[50%] animate-[pulse_1s_ease-in-out_infinite] self-center truncate rounded-full bg-soft-black dark:bg-soft-white"></p>
+        </div>
+        <div className="flex gap-2">
+          <p className="h-1 w-[50%] animate-[pulse_1s_ease-in-out_infinite] self-center truncate rounded-full bg-soft-black dark:bg-soft-white"></p>
+          <p className="h-1 w-[30%] animate-[pulse_1s_ease-in-out_infinite] self-center truncate rounded-full bg-soft-black dark:bg-soft-white"></p>
+          <p className="h-1 w-full animate-[pulse_1s_ease-in-out_infinite] self-center truncate rounded-full bg-soft-black dark:bg-soft-white"></p>
+        </div>
+        <div className="flex gap-2">
+          <p className="h-1 w-full animate-[pulse_1s_ease-in-out_infinite] self-center truncate rounded-full bg-soft-black dark:bg-soft-white"></p>
+          <p className="h-1 w-[50%] animate-[pulse_1s_ease-in-out_infinite] self-center truncate rounded-full bg-soft-black dark:bg-soft-white"></p>
+          <p className="h-1 w-[30%] animate-[pulse_1s_ease-in-out_infinite] self-center truncate rounded-full bg-soft-black dark:bg-soft-white"></p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export default PostItem;

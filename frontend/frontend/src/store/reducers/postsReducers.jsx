@@ -29,13 +29,13 @@ export const postsListReducer = (state = { comments: [] }, action) => {
 export const myPostsListReducer = (state = { comments: [] }, action) => {
   switch (action.type) {
     case MY_POSTS_REQUEST:
-      return { loading: true };
+      return { myPostsLoading: true };
 
     case MY_POSTS_SUCCESS:
-      return { loading: false, myPosts: action.payload };
+      return { myPostsLoading: false, myPosts: action.payload };
 
     case MY_POSTS_FAIL:
-      return { loading: false, error: action.payload };
+      return { myPostsLoading: false, error: action.payload };
 
     default:
       return state;

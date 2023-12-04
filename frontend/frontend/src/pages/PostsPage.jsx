@@ -2,17 +2,18 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { myPostsList, postsList } from "../store/actions/postsActions";
 
-import PostItem from "../components/PostItem";
+import PostItem, { PostItemSkeleton } from "../components/PostItem";
 import PostCreation from "../components/PostCreation";
 import PostsNavbar from "../components/PostsNavbar";
+import ImageCarousel from "../components/ImageCarousel";
+import ImageLoader from "../components/ImageLoader";
 
 function PostsPage({ showMyPosts = false }) {
   const dispatch = useDispatch();
   const [postCreation, setPostCreation] = useState(false);
 
-  const { posts } = useSelector((state) => state.postsList);
-  console.log(posts);
-  const { myPosts } = useSelector((state) => state.myPostsList);
+  const { posts, loading } = useSelector((state) => state.postsList);
+  const { myPosts, myPostsLoading } = useSelector((state) => state.myPostsList);
 
   const postsToDisplay = showMyPosts ? myPosts : posts;
 
@@ -23,6 +24,10 @@ function PostsPage({ showMyPosts = false }) {
   return (
     <div className="grid h-full grid-rows-[auto,1fr] gap-5">
       <PostsNavbar />
+
+      {loading && <PostItemSkeleton />}
+      {myPostsLoading && <PostItemSkeleton />}
+
       <div className="space-y-5 overflow-y-auto">
         {postsToDisplay &&
           postsToDisplay?.map((item, index) => (
