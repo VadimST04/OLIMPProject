@@ -28,7 +28,6 @@ const LanguageDropDown = ({ openUpwards = false }) => {
 
   useEffect(() => {
     setLearningLanguages(userProfile ? userProfile.learning_langs : []);
-    setLearningLanguages(["English", "Ukrainian", "German", "French"]);
   }, [userProfile]);
 
   return (
