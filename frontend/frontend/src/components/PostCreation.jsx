@@ -1,18 +1,22 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { BiImageAdd } from "react-icons/bi";
 import ImageCarousel from "./ImageCarousel";
 import PostsNavbar from "./PostsNavbar";
 import { useNavigate } from "react-router";
 import ImageLoader from "./ImageLoader";
+import { useDispatch, useSelector } from "react-redux";
+import { createPost } from "../store/actions/postsActions";
+import { getUserProfile } from "../store/actions/profileActions";
 
 const PostCreation = () => {
+  const dispatch = useDispatch();
+  const { userProfile } = useSelector((state) => state.userProfile);
   const imageInput = useRef();
+  const contentTextRef = useRef();
   const navigate = useNavigate();
   const [drag, setDrag] = useState(false);
   const dragBorderStyle = drag ? "border-soft-black" : "border-transparent";
-  const profileImage =
-    "https://images.unsplash.com/photo-1682687220161-e3e7388e4fad";
-  const username = "Sophia Taylor";
+  const username = userProfile?.user.username;
   const [images, setImages] = useState([]);
 
   const rowSpan = images.length > 0 ? "" : "row-span-2";
@@ -24,7 +28,7 @@ const PostCreation = () => {
     const files = [...e.target.files];
 
     for (let i = 0; i < files.length; i++) {
-      newImages[i] = URL.createObjectURL(files[i]);
+      newImages[i] = files[i];
     }
 
     setImages(newImages);
@@ -46,12 +50,23 @@ const PostCreation = () => {
     const files = [...e.dataTransfer.files];
 
     for (let i = 0; i < files.length; i++) {
-      newImages[i] = URL.createObjectURL(files[i]);
+      newImages[i] = files[i];
     }
 
     setImages(newImages);
     setDrag(false);
   };
+
+  const shareButtonCLick = () => {
+    console.log(images);
+    console.log(contentTextRef.current.value);
+    dispatch(createPost(contentTextRef.current.value, images));
+    navigate("/posts");
+  };
+
+  useEffect(() => {
+    dispatch(getUserProfile());
+  }, []);
 
   return (
     <div className="flex h-full w-full flex-col items-center">
@@ -89,19 +104,27 @@ const PostCreation = () => {
               />
             </div>
             <div className="overflow-hidden rounded-xl">
-              <ImageCarousel images={images} />
+              <ImageCarousel
+                images={images.map((item) => URL.createObjectURL(item))}
+              />
             </div>
           </div>
           <div className="grid grid-rows-[3rem,1fr,3rem] gap-5">
             <div className="flex items-center gap-2">
               <div className="h-12 w-12 overflow-hidden rounded-full">
-                <ImageLoader src={profileImage} />
+                <ImageLoader
+                  src={`data:image/jpeg;base64,${userProfile?.image_data}`}
+                  displayErrors={false}
+                />
               </div>
               <span className="font-semibold">{username}</span>
             </div>
             <div className="flex flex-col gap-1">
-              <p className="select-none text-[#C0C0C0]">Description</p>
-              <textarea className="flex-grow resize-none rounded-xl border-2 border-[#E1E1E1] bg-soft-white p-2 text-soft-black outline-none dark:border-[#ABABAB] dark:bg-soft-black dark:text-soft-white"></textarea>
+              <p className="select-none text-[#C0C0C0]">Content</p>
+              <textarea
+                ref={contentTextRef}
+                className="flex-grow resize-none rounded-xl border-2 border-[#E1E1E1] bg-soft-white p-2 text-soft-black outline-none dark:border-[#ABABAB] dark:bg-soft-black dark:text-soft-white"
+              ></textarea>
             </div>
             <div className="flex gap-5 ">
               <button
@@ -110,7 +133,10 @@ const PostCreation = () => {
               >
                 Cancel
               </button>
-              <button className="grow rounded-xl bg-soft-black font-semibold text-soft-white hover:bg-soft-black-hover dark:bg-[#D9D9D9] dark:text-soft-black dark:hover:bg-[#939393]">
+              <button
+                onClick={shareButtonCLick}
+                className="grow rounded-xl bg-soft-black font-semibold text-soft-white hover:bg-soft-black-hover dark:bg-[#D9D9D9] dark:text-soft-black dark:hover:bg-[#939393]"
+              >
                 Share
               </button>
             </div>
