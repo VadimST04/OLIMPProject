@@ -143,6 +143,7 @@ const ProfilePage = () => {
       <form className="flex h-full w-full flex-col gap-10">
         {/* title */}
         <p className="text-center text-[32px] font-semibold">My Profile</p>
+
         {/* img */}
         <div className="flex items-center justify-center">
           <div
@@ -164,10 +165,11 @@ const ProfilePage = () => {
             ></input>
           </div>
         </div>
+
         {/* Fields */}
-        <div className="flex w-full items-center justify-evenly">
+        <div className="grid w-full grid-cols-1 place-items-center items-center justify-evenly gap-10 sm:flex">
           {/* Left */}
-          <div className="flex h-56 w-[25%] flex-col justify-between gap-2">
+          <div className="flex h-56 w-full flex-col justify-between gap-2 sm:w-[25%]">
             <div className="w-full">
               <p>Username</p>
               <input
@@ -191,7 +193,7 @@ const ProfilePage = () => {
           </div>
 
           {/* Middle */}
-          <div className="flex h-56 w-[25%] flex-col justify-between gap-2">
+          <div className="flex h-56 w-full flex-col justify-between gap-2 sm:w-[25%]">
             <div className="w-full">
               <p>Email</p>
               <input
@@ -229,8 +231,9 @@ const ProfilePage = () => {
               />
             </div>
           </div>
+
           {/* Right */}
-          <div className="flex h-56 w-[25%] flex-col justify-between gap-2">
+          <div className="flex h-56 w-full flex-col justify-between gap-2 sm:w-[25%]">
             <div className="w-full">
               <p>Add new language</p>
               <SearchBar
@@ -262,6 +265,7 @@ const ProfilePage = () => {
             </div>
           </div>
         </div>
+
         {/* Buttons */}
         <div className="flex w-full items-center justify-center gap-10">
           <button
