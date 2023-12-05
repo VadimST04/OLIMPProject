@@ -9,20 +9,31 @@ import {
   userLoginReducer,
   userListReducer,
 } from "../store/reducers/userReducers";
-import { postsListReducer } from "../store/reducers/postsReducers";
+import {
+  myPostsListReducer,
+  postsListReducer,
+} from "../store/reducers/postsReducers";
 import { userProfileReducer } from "../store/reducers/profileReducers";
 import { newsListReducer } from "../store/reducers/newsReducers";
-import { musicDetailsReducer, musicListReducer } from "../store/reducers/musicReducers";
+import {
+  musicDetailsReducer,
+  musicListReducer,
+} from "../store/reducers/musicReducers";
 import { mainButtonReducer } from "../store/reducers/buttonsReducers";
 import { signInFormToggler } from "../store/reducers/formsReducers";
-import { booksDetailReducer, booksListReducer } from "../store/reducers/booksReducers";
+import {
+  booksDetailReducer,
+  booksListReducer,
+} from "../store/reducers/booksReducers";
 import { languagesListReducer } from "../store/reducers/languagesReducers";
 
 const reducer = combineReducers({
   userToken: userLoginReducer,
   usersList: userListReducer,
   languagesList: languagesListReducer,
+
   postsList: postsListReducer,
+  myPostsList: myPostsListReducer,
 
   musicList: musicListReducer,
   musicDetails: musicDetailsReducer,

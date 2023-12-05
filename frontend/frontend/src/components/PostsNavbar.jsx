@@ -4,7 +4,7 @@ import { MdCreate } from "react-icons/md";
 import { PiGridFour } from "react-icons/pi";
 import { useNavigate } from "react-router";
 
-const PostsNavbar = ({}) => {
+const PostsNavbar = () => {
   const [activeButtonIndex, setActiveButtonIndex] = useState(
     sessionStorage.getItem("postNavbarActiveButton")
       ? sessionStorage.getItem("postNavbarActiveButton")
@@ -23,7 +23,7 @@ const PostsNavbar = ({}) => {
     {
       title: "My posts",
       icon: <BiImage />,
-      link: "/posts",
+      link: "/posts/my-posts",
     },
     {
       title: "Create post",

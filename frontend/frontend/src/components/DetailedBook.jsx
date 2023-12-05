@@ -1,19 +1,25 @@
 import React, { useState } from "react";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import { BsFillArrowLeftCircleFill } from "react-icons/bs";
-const DetailedBook = ({ title, author, pages, closeBookHandler }) => {
-  pages = 238;
+import { useDispatch, useSelector } from "react-redux";
+import { bookDetails } from "../store/actions/booksAction";
+const DetailedBook = ({ bookId, title, author, closeBookHandler }) => {
   const [page, setPage] = useState(1);
+  const dispatch = useDispatch();
+  const { book } = useSelector((state) => state.bookDetail);
 
-  const leftClick = () => {
-    setPage(page > 1 ? page - 1 : 1);
-  };
-  const rightClick = () => {
-    setPage(page < pages ? page + 1 : pages);
-  };
+  useState(() => {
+    dispatch(bookDetails(bookId));
+  }, [dispatch, book]);
+
+  const paragraphsCount = 20;
+  const pages = Math.ceil(book?.text.split("\n").length / paragraphsCount);
+  const paragraphs = book?.text
+    .split("\n")
+    .slice(paragraphsCount * (page - 1), paragraphsCount * page);
 
   return (
-    <div className="grid h-full w-full grid-rows-[minmax(5rem,auto),1fr,minmax(5rem,auto)] gap-5 overflow-y-auto">
+    <div className="grid h-full w-full grid-rows-[minmax(5rem,auto),1fr,auto] gap-5 overflow-y-auto">
       <div className="relative grid h-full grid-cols-[minmax(0,1fr),auto] gap-5 pt-10">
         <button
           onClick={() => closeBookHandler()}
@@ -28,20 +34,24 @@ const DetailedBook = ({ title, author, pages, closeBookHandler }) => {
         <div className="self-center justify-self-end">
           <p className="text-2xl">
             <span className="font-bold">{page}</span>
-            <span>/{pages}</span>
+            <span>/{pages || ""}</span>
           </p>
         </div>
       </div>
-      <div className="overflow-y-auto"></div>
+      <div className="space-y-4 overflow-y-auto">
+        {paragraphs?.map((paragraph, index) => (
+          <p key={index}>{paragraph}</p>
+        ))}
+      </div>
       <div className="self-center justify-self-center">
         <button
-          onClick={leftClick}
+          onClick={() => setPage(page > 1 ? page - 1 : 1)}
           className="rounded-md p-2 text-2xl hover:bg-soft-white-hover dark:hover:bg-soft-black-hover"
         >
           <AiOutlineLeft />
         </button>
         <button
-          onClick={rightClick}
+          onClick={() => setPage(page < pages ? page + 1 : pages)}
           className="rounded-md p-2 text-2xl hover:bg-soft-white-hover dark:hover:bg-soft-black-hover"
         >
           <AiOutlineRight />

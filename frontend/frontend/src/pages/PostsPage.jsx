@@ -1,65 +1,36 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { postsList } from "../store/actions/postsActions";
+import { myPostsList, postsList } from "../store/actions/postsActions";
 
-import PostItem from "../components/PostItem";
-
-import { MdCreate } from "react-icons/md";
-import { PiGridFour } from "react-icons/pi";
-import { BiImage } from "react-icons/bi";
+import PostItem, { PostItemSkeleton } from "../components/PostItem";
 import PostCreation from "../components/PostCreation";
-import { useNavigate } from "react-router";
 import PostsNavbar from "../components/PostsNavbar";
+import ImageCarousel from "../components/ImageCarousel";
+import ImageLoader from "../components/ImageLoader";
 
-function PostsPage() {
+function PostsPage({ showMyPosts = false }) {
   const dispatch = useDispatch();
   const [postCreation, setPostCreation] = useState(false);
-  const { posts } = useSelector((state) => state.postsList);
-  console.log(posts);
 
-  const testPosts = [
-    {
-      liked: false,
-      images: [
-        "https://images.unsplash.com/photo-1682695794816-7b9da18ed470",
-        "https://images.unsplash.com/photo-1700748881202-3c6e94c3b1ce",
-        "https://images.unsplash.com/photo-1681008570032-abdfcb23f875",
-      ],
-      username: "John Wick",
-      userImage: "https://images.unsplash.com/photo-1560354508-468e7201bbc2",
-      content:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos facilis accusantium officiis officia corrupti dignissimos maxime distinctio, sequi, ipsum eius mollitia expedita rem eum vero. Eveniet blanditiis sapiente accusantium voluptas?",
-      likes: 155,
-      comments: {},
-      commentDate: "Aug 10, 2023",
-    },
-    {
-      liked: false,
-      images: [
-        "https://images.unsplash.com/photo-1682695794816-7b9da18ed470",
-        "https://images.unsplash.com/photo-1700748881202-3c6e94c3b1ce",
-        "https://images.unsplash.com/photo-1681008570032-abdfcb23f875",
-      ],
-      username: "John Wick",
-      userImage: "https://images.unsplash.com/photo-1560354508-468e7201bbc2",
-      content:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos facilis accusantium officiis officia corrupti dignissimos maxime distinctio, sequi, ipsum eius mollitia expedita rem eum vero. Eveniet blanditiis sapiente accusantium voluptas?",
-      likes: 155,
-      comments: {},
-      commentDate: "Aug 10, 2023",
-    },
-  ];
+  const { posts, loading } = useSelector((state) => state.postsList);
+  const { myPosts, myPostsLoading } = useSelector((state) => state.myPostsList);
+
+  const postsToDisplay = showMyPosts ? myPosts : posts;
 
   useEffect(() => {
-    dispatch(postsList());
-  }, [dispatch]);
+    dispatch(showMyPosts ? myPostsList() : postsList());
+  }, []);
 
   return (
-    <div className="grid h-full grid-rows-[auto,1fr]">
+    <div className="grid h-full grid-rows-[auto,1fr] gap-5">
       <PostsNavbar />
-      <div className="flex h-full flex-col items-center gap-5 pt-5">
-        {posts &&
-          posts?.map((item, index) => (
+
+      {loading && <PostItemSkeleton />}
+      {myPostsLoading && <PostItemSkeleton />}
+
+      <div className="space-y-5 overflow-y-auto">
+        {postsToDisplay &&
+          postsToDisplay?.map((item, index) => (
             <PostItem
               liked={false}
               images={item.image_post.map(

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import BookItem from "../components/BookItem";
+import BookItem, { BookItemSkeleton } from "../components/BookItem";
 import SearchBar from "../components/SearchBar";
 import HorizontalCarousel from "../components/HorizontalCarousel";
 import { useSelector, useDispatch } from "react-redux";
@@ -15,6 +15,7 @@ const BooksPage = () => {
   const [bookPreview, setBookPreview] = useState(false);
   const [bookDetails, setBookDetails] = useState(false);
   const [currentBook, setCurrentBook] = useState({
+    bookId: 0,
     image: "",
     title: "",
     author: "",
@@ -39,7 +40,7 @@ const BooksPage = () => {
     { "Ukrainian books": "Ukrainian" },
     { "German books": "German" },
     { "French books": "French" },
-    { "Itaian books": "Itaian" },
+    { "Italian books": "Itaian" },
     { "Spanish books": "Spanish" },
     { "Polish books": "Polish" },
     { "Japanese books": "Japanese" },
@@ -82,6 +83,14 @@ const BooksPage = () => {
             items={tags.map((obj) => Object.keys(obj)[0])}
           />
           <div className="grid grid-cols-[repeat(auto-fill,minmax(11rem,1fr))] gap-4">
+            {loading && (
+              <>
+                {[...Array(5)].map((_, index) => (
+                  <BookItemSkeleton key={index} />
+                ))}
+              </>
+            )}
+
             {books?.map((item, index) => (
               <BookItem
                 key={item.id}

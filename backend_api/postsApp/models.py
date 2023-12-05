@@ -6,9 +6,9 @@ class Post(models.Model):
     objects = models.Manager()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField()
-    likes = models.IntegerField(default=0)
-    is_liked = models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now_add=True, editable=False)
+    likes = models.IntegerField(blank=True, default=0)
+    is_liked = models.BooleanField(blank=True, default=False)
+    created_at = models.DateTimeField(blank=True, auto_now_add=True, editable=False)
 
     def __str__(self):
         return f'{self.user} post - {self.likes} likes'
