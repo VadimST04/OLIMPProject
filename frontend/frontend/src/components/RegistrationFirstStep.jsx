@@ -73,7 +73,7 @@ const RegistrationFirstStep = ({ setFirstStep, formData, setFormData }) => {
             type="text"
             placeholder="Enter username"
             onChange={fieldChangeHandle}
-            className={`w-full rounded-md border bg-soft-white py-1 pl-5 shadow-[0_0_2px_#00000064] outline-none hover:border-main-green md:py-2 md:pl-6 xl:pl-9 ${textSize}`}
+            className={`w-full rounded-md border border-transparent bg-soft-white-hover py-1 pl-5 outline-none hover:border-main-green focus:border-main-green dark:bg-soft-black-hover dark:text-soft-white md:py-2 md:pl-6 xl:pl-9 ${textSize}`}
           />
           <div className={`absolute left-2 ${textSize}`}>
             <FiUser />
@@ -93,7 +93,7 @@ const RegistrationFirstStep = ({ setFirstStep, formData, setFormData }) => {
             type="password"
             placeholder="Enter password"
             onChange={fieldChangeHandle}
-            className={`w-full rounded-md border bg-soft-white py-1 pl-5 shadow-[0_0_2px_#00000064] outline-none hover:border-main-green md:py-2 md:pl-6 xl:pl-9 ${textSize}`}
+            className={`w-full rounded-md border border-transparent bg-soft-white-hover py-1 pl-5 outline-none hover:border-main-green focus:border-main-green dark:bg-soft-black-hover dark:text-soft-white md:py-2 md:pl-6 xl:pl-9 ${textSize}`}
           />
           <div className={`absolute left-2 ${textSize}`}>
             <RiLockPasswordLine />
@@ -113,7 +113,7 @@ const RegistrationFirstStep = ({ setFirstStep, formData, setFormData }) => {
             type="password"
             placeholder="Confirm password"
             onChange={fieldChangeHandle}
-            className={`w-full rounded-md border bg-soft-white py-1 pl-5 shadow-[0_0_2px_#00000064] outline-none hover:border-main-green md:py-2 md:pl-6 xl:pl-9 ${textSize}`}
+            className={`w-full rounded-md border border-transparent bg-soft-white-hover py-1 pl-5 outline-none hover:border-main-green focus:border-main-green dark:bg-soft-black-hover dark:text-soft-white md:py-2 md:pl-6 xl:pl-9 ${textSize}`}
           />
           <div className={`absolute left-2 ${textSize}`}>
             <RiLockPasswordLine />
@@ -133,7 +133,7 @@ const RegistrationFirstStep = ({ setFirstStep, formData, setFormData }) => {
             type="email"
             placeholder="Enter email"
             onChange={fieldChangeHandle}
-            className={`w-full rounded-md border bg-soft-white py-1 pl-5 shadow-[0_0_2px_#00000064] outline-none hover:border-main-green md:py-2 md:pl-6 xl:pl-9 ${textSize}`}
+            className={`w-full rounded-md border border-transparent bg-soft-white-hover py-1 pl-5 outline-none hover:border-main-green focus:border-main-green dark:bg-soft-black-hover dark:text-soft-white md:py-2 md:pl-6 xl:pl-9 ${textSize}`}
           />
           <div className={`absolute left-2 ${textSize}`}>
             <AiOutlineMail />
@@ -154,13 +154,13 @@ const RegistrationFirstStep = ({ setFirstStep, formData, setFormData }) => {
       </div>
       <div className="flex gap-2">
         <div
-          className={`shadow- flex flex-grow cursor-pointer items-center justify-center gap-1 rounded-md border-2 py-1 hover:bg-gray-300 md:py-2 ${textSize}`}
+          className={`shadow- flex flex-grow cursor-pointer items-center justify-center gap-1 rounded-md border-2 bg-soft-white py-1 hover:bg-gray-300 md:py-2 ${textSize}`}
         >
           <FcGoogle />
           <p>Use Google</p>
         </div>
         <div
-          className={`flex flex-grow cursor-pointer items-center justify-center gap-1 rounded-md border bg-[#4E66A4] py-1 text-soft-white hover:bg-[#3B4D7C] md:py-2 ${textSize}`}
+          className={`flex flex-grow cursor-pointer items-center justify-center gap-1 rounded-md bg-[#4E66A4] py-1 text-soft-white hover:bg-[#3B4D7C] md:py-2 ${textSize}`}
         >
           <SiFacebook />
           <p>Use Facebook</p>

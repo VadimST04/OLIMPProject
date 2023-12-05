@@ -5,6 +5,7 @@ import { login, register } from "../store/actions/userActions";
 import logo from "../assets/OLIMPlogo.png";
 import RegistrationFirstStep from "./RegistrationFirstStep";
 import RegistrationSecondStep from "./RegistrationSecondStep";
+import { SIGN_IN_FORM_CLOSE } from "../store/constants/fromsConstants";
 
 const RegistrationForm = ({ closeFormCallback }) => {
   const formBg = useRef(null);
@@ -34,20 +35,24 @@ const RegistrationForm = ({ closeFormCallback }) => {
         formData.learningLanguages,
       ),
     );
+    dispatch({ type: SIGN_IN_FORM_CLOSE });
     closeFormCallback();
   };
 
   const closeForm = (e) => {
-    if (e.target === formBg.current) closeFormCallback();
+    if (e.target === formBg.current) {
+      dispatch({ type: SIGN_IN_FORM_CLOSE });
+      closeFormCallback();
+    }
   };
 
   return (
     <div
       ref={formBg}
       onClick={(e) => closeForm(e)}
-      className="absolute left-0 top-0 z-10 flex h-screen w-screen items-center justify-center bg-black bg-opacity-50"
+      className="absolute left-0 top-0 z-10 flex h-screen w-screen items-center justify-center bg-black/80"
     >
-      <form className="flex w-52 flex-col items-center gap-5 overflow-y-auto rounded-md border bg-soft-white text-soft-black shadow-[0_0_30px_#00000090] md:w-64 lg:w-96">
+      <form className="flex w-52 flex-col items-center gap-5 overflow-y-auto rounded-md bg-soft-white text-soft-black shadow-[0_0_30px_#00000090] dark:bg-soft-black md:w-64 lg:w-96">
         <div className="pointer-events-none aspect-square w-16 select-none overflow-hidden rounded-md md:w-20 lg:w-24 xl:w-28">
           <img src={logo} alt="" className="h-full w-full object-contain" />
         </div>
