@@ -15,6 +15,7 @@ const BooksPage = () => {
   const [bookPreview, setBookPreview] = useState(false);
   const [bookDetails, setBookDetails] = useState(false);
   const [currentBook, setCurrentBook] = useState({
+    bookId: 0,
     image: "",
     title: "",
     author: "",
