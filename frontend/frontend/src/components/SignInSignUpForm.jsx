@@ -86,9 +86,11 @@ const SignInSignUpForm = ({ closeFormCallback, registrationFormOpen }) => {
                 autoComplete="username"
                 type="text"
                 placeholder="Enter your username"
-                className={`w-full rounded-md border-2 border-transparent bg-soft-white py-0.5 pl-5 text-soft-black outline-none hover:outline-main-green focus:outline focus:outline-main-green  dark:bg-soft-black dark:text-soft-white md:py-2 md:pl-6 xl:pl-8 ${textSize}`}
+                className={`w-full rounded-md border-2 border-transparent bg-soft-white-hover py-0.5 pl-5 text-soft-black outline-none hover:border-main-green focus:border-main-green dark:bg-soft-black-hover dark:text-soft-white md:py-2 md:pl-6 xl:pl-8 ${textSize}`}
               />
-              <div className={`absolute left-1 ${textSize}`}>
+              <div
+                className={`absolute left-1 ${textSize} text-soft-black dark:text-soft-white`}
+              >
                 <FiUser />
               </div>
             </div>
@@ -106,9 +108,11 @@ const SignInSignUpForm = ({ closeFormCallback, registrationFormOpen }) => {
                 autoComplete="password"
                 type="password"
                 placeholder="Enter your password"
-                className={`w-full rounded-md border-2 border-transparent bg-soft-white py-0.5 pl-5 text-soft-black outline-none hover:outline-main-green focus:outline focus:outline-main-green  dark:bg-soft-black dark:text-soft-white md:py-2 md:pl-6 xl:pl-8 ${textSize}`}
+                className={`w-full rounded-md border-2 border-transparent bg-soft-white-hover py-0.5 pl-5 text-soft-black outline-none hover:border-main-green focus:border-main-green dark:bg-soft-black-hover dark:text-soft-white md:py-2 md:pl-6 xl:pl-8 ${textSize}`}
               />
-              <div className={`absolute left-1 ${textSize}`}>
+              <div
+                className={`absolute left-1 ${textSize} text-soft-black dark:text-soft-white`}
+              >
                 <RiLockPasswordLine />
               </div>
             </div>

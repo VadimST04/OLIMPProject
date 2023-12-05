@@ -58,7 +58,7 @@ const RegistrationSecondStep = ({
         <input
           accept="image/*"
           type="file"
-          className={`w-full rounded-md border bg-soft-white shadow-[0_0_2px_#00000064] outline-none hover:border-main-green md:py-1.5 md:pl-6 xl:pl-8 ${textSize}`}
+          className={`w-full rounded-md bg-soft-white-hover shadow-[0_0_2px_#00000064] outline-none hover:border-main-green dark:bg-soft-black-hover dark:text-soft-white md:py-1.5 md:pl-6 xl:pl-8 ${textSize}`}
           onChange={(e) =>
             setFormData({
               ...formData,
@@ -75,7 +75,7 @@ const RegistrationSecondStep = ({
         searchItems={languages}
         maxHeight="max-h-28"
         placeholder="Choose app language"
-        inputStyling={`w-full rounded-md border bg-soft-white py-1 pl-5 shadow-[0_0_2px_#00000064] outline-none hover:border-main-green md:py-2 ${textSize}`}
+        inputStyling={`w-full rounded-md dark:text-soft-white bg-soft-white-hover dark:bg-soft-black-hover py-1 pl-5 shadow-[0_0_2px_#00000064] outline-none hover:border-main-green md:py-2 ${textSize}`}
         submitCallback={(value) =>
           setFormData({
             ...formData,
@@ -86,14 +86,14 @@ const RegistrationSecondStep = ({
       <SearchBar
         searchItems={languages}
         exceptItems={formData.learningLanguages}
-        maxHeight="max-h-28"
+        maxHeight="max-h-40"
         placeholder="Choose learning languages"
-        inputStyling={`w-full rounded-md border bg-soft-white py-1 pl-5 shadow-[0_0_2px_#00000064] outline-none hover:border-main-green md:py-2 ${textSize}`}
+        inputStyling={`w-full rounded-md dark:text-soft-white bg-soft-white-hover dark:bg-soft-black-hover py-1 pl-5 shadow-[0_0_2px_#00000064] outline-none hover:border-main-green md:py-2 ${textSize}`}
         submitCallback={(value) => langSelected(value)}
         clearOnSubmit={true}
       />
       <div
-        className={`flex max-h-[9.5rem] flex-wrap items-center gap-1 overflow-y-auto rounded-md bg-white-green p-2`}
+        className={`flex max-h-[8.5rem] flex-wrap items-center gap-1 overflow-y-auto rounded-md bg-soft-white-hover p-2 dark:bg-soft-black-hover dark:text-soft-white`}
       >
         <div className={`w-full select-none text-center ${textSize}`}>
           Click on language to remove:
