@@ -92,6 +92,10 @@ export const logout = () => (dispatch) => {
 export const register =
   (username, email, password, image, app_lang, learning_langs) =>
   async (dispatch) => {
+    const id = toast.loading("Creating new account...", {
+      position: "top-center",
+      theme: localStorage.getItem("theme"),
+    });
     try {
       dispatch({
         type: USER_REGISTER_REQUEST,
@@ -123,9 +127,28 @@ export const register =
       });
 
       dispatch(login(username, password));
-
+      toast.update(id, {
+        render: "Registration successful",
+        type: "success",
+        isLoading: false,
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        progress: undefined,
+      });
       localStorage.setItem("userToken", JSON.stringify(data));
     } catch (error) {
+      toast.update(id, {
+        render: "Registration failed",
+        type: "error",
+        isLoading: false,
+        autoClose: 5000,
+        pauseOnHover: false,
+        hideProgressBar: false,
+        closeOnClick: true,
+        progress: undefined,
+      });
       dispatch({
         type: USER_REGISTER_FAIL,
         payload:
