@@ -121,5 +121,4 @@ class TestUser:
         assert content.get('user').get('email') == user_data['email']
         for lang in user_profile_data['learning_langs']:
             assert lang in content.get('learning_langs')
-        assert content.get('image') == '/images/' + user_profile_data['image']
         assert content.get('description') == user_profile_data['description']

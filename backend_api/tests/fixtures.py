@@ -21,7 +21,7 @@ def regular_user(client, django_user_model):
     regular = django_user_model.objects.create_user(
         username=username, password=password, email=email)
 
-    test_profile = UserProfile.objects.create(user_id=regular.pk, image=None,
+    test_profile = UserProfile.objects.create(user_id=regular.pk, image='C:\python_projects\OLIMPProject\\backend_api\static\images\\test.png',
                                               description=None, app_lang=eng)
     test_profile.learning_langs.set([eng, ger])
 
