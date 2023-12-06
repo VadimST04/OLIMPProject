@@ -63,6 +63,12 @@ export const MusicItemSkeleton = () => {
         <p className="h-1 w-full truncate rounded-full bg-soft-black text-center font-semibold dark:bg-soft-white"></p>
         <p className="h-1 w-[30%] truncate rounded-full bg-soft-black text-center font-semibold dark:bg-soft-white"></p>
       </div>
+      <div className="mt-3 flex h-1 w-full gap-2">
+        <p className="h-1 w-[40%] truncate rounded-full bg-soft-black text-center font-semibold dark:bg-soft-white"></p>
+        <p className="h-1 w-[30%] truncate rounded-full bg-soft-black text-center font-semibold dark:bg-soft-white"></p>
+        <p className="h-1 w-full truncate rounded-full bg-soft-black text-center font-semibold dark:bg-soft-white"></p>
+        <p className="h-1 w-[20%] truncate rounded-full bg-soft-black text-center font-semibold dark:bg-soft-white"></p>
+      </div>
     </div>
   );
 };
