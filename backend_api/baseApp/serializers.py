@@ -51,6 +51,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
     user = UserSerializer(read_only=True)
     app_lang = serializers.StringRelatedField()
     learning_langs = serializers.StringRelatedField(many=True)
+    selected_learning_langs = serializers.StringRelatedField(many=True)
     image = serializers.ImageField(required=False)
 
     class Meta:
@@ -61,7 +62,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
         """
 
         model = UserProfile
-        fields = ['user', 'image', 'image_data', 'description', 'app_lang', 'learning_langs']
+        fields = ['user', 'image', 'image_data', 'description', 'app_lang', 'learning_langs', 'selected_learning_langs']
 
 
 class LanguageSerializer(serializers.ModelSerializer):

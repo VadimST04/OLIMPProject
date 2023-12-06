@@ -20,7 +20,9 @@ const MusicPage = () => {
   useEffect(() => {
     if (!userProfile) dispatch(getUserProfile());
     if (!music)
-      dispatch(musicList(userProfile ? userProfile.learning_langs : [""]));
+      dispatch(
+        musicList(userProfile ? userProfile.selected_learning_langs : [""]),
+      );
   }, [dispatch, userProfile]);
 
   const tags = [
