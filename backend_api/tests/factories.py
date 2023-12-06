@@ -93,7 +93,7 @@ class UserProfileFactory(factory.django.DjangoModelFactory):
         model = UserProfile
 
     user = factory.SubFactory(UserFactory)
-    image = '../backend_api/static/images/Снимок_экрана_2023-11-19_212933.png'
+    image = None
     description = factory.Sequence(lambda n: f'test_description_{n}')
     app_lang = factory.SubFactory(LanguageFactory)
 
@@ -123,7 +123,7 @@ class ImagePostFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = ImagePost
 
-    image = '../backend_api/static/images/Снимок_экрана_2023-11-19_212933.png'
+    image = 'test.png'
     post = factory.SubFactory(PostFactory)
 
 

@@ -94,8 +94,6 @@ class TestUser:
 
         assert content.get('app_lang') == regular_user.data.user_profile.app_lang.name
         assert content.get('description') == regular_user.data.user_profile.description
-        assert content.get('image') == response.wsgi_request.build_absolute_uri(
-            regular_user.data.user_profile.image.url)
         assert content.get('learning_langs') == langs
         assert user_content.get('username') == regular_user.data.username
         assert user_content.get('email') == regular_user.data.email

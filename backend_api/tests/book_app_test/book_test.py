@@ -13,7 +13,7 @@ class TestBookModel:
     def test_all_books_page_authorized(self, api_client, book_factory, regular_user):
         ger = Language.objects.get(name='German')
         eng = Language.objects.get(name='English')
-        ital = Language.objects.create(name='Italian')
+        ital = Language.objects.get(name='Italian')
 
         ger_books = book_factory.create_batch(5, languages=ger)
         eng_books = book_factory.create_batch(5, languages=eng)
