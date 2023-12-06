@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import {
   USER_PROFILE_REQUEST,
   USER_PROFILE_SUCCESS,
@@ -53,6 +54,11 @@ export const getUserProfile = () => async (dispatch, getState) => {
 export const updateUserProfile =
   (username, email, password, description, image, app_lang, learning_langs) =>
   async (dispatch, getState) => {
+    const id = toast.loading("Saving changes...", {
+      position: "top-center",
+      theme: localStorage.getItem("theme"),
+    });
+
     try {
       dispatch({
         type: USER_PROFILE_REQUEST,
@@ -89,8 +95,29 @@ export const updateUserProfile =
         payload: data,
       });
 
+      toast.update(id, {
+        render: "Changes saved",
+        type: "success",
+        isLoading: false,
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        progress: undefined,
+      });
+
       localStorage.setItem("userProfile", JSON.stringify(data));
     } catch (error) {
+      toast.update(id, {
+        render: "Something went wrong",
+        type: "error",
+        isLoading: false,
+        autoClose: 5000,
+        pauseOnHover: false,
+        hideProgressBar: false,
+        closeOnClick: true,
+        progress: undefined,
+      });
       dispatch({
         type: USER_PROFILE_FAIL,
         payload:
