@@ -9,7 +9,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 const DetailedMusic = ({
   musicId,
-  lyrics,
   language,
   image,
   title,
@@ -20,6 +19,8 @@ const DetailedMusic = ({
   const dispatch = useDispatch();
   const { musicDetail } = useSelector((state) => state.musicDetails);
   console.log(musicDetail);
+
+  const lyrics = musicDetail?.lyrics;
 
   useState(() => {
     dispatch(musicDetails(musicId));
@@ -51,55 +52,10 @@ const DetailedMusic = ({
         </div>
       </div>
 
-      <div className="overflow-y-auto">
-        <p className="p-3">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit quo in
-          eaque quaerat ad provident nemo ipsam quasi libero asperiores non,
-          quas veritatis, ea, officia consequatur velit earum laborum
-          perspiciatis?
-        </p>
-        <p className="p-3">
-          Libero suscipit fugiat, deserunt ea repudiandae vero accusamus nihil
-          nisi error assumenda vitae autem. Ipsum ipsam impedit laudantium
-          minima repudiandae. Rerum, modi aperiam eligendi nesciunt corrupti
-          reprehenderit odio aliquid natus.
-        </p>
-        <p className="p-3">
-          Atque assumenda dolores cumque nemo adipisci nulla, placeat repellat
-          libero possimus officiis at harum modi totam error quae quas. Animi
-          dolores repudiandae repellendus saepe maiores veniam fugit cum magnam
-          et!
-        </p>
-        <p className="p-3">
-          Facilis saepe commodi magni laudantium. Natus eos placeat sint quo
-          neque molestias eius! Fugit nemo iure placeat eius reprehenderit,
-          porro sed adipisci ex quasi eum ab temporibus, suscipit quibusdam
-          odio.
-        </p>
-        <p className="p-3">
-          Nemo, vitae! Officiis natus nihil architecto. Enim voluptate dolore
-          quos cupiditate officiis magnam tempora esse! Harum, necessitatibus
-          eligendi dolore culpa eveniet illum fugit sequi qui omnis consequatur,
-          nisi, officia molestias.
-        </p>
-        <p className="p-3">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint delectus
-          perspiciatis molestias inventore fugiat labore quasi veniam blanditiis
-          explicabo possimus ipsum dolore quod fuga, hic vero esse dolorem
-          officia ratione.
-        </p>
-        <p className="p-3">
-          Voluptas ad sint eligendi perspiciatis eius repudiandae voluptatum
-          fuga voluptatibus cum maxime quam molestiae, nihil veniam voluptate
-          dicta. Fuga, porro sint? Explicabo, aspernatur rerum quaerat dicta
-          pariatur quam veniam facilis?
-        </p>
-        <p className="p-3">
-          Culpa nemo, ut obcaecati cupiditate voluptatibus aliquam dolores
-          assumenda reprehenderit tempora eos sunt velit quod facilis doloribus
-          facere eveniet illum officia repellendus qui unde rerum architecto
-          alias libero rem. Quod.
-        </p>
+      <div className="justify-center space-y-5 overflow-y-auto">
+        {lyrics?.split("\r\n\r\n").map((paragraph) => (
+          <p>{paragraph}</p>
+        ))}
       </div>
     </div>
   );
