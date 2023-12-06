@@ -3,6 +3,7 @@ import {
   USER_PROFILE_REQUEST,
   USER_PROFILE_SUCCESS,
   USER_PROFILE_FAIL,
+  CHANGE_SELECTED_LANGUAGES,
 } from "../constants/profileConstants";
 import axios from "axios";
 
@@ -30,7 +31,7 @@ export const getUserProfile = () => async (dispatch, getState) => {
     };
 
     const { data } = await axios.get(
-      "http://127.0.0.1:8000/api/users/profile",
+      "http://127.0.0.1:8000/api/users/profile/",
       config,
     );
 
@@ -118,6 +119,43 @@ export const updateUserProfile =
         closeOnClick: true,
         progress: undefined,
       });
+      dispatch({
+        type: USER_PROFILE_FAIL,
+        payload:
+          error.response && error.response.data.detail
+            ? error.response.data.detail
+            : error.response,
+      });
+    }
+  };
+
+export const updateSelectedLanguages =
+  (languages) => async (dispatch, getState) => {
+    try {
+      const { userToken } = getState().userToken;
+
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${userToken.access}`,
+        },
+      };
+
+      const { data } = await axios.patch(
+        "http://127.0.0.1:8000/api/users/profile/update/",
+        { selected_learning_langs: languages },
+        config,
+      );
+
+      console.log(data);
+
+      dispatch({
+        type: CHANGE_SELECTED_LANGUAGES,
+        payload: data,
+      });
+
+      localStorage.setItem("userProfile", JSON.stringify(data));
+    } catch (error) {
       dispatch({
         type: USER_PROFILE_FAIL,
         payload:

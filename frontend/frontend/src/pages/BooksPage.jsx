@@ -31,7 +31,9 @@ const BooksPage = () => {
     if (books && books.length > 0) return;
 
     console.log("test useEffect");
-    dispatch(booksList(userProfile ? userProfile.learning_langs : [""]));
+    dispatch(
+      booksList(userProfile ? userProfile.selected_learning_langs : [""]),
+    );
   }, []);
 
   const tags = [

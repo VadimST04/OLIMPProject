@@ -126,6 +126,8 @@ class UserProfileUpdate(APIView):
         user = request.user
         userprofile = UserProfile.objects.get(user=user)
 
+        print(data)
+
         user.username = data.get('username', user.username)
         user.email = data.get('email', user.email)
         password = data.get('password')
@@ -134,8 +136,9 @@ class UserProfileUpdate(APIView):
 
         user.save()
 
-        print(data.get('image', userprofile.image))
-        userprofile.image = data.get('image', userprofile.image)
+        if data.get('image'):
+            userprofile.image = data.get('image')
+
         userprofile.description = data.get('description', userprofile.description)
 
         if data.get('app_lang'):
