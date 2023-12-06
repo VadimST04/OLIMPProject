@@ -12,15 +12,13 @@ import { useRef } from "react";
 import { BiSolidPencil } from "react-icons/bi";
 import { RxCross1 } from "react-icons/rx";
 import ImageLoader from "../components/ImageLoader";
+import { toast } from "react-toastify";
 
 const ProfilePage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const imageInput = useRef();
   const { userProfile } = useSelector((state) => state.userProfile);
-  console.log("userProfile", userProfile);
-  // const { languages } = useSelector((state) => state.languagesList);
-  // console.log(languages);
   const [imageFileOld, setImageFileOld] = useState("");
   const [imageFile, setImageFile] = useState("");
   const [formData, setFormData] = useState({
