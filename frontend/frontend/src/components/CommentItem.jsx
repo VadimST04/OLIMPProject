@@ -3,11 +3,11 @@ import React, { useState } from "react";
 const CommentItem = ({
   profileImg,
   username,
-  commentDate,
   commentContent,
   isContent = false,
 }) => {
   const [expandComment, setExpandComment] = useState(false);
+
   const commentLineClamp = expandComment ? "" : "line-clamp-1";
   const maxSymbols = 43;
   const cursorStyle =
@@ -28,8 +28,6 @@ const CommentItem = ({
       <div className="flex flex-col">
         <div className="flex gap-2">
           <p className="font-semibold">{username}</p>
-          <p>•</p>
-          <p>{!isContent ? commentDate : "Aug 30, 20203"}</p>
         </div>
         <p className={`${!isContent && commentLineClamp}`}>{commentContent}</p>
         {!isContent && commentContent.length > maxSymbols && (
