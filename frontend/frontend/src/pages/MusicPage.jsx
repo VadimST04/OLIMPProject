@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { musicList, musicSearch } from "../store/actions/musicActions";
 import { getUserProfile } from "../store/actions/profileActions";
-import MusicItem from "../components/MusicItem";
+import MusicItem, { MusicItemSkeleton } from "../components/MusicItem";
 import DetailedMusic from "../components/DetailedMusic";
 import HorizontalCarousel from "../components/HorizontalCarousel";
 import SearchBar from "../components/SearchBar";
@@ -24,6 +24,7 @@ const MusicPage = () => {
         musicList(userProfile ? userProfile.selected_learning_langs : [""]),
       );
   }, [dispatch, userProfile]);
+  console.log(music);
 
   const tags = [
     { "All music": "" },
@@ -95,6 +96,11 @@ const MusicPage = () => {
             onItemClick={(item) => carouseItemClick(item)}
           />
           <div className="grid w-full grid-cols-[repeat(auto-fill,minmax(11rem,1fr))] gap-4">
+            {loading &&
+              [...Array(5)].map((_, index) => (
+                <MusicItemSkeleton key={index} />
+              ))}
+
             {music?.map((item) => (
               <MusicItem
                 musicId={item.id}

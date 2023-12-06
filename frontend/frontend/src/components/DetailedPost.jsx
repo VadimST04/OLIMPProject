@@ -25,6 +25,8 @@ const DetailedPost = ({
     if (e.target === postBg.current) closePostCallback();
   };
 
+  console.log(comments);
+
   return (
     <div
       ref={postBg}
@@ -39,7 +41,7 @@ const DetailedPost = ({
           <div className="h-full overflow-y-auto">
             <div className="flex flex-col gap-2 pb-5">
               <div className="flex items-center gap-2">
-                <div className="h-10 w-10 overflow-hidden rounded-full">
+                <div className="h-10 w-10 flex-shrink-0 overflow-hidden rounded-full">
                   <ImageLoader src={userImage} />
                 </div>
                 <p className="w-full items-center truncate">{username}</p>
@@ -47,18 +49,18 @@ const DetailedPost = ({
               {content}
             </div>
 
-            {comments.length < 1 && (
+            {comments?.length < 1 && (
               <div className="flex items-center justify-center text-xl">
                 No comments yet...
               </div>
             )}
 
-            {comments?.map((item) => (
+            {comments?.map((item, index) => (
               <CommentItem
-                profileImg={item.profileImg}
-                commentDate={item.commentDate}
-                commentContent={item.commentContent}
-                username={item.username}
+                key={index}
+                profileImg={`data:image/jpeg;base64,${item.user_image}`}
+                commentContent={item.text}
+                username={item.user}
               />
             ))}
           </div>
@@ -90,7 +92,7 @@ const DetailedPost = ({
               {content}
             </div>
 
-            {comments.length < 1 && (
+            {comments?.length < 1 && (
               <div className="flex items-center justify-center text-xl">
                 No comments yet...
               </div>
@@ -98,10 +100,9 @@ const DetailedPost = ({
             {comments?.map((item, index) => (
               <CommentItem
                 key={index}
-                profileImg={item.profileImg}
-                commentDate={item.commentDate}
-                commentContent={item.commentContent}
-                username={item.username}
+                profileImg={`data:image/jpeg;base64,${item.user_image}`}
+                commentContent={item.text}
+                username={item.user}
               />
             ))}
           </div>
