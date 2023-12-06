@@ -28,12 +28,18 @@ const LanguageDropDown = ({ openUpwards = false }) => {
   }, []);
 
   useEffect(() => {
-    const langs = userProfile ? userProfile.learning_langs : [];
+    const learningLangs = userProfile ? userProfile.learning_langs : [];
+    const selectedLangs = userProfile
+      ? userProfile.selected_learning_langs
+      : [];
+
     const langsToSet = [];
-    for (let i = 0; i < langs.length; i++) {
-      langsToSet.push({ languageName: langs[i], enabled: true });
+    for (let i = 0; i < learningLangs.length; i++) {
+      langsToSet.push({
+        languageName: learningLangs[i],
+        enabled: selectedLangs.includes(learningLangs[i]),
+      });
     }
-    console.log(langsToSet);
     setLearningLanguages(langsToSet);
   }, [userProfile]);
 
@@ -49,10 +55,6 @@ const LanguageDropDown = ({ openUpwards = false }) => {
 
     dispatch(updateSelectedLanguages(enabledLanguages));
   };
-
-  useEffect(() => {
-    console.log(learningLanguages);
-  }, [learningLanguages]);
 
   return (
     <button
