@@ -13,13 +13,18 @@ import {
 
 import axios from "axios";
 import { getUserProfile } from "./profileActions";
+import { toast } from "react-toastify";
 
 export const login = (username, password) => async (dispatch) => {
+  const id = toast.loading("Logging in...", {
+    position: "top-center",
+    theme: localStorage.getItem("theme"),
+  });
+
   try {
     dispatch({
       type: USER_LOGIN_REQUEST,
     });
-
     const config = {
       headers: {
         "Content-type": "application/json",
@@ -41,8 +46,30 @@ export const login = (username, password) => async (dispatch) => {
     });
 
     localStorage.setItem("userToken", JSON.stringify(data));
+
+    toast.update(id, {
+      render: "Login successful",
+      type: "success",
+      isLoading: false,
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      progress: undefined,
+    });
+
     dispatch(getUserProfile());
   } catch (error) {
+    toast.update(id, {
+      render: "Login failed",
+      type: "error",
+      isLoading: false,
+      autoClose: 5000,
+      pauseOnHover: false,
+      hideProgressBar: false,
+      closeOnClick: true,
+      progress: undefined,
+    });
     dispatch({
       type: USER_LOGIN_FAIL,
       payload:
@@ -65,6 +92,10 @@ export const logout = () => (dispatch) => {
 export const register =
   (username, email, password, image, app_lang, learning_langs) =>
   async (dispatch) => {
+    const id = toast.loading("Creating new account...", {
+      position: "top-center",
+      theme: localStorage.getItem("theme"),
+    });
     try {
       dispatch({
         type: USER_REGISTER_REQUEST,
@@ -96,9 +127,28 @@ export const register =
       });
 
       dispatch(login(username, password));
-
+      toast.update(id, {
+        render: "Registration successful",
+        type: "success",
+        isLoading: false,
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        progress: undefined,
+      });
       localStorage.setItem("userToken", JSON.stringify(data));
     } catch (error) {
+      toast.update(id, {
+        render: "Registration failed",
+        type: "error",
+        isLoading: false,
+        autoClose: 5000,
+        pauseOnHover: false,
+        hideProgressBar: false,
+        closeOnClick: true,
+        progress: undefined,
+      });
       dispatch({
         type: USER_REGISTER_FAIL,
         payload:

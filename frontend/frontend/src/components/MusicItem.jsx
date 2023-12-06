@@ -42,4 +42,35 @@ const MusicItem = ({
   );
 };
 
+export const MusicItemSkeleton = () => {
+  return (
+    <div className="flex w-full cursor-pointer flex-col items-center justify-center rounded-2xl bg-[#DBDBDB] p-2 transition-all duration-200 hover:bg-[#A9A9A9] dark:bg-[#737373] dark:hover:bg-soft-black-hover">
+      <div className="flex w-full items-center justify-between font-semibold"></div>
+      <div className="h-24 w-24 overflow-hidden rounded-full">
+        <div
+          className={`h-full w-full animate-[pulse_1s_ease-in-out_infinite] bg-soft-black dark:bg-soft-white`}
+        ></div>
+      </div>
+      <div className="mt-3 flex h-1 w-full gap-2">
+        <p className="h-1 w-[20%] truncate rounded-full bg-soft-black text-center font-semibold dark:bg-soft-white"></p>
+        <p className="h-1 w-[40%] truncate rounded-full bg-soft-black text-center font-semibold dark:bg-soft-white"></p>
+        <p className="h-1 w-[30%] truncate rounded-full bg-soft-black text-center font-semibold dark:bg-soft-white"></p>
+        <p className="h-1 w-full truncate rounded-full bg-soft-black text-center font-semibold dark:bg-soft-white"></p>
+      </div>
+      <div className="mt-3 flex h-1 w-full gap-2">
+        <p className="h-1 w-[20%] truncate rounded-full bg-soft-black text-center font-semibold dark:bg-soft-white"></p>
+        <p className="h-1 w-[40%] truncate rounded-full bg-soft-black text-center font-semibold dark:bg-soft-white"></p>
+        <p className="h-1 w-full truncate rounded-full bg-soft-black text-center font-semibold dark:bg-soft-white"></p>
+        <p className="h-1 w-[30%] truncate rounded-full bg-soft-black text-center font-semibold dark:bg-soft-white"></p>
+      </div>
+      <div className="mt-3 flex h-1 w-full gap-2">
+        <p className="h-1 w-[40%] truncate rounded-full bg-soft-black text-center font-semibold dark:bg-soft-white"></p>
+        <p className="h-1 w-[30%] truncate rounded-full bg-soft-black text-center font-semibold dark:bg-soft-white"></p>
+        <p className="h-1 w-full truncate rounded-full bg-soft-black text-center font-semibold dark:bg-soft-white"></p>
+        <p className="h-1 w-[20%] truncate rounded-full bg-soft-black text-center font-semibold dark:bg-soft-white"></p>
+      </div>
+    </div>
+  );
+};
+
 export default MusicItem;

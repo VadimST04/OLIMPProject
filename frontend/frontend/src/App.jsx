@@ -15,13 +15,17 @@ import ProfilePage from "./pages/ProfilePage";
 import NewsPage from "./pages/NewsPage";
 import PostCreation from "./components/PostCreation";
 import ChatsPage from "./pages/ChatsPage";
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Root = () => {
   return (
-    <div className="grid h-[100dvh] grid-rows-[4rem,1fr]">
-      <Navbar />
-      <MainContent />
-    </div>
+    <>
+      <div className="grid h-[100dvh] grid-rows-[4rem,1fr]">
+        <Navbar />
+        <MainContent />
+      </div>
+      <ToastContainer />
+    </>
   );
 };
 
