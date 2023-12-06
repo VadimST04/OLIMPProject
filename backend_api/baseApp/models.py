@@ -30,8 +30,11 @@ class UserProfile(models.Model):
     selected_learning_langs = models.ManyToManyField(Language, blank=True, related_name='selected_learning_langs')
 
     def save(self, *args, **kwargs):
-        if self.image:
-            self.image_data = self.image.read()
+        try:
+            if self.image:
+                self.image_data = self.image.read()
+        except FileNotFoundError:
+            pass
         super().save(*args, **kwargs)
 
     def __str__(self):
