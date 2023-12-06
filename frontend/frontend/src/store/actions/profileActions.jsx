@@ -136,7 +136,7 @@ export const updateSelectedLanguages =
 
       const config = {
         headers: {
-          "Content-Type": "multipart/form-data",
+          "Content-type": "application/json",
           Authorization: `Bearer ${userToken.access}`,
         },
       };
