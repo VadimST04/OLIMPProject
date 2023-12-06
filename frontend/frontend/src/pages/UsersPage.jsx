@@ -5,8 +5,8 @@ import Useritem from "../components/Useritem";
 
 const UsersPage = () => {
   const dispatch = useDispatch();
-  const { users } = useSelector((state) => state.usersList); // need to use SPREAD operator (...)
-
+  const { users } = useSelector((state) => state.usersList);
+  
   useEffect(() => {
     dispatch(getUsers());
   }, [dispatch]);
@@ -16,7 +16,7 @@ const UsersPage = () => {
       {users?.map((item, index) => (
         <div key={index}>
           <Useritem
-            image={item.image}
+            image={`data:image/jpeg;base64,${item.image_data}`}
             description={item.description}
             username={item.user.username}
           />
