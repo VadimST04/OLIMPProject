@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Checkbox from "./Checkbox";
 import { SIGN_IN_FORM_OPEN } from "../store/constants/fromsConstants";
+import { updateSelectedLanguages } from "../store/actions/profileActions";
 
 const LanguageDropDown = ({ openUpwards = false }) => {
   const [languageDropDownOpen, setLanguageDropDownOpen] = useState(false);
@@ -14,7 +15,7 @@ const LanguageDropDown = ({ openUpwards = false }) => {
   const selfRef = useRef();
   const dropDownVisibility = languageDropDownOpen ? "" : "hidden";
   const openStyle = openUpwards ? "bottom-[100%]" : "top-[100%]";
-
+  const dispatch = useDispatch();
   const onOutsideClick = (e) => {
     if (!selfRef.current.contains(e.target)) setLanguageDropDownOpen(false);
   };
@@ -27,8 +28,31 @@ const LanguageDropDown = ({ openUpwards = false }) => {
   }, []);
 
   useEffect(() => {
-    setLearningLanguages(userProfile ? userProfile.learning_langs : []);
+    const langs = userProfile ? userProfile.learning_langs : [];
+    const langsToSet = [];
+    for (let i = 0; i < langs.length; i++) {
+      langsToSet.push({ languageName: langs[i], enabled: true });
+    }
+    console.log(langsToSet);
+    setLearningLanguages(langsToSet);
   }, [userProfile]);
+
+  const checkCallback = (languageName, enabled) => {
+    const newLangs = learningLanguages;
+    newLangs.find((lang) => lang.languageName === languageName).enabled =
+      enabled;
+    setLearningLanguages(newLangs);
+
+    const enabledLanguages = newLangs
+      .filter((lang) => lang.enabled)
+      .map((lang) => lang.languageName);
+
+    dispatch(updateSelectedLanguages(enabledLanguages));
+  };
+
+  useEffect(() => {
+    console.log(learningLanguages);
+  }, [learningLanguages]);
 
   return (
     <button
@@ -43,7 +67,12 @@ const LanguageDropDown = ({ openUpwards = false }) => {
       >
         <div className="text-soft-black">
           {learningLanguages?.map((lang, index) => (
-            <Checkbox key={index} label={lang} checkedByDefault={true} />
+            <Checkbox
+              key={index}
+              label={lang.languageName}
+              checkedByDefault={lang.enabled}
+              checkCallback={checkCallback}
+            />
           ))}
         </div>
       </div>
