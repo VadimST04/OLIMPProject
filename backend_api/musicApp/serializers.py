@@ -45,4 +45,4 @@ class SongListSerializer(serializers.ModelSerializer):
         """
 
         model = Song
-        fields = ['id', 'language', 'title', 'duration', 'artist', 'image_data']
+        fields = ['id', 'language', 'title', 'duration', 'artist', 'image_data', 'lyrics', ]
