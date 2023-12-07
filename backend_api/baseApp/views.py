@@ -139,7 +139,8 @@ class UserProfileUpdate(APIView):
         if data.get('image'):
             userprofile.image = data.get('image')
 
-        userprofile.description = data.get('description', userprofile.description)
+        if data.get('description'):
+            userprofile.description = data.get('description')
 
         if data.get('app_lang'):
             app_lang = Language.objects.filter(name=data.get('app_lang', userprofile.app_lang))[0]
