@@ -60,7 +60,7 @@ class UserRegistration(APIView):
             new_user_profile = UserProfile.objects.create(
                 user=new_user,
                 image=data.get('image'),
-                description=data.get('description'),
+                description=data.get('description', ''),
             )
             new_user_profile.app_lang = app_lang
             new_user_profile.learning_langs.set(learning_langs)
@@ -140,7 +140,7 @@ class UserProfileUpdate(APIView):
             userprofile.image = data.get('image')
 
         if data.get('description'):
-            userprofile.description = data.get('description')
+            userprofile.description = data.get('description', '')
 
         if data.get('app_lang'):
             app_lang = Language.objects.filter(name=data.get('app_lang', userprofile.app_lang))[0]

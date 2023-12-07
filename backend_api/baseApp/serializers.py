@@ -62,7 +62,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
         """
 
         model = UserProfile
-        fields = ['user', 'image', 'image_data', 'description', 'app_lang', 'learning_langs', 'selected_learning_langs']
+        fields = '__all__'
 
 
 class LanguageSerializer(serializers.ModelSerializer):
