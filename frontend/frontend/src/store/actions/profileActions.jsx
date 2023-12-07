@@ -157,6 +157,7 @@ export const updateSelectedLanguages =
         type: CHANGE_SELECTED_LANGUAGES,
         payload: data,
       });
+      localStorage.setItem("userProfile", JSON.stringify(data));
       toast.update(id, {
         render: "Changes saved",
         type: "success",
@@ -167,7 +168,6 @@ export const updateSelectedLanguages =
         pauseOnHover: false,
         progress: undefined,
       });
-      localStorage.setItem("userProfile", JSON.stringify(data));
     } catch (error) {
       toast.update(id, {
         render: "Something went wrong",
