@@ -23,7 +23,7 @@ const ProfilePage = () => {
   const [imageFile, setImageFile] = useState("");
   const [formData, setFormData] = useState({
     username: "",
-    description: "",
+    description: " ",
     email: "",
     password: "",
     appLanguage: "",
@@ -185,7 +185,7 @@ const ProfilePage = () => {
                 type="text"
                 onChange={onFieldsChange}
                 className="h-full w-full resize-none rounded-md border-2 border-main-green bg-transparent py-2 pl-3 pr-5 outline-none hover:border-main-green"
-                value={formData.description}
+                value={formData.description || ""}
               />
             </div>
           </div>
