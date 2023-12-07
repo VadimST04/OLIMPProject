@@ -25,7 +25,7 @@ const DetailedNews = ({
   const websiteName = url.hostname.replace("www.", "");
   console.log(author);
   return (
-    <div className="flex h-full w-full gap-5 overflow-y-auto pr-2">
+    <div className="flex h-full w-full flex-col gap-5 overflow-y-auto pr-2 sm:flex-row">
       <div
         onClick={() => setOpenDetails(false)}
         className="flex w-min cursor-pointer items-center text-[32px]"
@@ -33,7 +33,7 @@ const DetailedNews = ({
         <BsFillArrowLeftCircleFill />
       </div>
       <div className="flex-grow">
-        <div className="float-left mr-3 aspect-square w-[28rem] ">
+        <div className="float-left mr-3 aspect-square w-full max-w-[28rem]">
           <ImageLoader src={image_url} />
         </div>
         <div className="w-full space-y-1">

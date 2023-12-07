@@ -131,6 +131,10 @@ export const updateUserProfile =
 
 export const updateSelectedLanguages =
   (languages) => async (dispatch, getState) => {
+    const id = toast.loading("Saving changes...", {
+      position: "top-center",
+      theme: localStorage.getItem("theme"),
+    });
     try {
       const { userToken } = getState().userToken;
 
@@ -153,9 +157,28 @@ export const updateSelectedLanguages =
         type: CHANGE_SELECTED_LANGUAGES,
         payload: data,
       });
-
       localStorage.setItem("userProfile", JSON.stringify(data));
+      toast.update(id, {
+        render: "Changes saved",
+        type: "success",
+        isLoading: false,
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        progress: undefined,
+      });
     } catch (error) {
+      toast.update(id, {
+        render: "Something went wrong",
+        type: "error",
+        isLoading: false,
+        autoClose: 5000,
+        pauseOnHover: false,
+        hideProgressBar: false,
+        closeOnClick: true,
+        progress: undefined,
+      });
       dispatch({
         type: USER_PROFILE_FAIL,
         payload:

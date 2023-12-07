@@ -53,8 +53,7 @@ const DetailedMusic = ({
       </div>
 
       <div className="justify-center space-y-5 overflow-y-auto">
-        {lyrics?.split("\r\n\r\n").map((paragraph) => (
-          <p>{paragraph}</p>
+          <p key={index}>{paragraph}</p>
         ))}
       </div>
     </div>
