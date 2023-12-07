@@ -75,18 +75,6 @@ const NewsPage = () => {
     return sections;
   };
   return (
-    // <>
-    //   <div
-    //     className={`h-full w-full space-y-5 overflow-y-auto pr-2 ${newsVisibility}`}
-    //   >
-    //     {generateSections().map((item, index) => (
-    //       <div key={index} className="flex h-full w-full gap-5">
-    //         {item}
-    //       </div>
-    //     ))}
-    //   </div>
-    //
-    // </>
     <>
       <div className={`h-full w-full overflow-y-auto ${newsVisibility}`}>
         <div className="h-full w-full space-y-5 md:hidden">
