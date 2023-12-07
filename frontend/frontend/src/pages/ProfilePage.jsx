@@ -12,20 +12,18 @@ import { useRef } from "react";
 import { BiSolidPencil } from "react-icons/bi";
 import { RxCross1 } from "react-icons/rx";
 import ImageLoader from "../components/ImageLoader";
+import { toast } from "react-toastify";
 
 const ProfilePage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const imageInput = useRef();
   const { userProfile } = useSelector((state) => state.userProfile);
-  console.log("userProfile", userProfile);
-  // const { languages } = useSelector((state) => state.languagesList);
-  // console.log(languages);
   const [imageFileOld, setImageFileOld] = useState("");
   const [imageFile, setImageFile] = useState("");
   const [formData, setFormData] = useState({
     username: "",
-    description: "",
+    description: " ",
     email: "",
     password: "",
     appLanguage: "",
@@ -187,7 +185,7 @@ const ProfilePage = () => {
                 type="text"
                 onChange={onFieldsChange}
                 className="h-full w-full resize-none rounded-md border-2 border-main-green bg-transparent py-2 pl-3 pr-5 outline-none hover:border-main-green"
-                value={formData.description}
+                value={formData.description || ""}
               />
             </div>
           </div>
