@@ -37,7 +37,7 @@ const LanguageDropDown = ({ openUpwards = false }) => {
     for (let i = 0; i < learningLangs.length; i++) {
       langsToSet.push({
         languageName: learningLangs[i],
-        enabled: selectedLangs.includes(learningLangs[i]),
+        enabled: selectedLangs?.includes(learningLangs[i]),
       });
     }
     setLearningLanguages(langsToSet);
