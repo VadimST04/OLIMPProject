@@ -60,7 +60,7 @@ class UserRegistration(APIView):
             new_user_profile = UserProfile.objects.create(
                 user=new_user,
                 image=data.get('image'),
-                description=data.get('description'),
+                description=data.get('description', ''),
             )
             new_user_profile.app_lang = app_lang
             new_user_profile.learning_langs.set(learning_langs)
