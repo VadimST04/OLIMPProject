@@ -133,28 +133,27 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'olimp_db',
-#         'USER': 'postgres',
-#         'PASSWORD': os.environ.get('DB_PASSWORD'),
-#         'HOST': 'localhost',
-#         'PORT': '5432',
-#     }
-# }
-
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'olimp_db',
-        'USER': 'olimp_admin',
-        'PASSWORD': os.environ.get('DB_PASSWORD_AZURE'),
-        'HOST': 'olimpserver.postgres.database.azure.com',
+        'USER': 'postgres',
+        'PASSWORD': os.environ.get('DB_PASSWORD'),
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'olimp_db',
+#         'USER': 'olimp_admin',
+#         'PASSWORD': os.environ.get('DB_PASSWORD_AZURE'),
+#         'HOST': 'olimpserver.postgres.database.azure.com',
+#         'PORT': '5432',
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
